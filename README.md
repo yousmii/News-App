@@ -58,7 +58,7 @@ pip3 install -r requirements.txt
 cd src/ProgDBTutor
 python app.py
 ```
-Then visit http://localhost:5000
+Then visit http://localhost:8080
 
 
 #### 5. Run unit tests:

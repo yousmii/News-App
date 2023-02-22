@@ -7,6 +7,7 @@ from flask import request, session, jsonify
 from config import config_data
 from quote_data_access import Quote, DBConnection, QuoteDataAccess
 
+from waitress import serve
 # INITIALIZE SINGLETON SERVICES
 app = Flask('Tutorial ')
 app.secret_key = '*^*(*&)(*)(*afafafaSDD47j\3yX R~X@H!jmM]Lwf/,?KT'
@@ -71,4 +72,6 @@ def show_quotes_ajax():
 
 # RUN DEV SERVER
 if __name__ == "__main__":
+    serve(app, host="0.0.0.0", port=8080)
     app.run(HOST, debug=DEBUG)
+
