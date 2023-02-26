@@ -8,6 +8,9 @@ from config import config_data
 from quote_data_access import Quote, DBConnection, QuoteDataAccess
 
 from waitress import serve
+
+#from src.ProgDBTutor.config import config_data
+
 # INITIALIZE SINGLETON SERVICES
 app = Flask('Tutorial ')
 app.secret_key = '*^*(*&)(*)(*afafafaSDD47j\3yX R~X@H!jmM]Lwf/,?KT'
