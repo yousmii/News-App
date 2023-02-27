@@ -1,5 +1,7 @@
 # TUTORIAL Len Feremans, Sandy Moens and Joey De Pauw
 # see tutor https://code.tutsplus.com/tutorials/creating-a-web-app-from-scratch-using-python-flask-and-mysql--cms-22972
+import os
+
 from flask import Flask
 from flask.templating import render_template
 from flask import request, session, jsonify
@@ -8,7 +10,7 @@ from config import config_data
 from quote_data_access import Quote, DBConnection, QuoteDataAccess
 
 # INITIALIZE SINGLETON SERVICES
-app = Flask('Tutorial ')
+app = Flask('News Aggregator ')
 app.secret_key = '*^*(*&)(*)(*afafafaSDD47j\3yX R~X@H!jmM]Lwf/,?KT'
 app_data = dict()
 app_data['app_name'] = config_data['app_name']
@@ -53,7 +55,7 @@ def add_quote():
 # VIEW
 @app.route("/")
 def main():
-    return render_template('index.html', app_data=app_data)
+    return render_template('home.html', app_data=app_data)
 
 
 @app.route("/show_quotes")
