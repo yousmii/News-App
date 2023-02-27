@@ -1,16 +1,14 @@
-# TUTORIAL Len Feremans, Sandy Moens and Joey De Pauw
-# see tutor https://code.tutsplus.com/tutorials/creating-a-web-app-from-scratch-using-python-flask-and-mysql--cms-22972
 import os
 
 from flask import Flask
 from flask.templating import render_template
-from flask import request, session, jsonify
+from flask import request, session, jsonify, redirect
 
 from config import config_data
 from quote_data_access import Quote, DBConnection, QuoteDataAccess
 
 # INITIALIZE SINGLETON SERVICES
-app = Flask('News Aggregator ')
+app = Flask('News-App ')
 app.secret_key = '*^*(*&)(*)(*afafafaSDD47j\3yX R~X@H!jmM]Lwf/,?KT'
 app_data = dict()
 app_data['app_name'] = config_data['app_name']
@@ -20,11 +18,14 @@ quote_data_access = QuoteDataAccess(connection)
 DEBUG = False
 HOST = "127.0.0.1" if DEBUG else "0.0.0.0"
 
+# TEST USER
+user = {"username": "abc", "password": "xyz"}
+
 
 # REST API
 # See https://www.ibm.com/developerworks/library/ws-restful/index.html
 @app.route('/quotes', methods=['GET'])
-def get_quotes(): 
+def get_quotes():
     # Lookup row in table Quote, e.g. 'SELECT ID,TEXT FROM Quote'
     quote_objects = quote_data_access.get_quotes()
     # Translate to json
@@ -41,7 +42,7 @@ def get_quote(id):
 
 # To create resource use HTTP POST
 @app.route('/quotes', methods=['POST'])
-def add_quote(): 
+def add_quote():
     # Text value of <input type="text" id="text"> was posted by form.submit
     quote_text = request.form.get('text')
     quote_author = request.form.get('author')
@@ -50,6 +51,28 @@ def add_quote():
     print('Adding {}'.format(quote_obj.to_dct()))
     quote_obj = quote_data_access.add_quote(quote_obj)
     return jsonify(quote_obj.to_dct())
+
+
+# Login
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    if (request.method == 'POST'):
+        username = request.form.get('username')
+        password = request.form.get('password')
+        if username == user['username'] and password == user['password']:
+            session['user'] = username
+            return redirect('/admin')
+
+        return "<h1>Wrong username or password</h1>"  # if the username or password does not matches
+
+    return render_template("login.html")
+
+
+# Logout
+@app.route('/logout')
+def logout():
+    session.pop('user')
+    return redirect('/login')
 
 
 # VIEW
@@ -73,7 +96,13 @@ def show_quotes_ajax():
 
 @app.route("/admin")
 def show_admin():
-    return render_template('admin.html', app_data=app_data)
+    if 'user' in session and session['user'] == user['username']:
+        return render_template('admin.html', app_data=app_data)
+    return redirect('/login')
+
+@app.route("/home")
+def home():
+    return render_template('home.html', app_data=app_data)
 
 # RUN DEV SERVER
 if __name__ == "__main__":
