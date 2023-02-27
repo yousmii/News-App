@@ -70,15 +70,6 @@ def login():
 
     return render_template("login.html")
 
-# Admin dashboard
-@app.route('/dashboard')
-def dashboard():
-    if('user' in session and session['user'] == user['username']):
-        return '<h1>Welcome to the dashboard</h1>'
-    #here we are checking whether the user is logged in or not
-
-    return '<h1>You are not logged in.</h1>'  #if the user is not in the session
-
 #Logout
 @app.route('/logout')
 def logout():
