@@ -64,7 +64,7 @@ def login():
         if username == user['username'] and password == user['password']:
             
             session['user'] = username
-            return redirect('/dashboard')
+            return redirect('/admin')
 
         return "<h1>Wrong username or password</h1>"    #if the username or password does not matches 
 
@@ -89,7 +89,6 @@ def logout():
 # VIEW
 @app.route("/")
 def main():
-    #return render_template('index.html', app_data=app_data)
     return render_template('login.html', app_data=app_data)
 
 
@@ -108,7 +107,9 @@ def show_quotes_ajax():
 
 @app.route("/admin")
 def show_admin():
-    return render_template('admin.html', app_data=app_data)
+    if('user' in session and session['user'] == user['username']):
+        return render_template('admin.html', app_data=app_data)
+    return redirect('/login')
 
 # RUN DEV SERVER
 if __name__ == "__main__":
