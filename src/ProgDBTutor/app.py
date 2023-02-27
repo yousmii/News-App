@@ -7,7 +7,7 @@ from flask import request, session, jsonify, redirect
 from config import config_data
 from quote_data_access import Quote, DBConnection, QuoteDataAccess
 
-from waitress import serve
+#from waitress import serve
 
 #from src.ProgDBTutor.config import config_data
 
@@ -108,6 +108,6 @@ def show_quotes_ajax():
 
 # RUN DEV SERVER
 if __name__ == "__main__":
-    serve(app, host="0.0.0.0", port=8080)
+    #serve(app, host="0.0.0.0", port=8080)
     app.run(HOST, debug=DEBUG)
 
