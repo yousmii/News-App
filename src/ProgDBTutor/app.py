@@ -106,6 +106,10 @@ def show_quotes_ajax():
     return render_template('quotes_ajax.html', app_data=app_data)
 
 
+@app.route("/admin")
+def show_admin():
+    return render_template('admin.html', app_data=app_data)
+
 # RUN DEV SERVER
 if __name__ == "__main__":
     #serve(app, host="0.0.0.0", port=8080)
