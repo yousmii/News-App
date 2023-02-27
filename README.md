@@ -183,7 +183,7 @@ sudo su - app
 
 #### 3. Clone the application in /home/app
 ```bash
-git clone https://github.com/JoeyDP/PPDB-Template-App.git
+git clone https://github.com/yousmii/News-App
 ```
 
 
@@ -202,7 +202,7 @@ gunicorn --bind 0.0.0.0:5000 wsgi:app
 As an account with sudo acces (not app), copy the file `service/webapp.service` to `/etc/systemd/system/` and enable the service:
 
 ```bash
-sudo ln -s /home/app/PPDB-Template-App/service/webapp.service /etc/systemd/system/
+sudo ln -s /home/app/News-App/service/webapp.service /etc/systemd/system/
 
 sudo systemctl enable webapp
 sudo systemctl start webapp
@@ -213,8 +213,8 @@ A file `src/ProgDBTutor/webapp.sock` should be created.
 #### 7. Setup nginx
 Link or copy the nginx server block configuration file to the right nginx folders:
 ```bash
-sudo ln -s /home/app/PPDB-Template-App/nginx/webapp /etc/nginx/sites-available/
-sudo ln -s /home/app/PPDB-Template-App/nginx/webapp /etc/nginx/sites-enabled/
+sudo ln -s /home/app/News-App/nginx/webapp /etc/nginx/sites-available/
+sudo ln -s /home/app/News-App/nginx/webapp /etc/nginx/sites-enabled/
 ```
 
 The contents of this file can be changed for your setup. For example change the IP address to your external IP and add the correct DNS name (`team[x].ua-ppdb.me`)
@@ -225,7 +225,7 @@ server {
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:/home/app/PPDB-Template-App/src/ProgDBTutor/webapp.sock;
+        proxy_pass http://unix:/home/app/News-App/src/ProgDBTutor/webapp.sock;
     }
 }
 ```
