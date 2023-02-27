@@ -2,7 +2,7 @@
 # see tutor https://code.tutsplus.com/tutorials/creating-a-web-app-from-scratch-using-python-flask-and-mysql--cms-22972
 from flask import Flask
 from flask.templating import render_template
-from flask import request, session, jsonify
+from flask import request, session, jsonify, redirect
 
 from config import config_data
 from quote_data_access import Quote, DBConnection, QuoteDataAccess
@@ -12,7 +12,7 @@ from waitress import serve
 #from src.ProgDBTutor.config import config_data
 
 # INITIALIZE SINGLETON SERVICES
-app = Flask('Tutorial ')
+app = Flask('News-App ')
 app.secret_key = '*^*(*&)(*)(*afafafaSDD47j\3yX R~X@H!jmM]Lwf/,?KT'
 app_data = dict()
 app_data['app_name'] = config_data['app_name']
@@ -22,6 +22,8 @@ quote_data_access = QuoteDataAccess(connection)
 DEBUG = False
 HOST = "127.0.0.1" if DEBUG else "0.0.0.0"
 
+# TEST USER
+user = {"username": "abc", "password": "xyz"}
 
 # REST API
 # See https://www.ibm.com/developerworks/library/ws-restful/index.html
@@ -53,11 +55,42 @@ def add_quote():
     quote_obj = quote_data_access.add_quote(quote_obj)
     return jsonify(quote_obj.to_dct())
 
+# Login
+@app.route('/login', methods = ['POST', 'GET'])
+def login():
+    if(request.method == 'POST'):
+        username = request.form.get('username')
+        password = request.form.get('password')     
+        if username == user['username'] and password == user['password']:
+            
+            session['user'] = username
+            return redirect('/dashboard')
+
+        return "<h1>Wrong username or password</h1>"    #if the username or password does not matches 
+
+    return render_template("login.html")
+
+# Admin dashboard
+@app.route('/dashboard')
+def dashboard():
+    if('user' in session and session['user'] == user['username']):
+        return '<h1>Welcome to the dashboard</h1>'
+    #here we are checking whether the user is logged in or not
+
+    return '<h1>You are not logged in.</h1>'  #if the user is not in the session
+
+#Logout
+@app.route('/logout')
+def logout():
+    session.pop('user')
+    return redirect('/login')
+
 
 # VIEW
 @app.route("/")
 def main():
-    return render_template('index.html', app_data=app_data)
+    #return render_template('index.html', app_data=app_data)
+    return render_template('login.html', app_data=app_data)
 
 
 @app.route("/show_quotes")
