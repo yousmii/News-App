@@ -7,6 +7,10 @@ from flask import request, session, jsonify, redirect
 from config import config_data
 from quote_data_access import Quote, DBConnection, QuoteDataAccess
 
+#from waitress import serve
+
+#from src.ProgDBTutor.config import config_data
+
 # INITIALIZE SINGLETON SERVICES
 app = Flask('News-App ')
 app.secret_key = '*^*(*&)(*)(*afafafaSDD47j\3yX R~X@H!jmM]Lwf/,?KT'
@@ -52,23 +56,22 @@ def add_quote():
     quote_obj = quote_data_access.add_quote(quote_obj)
     return jsonify(quote_obj.to_dct())
 
-
 # Login
-@app.route('/login', methods=['POST', 'GET'])
+@app.route('/login', methods = ['POST', 'GET'])
 def login():
-    if (request.method == 'POST'):
+    if(request.method == 'POST'):
         username = request.form.get('username')
         password = request.form.get('password')
         if username == user['username'] and password == user['password']:
+
             session['user'] = username
             return redirect('/admin')
 
-        return "<h1>Wrong username or password</h1>"  # if the username or password does not matches
+        return "<h1>Wrong username or password</h1>"    #if the username or password does not matches
 
     return render_template("login.html")
 
-
-# Logout
+#Logout
 @app.route('/logout')
 def logout():
     session.pop('user')

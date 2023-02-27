@@ -1,9 +1,9 @@
 server {
     listen 80;
-    server_name 0.0.0.0 team[x].ua-ppdb.me;
+    server_name 34.76.118.226 team2.ua-ppdb.me;
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:/home/app/PPDB-Template-App/src/ProgDBTutor/webapp.sock;
+        proxy_pass http://unix:/home/app/News-App/src/ProgDBTutor/webapp.sock;
     }
 }
