@@ -3,7 +3,7 @@
   margin: 0;
   margin-bottom: 25px;
   padding: 10px;
-  background-color: #333;
+  background-color: #161B22;
   overflow: hidden;
   display: flex;
   justify-content: space-between;
@@ -47,8 +47,7 @@
 }
 
 .navbar-links li a:hover {
-  background-color: #ddd;
-  color: black;
+  color: #B1B2B5;
 }
 
 .clear {

@@ -1,52 +1,70 @@
 * {
     font-family: 'Open Sans', sans-serif;
+    color: #c9d1d9;
 }
+
+body {
+    background: #0D1117;
+}
+
 
 .article-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    padding: 20px;
+    justify-content: space-between;
 }
 
 .article {
-    width: calc(33.33333% - 10px);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
-    background-color: #f1f1f1;
-    min-height: 6rem;
-    min-width: 200px;
-    margin: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    overflow: hidden; /* hide any overflow from the image */
+    text-align: center;
+    width: 400px;
+    margin: 0 auto; /* center the container horizontally */
+    background-color: #0D1117; /* create the white rectangle background */
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1); /* add a subtle shadow effect */
+    padding: 20px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border: solid 2px #363B42;
+}
+
+.article a {
+    display: block;
+    text-decoration: none;
 }
 
 .article img {
+    display: block;
     width: 100%;
     height: auto;
-    display: block;
-    border-radius: 5px 5px 0 0; /* round the top corners of the image */
+    object-fit: cover;
+    object-position: top;
+    margin-bottom: 10px;
+    transition: transform 0.2s ease-in-out; /* add a transition effect */
+    border-radius: 4px;
+}
+
+.article img:hover {
+    transform: scale(1.01); /* zoom in on the thumbnail on hover */
 }
 
 .article h2 {
-    margin: 10px 0;
-    font-size: 18px;
-    padding: 10px;
-    color: #444444;
-    background-color: #eee;
-    border-radius: 0 0 5px 5px; /* round the bottom corners of the title */
+    font-size: 20px;
+    font-weight: bolder;
+    margin: 10px 0 0 0;
+    color: #57A5FD;
 }
 
-/* Media query for fullscreen */
-@media screen and (min-width: 1200px) {
-    .article {
-        width: 350px;
-    }
+.article:hover h2 {
+    text-decoration: underline;
+}
 
-    .article h2 {
-        font-size: 20px;
-        padding: 15px;
+@media only screen and (max-width: 767px) {
+    .article {
+        width: 100%;
     }
 }
