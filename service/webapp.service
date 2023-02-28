@@ -18,7 +18,7 @@ WorkingDirectory=/home/app/News-App/src/News-App
 Environment="PATH=/home/app/News-App/env/bin"
 
 # We'll then specify the commanded to start the service
-ExecStart=/home/app/PPDB-Template-App/env/bin/gunicorn --workers 3 --bind unix:webapp.sock -m 007 wsgi:app
+ExecStart=/home/app/News-App/env/bin/gunicorn --workers 3 --bind unix:webapp.sock -m 007 wsgi:app
 
 # This will tell systemd what to link this service to if we enable it to start at boot. We want this service to start when the regular multi-user system is up and running:
 [Install]
