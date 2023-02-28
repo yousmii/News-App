@@ -2,7 +2,7 @@ import os
 
 from flask import Flask
 from flask.templating import render_template
-from flask import request, session, jsonify, redirect
+from flask import request, session, jsonify, redirect, flash
 
 from config import config_data
 from quote_data_access import Quote, DBConnection, QuoteDataAccess
@@ -67,7 +67,8 @@ def login():
             session['user'] = username
             return redirect('/admin')
 
-        return "<h1>Wrong username or password</h1>"    #if the username or password does not matches
+        flash('Wrong password', 'error')
+        #return "<h1>Wrong username or password</h1>"    #if the username or password does not matches
 
     return render_template("login.html")
 
@@ -75,7 +76,7 @@ def login():
 @app.route('/logout')
 def logout():
     session.pop('user')
-    return redirect('/login')
+    return redirect('/')
 
 
 # VIEW
