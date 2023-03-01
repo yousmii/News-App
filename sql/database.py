@@ -1,9 +1,10 @@
+
 # prereq inport
 from datetime import datetime, date, time
 
 from sqlalchemy import *
 from sqlalchemy.orm import relationship, declarative_base
-from con import *
+from .con import *
 
 Base = declarative_base()
 
@@ -12,8 +13,6 @@ class User(Base):
     __tablename__ = 'user'
     cookie = Column(Integer, Sequence('user_seq'), primary_key=True)
     history = Column(String(255), nullable=True)
-
-
 class Admin(Base):
     __tablename__ = 'admin'
     name = Column(String(255), primary_key=True)
@@ -72,4 +71,10 @@ def create():
 
 
 create()
-# session.close_all()
+"""
+u = User(cookie=2, history="vla")
+
+#get_db().add(student)
+session.add(u)
+session.commit()
+"""

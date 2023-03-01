@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy_utils import database_exists, create_database
-from local_settings import postgresql as settings
+from .local_settings import postgresql as settings
 
 
 # create engine
@@ -37,7 +37,7 @@ def get_engine_from_settings():
 def get_session():
     engine = get_engine_from_settings()
     session = sessionmaker(bind=engine)
-    return session
+    return session()
 
 
 session = get_session()
