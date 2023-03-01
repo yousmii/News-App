@@ -10,9 +10,15 @@ postgresql={
 """
 postgresql={
     'pguser':'app',
-    'pgpassword':'password',
+    'pgpassword':'',
     'pghost':'localhost',
-    'pgport':'5000',
-    'pgdb':'dbtutor ',
+    'pgport':'8080',
+    'pgdb':'dbtutor',
 }
 """
+"""
+config_data['app_name'] = 'ProgDB Tutor'
+config_data['dbname'] = 'dbtutor'
+config_data['dbuser'] = 'app'
+"""
+
