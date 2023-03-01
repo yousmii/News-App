@@ -55,7 +55,7 @@ pip3 install -r requirements.txt
 
 #### 4. Run development server
 ```bash
-cd src/ProgDBTutor
+cd src/News-App
 python app.py
 ```
 Then visit http://localhost:8080
@@ -63,7 +63,7 @@ Then visit http://localhost:8080
 
 #### 5. Run unit tests:
 ```bash
-cd src/ProgDBTutor
+cd src/News-App
 nosetests
 ```
 
@@ -193,7 +193,7 @@ git clone https://github.com/yousmii/News-App
 #### 5. Test if wsgi entrypoint works
 Instead of using the Flask debug server, we use gunicorn to serve the application.
 ```bash
-cd src/ProgDBTutor
+cd src/News-App
 gunicorn --bind 0.0.0.0:5000 wsgi:app
 ```
 
@@ -207,7 +207,7 @@ sudo ln -s /home/app/News-App/service/webapp.service /etc/systemd/system/
 sudo systemctl enable webapp
 sudo systemctl start webapp
 ```
-A file `src/ProgDBTutor/webapp.sock` should be created.
+A file `src/News-App/webapp.sock` should be created.
 
 
 #### 7. Setup nginx
@@ -221,11 +221,11 @@ The contents of this file can be changed for your setup. For example change the 
 ```
 server {
     listen 80;
-    server_name 0.0.0.0 team[x].ua-ppdb.me;
+    server_name 34.76.118.226 team2.ua-ppdb.me;
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:/home/app/News-App/src/ProgDBTutor/webapp.sock;
+        proxy_pass http://unix:/home/app/News-App/src/News-App/webapp.sock;
     }
 }
 ```
