@@ -127,6 +127,6 @@ input[type="submit"]:hover {
   background-color: #ff0000;
   color: #ffffff;
   list-style: none;
-  font-size: 10rem;
+  font-size: 1.2rem;
   font-weight: bold;
 }
