@@ -2,6 +2,11 @@ import xml.etree.ElementTree as ET
 
 
 def parse(path):
+    image_link_regex = "\"https:?//.*.(png|jpg|jpeg)\""
+    url_link_regex = "\"https?:\/\/.*.\""
+
+
+
     html_file = open('templates/articles.html', 'w+')
 
     tree = ET.parse(path)
@@ -23,6 +28,7 @@ def parse(path):
 
 def main():
     parse('static/vrtnieuws.xml')
+    # parse('static/gva.xml')
 
 
 if __name__ == "__main__":
