@@ -1,23 +1,45 @@
-# prereq inport
 from datetime import datetime, date, time
-
+import bcrypt
+from flask_login import login_manager, UserMixin
 from sqlalchemy import *
-from sqlalchemy.orm import relationship, declarative_base
-from con import *
+from sqlalchemy.orm import relationship, declarative_base, scoped_session, sessionmaker
+
+from .con import engine
+
+db_session = scoped_session(sessionmaker(autocommit=False,
+                                         autoflush=False,
+                                         bind=engine))
 
 Base = declarative_base()
+Base.query = db_session.query_property()
 
 
-class User(Base):
+class User(Base, UserMixin):
     __tablename__ = 'user'
     cookie = Column(Integer, Sequence('user_seq'), primary_key=True)
     history = Column(String(255), nullable=True)
+    id = Column(Integer(), primary_key=True)
+    username = Column(String(30), nullable=False, unique=True)
+    email_address = Column(String(50), nullable=False, unique=True)
+    password_hash = Column(String(60), nullable=False)
+
+    @property
+    def password(self):
+        # password_hash?
+        return self.password
+
+    @password.setter
+    def password(self, plain_text_password):
+        self.password_hash = bcrypt.generate_password_hash(plain_text_password).decode('utf-8')
+
+    def check_password_correction(self, attempted_password):
+        return bcrypt.check_password_hash(self.password_hash, attempted_password)
 
 
 class Admin(Base):
     __tablename__ = 'admin'
     name = Column(String(255), primary_key=True)
-    password = Column(String, nullable=False)
+    password_hash = Column(String, nullable=False)
     cookie_id = Column(Integer, ForeignKey('user.cookie', ondelete='CASCADE', onupdate='CASCADE'), unique=True)
     cookie = relationship('User', backref='user')
 
@@ -71,5 +93,6 @@ def create():
     Base.metadata.create_all(engine)
 
 
-create()
-# session.close_all()
+if __name__ == "__main__":
+    create()
+    # session.close_all()

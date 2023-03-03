@@ -1,36 +1,38 @@
-import os
-
-from flask import Flask
+from flask import Flask, url_for
 from flask.templating import render_template
 from flask import request, session, jsonify, redirect, flash
 
-from database import User
-from forms import RegisterForm, LoginForm
+from sql.database import User
+from sql.forms import RegisterForm, LoginForm
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager
+from flask_login import LoginManager, login_user, logout_user
 
 from config import config_data
 from quote_data_access import Quote, DBConnection, QuoteDataAccess
 
-#from waitress import serve
 
-#from src.ProgDBTutor.config import config_data
 
+# TEST USER
+user = {"username": "abc", "password": "xyz"}
+
+# RUN DEV SERVER
 # INITIALIZE SINGLETON SERVICES
 app = Flask('News-App ')
 app.secret_key = '*^*(*&)(*)(*afafafaSDD47j\3yX R~X@H!jmM]Lwf/,?KT'
 app_data = dict()
 app_data['app_name'] = config_data['app_name']
-connection = DBConnection(dbname=config_data['dbname'], dbuser=config_data['dbuser'], password="")
+
+connection = DBConnection(dbname=config_data['dbname'], dbuser=config_data['dbuser'], password="password")
 quote_data_access = QuoteDataAccess(connection)
 bcrypt = Bcrypt(app)
+
 login_manager = LoginManager(app)
+login_manager.init_app(app)
+login_manager.login_view = 'login'
 
 DEBUG = False
 HOST = "127.0.0.1" if DEBUG else "0.0.0.0"
 
-# TEST USER
-user = {"username": "abc", "password": "xyz"}
 
 
 # REST API
@@ -63,27 +65,6 @@ def add_quote():
     quote_obj = quote_data_access.add_quote(quote_obj)
     return jsonify(quote_obj.to_dct())
 
-# Login
-# @app.route('/login', methods = ['POST', 'GET'])
-# def login():
-#     if(request.method == 'POST'):
-#         username = request.form.get('username')
-#         password = request.form.get('password')
-#         if username == user['username'] and password == user['password']:
-#
-#             session['user'] = username
-#             return redirect('/admin')
-#
-#         flash('Wrong password', 'error')
-#         #return "<h1>Wrong username or password</h1>"    #if the username or password does not matches
-#
-#     return render_template("login.html")
-#
-# #Logout
-# @app.route('/logout')
-# def logout():
-#     session.pop('user')
-#     return redirect('/')
 
 # Register
 @app.route('/register', methods=['GET', 'POST'])
@@ -104,11 +85,14 @@ def register_page():
 
 # Login
 
-@app.route('/Login', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])
 def login_page():
+    print("boop")
     form = LoginForm()
     if form.validate_on_submit():
+        print("beep")
         attempted_user = User.query.filter_by(username=form.username.data).first()
+        print("baap")
         if attempted_user and attempted_user.check_password_correction(attempted_password=form.password.data):
             login_user(attempted_user)
             flash(f'Success! You are logged in as: {attempted_user.username}', category='success')
@@ -117,12 +101,14 @@ def login_page():
             flash('Username and password do not match! Please try again', category='danger')
     return render_template('login.html', form=form)
 
+
 # Logout
 
-@app.route('/Logout')
+@app.route('/logout')
 def logout_page():
     logout_user()
     return redirect(url_for('home'))
+
 
 # VIEW
 @app.route("/")
@@ -149,10 +135,29 @@ def show_admin():
         return render_template('admin.html', app_data=app_data)
     return redirect('/login')
 
+
 @app.route("/home")
 def home():
     return render_template('home.html', app_data=app_data)
 
-# RUN DEV SERVER
-if __name__ == "__main__":
-    app.run(HOST, debug=DEBUG)
+
+@app.login_manager.user_loader
+def get_user(user_id):
+    try:
+        return User.query.get(int(user_id))
+    except:
+        return None
+
+
+@app.login_manager.request_loader
+def load_user_from_request(request):
+    # load user from the request object
+    user_id = request.headers.get('Authorization')
+    if user_id:
+        return User.get(user_id)
+    return None
+
+
+print("a")
+app.run(HOST, debug=DEBUG, port="4040")
+print("b")
