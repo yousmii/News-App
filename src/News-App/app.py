@@ -4,6 +4,11 @@ from flask import Flask
 from flask.templating import render_template
 from flask import request, session, jsonify, redirect, flash
 
+from database import User
+from forms import RegisterForm, LoginForm
+from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
+
 from config import config_data
 from quote_data_access import Quote, DBConnection, QuoteDataAccess
 
@@ -18,6 +23,8 @@ app_data = dict()
 app_data['app_name'] = config_data['app_name']
 connection = DBConnection(dbname=config_data['dbname'], dbuser=config_data['dbuser'], password="")
 quote_data_access = QuoteDataAccess(connection)
+bcrypt = Bcrypt(app)
+login_manager = LoginManager(app)
 
 DEBUG = False
 HOST = "127.0.0.1" if DEBUG else "0.0.0.0"
@@ -57,27 +64,65 @@ def add_quote():
     return jsonify(quote_obj.to_dct())
 
 # Login
-@app.route('/login', methods = ['POST', 'GET'])
-def login():
-    if(request.method == 'POST'):
-        username = request.form.get('username')
-        password = request.form.get('password')
-        if username == user['username'] and password == user['password']:
+# @app.route('/login', methods = ['POST', 'GET'])
+# def login():
+#     if(request.method == 'POST'):
+#         username = request.form.get('username')
+#         password = request.form.get('password')
+#         if username == user['username'] and password == user['password']:
+#
+#             session['user'] = username
+#             return redirect('/admin')
+#
+#         flash('Wrong password', 'error')
+#         #return "<h1>Wrong username or password</h1>"    #if the username or password does not matches
+#
+#     return render_template("login.html")
+#
+# #Logout
+# @app.route('/logout')
+# def logout():
+#     session.pop('user')
+#     return redirect('/')
 
-            session['user'] = username
-            return redirect('/admin')
+# Register
+@app.route('/register', methods=['GET', 'POST'])
+def register_page():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        user_to_create = User(username=form.username.data,
+                              email_address=form.email_address.data,
+                              password=form.password1.data)
+        session.add(user_to_create)
+        session.commit()
+        return redirect(url_for('home'))
+    if form.errors != {}:
+        for err_msg in form.errors.values():
+            flash(f'There was an error with creating a user {err_msg}', category='danger')
+    return render_template('register.html', form=form)
 
-        flash('Wrong password', 'error')
-        #return "<h1>Wrong username or password</h1>"    #if the username or password does not matches
 
-    return render_template("login.html")
+# Login
 
-#Logout
-@app.route('/logout')
-def logout():
-    session.pop('user')
-    return redirect('/')
+@app.route('/Login', methods=['GET', 'POST'])
+def login_page():
+    form = LoginForm()
+    if form.validate_on_submit():
+        attempted_user = User.query.filter_by(username=form.username.data).first()
+        if attempted_user and attempted_user.check_password_correction(attempted_password=form.password.data):
+            login_user(attempted_user)
+            flash(f'Success! You are logged in as: {attempted_user.username}', category='success')
+            return redirect(url_for('home'))
+        else:
+            flash('Username and password do not match! Please try again', category='danger')
+    return render_template('login.html', form=form)
 
+# Logout
+
+@app.route('/Logout')
+def logout_page():
+    logout_user()
+    return redirect(url_for('home'))
 
 # VIEW
 @app.route("/")
