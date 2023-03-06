@@ -1,0 +1,79 @@
+* {
+    font-family: 'Open Sans', sans-serif;
+    color: #c9d1d9;
+}
+
+body {
+    background: #0D1117;
+}
+
+
+.article-container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+    justify-content: space-between;
+}
+
+.headline {
+
+}
+
+.article {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: center;
+    width: 400px;
+    margin: 0 auto; /* center the container horizontally */
+    background-color: #0D1117; /* create the white rectangle background */
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.1); /* add a subtle shadow effect */
+    padding: 20px;
+    border-radius: 6px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    border: solid 2px #363B42;
+}
+
+.large-article {
+    height: auto;
+    width: 600px;
+}
+
+.article a {
+    display: block;
+    text-decoration: none;
+}
+
+.article img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+    margin-bottom: 10px;
+    transition: transform 0.2s ease-in-out; /* add a transition effect */
+    border-radius: 4px;
+}
+
+.article img:hover {
+    transform: scale(1.01); /* zoom in on the thumbnail on hover */
+}
+
+.article h2 {
+    font-size: 20px;
+    font-weight: bolder;
+    margin: 10px 0 0 0;
+    color: #57A5FD;
+}
+
+.article:hover h2 {
+    text-decoration: underline;
+}
+
+@media only screen and (max-width: 767px) {
+    .article {
+        width: 100%;
+    }
+}

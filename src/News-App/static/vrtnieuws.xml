@@ -1,0 +1,985 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:vrtns="http://base.vrt.be" xml:lang="en">
+    <title type="text">VRT NWS: news</title>
+    <logo>https://images.vrt.be/w960hx/logos/vrtnws_logo_2022_wbg.png</logo>
+    <id>https://www.vrt.be/vrtnws/en/</id>
+    <updated>2023-03-01T08:27:24.431Z</updated>
+    <author>
+        <name>VRT NWS</name>
+    </author>
+    <link href="https://www.vrt.be/vrtnws/en.rss.articles.xml" rel="self" type="application/atom+xml"/>
+    <link href="https://www.vrt.be/vrtnws/en/" rel="alternate" type="text/html"/>
+    <entry>
+        <title type="text">Former Belgian minister takes Turkish regime to the International Court</title>
+        <id>https://vrtnws.be/p.7n0Wxq3vR</id>
+        <published>2023-03-01T08:22:38.000Z</published>
+        <updated>2023-03-01T08:22:38.000Z</updated>
+        <summary type="text">Former Belgian cabinet minister Johan Vande Lanotte has joined the Turkey Tribunal charity,
+            (an opinion tribunal), and the European association of magistrates Medel to file a case against the regime
+            of Turkish President Erdogan at the ICC, the International Criminal Court. They are accusing the Turkish
+            government of crimes against humanity.
+        </summary>
+        <vrtns:nstag xmlns="">Crime &amp; Justice</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/03/01/former-belgian-minister-takes-turkish-regime-to-the-internation.rss.xml"
+              rel="self" title=" Former Belgian minister takes Turkish regime to the International Court"
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.7n0Wxq3vR" rel="alternate"
+              title=" Former Belgian minister takes Turkish regime to the International Court" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2022/04/21/7cd53919-c191-11ec-b07d-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Flemings enthusiastic car-sharers</title>
+        <id>https://vrtnws.be/p.nwBDnyLoZ</id>
+        <published>2023-03-01T06:02:00.000Z</published>
+        <updated>2023-03-01T06:02:00.000Z</updated>
+        <summary type="text">Car-sharing is becoming increasingly popular across Flanders. Today 120,000 people are
+            signed up to one of a growing number of car-share operators in Belgium and the lion’s share are people in
+            northern Belgium. Car-sharing is handy and cheap, particularly if you don’t need a car that often.
+        </summary>
+        <vrtns:nstag xmlns="">Society</vrtns:nstag>
+        <vrtns:nslabeltag xmlns="">system:vrtnieuws/labels/video</vrtns:nslabeltag>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/28/flemings-enthusiastic-car-sharers.rss.xml" rel="self"
+              title="Flemings enthusiastic car-sharers" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.nwBDnyLoZ" rel="alternate" title="Flemings enthusiastic car-sharers"
+              type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/28/5f71a2d0-b776-11ed-91d7-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Driest February in 37 years</title>
+        <id>https://vrtnws.be/p.YbYPRdZk4</id>
+        <published>2023-02-28T15:07:39.000Z</published>
+        <updated>2023-02-28T15:07:39.000Z</updated>
+        <summary type="text">February 2023 will go down on record as having been the driest February since 1986. During
+            the whole of this month just 13.3mm of rain fell at the Royal Meteorological Institute’s (KMI) weather
+            centre in the Brussels municipality of Ukkel. The amount of precipitation for the winter as a whole has been
+            more or less normal. Nevertheless, nature could certainly use a bit of additional rain to help prepare it
+            for the potentially dry summer months that are coming up.
+        </summary>
+        <vrtns:nstag xmlns="">Home News</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/28/driest-february-in-37-years.rss.xml" rel="self"
+              title="Driest February in 37 years " type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.YbYPRdZk4" rel="alternate" title="Driest February in 37 years "
+              type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2022/04/06/a287a460-b567-11ec-b07d-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">VIDEO: Avian flu decimates black-headed gulls in Limburg</title>
+        <id>https://vrtnws.be/p.kQ7kNYdR1</id>
+        <published>2023-02-28T14:30:57.000Z</published>
+        <updated>2023-02-28T14:30:57.000Z</updated>
+        <summary type="text">For two weeks now dead black-headed gulls have been washing ashore along the River Maas in
+            Limburg Province. All have died as a result of avian or bird flu. Other birds are becoming unwell, but it’s
+            above all black-headed gulls that are dying.
+        </summary>
+        <vrtns:nstag xmlns="">Home News</vrtns:nstag>
+        <vrtns:nslabeltag xmlns="">system:vrtnieuws/labels/video</vrtns:nslabeltag>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/28/avian-flu-decimates-black-headed-gulls-in-limburg.rss.xml"
+              rel="self" title="VIDEO: Avian flu decimates black-headed gulls in Limburg" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.kQ7kNYdR1" rel="alternate"
+              title="VIDEO: Avian flu decimates black-headed gulls in Limburg" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/28/849c2bd1-b774-11ed-91d7-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Body of missing woman (75) found in woodland at Maasmechelen</title>
+        <id>https://vrtnws.be/p.7n0Ww5BYA</id>
+        <published>2023-02-28T14:19:08.000Z</published>
+        <updated>2023-02-28T14:19:08.000Z</updated>
+        <summary type="text">The body of a 75-year-old woman that had been missing since last week has been found in
+            woodland at Maasmechelen in Limburg Province. Emilia Chini, who was living with dementia, was last seen last
+            Wednesday close to her home in the Eisden-Tuinwijk area of Maasmechelen. The pensioner’s body was found in
+            the Mechels Bos Woods.
+        </summary>
+        <vrtns:nstag xmlns="">Home News</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/28/body-of-missing-woman-75-found-in-woodland-at-maasmechelen.rss.xml"
+              rel="self" title="Body of missing woman (75) found in woodland at Maasmechelen"
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.7n0Ww5BYA" rel="alternate"
+              title="Body of missing woman (75) found in woodland at Maasmechelen" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/23/2b43e4d3-b362-11ed-91d7-02b7b76bf47f.png"
+              rel="enclosure" type="image/png"/>
+    </entry>
+    <entry>
+        <title type="text">Sharp increase in the number of car-sharers in Belgium</title>
+        <id>https://vrtnws.be/p.dLKGA1MJP</id>
+        <published>2023-02-28T12:21:46.000Z</published>
+        <updated>2023-02-28T12:21:46.000Z</updated>
+        <summary type="text">2022 saw the number of car-sharers in Belgium increase by 40%. By the end of last year
+            121,394 people in Belgium were sharing a car, either with friends or neighbours or as a subscriber to a
+            car-sharing service such as Cambio or Miles. Never before were there so many Belgians sharing cars.
+        </summary>
+        <vrtns:nstag xmlns="">Economy</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/28/sharp-increase-in-the-number-of-car-sharers-in-belgium.rss.xml"
+              rel="self" title="Sharp increase in the number of car-sharers in Belgium" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.dLKGA1MJP" rel="alternate"
+              title="Sharp increase in the number of car-sharers in Belgium" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2020/07/30/78eeb2b6-d24f-11ea-aae0-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Shopkeeper that stabbed to death an intruder to remain in custody</title>
+        <id>https://vrtnws.be/p.aD4WQlJaA</id>
+        <published>2023-02-28T11:24:15.000Z</published>
+        <updated>2023-02-28T11:24:15.000Z</updated>
+        <summary type="text">A shopkeeper from the Limburg municipality of Houthalen-Helchteren will remain in custody
+            for the time being. During the weekend the shopkeeper was involved in an incident with an intruder. The
+            intruder was stabbed and died of his injuries.
+        </summary>
+        <vrtns:nstag xmlns="">Crime &amp; Justice</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/28/shopkeeper-that-stabbed-to-death-an-intruder-to-remain-custody.rss.xml"
+              rel="self" title="Shopkeeper that stabbed to death an intruder to remain in custody"
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.aD4WQlJaA" rel="alternate"
+              title="Shopkeeper that stabbed to death an intruder to remain in custody" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/25/8a257d0b-b510-11ed-91d7-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Range of products that can be purched using Ecocheques to be expanded from Wednesday</title>
+        <id>https://vrtnws.be/p.DY35AWGll</id>
+        <published>2023-02-28T10:28:51.000Z</published>
+        <updated>2023-02-28T10:28:51.000Z</updated>
+        <summary type="text">As ever a new month brings with it a range of new rules, regulations and other measures
+            that affect us in our daily lives. One such measure that comes into force from tomorrow (1March) is an
+            expansion of the range of products that can be purchased using the Ecocheques that some of us receive from
+            our employers.
+        </summary>
+        <vrtns:nstag xmlns="">Home News</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/28/range-of-products-that-can-be-purched-using-ecocheques-to-be-exp.rss.xml"
+              rel="self" title="Range of products that can be purched using Ecocheques to be expanded from Wednesday"
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.DY35AWGll" rel="alternate"
+              title="Range of products that can be purched using Ecocheques to be expanded from Wednesday"
+              type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2015/10/12/44184c4f-70b6-11e5-b4f9-00163edf48dd.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Disruption as postal workers stage a 24-hour strike</title>
+        <id>https://vrtnws.be/p.QAjJlvnX5</id>
+        <published>2023-02-28T09:39:53.000Z</published>
+        <updated>2023-02-28T09:39:53.000Z</updated>
+        <summary type="text">Employees of the Belgian Post office Bpost are taking industrial action in protest at the
+            company’s reorganization plans. Luc Tegethoff of the liberal public service union VSOA told VRT Radio 1 that
+            while newspapers will be delivered today it could well be a very different story with regard to letters and
+            parcels.
+        </summary>
+        <vrtns:nstag xmlns="">Economy</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/28/disruption-as-postal-workers-stage-a-24-hour-strike.rss.xml"
+              rel="self" title="Disruption as postal workers stage a 24-hour strike" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.QAjJlvnX5" rel="alternate"
+              title="Disruption as postal workers stage a 24-hour strike" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/23/f42a4766-b3b4-11ed-91d7-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Average rent in Flanders now at 815 euro/month</title>
+        <id>https://vrtnws.be/p.BlvVeojWG</id>
+        <published>2023-02-28T08:59:43.000Z</published>
+        <updated>2023-02-28T08:59:43.000Z</updated>
+        <summary type="text">The price of renting a property in Flanders has increased significantly. Figures published
+            in the real estate federation CIB’s annual “Rent Barometer” show a year-on-year increase of 4.7% in the
+            average price paid to rent a property in our region. A shortage of properties to rent and demand for energy
+            efficient properties are serving to fuel the increase in rents.
+        </summary>
+        <vrtns:nstag xmlns="">Economy</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/28/average-rent-in-flanders-now-at-815-euro-month.rss.xml"
+              rel="self" title="Average rent in Flanders now at 815 euro/month  " type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.BlvVeojWG" rel="alternate"
+              title="Average rent in Flanders now at 815 euro/month  " type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2022/09/09/2baf1df6-3010-11ed-b07d-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Bar to pass Flemish integration test goes higher</title>
+        <id>https://vrtnws.be/p.oLvxOYDYQ</id>
+        <published>2023-02-27T15:15:17.000Z</published>
+        <updated>2023-02-27T15:15:17.000Z</updated>
+        <summary type="text">The result newcomers need to obtain in order to pass the Flemish integration test is
+            becoming more demanding starting 1 March. Newcomers taking the test will have to be able to answer 9 out of
+            11 questions about "basic fundamental values" correctly.
+        </summary>
+        <vrtns:nstag xmlns="">Society</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/27/bar-to-pass-flemish-integration-test-goes-higher.rss.xml"
+              rel="self" title="Bar to pass Flemish integration test goes higher" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.oLvxOYDYQ" rel="alternate"
+              title="Bar to pass Flemish integration test goes higher" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2022/11/24/40060da1-6c08-11ed-b07d-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Northern lights in Belgium for first time in a decade (VIDEO)</title>
+        <id>https://vrtnws.be/p.JN3ywN5qa</id>
+        <published>2023-02-27T13:52:13.000Z</published>
+        <updated>2023-02-27T13:52:13.000Z</updated>
+        <summary type="text">For the first time in a decade the northern lights (aurora borealis) were visible in
+            Belgium last night. Unfortunately, the lights couldn’t yet be seen by the naked eye, but they could be
+            photographed with the right settings. If conditions are favourable, the northern lights could become visible
+            for all tonight.
+        </summary>
+        <vrtns:nstag xmlns="">Science</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/27/northern-lights-in-belgium-for-first-time-in-a-decade.rss.xml"
+              rel="self" title="Northern lights in Belgium for first time in a decade (VIDEO)"
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.JN3ywN5qa" rel="alternate"
+              title="Northern lights in Belgium for first time in a decade (VIDEO)" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/27/cd3ffd3a-b68d-11ed-91d7-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Inflation nearly halves in only 4 months</title>
+        <id>https://vrtnws.be/p.YbYAvew94</id>
+        <published>2023-02-27T11:38:12.000Z</published>
+        <updated>2023-02-27T11:38:12.000Z</updated>
+        <summary type="text">Belgian year-on-year inflation – the rate at which prices in the shops rise - has taken a
+            new knock. February inflation stood at 6.62%,down from 8.05% in January. The fall is attributed to lower
+            energy prices. Meanwhile food inflation continues to rise.
+        </summary>
+        <vrtns:nstag xmlns="">Economy</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/27/inflation-nearly-halves-in-only-4-months.rss.xml" rel="self"
+              title="Inflation nearly halves in only 4 months" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.YbYAvew94" rel="alternate" title="Inflation nearly halves in only 4 months"
+              type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2022/04/06/96e8b07b-b591-11ec-b07d-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Record ‘Reading Aloud in Multiple Languages’ set in Schaarbeek</title>
+        <id>https://vrtnws.be/p.M9j8oA69p</id>
+        <published>2023-02-27T10:55:10.000Z</published>
+        <updated>2023-02-27T10:55:10.000Z</updated>
+        <summary type="text">Children and adults from local schools set a new record for reading aloud in the highest
+            number of languages at the Bib Sophia Library in Schaarbeek (Brussels) last Sunday. Excerpts of Leo
+            Timmers’s ‘Magical Life of Mr Renny ‘were read out in 65 different languages.
+        </summary>
+        <vrtns:nstag xmlns="">Culture and Media</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/27/record-_reading-aloud-in-multiple-languages-set-in-schaarbeek.rss.xml"
+              rel="self" title="Record ‘Reading Aloud in Multiple Languages’ set in Schaarbeek"
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.M9j8oA69p" rel="alternate"
+              title="Record ‘Reading Aloud in Multiple Languages’ set in Schaarbeek" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/26/50284a40-b5e1-11ed-91d7-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Rail strike on 10 March</title>
+        <id>https://vrtnws.be/p.WklAvxvPW</id>
+        <published>2023-02-27T09:46:19.000Z</published>
+        <updated>2023-02-27T09:46:19.000Z</updated>
+        <summary type="text">Staff at Belgium’s publicly owned rail company NMBS are taking industrial action on 10
+            March. The unions say workers are worried about rail underfunding and staffing levels: “We can no longer
+            offer our passengers a good service”.
+        </summary>
+        <vrtns:nstag xmlns="">Home News</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/27/rail-strike-on-10-march.rss.xml" rel="self"
+              title="Rail strike on 10 March" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.WklAvxvPW" rel="alternate" title="Rail strike on 10 March" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/01/06/2f951e04-8dd7-11ed-b07d-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Record cocaine seizure as Belgian home
+            minister visits Ecuador
+        </title>
+        <id>https://vrtnws.be/p.WklA0Jv5R</id>
+        <published>2023-02-27T09:16:13.000Z</published>
+        <updated>2023-02-27T09:16:13.000Z</updated>
+        <summary type="text">Belgian home minister Annelies Verlinden (Flemish Christian democrat) is accompanying
+            European commissioner for home affairs Ylva Johansson to Ecuador and Colombia on a trip intended to step up
+            cooperation between Belgium, the EU and the two Latin American countries in the fight against drugs
+            trafficking. During the first day of the Belgian’s visit a massive cache of cocaine bound for Belgium was
+            intercepted.
+        </summary>
+        <vrtns:nstag xmlns="">Foreign News</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/27/https-www-vrt-be-vrtnws-en-2023-02-27-peter-goossens-leaves-3.rss.xml"
+              rel="self" title="Record cocaine seizure as Belgian home&#xa;minister visits Ecuador"
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.WklA0Jv5R" rel="alternate"
+              title="Record cocaine seizure as Belgian home&#xa;minister visits Ecuador" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/01/10/af718b2f-90f3-11ed-b07d-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Peter Goossens to leave 3-star Hof van Cleve</title>
+        <id>https://vrtnws.be/p.Rajv6veqm</id>
+        <published>2023-02-27T08:42:11.000Z</published>
+        <updated>2023-02-27T08:42:11.000Z</updated>
+        <summary type="text">Hof Van Cleve, Peter Goossens’s restaurant in Kruisem (East Flanders) that has been awarded
+            three Michelin stars, will soon be under new leadership. The celebrated Flemish chef is selling up.
+        </summary>
+        <vrtns:nstag xmlns="">Culture and Media</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/27/peter-goossens-leaves-3-star-hof-van-cleve.rss.xml"
+              rel="self" title="Peter Goossens to leave 3-star Hof van Cleve" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.Rajv6veqm" rel="alternate" title="Peter Goossens to leave 3-star Hof van Cleve"
+              type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2019/11/18/0c5a4ff9-0a09-11ea-abcc-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">VIDEO: Vigils for Belgian aid worker held in Iranian jail</title>
+        <id>https://vrtnws.be/p.YbYAlWaEN</id>
+        <published>2023-02-27T08:26:51.000Z</published>
+        <updated>2023-02-27T08:26:51.000Z</updated>
+        <summary type="text">Vigils were held for Olivier Vandecasteele, the Belgian aid worker incarcerated in Iran,
+            across Belgium yesterday. In Brussels, Ghent, Leuven, Namur and Tournai people gathered to demand his
+            immediate release. Olivier’s sister Nathalie Vandecasteele told VRT: “We want to continue to pile on the
+            pressure on politicians. He needs to be freed ASAP because he has health issues and is still in solitary
+            confinement.
+        </summary>
+        <vrtns:nstag xmlns="">Home News</vrtns:nstag>
+        <vrtns:nslabeltag xmlns="">system:vrtnieuws/labels/video</vrtns:nslabeltag>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/27/vigils-for-belgian-aid-worker-held-in-iranian-jail.rss.xml"
+              rel="self" title="VIDEO: Vigils for Belgian aid worker held in Iranian jail" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.YbYAlWaEN" rel="alternate"
+              title="VIDEO: Vigils for Belgian aid worker held in Iranian jail" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/26/94ed289a-b607-11ed-91d7-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Stuffed “Roger” the centrepiece at “Pop-Up Wolves Expo”</title>
+        <id>https://vrtnws.be/p.YbYj5Q9xn</id>
+        <published>2023-02-26T08:00:00.000Z</published>
+        <updated>2023-02-26T08:00:00.000Z</updated>
+        <summary type="text">A new exhibition at the Webbekoms Broek visitors’ centre in Diest (Flemish Brabant)
+            chronicles the return of the wolf to our region after an absence of more than 100 years. The centrepiece of
+            the exhibition is the stuffed body of a wolf that was run over and killed by a car in Limburg Province.
+        </summary>
+        <vrtns:nstag xmlns="">Expo</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/21/stuffed-_roger_-the-centrepiece-at-pop-up-wolves-expo.rss.xml"
+              rel="self" title="Stuffed “Roger” the centrepiece at “Pop-Up Wolves Expo”" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.YbYj5Q9xn" rel="alternate"
+              title="Stuffed “Roger” the centrepiece at “Pop-Up Wolves Expo”" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/20/35e0c6e2-b140-11ed-b07d-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Line manager’s leadership style plays an import role in preventing burnouts</title>
+        <id>https://vrtnws.be/p.jGKeL3EPY</id>
+        <published>2023-02-26T08:00:00.000Z</published>
+        <updated>2023-02-26T08:00:00.000Z</updated>
+        <summary type="text">According to a survey carried out by the HR-services company Securex and Leuven University
+            (KUL) just a third of line managers have a leadership style that is conducive to helping prevent burnouts
+            among those in their team. Among those that receive support from their line manager just 1% suffer a
+            burnout. This figure rises to 38% among those that work under a line manager with a controlling and toxic
+            management style.
+        </summary>
+        <vrtns:nstag xmlns="">Economy</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/21/line-manager_s-leadership-style-play-an-import-role-in-prevented.rss.xml"
+              rel="self" title="Line manager’s leadership style plays an import role in preventing burnouts"
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.jGKeL3EPY" rel="alternate"
+              title="Line manager’s leadership style plays an import role in preventing burnouts" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2022/07/08/c2f23214-fede-11ec-b07d-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Pressure to convert an issue among Brussels public transport staff</title>
+        <id>https://vrtnws.be/p.RajQkGX49</id>
+        <published>2023-02-25T08:00:00.000Z</published>
+        <updated>2023-02-25T08:00:00.000Z</updated>
+        <summary type="text">More than three-quarters of those that work for the Brussels public transport company MIVB
+            want greater protection against religious, political or ideologic influence exerted on them by colleagues.
+            That’s according to a survey published earlier this week by CAL, a Francophone umbrella group comprising 28
+            secular, humanist organisations.
+        </summary>
+        <vrtns:nstag xmlns="">Religie &amp; Levensbeschouwing</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/21/pressure-to-convert-an-issue-among-brussels-public-transport-sta.rss.xml"
+              rel="self" title="Pressure to convert an issue among Brussels public transport staff"
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.RajQkGX49" rel="alternate"
+              title="Pressure to convert an issue among Brussels public transport staff" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2022/06/13/54a7963e-eafc-11ec-b07d-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Why do people have affairs?</title>
+        <id>https://vrtnws.be/p.Ov9v9yPlq</id>
+        <published>2023-02-25T07:04:00.000Z</published>
+        <updated>2023-02-25T07:04:00.000Z</updated>
+        <summary type="text">Earlier this month we celebrated Valentine’s Day. Over the years it has become a
+            celebration of loved ones in a marriage, partnership or permanent relationship, but in the United States, on
+            the eve of Valentine’s Day, National Mistress Day is also celebrated. This is more a celebration of
+            “unofficial relationships”.
+        </summary>
+        <vrtns:nstag xmlns="">Society</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/22/why-are-people-unfaithful.rss.xml" rel="self"
+              title="Why do people have affairs?" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.Ov9v9yPlq" rel="alternate" title="Why do people have affairs?"
+              type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2020/02/13/504f73a6-4e6c-11ea-aae0-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Search continues for 75-year-old woman missing since Wednesday</title>
+        <id>https://vrtnws.be/p.ZW19DDVWm</id>
+        <published>2023-02-24T15:24:22.000Z</published>
+        <updated>2023-02-24T15:24:22.000Z</updated>
+        <summary type="text">The search for a 75-year-old woman from the Limburg municipality of Maasmechelen entered
+            its third day on Friday. Several teams of police officers with tracker dogs searched the Mechels Bos woods.
+            On Thursday evening drones were deployed in an effort to find the missing pensioner. Emilia Chini went
+            missing on Wednesday evening near to her home on the Lindelaan in the Eisden-Tuinwijk area of Maasmechelen.
+        </summary>
+        <vrtns:nstag xmlns="">Home News</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/24/search-continues-for-75-year-old-woman-missing-since-wednesday.rss.xml"
+              rel="self" title="Search continues for 75-year-old woman missing since Wednesday"
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.ZW19DDVWm" rel="alternate"
+              title="Search continues for 75-year-old woman missing since Wednesday" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/23/2b43e4d3-b362-11ed-91d7-02b7b76bf47f.png"
+              rel="enclosure" type="image/png"/>
+    </entry>
+    <entry>
+        <title type="text">European Commission bans TikTok use</title>
+        <id>https://vrtnws.be/p.E1NKQZGGL</id>
+        <published>2023-02-24T13:32:46.000Z</published>
+        <updated>2023-02-24T13:32:46.000Z</updated>
+        <summary type="text">The European Commission has banished the use of the Chinese social media app TikTok from
+            all its computers, tablets and staff smartphones. The measure is designed to protect the commission’s staff.
+        </summary>
+        <vrtns:nstag xmlns="">Media</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/24/european-commission-bans-tiktok-use.rss.xml" rel="self"
+              title="European Commission bans TikTok use " type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.E1NKQZGGL" rel="alternate" title="European Commission bans TikTok use "
+              type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/23/1be3cb57-b3a6-11ed-91d7-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Bonds issue raises almost 28 million euro in its first day</title>
+        <id>https://vrtnws.be/p.6KlMl7Ja0</id>
+        <published>2023-02-24T12:25:25.000Z</published>
+        <updated>2023-02-24T12:25:25.000Z</updated>
+        <summary type="text">The Federal Debt Agency reports that the latest government bond issue that was launched on
+            Thursday raised 26.8 million euro in its first day. Until next Friday those that wish to will be able to
+            invest in the bonds that run for either 3 or 10 years.
+        </summary>
+        <vrtns:nstag xmlns="">Economy</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/24/bonds-issue-raises-almost-28-million-euro-in-its-first-day.rss.xml"
+              rel="self" title="Bonds issue raises almost 28 million euro in its first day"
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.6KlMl7Ja0" rel="alternate"
+              title="Bonds issue raises almost 28 million euro in its first day" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2022/05/25/cb1b21b8-dc2b-11ec-b07d-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">More than 1,000 patients have already been treated at Belgian B-FAST field hospital in
+            Turkey
+        </title>
+        <id>https://vrtnws.be/p.oLv0vE5Jv</id>
+        <published>2023-02-24T11:57:37.000Z</published>
+        <updated>2023-02-24T11:57:37.000Z</updated>
+        <summary type="text">The Federal Foreign Affairs Department reports that in just one week the Belgian B-FAST
+            field hospital in the Turkish town of Kirikhan has treated more than 1,000 people. Last week the Belgian
+            emergency assistance intervention team B-FAST set up a field hospital with medical staff in Kirikhan, a town
+            that suffered severe damage from the earthquakes that caused widespread death, injury and destruction
+            earlier this month.
+        </summary>
+        <vrtns:nstag xmlns="">Foreign News</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/24/more-than-1-000-patients-have-already-been-treated-at-belgian-b.rss.xml"
+              rel="self"
+              title="More than 1,000 patients have already been treated at Belgian B-FAST field hospital in Turkey"
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.oLv0vE5Jv" rel="alternate"
+              title="More than 1,000 patients have already been treated at Belgian B-FAST field hospital in Turkey"
+              type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2021/12/02/e033dfb5-538e-11ec-b07d-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Belgium scraps mandatory COVID tests for people arriving here from China</title>
+        <id>https://vrtnws.be/p.Pq7KdpXEa</id>
+        <published>2023-02-24T11:27:54.000Z</published>
+        <updated>2023-02-24T11:27:54.000Z</updated>
+        <summary type="text">From Monday people arriving in Belgium from China will no longer have to undergo a
+            mandatory test for coronavirus in order to be allowed into the country. Speaking on Friday morning, the
+            Federal Health Minister Frank Vandenbroucke (Flemish socialist) said that from 27 February the tests will be
+            voluntary. Testing will be scrapped completely from mid-March.
+        </summary>
+        <vrtns:nstag xmlns="">Health</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/24/belgium-scraps-mandatory-covid-tests-for-people-arriving-here-fr.rss.xml"
+              rel="self" title="Belgium scraps mandatory COVID tests for people arriving here from China "
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.Pq7KdpXEa" rel="alternate"
+              title="Belgium scraps mandatory COVID tests for people arriving here from China " type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2021/03/29/849319a8-9048-11eb-b07d-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">80 residency &amp; work permits granted to Moroccan nations suspended due to suspected
+            fraud
+        </title>
+        <id>https://vrtnws.be/p.3BL0VA4ne</id>
+        <published>2023-02-24T10:50:54.000Z</published>
+        <updated>2023-02-24T10:50:54.000Z</updated>
+        <summary type="text">Earlier this week the Belgian Consulate in Turkey opened an investigation into suspected
+            fraud regarding the acquisition of permits allowing Turks to come and live and work in Belgium. Now the
+            Belgian Consulate in Morocco has followed suit. A total of 80 cases of suspected work permit fraud involving
+            Moroccans are being investigated. The permits that had been issued to Moroccans to come and work in Flanders
+            have now been suspended.
+        </summary>
+        <vrtns:nstag xmlns="">Home News</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/24/80-residency-work-permits-granted-to-moroccan-nations-suspende.rss.xml"
+              rel="self"
+              title="80 residency &amp; work permits granted to Moroccan nations suspended due to suspected fraud "
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.3BL0VA4ne" rel="alternate"
+              title="80 residency &amp; work permits granted to Moroccan nations suspended due to suspected fraud "
+              type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/22/fba12c08-b28d-11ed-91d7-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Flemish Government launches new initiative to collect emergency aid for Ukraine</title>
+        <id>https://vrtnws.be/p.y3Ab8lGLB</id>
+        <published>2023-02-24T09:48:11.000Z</published>
+        <updated>2023-02-24T09:48:11.000Z</updated>
+        <summary type="text">The Flemish Government has launched a new initiative to collect aid to assist the victims
+            of the war in Ukraine. Companies and local authorities can collect and donate goods through the scheme that
+            is being organised in collaboration with the Flemish Red Cross, the Association of Flemish City and
+            Municipal Authorities (VVSG) and business federations from 8 branches of industry. It’s a year to the day
+            since the war started and the need for basic everyday goods among the people of Ukraine remains great.
+        </summary>
+        <vrtns:nstag xmlns="">Home News</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/24/flemish-government-launch-new-initiative-to-collect-emergency-ai.rss.xml"
+              rel="self" title="Flemish Government launches new initiative to collect emergency aid for Ukraine"
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.y3Ab8lGLB" rel="alternate"
+              title="Flemish Government launches new initiative to collect emergency aid for Ukraine" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/01/02/46021f80-8a59-11ed-b07d-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">VIDEO: 90% drop in UK-bound migrants taking their chances on the Flemish coast</title>
+        <id>https://vrtnws.be/p.aD4D68bNd</id>
+        <published>2023-02-23T14:44:24.000Z</published>
+        <updated>2023-02-23T14:44:24.000Z</updated>
+        <summary type="text">Greater security at Flemish ports, a new taskforce to clamp down on people-trafficking and
+            the use of intel gleaned from mobile phones belonging to victims and suspects have all led to a sharp fall
+            in the number of UK-bound migrants ending up on the Flemish coast. The pull of northern France, where
+            chances of success are greater, is stronger. In comparison with 2018 there has been a 90% drop in UK-bound
+            migrants taking their chances on the Flemish coast.
+        </summary>
+        <vrtns:nslabeltag xmlns="">system:vrtnieuws/labels/video</vrtns:nslabeltag>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/23/90-drop-in-uk-bound-migrants-taking-their-chances-on-the-flemis.rss.xml"
+              rel="self" title="VIDEO: 90% drop in UK-bound migrants taking their chances on the Flemish coast"
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.aD4D68bNd" rel="alternate"
+              title="VIDEO: 90% drop in UK-bound migrants taking their chances on the Flemish coast" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/23/916df528-b388-11ed-91d7-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">VIDEO: One in three road deaths are cyclists or pedestrians</title>
+        <id>https://vrtnws.be/p.nwBwLYZw7</id>
+        <published>2023-02-23T14:34:09.000Z</published>
+        <updated>2023-02-23T14:34:09.000Z</updated>
+        <summary type="text">More and more people are getting on their bikes. It’s healthy and cheap but fatalities are
+            up. Last year over 500 people died in traffic. A third were cyclists or pedestrians. Many were seniors.
+        </summary>
+        <vrtns:nslabeltag xmlns="">system:vrtnieuws/labels/video</vrtns:nslabeltag>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/23/one-in-three-road-deaths-are-cyclists-or-pedestrians.rss.xml"
+              rel="self" title="VIDEO: One in three road deaths are cyclists or pedestrians"
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.nwBwLYZw7" rel="alternate"
+              title="VIDEO: One in three road deaths are cyclists or pedestrians" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/23/22c954ce-b387-11ed-91d7-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">"National debt just shy of 120% of GDP in 2028"</title>
+        <id>https://vrtnws.be/p.11e16kAke</id>
+        <published>2023-02-23T13:43:25.000Z</published>
+        <updated>2023-02-23T13:43:25.000Z</updated>
+        <summary type="text">Belgium’s national debt is set to rise to nearly 120% of national output by 2028. Figures
+            from the government planning office suggest that if no action is taken budget deficits this year and next
+            will total 5.7% and 5.4% of GDP or national output.
+        </summary>
+        <vrtns:nstag xmlns="">Economy</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/23/national-debt-just-shy-of-120-of-gdp-in-2028.rss.xml"
+              rel="self" title="&quot;National debt just shy of 120% of GDP in 2028&quot;" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.11e16kAke" rel="alternate"
+              title="&quot;National debt just shy of 120% of GDP in 2028&quot;" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2020/01/03/b9b4c16b-2e00-11ea-abcc-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">VIDEO: Fire bomb attack at Antwerp pizzeria</title>
+        <id>https://vrtnws.be/p.BlvlBnnDW</id>
+        <published>2023-02-23T08:02:46.000Z</published>
+        <updated>2023-02-23T12:58:00.000Z</updated>
+        <summary type="text">A pizzeria in the Kiel district of Antwerp is the latest property to be attacked in the
+            northern port city in what in all likelihood is a further escalation of the drugs war in the city.
+        </summary>
+        <vrtns:nstag xmlns="">Crime &amp; Justice</vrtns:nstag>
+        <vrtns:nslabeltag xmlns="">system:vrtnieuws/labels/video</vrtns:nslabeltag>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/23/antwerp-pizzeria-attacked-with-fire-bomb.rss.xml" rel="self"
+              title="VIDEO: Fire bomb attack at Antwerp pizzeria" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.BlvlBnnDW" rel="alternate" title="VIDEO: Fire bomb attack at Antwerp pizzeria"
+              type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/23/dd643696-b36e-11ed-91d7-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Brussels metro can’t understand why train wheels are going oval</title>
+        <id>https://vrtnws.be/p.APOPLReAD</id>
+        <published>2023-02-23T12:46:57.000Z</published>
+        <updated>2023-02-23T12:46:57.000Z</updated>
+        <summary type="text">Folk at the Brussels local transport company MIVB are scratching their heads. The wheels on
+            the new M7 metro trains are wearing down faster than usual. They are being blamed for extra noise and
+            vibrations. The transport company is puzzled because the wheels are made by the same producer and in the
+            same way!
+        </summary>
+        <vrtns:nstag xmlns="">Home News</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/23/brussels-metro-cant-understand-why-train-wheels-are-going-oval.rss.xml"
+              rel="self" title="Brussels metro can’t understand why train wheels are going oval "
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.APOPLReAD" rel="alternate"
+              title="Brussels metro can’t understand why train wheels are going oval " type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/23/b1340afb-b365-11ed-91d7-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Ex far right lawmaker to face Holocaust denial charges</title>
+        <id>https://vrtnws.be/p.0YdY9O5Kl</id>
+        <published>2023-02-23T10:53:48.000Z</published>
+        <updated>2023-02-23T10:53:48.000Z</updated>
+        <summary type="text">A panel of judges has ordered that Dries Van Langenhove stand trial on charges of Holocaust
+            denial. The former far right lawmaker already has to stand trial for inciting hate and violence as well as
+            weapons offences.
+        </summary>
+        <vrtns:nstag xmlns="">Crime &amp; Justice</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/23/ex-far-right-lawmaker-to-face-holocaust-denial-charges.rss.xml"
+              rel="self" title="Ex far right lawmaker to face Holocaust denial charges" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.0YdY9O5Kl" rel="alternate"
+              title="Ex far right lawmaker to face Holocaust denial charges" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/23/abbe0d35-b353-11ed-91d7-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Man in court on charges of penetrating a horse on a Leuven square</title>
+        <id>https://vrtnws.be/p.qE5EkKAOW</id>
+        <published>2023-02-23T09:04:07.000Z</published>
+        <updated>2023-02-23T09:04:07.000Z</updated>
+        <summary type="text">A man from Leuven faced his day in court yesterday after he was accused on penetrating a
+            horse with his hand on the Laduezeplein in the Flemish Brabantine capital. The incident allegedly happened
+            during the filming of a TV series.
+        </summary>
+        <vrtns:nstag xmlns="">Home News</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/23/man-in-court-for-penetrating-horse-on-leuven-square.rss.xml"
+              rel="self" title="Man in court on charges of penetrating a horse on a Leuven square"
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.qE5EkKAOW" rel="alternate"
+              title="Man in court on charges of penetrating a horse on a Leuven square" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2022/10/05/e641b63b-4497-11ed-b07d-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Belgian long-term interest highest in a decade: what does it mean for you?</title>
+        <id>https://vrtnws.be/p.JN3NpmNnQ</id>
+        <published>2023-02-23T08:38:22.000Z</published>
+        <updated>2023-02-23T08:38:22.000Z</updated>
+        <summary type="text">Belgian long-term interest rates have hit the highest level in a decade. Interest on
+            ten-year bonds has now reached 3.2%. The further rise is bad news for mortgage holders and the Belgian
+            state, but better news for savers.
+        </summary>
+        <vrtns:nstag xmlns="">Economy</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/23/belgian-long-term-interest-highest-in-a-decade-what-does-it-mea.rss.xml"
+              rel="self" title="Belgian long-term interest highest in a decade: what does it mean for you?"
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.JN3NpmNnQ" rel="alternate"
+              title="Belgian long-term interest highest in a decade: what does it mean for you?" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2019/12/28/392b9cdb-2960-11ea-abcc-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">UK-bound migrants ignoring Belgium</title>
+        <id>https://vrtnws.be/p.8eYeEoeZl</id>
+        <published>2023-02-22T15:10:20.000Z</published>
+        <updated>2023-02-22T15:10:20.000Z</updated>
+        <summary type="text">The number of migrants travelling through Belgium on their way to the UK fell by 90% since
+            2018. Human traffickers are increasingly abandoning Belgium as a transit country in their attempts to
+            smuggle migrants to the UK federal justice minister Vincent Van Quickenborne (Flemish liberal) said
+            Wednesday.
+        </summary>
+        <vrtns:nstag xmlns="">Home News</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/22/uk-bound-migrants-ignoring-belgium.rss.xml" rel="self"
+              title="UK-bound migrants ignoring Belgium" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.8eYeEoeZl" rel="alternate" title="UK-bound migrants ignoring Belgium"
+              type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2022/11/14/a6f3e209-6422-11ed-b07d-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Flemish Brabantians get back on their bike</title>
+        <id>https://vrtnws.be/p.11e1jPlnn</id>
+        <published>2023-02-22T11:14:41.000Z</published>
+        <updated>2023-02-22T11:14:41.000Z</updated>
+        <summary type="text">More and more Brabantians are getting on their bikes. Last year 3 million cyclists drove
+            past a bicycle counter in Flemish Brabant Province. Leuven-Brussels remains the most popular cycle
+            superhighway.
+        </summary>
+        <vrtns:nstag xmlns="">Home News</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/22/flemish-brabantians-get-back-on-their-bike.rss.xml"
+              rel="self" title="Flemish Brabantians get back on their bike" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.11e1jPlnn" rel="alternate" title="Flemish Brabantians get back on their bike"
+              type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/22/fada0d99-b29c-11ed-91d7-02b7b76bf47f.png"
+              rel="enclosure" type="image/png"/>
+    </entry>
+    <entry>
+        <title type="text">Brussels cinema evacuated after cinemagoers become unwell</title>
+        <id>https://vrtnws.be/p.bDJD9b6jL</id>
+        <published>2023-02-22T11:03:47.000Z</published>
+        <updated>2023-02-22T11:03:47.000Z</updated>
+        <summary type="text">Cinéma Aventure in Brussels had to be evacuated last night after a dozen cinemagoers became
+            unwell suffering breathing difficulty and irritation of the eyes. The fire service believes chemical
+            substances used in neighbouring nail bars may have caused the incident. One woman even had to be
+            hospitalised.
+        </summary>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/22/brussels-cinema-evacuated-after-cinemagoers-become-unwell.rss.xml"
+              rel="self" title="Brussels cinema evacuated after cinemagoers become unwell" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.bDJD9b6jL" rel="alternate"
+              title="Brussels cinema evacuated after cinemagoers become unwell" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/21/8297da7e-b224-11ed-91d7-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Refugees and asylum seekers fill construction job shortage</title>
+        <id>https://vrtnws.be/p.APOPJ6R1y</id>
+        <published>2023-02-22T10:10:32.000Z</published>
+        <updated>2023-02-22T10:10:32.000Z</updated>
+        <summary type="text">A report from the Social Economic Council for Flanders identifies a great shortage of
+            plasters and roofers. Few are the Flemish youngsters eager to embark on training for these professions,
+            while the number of training courses isn’t sufficient either. Employers are often obliged to look further
+            afield to find qualified workers.
+        </summary>
+        <vrtns:nstag xmlns="">Economy</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/22/refugees-and-asylum-seekers-fill-construction-job-shortage.rss.xml"
+              rel="self" title="Refugees and asylum seekers fill construction job shortage "
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.APOPJ6R1y" rel="alternate"
+              title="Refugees and asylum seekers fill construction job shortage " type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/22/fba12c08-b28d-11ed-91d7-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Dutch judge refuses to send asylum seeker back to Belgium due to risk of “inhumane
+            treatment”
+        </title>
+        <id>https://vrtnws.be/p.8eYenykdM</id>
+        <published>2023-02-22T09:34:02.000Z</published>
+        <updated>2023-02-22T09:34:02.000Z</updated>
+        <summary type="text">A Dutch judge has refused to send a Chinese asylum seeker back to Belgium out of concerns
+            he could face inhumane treatment at the hands of the Belgian authorities. The Chinese national applied for
+            asylum in the Netherlands last summer, but it soon emerged he had already applied in Belgium. As a result
+            his application couldn’t be processed by the Dutch authorities. Under European rules he was supposed to be
+            sent back to Belgium. The Chinese appealed against that decision pointing to the lack of capacity for asylum
+            seekers south of the border.
+        </summary>
+        <vrtns:nstag xmlns="">Crime &amp; Justice</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/22/dutch-judge-refuses-to-send-asylum-seeker-back-to-belgium-due-to.rss.xml"
+              rel="self"
+              title="Dutch judge refuses to send asylum seeker back to Belgium due to risk of “inhumane treatment”"
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.8eYenykdM" rel="alternate"
+              title="Dutch judge refuses to send asylum seeker back to Belgium due to risk of “inhumane treatment”"
+              type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2022/11/22/44ee3edf-6a77-11ed-b07d-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Russian spy ship had Belgian wind farms in its sights</title>
+        <id>https://vrtnws.be/p.9313L7v6b</id>
+        <published>2023-02-22T08:50:07.000Z</published>
+        <updated>2023-02-22T08:50:07.000Z</updated>
+        <summary type="text">Belgian justice minister Vincent Van Quickenborne (Flemish liberal), who also doubles as
+            Minister for the North Sea, has provided details about a Russian spy ship that cruised off the Belgian coast
+            last November. The vessel was sailing in the vicinity of Belgian windfarms and refused to identify itself.
+            “The passage of this ship must be seen within the wider context of the war in Ukraine” Mr Van Quickenborne
+            told VRT.
+        </summary>
+        <vrtns:nstag xmlns="">Home News</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/22/russian-spy-ship-had-belgian-wind-farms-in-its-sights.rss.xml"
+              rel="self" title="Russian spy ship had Belgian wind farms in its sights" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.9313L7v6b" rel="alternate"
+              title="Russian spy ship had Belgian wind farms in its sights" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/01/20/06bf8bad-98a7-11ed-b07d-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">“Dikkebus” becomes “Enormebus” pace Roald Dahl</title>
+        <id>https://vrtnws.be/p.JN3NNBe3a</id>
+        <published>2023-02-22T08:19:44.000Z</published>
+        <updated>2023-02-22T08:19:44.000Z</updated>
+        <summary type="text">The controversy over the updating of the words of British author Roald Dahl has crossed the
+            English Channel and is also causing a stir in Flanders.
+        </summary>
+        <vrtns:nstag xmlns="">Culture and Media</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/22/_dikkebus_-becomes-enormebus.rss.xml" rel="self"
+              title="“Dikkebus” becomes “Enormebus” pace Roald Dahl" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.JN3NNBe3a" rel="alternate"
+              title="“Dikkebus” becomes “Enormebus” pace Roald Dahl" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/21/c52f50f3-b200-11ed-91d7-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Magnificent floats win prizes at Aalst Carnival</title>
+        <id>https://vrtnws.be/p.bDJ3X8npD</id>
+        <published>2023-02-21T10:10:26.000Z</published>
+        <updated>2023-02-21T15:24:00.000Z</updated>
+        <summary type="text">Three carnival groups received prizes for creating the most beautiful floats at Aalst
+            Carnival. The prize ceremony is one of the highlights of three days of revelry in the city.
+        </summary>
+        <vrtns:nstag xmlns="">Home News</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/21/magnificent-floats-at-aalst-carnival.rss.xml" rel="self"
+              title="Magnificent floats win prizes at Aalst Carnival" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.bDJ3X8npD" rel="alternate"
+              title="Magnificent floats win prizes at Aalst Carnival" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/21/b2645578-b1aa-11ed-b07d-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Asylum seeker tent camp doesn’t get cleared as planned</title>
+        <id>https://vrtnws.be/p.vLN9lyVPl</id>
+        <published>2023-02-21T09:20:20.000Z</published>
+        <updated>2023-02-21T14:59:00.000Z</updated>
+        <summary type="text">Plans to clear a tent camp outside the Klein Kasteeltje reception centre for asylum seekers
+            in Brussels failed to go ahead yesterday evening. Following the sealing of the Paleizenstraat squat in
+            Schaarbeek where many asylum seekers had taken up residence numbers at the tent camp outside Klein
+            Kasteeltje operated by Fedasil, the government agency that provides accommodation to registered asylum
+            seekers, swelled.
+        </summary>
+        <vrtns:nstag xmlns="">Home News</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/21/asylum-seeker-tent-camp-doesnt-get-cleared-as-planned.rss.xml"
+              rel="self" title="Asylum seeker tent camp doesn’t get cleared as planned" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.vLN9lyVPl" rel="alternate"
+              title="Asylum seeker tent camp doesn’t get cleared as planned" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/20/728b6918-b137-11ed-b07d-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Investigation underway after explosion outside Ghent beauty salon</title>
+        <id>https://vrtnws.be/p.nwBJxNy6K</id>
+        <published>2023-02-21T14:48:26.000Z</published>
+        <updated>2023-02-21T14:48:26.000Z</updated>
+        <summary type="text">The Judicial Authorities have launched an investigation after a homemade bomb exploded
+            outside a beauty salon in the East Flemish city of Ghent. No one was injured in the explosion that took
+            place early on Tuesday morning. Earlier this month a similar incident took place in the Rabot area of Ghent.
+            No significant damage was caused by the explosion.
+        </summary>
+        <vrtns:nstag xmlns="">Crime &amp; Justice</vrtns:nstag>
+        <vrtns:nslabeltag xmlns=""/>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/21/investigation-underway-after-explosion-ghent-beauty-salon.rss.xml"
+              rel="self" title="Investigation underway after explosion outside Ghent beauty salon"
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.nwBJxNy6K" rel="alternate"
+              title="Investigation underway after explosion outside Ghent beauty salon" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/21/44b12f16-b1db-11ed-91d7-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Tax surcharge wipes out power firm’s excessive profits</title>
+        <id>https://vrtnws.be/p.Gv7aqnv3d</id>
+        <published>2023-02-21T13:58:39.000Z</published>
+        <updated>2023-02-21T13:58:39.000Z</updated>
+        <summary type="text">Higher gas and electricity prices generated higher pretax profits for power company Engie
+            last year. Pretax profits were up 2 billion to 5 billion in 2022. In 2021 the company only made profits of 3
+            billion euros. However, the Belgian government introduced a tax surcharge on excessive profits by energy
+            companies reducing Engie’s net profits to 200 million euros. Engie made excessive profits because it
+            generates most of its energy from nuclear at no extra cost but was able to benefit from higher market prices
+            triggered by Russia’s further invasion of Ukraine.
+        </summary>
+        <vrtns:nstag xmlns="">Economy</vrtns:nstag>
+        <vrtns:nslabeltag xmlns="">system:vrtnieuws/labels/video</vrtns:nslabeltag>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/21/tax-surcharge-wipes-out-power-firms-excessive-profits.rss.xml"
+              rel="self" title="Tax surcharge wipes out power firm’s excessive profits" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.Gv7aqnv3d" rel="alternate"
+              title="Tax surcharge wipes out power firm’s excessive profits" type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/21/d87ffd97-b1ef-11ed-91d7-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Half of all De Lijn fines are never paid</title>
+        <id>https://vrtnws.be/p.JN3Ljp5Mk</id>
+        <published>2023-02-21T13:41:09.000Z</published>
+        <updated>2023-02-21T13:41:09.000Z</updated>
+        <summary type="text">Half the fare dodging fines issued by the Flemish transport company De Lijn are never paid.
+            This means the company is losing out on 3.5 million euros every year. In the big cities around half of all
+            passengers don’t possess a valid ticket. The number of fines doubled in the past 4 years but getting hold of
+            the cash when somebody fails to pay is a terribly long procedure involving a bailiff and payment plan.
+        </summary>
+        <vrtns:nstag xmlns="">Home News</vrtns:nstag>
+        <vrtns:nslabeltag xmlns="">system:vrtnieuws/labels/video</vrtns:nslabeltag>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/21/half-of-all-de-lijn-fines-are-never-paid.rss.xml" rel="self"
+              title=" Half of all De Lijn fines are never paid" type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.JN3Ljp5Mk" rel="alternate" title=" Half of all De Lijn fines are never paid"
+              type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/21/670d6598-b1ed-11ed-91d7-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+    <entry>
+        <title type="text">Rubens’s Portrait of a Man as the God Mars in Brussels ahead of New York auction</title>
+        <id>https://vrtnws.be/p.7n0RMEq6y</id>
+        <published>2023-02-21T13:21:42.000Z</published>
+        <updated>2023-02-21T13:21:42.000Z</updated>
+        <summary type="text">It is not something that happens every day but in May a real Peter Paul Rubens is being
+            auctioned at Sotheby’s in New York. The Portrait of a Man as the God Mars is currently in Belgium for the
+            first time in 200 years and is attracting considerable interest says George Gordon (Sotheby’s Master
+            Paintings) (VIDEO).
+        </summary>
+        <vrtns:nstag xmlns="">Culture and Media</vrtns:nstag>
+        <vrtns:nslabeltag xmlns="">system:vrtnieuws/labels/video</vrtns:nslabeltag>
+        <link href="https://www.vrt.be/vrtnws/en/2023/02/21/rubens_s-portrait-of-a-man-as-the-god-mars-in-brussels-ahead-of.rss.xml"
+              rel="self" title="Rubens’s Portrait of a Man as the God Mars in Brussels ahead of New York auction"
+              type="application/atom+xml"/>
+        <link href="https://vrtnws.be/p.7n0RMEq6y" rel="alternate"
+              title="Rubens’s Portrait of a Man as the God Mars in Brussels ahead of New York auction"
+              type="text/html"/>
+        <link href="https://images.vrt.be/vrtnws_share/2023/02/21/aec7b314-b1ea-11ed-91d7-02b7b76bf47f.jpg"
+              rel="enclosure" type="image/jpeg"/>
+    </entry>
+</feed>
