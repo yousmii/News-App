@@ -5,6 +5,7 @@ from flask.templating import render_template
 from flask import request, session, jsonify, redirect, flash
 
 from config import config_data
+from DBConnection import DBConnection
 
 #from waitress import serve
 
