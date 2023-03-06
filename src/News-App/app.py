@@ -7,6 +7,7 @@ from flask import request, session, jsonify, redirect, flash
 from config import config_data
 from quote_data_access import Quote, DBConnection, QuoteDataAccess
 
+
 #from waitress import serve
 
 #from src.ProgDBTutor.config import config_data
@@ -107,6 +108,11 @@ def show_admin():
 @app.route("/home")
 def home():
     return render_template('home.html', app_data=app_data)
+
+@app.route("/post_rss", methods= ['POST'])
+def post_rss():
+    rss =
+
 
 # RUN DEV SERVER
 if __name__ == "__main__":
