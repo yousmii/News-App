@@ -7,6 +7,8 @@ from flask import request, session, jsonify, redirect, flash
 from config import config_data
 from DBConnection import DBConnection
 
+from database import *
+
 
 #from waitress import serve
 
@@ -68,7 +70,9 @@ def home():
 
 @app.route("/post_rss", methods= ['POST'])
 def post_rss():
-    rss =
+
+
+    rss =Feed()
 
 
 # RUN DEV SERVER
