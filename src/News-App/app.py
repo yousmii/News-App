@@ -7,7 +7,7 @@ from flask import request, session, jsonify, redirect, flash
 from config import config_data
 from DBConnection import DBConnection
 
-#from waitress import serve
+from waitress import serve
 
 #from src.ProgDBTutor.config import config_data
 
@@ -67,4 +67,5 @@ def home():
 
 # RUN DEV SERVER
 if __name__ == "__main__":
-    app.run(HOST, debug=DEBUG)
+    #app.run(HOST, debug=DEBUG)
+    serve(app, host="0.0.0.0", port=8080)

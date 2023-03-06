@@ -3,7 +3,7 @@ from datetime import datetime, date, time
 
 from sqlalchemy import *
 from sqlalchemy.orm import relationship, declarative_base
-from con import *
+from config import *
 
 Base = declarative_base()
 
@@ -35,7 +35,7 @@ class NewsSource(Base):
 
 class RSS(Base):
     __tablename__='rss'
-    content = Column(TEXT,nullable=False)
+    rss_url = Column(String, nullable=False)
     id = Column(INT,primary_key=True)
     published_by=Column(String,ForeignKey('source.name',ondelete='SET-NULL',onupdate='CASCADE'),nullable=False)
 
@@ -65,6 +65,8 @@ class Feed(Base):
     __tablename__='feed'
     article=Column(String,ForeignKey('article.link',ondelete='CASCADE',onupdate='CASCADE'),nullable=False,primary_key=True)
     user=Column(INT,ForeignKey('user.cookie',ondelete='CASCADE',onupdate='CASCADE'),nullable=False,primary_key=True)
+
+
 
 # connection.execute()
 def create():
