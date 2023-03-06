@@ -1,4 +1,4 @@
-from sql.database import *
+from .database import *
 
 class DBConnection:
     def __init__(self):
