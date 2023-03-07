@@ -34,10 +34,11 @@ class NewsSource(Base):
     magazine = Column(String, nullable=False)
 
 class RSS(Base):
-    __tablename__='rss'
-    content = Column(TEXT,nullable=False)
-    id = Column(INT,primary_key=True)
-    published_by=Column(String,ForeignKey('source.name',ondelete='SET-NULL',onupdate='CASCADE'),nullable=False)
+    __tablename__ = 'rss'
+    rss_url = Column(String, nullable=False)
+    id = Column(INT, primary_key=True)
+    published_by = Column(String, ForeignKey('source.name', ondelete='SET-NULL', onupdate='CASCADE'), nullable=False)
+
 
 class Labels(Base):
     __tablename__='labels'
