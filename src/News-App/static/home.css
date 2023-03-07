@@ -46,6 +46,14 @@ body {
     text-decoration: none;
 }
 
+.article a:hover {
+    text-decoration: none;
+}
+
+.article a:active {
+    text-decoration: none;
+}
+
 .article img {
     display: block;
     width: 100%;
@@ -69,7 +77,7 @@ body {
 }
 
 .article:hover h2 {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 @media only screen and (max-width: 767px) {
