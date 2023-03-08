@@ -45,5 +45,5 @@ yarn
 Now with everything in place, we just need to startup the project, which is also quite easy :)
 
 ```bash
-yarn vite
+yarn start
 ```
