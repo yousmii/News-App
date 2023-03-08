@@ -1,12 +1,10 @@
 {
   "name": "news-app",
   "private": true,
-  "proxy": "http://localhost:5000/",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "start": "vite",
-    "start_backend": "cd src/server && env/bin/flask run --no-debugger",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
