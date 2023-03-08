@@ -6,14 +6,6 @@ from flask import request, session, jsonify, redirect, flash
 from app import app, user, app_data
 from rss_parser import parse
 
-
-#from waitress import serve
-
-#from src.ProgDBTutor.config import config_data
-
-
-
-
 # REST API
 # See https://www.ibm.com/developerworks/library/ws-restful/index.html
 
