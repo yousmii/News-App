@@ -14,7 +14,7 @@ User=app
 Group=www-data
 
 # We'll then map out the working directory and set the PATH environmental variable so that the init system knows where our the executables for the process are located (within our virtual environment).
-WorkingDirectory=/home/app/News-App/NewsApp
+WorkingDirectory=/home/app/News-App/src/server
 Environment="PATH=/home/app/News-App/env/bin"
 
 # We'll then specify the commanded to start the service
