@@ -106,8 +106,11 @@ def parse(path):
     xml_string = xml_file.read()
     feed = feedparser.parse(xml_string)
 
+    articles = []
+
     # Loop through each article in the feed
     for entry in feed.entries:
+        article = {}
         # Get the article title
         title = entry.title
 
@@ -124,17 +127,14 @@ def parse(path):
         # Get the article URL
         url = entry.link
 
-        html_file = open('templates/articles.html', 'a+')
+        article["title"] = title
+        article["image"] = thumbnail
+        article["link"] = url
 
-        html_file.write("<div class=\"article\">\n")
-        html_file.write(f"<a href=\"{url}\" target='blank'>\n")
-        html_file.write(f"<img src=\"{thumbnail}\">\n")
-        html_file.write(f"<h2>{title}</h2>\n")
-        html_file.write("</a>\n</div>\n")
+        articles.append(article)
 
-        html_file.close()
+    return articles
 
-        print(title, url, thumbnail)
 
 
 

@@ -1,8 +1,11 @@
 import os
+import json
 
-from flask import Flask
+from flask import Flask, stream_with_context, Response
 from flask.templating import render_template
 from flask import request, session, jsonify, redirect, flash
+
+from rss_parser import parse
 
 from config import config_data
 
@@ -58,6 +61,11 @@ def show_admin():
 @app.route("/home")
 def home():
     return render_template('home.html', app_data=app_data)
+
+@app.route("/data")
+def get_articles():
+    articles = parse("static/sporza.xml")
+    return json.dumps(articles)
 
 # RUN DEV SERVER
 if __name__ == "__main__":
