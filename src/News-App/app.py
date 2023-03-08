@@ -8,7 +8,7 @@ from flask import request, session, jsonify, redirect, flash, url_for
 from config import config_data
 from DBConnection import DBConnection
 
-from database import *
+#from database import *
 
 from RSSCounter import RSSCounter
 
@@ -24,7 +24,7 @@ app_data = dict()
 app_data['app_name'] = config_data['app_name']
 connection = DBConnection(dbname=config_data['dbname'], dbuser=config_data['dbuser'], password="")
 
-db = SQLAlchemy(app)
+#db = SQLAlchemy(app)
 
 DEBUG = False
 HOST = "127.0.0.1" if DEBUG else "0.0.0.0"
@@ -82,14 +82,14 @@ def home():
 def post_rss():
 
 
-    rss = RSS()
-    rss.rss_url = request.form['feed_url']
-    rss.published_by = request.form['feed_name']
+    #rss = RSS()
+    #rss.rss_url = request.form['feed_url']
+    #rss.published_by = request.form['feed_name']
 
-    db.session.add(rss)
-    db.session.commit()
+    #db.session.add(rss)
+    #db.session.commit()
 
-    return (url_for('show_admin'))
+    return render_template('admin.html', app_data = app_data)
 
 # RUN DEV SERVER
 if __name__ == "__main__":
