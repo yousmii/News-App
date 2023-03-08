@@ -21,7 +21,7 @@ connection = DBConnection(dbname=config_data['dbname'], dbuser=config_data['dbus
 DEBUG = False
 HOST = "127.0.0.1" if DEBUG else "0.0.0.0"
 
-# TEST USER
+# TEST USE
 user = {"username": "abc", "password": "xyz"}
 
 
