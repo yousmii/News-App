@@ -48,5 +48,9 @@ def home():
 
 @app.route("/data")
 def get_articles():
-    articles = parse("static/sporza.xml")
+    articles = parse('https://www.vrt.be/vrtnws/en.rss.articles.xml') + \
+    parse('https://www.gva.be/rss/section/ca750cdf-3d1e-4621-90ef-a3260118e21c') + \
+    parse('https://www.nieuwsblad.be/rss/section/55178e67-15a8-4ddd-a3d8-bfe5708f8932') + \
+    parse('https://www.demorgen.be/in-het-nieuws/rss.xml') + \
+    parse('https://sporza.be/nl.rss.xml')
     return json.dumps(articles)
