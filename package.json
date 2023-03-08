@@ -5,8 +5,8 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "start": "react-scripts start",
-    "start_backend": "cd backend && env/bin/flask run --no-debugger",
+    "start": "vite",
+    "start_backend": "cd src/server && env/bin/flask run --no-debugger",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
