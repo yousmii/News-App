@@ -9,18 +9,22 @@ from sql.config import engine
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
-# create the extension
-db = SQLAlchemy()
-# INITIALIZE SINGLETON SERVICES
-app = Flask('News-App')
-app.secret_key = '*^*(*&)(*)(*afafafaSDD47j\3yX R~X@H!jmM]Lwf/,?KT'
-app_data = dict()
-app_data['app_name'] = config_data['app_name']
-
-# INITIALIZE SINGLETON SERVICES
-#app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"
-app.config["SQLALCHEMY_DATABASE_URI"] =engine.url
-db.init_app(app)
+##############################################################################
+#### NIEMAND RAAKT DIT AAN AUB!!!!!!###########################################
+# create the extension                                                       ##
+db = SQLAlchemy()                                                            ##
+# INITIALIZE SINGLETON SERVICES                                              ##
+app = Flask('News-App')                                                      ##
+app.secret_key = '*^*(*&)(*)(*afafafaSDD47j\3yX R~X@H!jmM]Lwf/,?KT'          ##
+app_data = dict()                                                            ##
+app_data['app_name'] = config_data['app_name']                               ##
+                                                                             ##
+# INITIALIZE SINGLETON SERVICES                                              ##
+# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"             ##
+app.config["SQLALCHEMY_DATABASE_URI"] = engine.url                           ##
+db.init_app(app)                                                             ##
+###############################################################################
+###############################################################################
 
 from database import *
 
@@ -66,10 +70,12 @@ def login():
 def logout():
     session.pop('user')
     return redirect('/')
+
+
 # VIEW
 @app.route("/")
 def main():
-    user=User(cookie=4000,history="hi")
+    user = User(cookie=4000, history="hi")
     # demo of adding to db
     db.session.add(user)
     db.session.commit()
