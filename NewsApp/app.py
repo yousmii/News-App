@@ -1,5 +1,5 @@
 from flask import Flask
-from NewsApp.config import config_data
+from config import config_data
 
 # INITIALIZE SINGLETON SERVICES
 app = Flask('NewsApp ')
@@ -13,4 +13,4 @@ HOST = "127.0.0.1" if DEBUG else "0.0.0.0"
 # TEST USER
 user = {"username": "abc", "password": "xyz"}
 
-from NewsApp import routes
+import routes

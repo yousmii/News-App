@@ -1,7 +1,7 @@
 from flask.templating import render_template
 from flask import request, session, jsonify, redirect, flash
 
-from NewsApp import app, user, app_data
+from app import app, user, app_data
 
 
 #from waitress import serve
