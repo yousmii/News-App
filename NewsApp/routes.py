@@ -1,28 +1,14 @@
-import os
-
-from flask import Flask
 from flask.templating import render_template
 from flask import request, session, jsonify, redirect, flash
 
-from config import config_data
-from DBConnection import DBConnection
+from NewsApp import app, user, app_data
+
 
 #from waitress import serve
 
 #from src.ProgDBTutor.config import config_data
 
-# INITIALIZE SINGLETON SERVICES
-app = Flask('News-App ')
-app.secret_key = '*^*(*&)(*)(*afafafaSDD47j\3yX R~X@H!jmM]Lwf/,?KT'
-app_data = dict()
-app_data['app_name'] = config_data['app_name']
-connection = DBConnection(dbname=config_data['dbname'], dbuser=config_data['dbuser'], password="")
 
-DEBUG = False
-HOST = "127.0.0.1" if DEBUG else "0.0.0.0"
-
-# TEST USER
-user = {"username": "abc", "password": "xyz"}
 
 
 # REST API
@@ -64,7 +50,3 @@ def show_admin():
 @app.route("/home")
 def home():
     return render_template('home.html', app_data=app_data)
-
-# RUN DEV SERVER
-if __name__ == "__main__":
-    app.run(HOST, debug=DEBUG)

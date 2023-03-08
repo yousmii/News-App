@@ -55,15 +55,15 @@ pip3 install -r requirements.txt
 
 #### 4. Run development server
 ```bash
-cd src/News-App
-python app.py
+cd src/NewsApp
+python routes.py
 ```
 Then visit http://localhost:8080
 
 
 #### 5. Run unit tests:
 ```bash
-cd src/News-App
+cd src/NewsApp
 nosetests
 ```
 
@@ -193,7 +193,7 @@ git clone https://github.com/yousmii/News-App
 #### 5. Test if wsgi entrypoint works
 Instead of using the Flask debug server, we use gunicorn to serve the application.
 ```bash
-cd src/News-App
+cd src/NewsApp
 gunicorn --bind 0.0.0.0:5000 wsgi:app
 ```
 
@@ -202,7 +202,7 @@ gunicorn --bind 0.0.0.0:5000 wsgi:app
 As an account with sudo acces (not app), copy the file `service/webapp.service` to `/etc/systemd/system/` and enable the service:
 
 ```bash
-sudo ln -s /home/app/News-App/service/webapp.service /etc/systemd/system/
+sudo ln -s /home/app/NewsApp/service/webapp.service /etc/systemd/system/
 
 sudo systemctl enable webapp
 sudo systemctl start webapp
@@ -213,8 +213,8 @@ A file `src/News-App/webapp.sock` should be created.
 #### 7. Setup nginx
 Link or copy the nginx server block configuration file to the right nginx folders:
 ```bash
-sudo ln -s /home/app/News-App/nginx/webapp /etc/nginx/sites-available/
-sudo ln -s /home/app/News-App/nginx/webapp /etc/nginx/sites-enabled/
+sudo ln -s /home/app/NewsApp/nginx/webapp /etc/nginx/sites-available/
+sudo ln -s /home/app/NewsApp/nginx/webapp /etc/nginx/sites-enabled/
 ```
 
 The contents of this file can be changed for your setup. For example change the IP address to your external IP and add the correct DNS name (`team[x].ua-ppdb.me`)

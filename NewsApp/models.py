@@ -3,7 +3,7 @@ from datetime import datetime, date, time
 
 from sqlalchemy import *
 from sqlalchemy.orm import relationship, declarative_base
-from con import *
+from NewsApp.sqlconfig import *
 
 Base = declarative_base()
 
