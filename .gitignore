@@ -2,3 +2,4 @@ NewsApp/__pycache__/
 env/
 venv/
 node_modules/
+*__pycache__/
