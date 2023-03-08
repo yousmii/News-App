@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy_utils import database_exists, create_database
-from NewsApp.local_settings import postgresql as settings
+from local_settings import postgresql as settings
 
 
 # create engine
