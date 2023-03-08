@@ -55,15 +55,15 @@ pip3 install -r requirements.txt
 
 #### 4. Run development server
 ```bash
-cd src/NewsApp
-python routes.py
+cd NewsApp
+python run.py
 ```
 Then visit http://localhost:8080
 
 
 #### 5. Run unit tests:
 ```bash
-cd src/NewsApp
+cd NewsApp
 nosetests
 ```
 
@@ -194,7 +194,7 @@ git clone https://github.com/yousmii/News-App
 Instead of using the Flask debug server, we use gunicorn to serve the application.
 ```bash
 cd src/NewsApp
-gunicorn --bind 0.0.0.0:5000 wsgi:app
+gunicorn --bind 0.0.0.0:5000 run:app
 ```
 
 
@@ -225,7 +225,7 @@ server {
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:/home/app/News-App/src/News-App/webapp.sock;
+        proxy_pass http://unix:/home/app/News-App/NewsApp/webapp.sock;
     }
 }
 ```
