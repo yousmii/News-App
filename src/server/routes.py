@@ -50,3 +50,8 @@ def show_admin():
 @app.route("/home")
 def home():
     return render_template('home.html', app_data=app_data)
+
+@app.route("/data")
+def get_articles():
+    articles = parse("static/sporza.xml")
+    return json.dumps(articles)
