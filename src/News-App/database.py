@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_utils.types import uuid
 
-from app import db
+from config import db
 
 
 # Base = declarative_base()
@@ -89,23 +89,3 @@ class Feed(db.Model):
 u=User()
 u.add(2,"bla")
 """
-
-
-def unique_id():
-    return uuid.uuid4()
-
-
-class ConnectDB:
-    def __init__(self):
-        pass
-
-    def initialise(self, app):
-        db.init_app(app)
-        with app.app_context():
-            db.create_all()
-
-    def add_user(self, cookie, history):
-        user = User(cookie=cookie, history=history)
-        # demo of adding to db
-        db.session.add(user)
-        db.session.commit()

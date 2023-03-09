@@ -8,29 +8,12 @@ from config import config_data
 from sql.config import engine
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-
-##############################################################################
-#### NIEMAND RAAKT DIT AAN AUB!!!!!!###########################################
-# create the extension                                                       ##
-db = SQLAlchemy()                                                            ##
-# INITIALIZE SINGLETON SERVICES                                              ##
-app = Flask('News-App')                                                      ##
-app.secret_key = '*^*(*&)(*)(*afafafaSDD47j\3yX R~X@H!jmM]Lwf/,?KT'          ##
-app_data = dict()                                                            ##
-app_data['app_name'] = config_data['app_name']                               ##
-                                                                             ##
-# INITIALIZE SINGLETON SERVICES                                              ##
-# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"             ##
-app.config["SQLALCHEMY_DATABASE_URI"] = engine.url                           ##
-db.init_app(app)
-from database import *
-###############################################################################
-###############################################################################
-
+from ConnectDB import ConnectDB
+from config import app, db, app_data
 
 # TEST USER
 user = {"username": "abc", "password": "xyz"}
-dbConnection=ConnectDB()
+dbConnection=ConnectDB(db)
 # REST API
 # See https://www.ibm.com/developerworks/library/ws-restful/index.html
 
@@ -75,15 +58,9 @@ def logout():
 # VIEW
 @app.route("/")
 def main():
-    """"
-    user = User(cookie=4001, history="hi")
-    # demo of adding to db
-    db.session.add(user)
-    db.session.commit()
-    """
-    dbConnection.add_user(4003,"BLA")
-    print(User.query.all())
-    print("hello")
+    #template how add users using ConnectDB
+    #dbConnection.add_user(4005,"BLA")
+    print(dbConnection.getUsers())
     return render_template('home.html', app_data=app_data)
 
 
