@@ -1,13 +1,5 @@
-import os
-import uuid
-
-from flask import Flask
 from flask.templating import render_template
 from flask import request, session, jsonify, redirect, flash
-from config import config_data
-from sql.config import engine
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from ConnectDB import ConnectDB
 from config import app, db, app_data
 
