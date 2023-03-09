@@ -1,12 +1,22 @@
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy_utils.types import uuid
+
 from app import db
+
 
 # Base = declarative_base()
 
 
 class User(db.Model):
+
     __tablename__ = 'user'
     cookie = db.Column(db.Integer, db.Sequence('user_seq'), primary_key=True)
     history = db.Column(db.String(255), nullable=True)
+
+    def add(self, cookie: int, history: str):
+        u = User(cookie=cookie, history=history)
+        db.session.add(u)
+        db.session.commit()
 
 
 class Admin(db.Model):
@@ -19,8 +29,10 @@ class Admin(db.Model):
 
 class Creates(db.Model):
     __tablename__ = 'creates'
-    creator = db.Column(db.String, db.ForeignKey('admin.name', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True)
-    created = db.Column(db.String, db.ForeignKey('admin.name', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True)
+    creator = db.Column(db.String, db.ForeignKey('admin.name', ondelete='CASCADE', onupdate='CASCADE'),
+                        primary_key=True)
+    created = db.Column(db.String, db.ForeignKey('admin.name', ondelete='CASCADE', onupdate='CASCADE'),
+                        primary_key=True)
 
 
 class NewsSource(db.Model):
@@ -28,41 +40,72 @@ class NewsSource(db.Model):
     name = db.Column(db.String, primary_key=True)
     magazine = db.Column(db.String, nullable=False)
 
+
 class RSS(db.Model):
-    __tablename__='rss'
+    __tablename__ = 'rss'
     rss_url = db.Column(db.String, nullable=False)
-    id = db.Column(db.INT,primary_key=True)
-    published_by=db.Column(db.String,db.ForeignKey('source.name',ondelete='CASCADE',onupdate='CASCADE'),nullable=False)
+    id = db.Column(db.INT, primary_key=True)
+    published_by = db.Column(db.String, db.ForeignKey('source.name', ondelete='CASCADE', onupdate='CASCADE'),
+                             nullable=False)
+
 
 class Labels(db.Model):
-    __tablename__='labels'
-    label=db.Column(db.String,primary_key=True)
+    __tablename__ = 'labels'
+    label = db.Column(db.String, primary_key=True)
+
 
 class Article(db.Model):
-    __tablename__='article'
-    title = db.Column(db.String,nullable=False)
-    description = db.Column(db.String,nullable=True)
-    photo = db.Column(db.String,nullable=True)
-    link=db.Column(db.String,primary_key=True)
-    pub_date=db.Column(db.String,nullable=False)
+    __tablename__ = 'article'
+    title = db.Column(db.String, nullable=False)
+    description = db.Column(db.String, nullable=True)
+    photo = db.Column(db.String, nullable=True)
+    link = db.Column(db.String, primary_key=True)
+    pub_date = db.Column(db.String, nullable=False)
     pub_time = db.Column(db.String, nullable=False)
-    references=db.Column(db.String,db.ForeignKey('source.name',onupdate='CASCADE',ondelete='CASCADE'),nullable=False)
-    rss_access=db.Column(db.INT,db.ForeignKey('rss.id',onupdate='CASCADE',ondelete='CASCADE'),nullable=False)
-    label=db.Column(db.String,db.ForeignKey('labels.label',onupdate='CASCADE',ondelete='CASCADE'),nullable=False)
+    references = db.Column(db.String, db.ForeignKey('source.name', onupdate='CASCADE', ondelete='CASCADE'),
+                           nullable=False)
+    rss_access = db.Column(db.INT, db.ForeignKey('rss.id', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
+    label = db.Column(db.String, db.ForeignKey('labels.label', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
+
 
 class TF_IDF(db.Model):
-    __tablename__='tf_idf'
-    article1=db.Column(db.String,db.ForeignKey('article.link',ondelete='CASCADE',onupdate='CASCADE'),nullable=False,primary_key=True)
-    article2=db.Column(db.String,db.ForeignKey('article.link',ondelete='CASCADE',onupdate='CASCADE'),nullable=False,primary_key=True)
-    value=db.Column(db.INT,nullable=False)
+    __tablename__ = 'tf_idf'
+    article1 = db.Column(db.String, db.ForeignKey('article.link', ondelete='CASCADE', onupdate='CASCADE'),
+                         nullable=False, primary_key=True)
+    article2 = db.Column(db.String, db.ForeignKey('article.link', ondelete='CASCADE', onupdate='CASCADE'),
+                         nullable=False, primary_key=True)
+    value = db.Column(db.INT, nullable=False)
+
 
 class Feed(db.Model):
-    __tablename__='feed'
-    article=db.Column(db.String,db.ForeignKey('article.link',ondelete='CASCADE',onupdate='CASCADE'),nullable=False,primary_key=True)
-    user=db.Column(db.INT,db.ForeignKey('user.cookie',ondelete='CASCADE',onupdate='CASCADE'),nullable=False,primary_key=True)
+    __tablename__ = 'feed'
+    article = db.Column(db.String, db.ForeignKey('article.link', ondelete='CASCADE', onupdate='CASCADE'),
+                        nullable=False, primary_key=True)
+    user = db.Column(db.INT, db.ForeignKey('user.cookie', ondelete='CASCADE', onupdate='CASCADE'), nullable=False,
+                     primary_key=True)
 
 
 """"
 u=User()
 u.add(2,"bla")
 """
+
+
+def unique_id():
+    return uuid.uuid4()
+
+
+class ConnectDB:
+    def __init__(self):
+        pass
+
+    def initialise(self, app):
+        db.init_app(app)
+        with app.app_context():
+            db.create_all()
+
+    def add_user(self, cookie, history):
+        user = User(cookie=cookie, history=history)
+        # demo of adding to db
+        db.session.add(user)
+        db.session.commit()

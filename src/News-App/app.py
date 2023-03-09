@@ -22,15 +22,15 @@ app_data['app_name'] = config_data['app_name']                               ##
 # INITIALIZE SINGLETON SERVICES                                              ##
 # app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///project.db"             ##
 app.config["SQLALCHEMY_DATABASE_URI"] = engine.url                           ##
-db.init_app(app)                                                             ##
+db.init_app(app)
+from database import *
 ###############################################################################
 ###############################################################################
 
-from database import *
 
 # TEST USER
 user = {"username": "abc", "password": "xyz"}
-
+dbConnection=ConnectDB()
 # REST API
 # See https://www.ibm.com/developerworks/library/ws-restful/index.html
 
@@ -75,10 +75,13 @@ def logout():
 # VIEW
 @app.route("/")
 def main():
-    user = User(cookie=4000, history="hi")
+    """"
+    user = User(cookie=4001, history="hi")
     # demo of adding to db
     db.session.add(user)
     db.session.commit()
+    """
+    dbConnection.add_user(4003,"BLA")
     print(User.query.all())
     print("hello")
     return render_template('home.html', app_data=app_data)
