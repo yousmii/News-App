@@ -1,11 +1,19 @@
+import os
+import uuid
+
+from flask import Flask
 from flask.templating import render_template
 from flask import request, session, jsonify, redirect, flash
+from config import config_data
+from sql.config import engine
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
 from ConnectDB import ConnectDB
-from config import app, db, app_data
+from config import app, app_data
 
 # TEST USER
 user = {"username": "abc", "password": "xyz"}
-dbConnection=ConnectDB(db)
+dbConnection = ConnectDB()
 # REST API
 # See https://www.ibm.com/developerworks/library/ws-restful/index.html
 
@@ -50,8 +58,8 @@ def logout():
 # VIEW
 @app.route("/")
 def main():
-    #template how add users using ConnectDB
-    #dbConnection.add_user(4005,"BLA")
+    # template how add users using ConnectDB
+    #dbConnection.add_user(4009, "BLA")
     print(dbConnection.getUsers())
     return render_template('home.html', app_data=app_data)
 
