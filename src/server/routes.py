@@ -67,6 +67,18 @@ def get_articles():
     articles = parse("static/sporza.xml")
     return json.dumps(articles)
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html', app_data = app_data)
+
+@app.errorhandler(404)
+def forbidden_access(e):
+    return render_template('403.html', app_data = app_data)
+
+@app.errorhandler(500)
+def internal_server_error(e):
+    return render_template('500.html',app_data = app_data)
+
 # RUN DEV SERVER
 if __name__ == "__main__":
     app.run(HOST, debug=DEBUG)
