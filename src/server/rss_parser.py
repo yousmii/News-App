@@ -1,4 +1,5 @@
 import feedparser
+from bs4 import BeautifulSoup
 
 def parse(link):
     # Parse the RSS feed
@@ -21,6 +22,13 @@ def parse(link):
                 if enc['type'].startswith('image/'):
                     thumbnail = enc['href']
                     break
+        if not thumbnail:
+            # Extract the image URL from the description using BeautifulSoup
+            description = entry.description
+            soup = BeautifulSoup(description, 'html.parser')
+            img_tag = soup.find('img')
+            if img_tag:
+                thumbnail = img_tag['src']
 
         # Get the article URL
         url = entry.link
@@ -34,20 +42,25 @@ def parse(link):
     return articles
 
 def main():
-    print("---vrt---")
-    parse('https://www.vrt.be/vrtnws/en.rss.articles.xml')
-    print("\n")
-    print("---gva---")
-    parse('https://www.gva.be/rss/section/ca750cdf-3d1e-4621-90ef-a3260118e21c')
-    print("\n")
-    print("---het nieuwsblad---")
-    parse('https://www.nieuwsblad.be/rss/section/55178e67-15a8-4ddd-a3d8-bfe5708f8932')
-    print("\n")
-    print("---de morgen---")
-    parse('https://www.demorgen.be/in-het-nieuws/rss.xml')
-    print("\n")
-    print("---sporza---")
-    parse('https://sporza.be/nl.rss.xml')
+    # print("---vrt---")
+    # parse('https://www.vrt.be/vrtnws/en.rss.articles.xml')
+    # print("\n")
+    # print("---gva---")
+    # parse('https://www.gva.be/rss/section/ca750cdf-3d1e-4621-90ef-a3260118e21c')
+    # print("\n")
+    # print("---het nieuwsblad---")
+    # parse('https://www.nieuwsblad.be/rss/section/55178e67-15a8-4ddd-a3d8-bfe5708f8932')
+    # print("\n")
+    # print("---de morgen---")
+    # parse('https://www.demorgen.be/in-het-nieuws/rss.xml')
+    # print("\n")
+    # print("---sporza---")
+    # parse('https://sporza.be/nl.rss.xml')
+    print('\n')
+    print('---the bulletin---')
+    articles = parse('https://www.thebulletin.be/rss.xml')
+    print(articles)
+    
 
 if __name__ == "__main__":
     main()

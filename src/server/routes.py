@@ -29,7 +29,11 @@ def get_articles():
                parse('https://www.gva.be/rss/section/ca750cdf-3d1e-4621-90ef-a3260118e21c') + \
                parse('https://www.nieuwsblad.be/rss/section/55178e67-15a8-4ddd-a3d8-bfe5708f8932') + \
                parse('https://www.demorgen.be/in-het-nieuws/rss.xml') + \
-               parse('https://sporza.be/nl.rss.xml')
+               parse('https://sporza.be/nl.rss.xml') + \
+               parse('https://www.thebulletin.be/rss.xml') + \
+               parse('https://www.standaard.be/rss/section/1f2838d4-99ea-49f0-9102-138784c7ea7c') + \
+               parse('https://www.hln.be/home/rss.xml') + \
+               parse('https://www.hbvl.be/rss/section/D1618839-F921-43CC-AF6A-A2B200A962DC')
     return json.dumps(articles)
 
 @app.errorhandler(404)
