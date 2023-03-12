@@ -32,7 +32,7 @@ body {
   justify-content: flex-start;
   align-items: center;
   text-align: center;
-  width: 400px;
+  width: 29%;
   margin: 0 auto; /* center the container horizontally */
   background-color: #FFFFFF; /* create the white rectangle background */
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1); /* add a subtle shadow effect */
@@ -40,6 +40,10 @@ body {
   border-radius: 20px;
   margin-bottom: 20px;
   overflow: hidden;
+}
+
+.article:nth-child(1), .article:nth-child(2) {
+  width: 46%;
 }
 
 .article a {
@@ -75,8 +79,10 @@ body {
   font-size: 20.1px;
 }
 
-@media only screen and (max-width: 767px) {
-  .article {
+@media only screen and (max-width: 600px) {
+  .article,
+  .article:nth-child(1),
+  .article:nth-child(2) {
     width: 100%;
   }
 }
