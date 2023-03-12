@@ -1,3 +1,8 @@
+src/News-App/__pycache__/
+env/
+venv/
+.idea
+.fleet
 backend/__pycache__/
 backend/env/
 backend/venv/

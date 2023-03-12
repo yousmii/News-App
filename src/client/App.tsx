@@ -1,20 +1,33 @@
 import React, {useState, useEffect} from "react";
 import Header from "./components/Header";
 import styles from "./components/Article.module.scss"
+import axios from 'axios';
 
 function App() {
     const [data, setData] = useState([]);
-
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch('/data');
-            const jsonData = await response.json();
-            setData(jsonData);
+            try {
+                const response = await axios.get('/api');
+                setData(response.data);
+            } catch (error) {
+                setError(error.response.data.error);
+            }
         }
 
         fetchData();
     }, []);
+
+    if (error) {
+        return (
+            <div>
+                <Header/>
+                <div className={styles.error}>{error}</div>
+            </div>
+        );
+    }
 
     return (
         <div>
