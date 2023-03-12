@@ -2,3 +2,6 @@ src/News-App/__pycache__/
 env/
 venv/
 node_modules/
+.idea
+.fleet
+node_modules

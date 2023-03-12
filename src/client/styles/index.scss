@@ -1,0 +1,26 @@
+@import "./variables.scss";
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $open-sans;
+    color: $text;
+    height: 200vh;
+}
+
+button {
+    font-family: inherit;
+    outline: none;
+    border: none;
+    background: none;
+    letter-spacing: inherit;
+    color: inherit;
+    font-size: inherit;
+    text-align: inherit;
+    padding: 0;
+}
