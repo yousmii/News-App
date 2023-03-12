@@ -10,3 +10,10 @@ Werkzeug==0.16.1
 nltk==3.8.1
 gensim==4.3.0
 numpy==1.24.1
+pip~=23.0.1
+wheel~=0.37.1
+setuptools~=60.2.0
+psycopg2~=2.9.5
+SQLAlchemy~=2.0.4
+feedparser~=6.0.10
+sqlalchemy-utils==0.40.0

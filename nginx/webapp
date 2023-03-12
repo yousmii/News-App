@@ -4,6 +4,6 @@ server {
 
     location / {
         include proxy_params;
-        proxy_pass http://unix:/home/app/News-App/src/News-App/webapp.sock;
+        proxy_pass http://unix:/home/app/News-App/src/server/webapp.sock;
     }
 }

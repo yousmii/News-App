@@ -1,85 +1,85 @@
 @import "../styles/variables.scss";
 
 .header {
-    height: $header-height;
-    background: $bg2;
-    color: $white;
-    position: fixed;
-    z-index: 1000;
-    width: 100%;
+  height: $header-height;
+  background: $bg2;
+  color: $white;
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
 
-    &__content {
-        max-width: 1920px;
-        margin: 0 auto;
-        padding: 0 $spacing-m;
+  &__content {
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 $spacing-m;
 
-        @include breakpoint(medium) {
-            padding: 0 $spacing-l;
-        }
+    @include breakpoint(medium) {
+      padding: 0 $spacing-l;
+    }
     transition: 0.3s ease padding;
 
-        height: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    & > div {
+      flex: 1;
+      white-space: nowrap;
+
+      &:nth-child(2) {
         display: flex;
-        align-items: center;
+        justify-content: flex-end;
+        height: 100%;
 
-        & > div {
-            flex: 1;
-            white-space: nowrap;
-
-            &:nth-child(2) {
-                display: flex;
-                justify-content: flex-end;
-                height: 100%;
-
-                margin-right: $spacing-m;
-            }
+        margin-right: $spacing-m;
+      }
 
       &:last-of-type {
-                display: flex;
-                justify-content: flex-end;
-                flex: 0;
-            }
-        }
+        display: flex;
+        justify-content: flex-end;
+        flex: 0;
+      }
     }
+  }
 
   &__button__container {
-        display: none;
-        @include breakpoint(medium) {
-            display: initial;
-        }
+    display: none;
+    @include breakpoint(medium) {
+      display: initial;
     }
+  }
 
   &__toggler {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 
-        @include breakpoint(medium) {
-            display: none;
-        }
+    @include breakpoint(medium) {
+      display: none;
+    }
 
     & > svg {
-            display: block;
-            font-size: 32px;
-        }
+      display: block;
+      font-size: 32px;
     }
+  }
 }
 
 .logo {
-    font-size: 26px;
-    font-weight: 700;
-    color: $white;
-    align-items: center;
-    display: inline-flex;
-    grid-auto-flow: column;
-    grid-column-gap: $spacing-s;
+  font-size: 26px;
+  font-weight: 700;
+  color: $white;
+  align-items: center;
+  display: inline-flex;
+  grid-auto-flow: column;
+  grid-column-gap: $spacing-s;
 }
 
 .nav {
-    width: 100%;
-    position: fixed;
-    // top: $header-height;
+  width: 100%;
+  position: fixed;
+  // top: $header-height;
   right: 0;
   background: $bg2;
   text-align: center;
@@ -91,69 +91,69 @@
     z-index 0s linear 0.01s;
 
   &--open {
-      visibility: visible;
-      opacity: 1;
-      z-index: 1;
-      transform: translateY($header-height);
-      transition-delay: 0s, 0s, 0.3s;
+    visibility: visible;
+    opacity: 1;
+    z-index: 1;
+    transform: translateY($header-height);
+    transition-delay: 0s, 0s, 0.3s;
   }
 
   &__item {
-      display: block;
-      padding: $spacing-m;
+    display: block;
+    padding: $spacing-m;
 
-      text-decoration: none;
-      color: inherit;
+    text-decoration: none;
+    color: inherit;
 
-      height: 100%;
+    height: 100%;
 
-      transition: 0.3s ease color;
-      &:hover {
-          color: $link;
-      }
+    transition: 0.3s ease color;
+    &:hover {
+      color: $link;
+    }
   }
 
   @include breakpoint(medium) {
-      visibility: visible;
-      position: static;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      background: initial;
-      width: auto;
-      padding: 0;
+    visibility: visible;
+    position: static;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    background: initial;
+    width: auto;
+    padding: 0;
 
-      &__item {
-          padding: 0 $spacing-l;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-      }
+    &__item {
+      padding: 0 $spacing-l;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   &__button__container {
-      @include breakpoint(medium) {
-          display: none;
-      }
+    @include breakpoint(medium) {
+      display: none;
+    }
     padding: $spacing-m;
   }
 }
 
 .button {
-    font-weight: 500;
-    color: $link;
-    border: 2px solid $link;
-    padding: $spacing-s $spacing-l;
-    border-radius: calc($spacing-s / 2);
-    cursor: pointer;
+  font-weight: 500;
+  color: $link;
+  border: 2px solid $link;
+  padding: $spacing-s $spacing-l;
+  border-radius: calc($spacing-s / 2);
+  cursor: pointer;
 
-    transition: transform 0.2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 
-    &:active {
-        transform: scale(0.98);
-        border-radius: 0;
-    }
+  &:active {
+    transform: scale(0.98);
+    border-radius: 0;
+  }
 
   &:hover {
-        transform: scale(1.2);
-    }
+    transform: scale(1.2);
+  }
 }

@@ -26,24 +26,24 @@ $large: 64em;
 $extra-large: 75em;
 
 @mixin breakpoint($point) {
-    @if $point == small {
-        @media (min-width: $small) {
-            @content;
-        }
+  @if $point == small {
+    @media (min-width: $small) {
+      @content;
     }
+  }
   @if $point == medium {
-      @media (min-width: $medium) {
-          @content;
-      }
+    @media (min-width: $medium) {
+      @content;
+    }
   }
   @if $point == large {
-      @media (min-width: $large) {
-          @content;
-      }
+    @media (min-width: $large) {
+      @content;
+    }
   }
   @if $point == extra-large {
-      @media (min-width: $extra-large) {
-          @content;
-      }
+    @media (min-width: $extra-large) {
+      @content;
+    }
   }
 }

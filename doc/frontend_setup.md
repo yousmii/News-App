@@ -46,4 +46,8 @@ Now with everything in place, we just need to startup the project, which is also
 
 ```bash
 yarn start
+<<<<<<< HEAD
 ```
+=======
+```
+>>>>>>> fb0a59dc835eaf2b3f021a338aec36787fc467b1

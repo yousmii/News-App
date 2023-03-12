@@ -18,7 +18,6 @@ engine = get_engine(settings['pguser'],
                     settings['pghost'],
                     settings['pgport'],
                     settings['pgdb'])
-engine.url.database  # TODO: Waarom staat deze line hier?
 
 
 def get_engine_from_settings():
@@ -41,7 +40,6 @@ def get_session():
 
 
 session = get_session()
-session # TODO: en deze?
 
 
 def get_db():
