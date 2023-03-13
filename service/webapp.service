@@ -18,7 +18,7 @@ WorkingDirectory=/home/app/News-App/
 Environment="PATH=/home/app/News-App/venv/bin"
 
 # We'll then specify the commanded to start the service
-ExecStart=npm run start-service
+ExecStart=/usr/bin/npm run start-service
 
 # This will tell systemd what to link this service to if we enable it to start at boot. We want this service to start when the regular multi-user system is up and running:
 [Install]
