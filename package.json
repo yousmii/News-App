@@ -5,9 +5,11 @@
     "type": "module",
     "scripts": {
         "start": "npm run install-backend && concurrently \"npm run start-client\" \"npm run start-server\"",
+        "start-service": "npm run install-backend && concurrently \"npm run start-client\" \"npm run start-server-service\"",
         "dev": "npm run install-backend && concurrently \"npm run start-client\" \"npm run start-server\"",
         "start-client": "vite",
         "start-server": "source venv/bin/activate && cd src/server && python3 run.py",
+        "start-server-service": "source venv/bin/activate && cd src/server && /home/app/News-App/env/bin/gunicorn --workers 3 --bind unix:webapp.sock -m 007 run:app",
         "install-backend": "cd src/server && pip install -r requirements.txt",
         "build": "tsc && vite build",
         "preview": "vite preview"
