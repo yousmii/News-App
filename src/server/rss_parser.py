@@ -1,6 +1,6 @@
 import feedparser
 from bs4 import BeautifulSoup
-
+from database import Article,db
 def parse(link):
     # Parse the RSS feed
     feed = feedparser.parse(link)
@@ -36,7 +36,13 @@ def parse(link):
         article["title"] = title
         article["image"] = thumbnail
         article["link"] = url
-
+        # add article to db:
+        ar1=Article(title=article["title"],photo=article["image"],link=article["link"])
+        """
+        db.session.add(ar1)
+        db.session.commit()
+        print(Article.query.all())
+        """
         articles.append(article)
 
     return articles
