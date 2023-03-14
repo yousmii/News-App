@@ -3,7 +3,8 @@ import json
 from flask.templating import render_template
 from flask import request, session, jsonify, redirect, flash
 
-from app import app, user, app_data
+from app import app, user
+from config import app_data
 from rss_parser import parse
 
 # REST API
