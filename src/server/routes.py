@@ -33,7 +33,8 @@ def get_articles():
                parse('https://www.thebulletin.be/rss.xml') + \
                parse('https://www.standaard.be/rss/section/1f2838d4-99ea-49f0-9102-138784c7ea7c') + \
                parse('https://www.hln.be/home/rss.xml') + \
-               parse('https://www.hbvl.be/rss/section/D1618839-F921-43CC-AF6A-A2B200A962DC')
+               parse('https://www.hbvl.be/rss/section/D1618839-F921-43CC-AF6A-A2B200A962DC') + \
+               parse('https://www.vrt.be/vrtnws/nl.rss.articles.xml')
     return json.dumps(articles)
 
 @app.errorhandler(404)
