@@ -5,6 +5,7 @@ import styles from "./components/Header.module.scss"
 import axios from 'axios';
 
 import Homepage from "./pages/Homepage";
+import Admin from "./pages/Admin"
 import Error404 from "./pages/Error404";
 import {BsNewspaper} from "react-icons/bs";
 
@@ -20,8 +21,8 @@ function App() {
                 </header>
                 <Routes>
                     <Route path="/" element={<Homepage />} />
+                    <Route path="/admin" element={<Admin />} />
                     <Route path="*" element={<Error404/>} />
-
                 </Routes>
             </main>
         </BrowserRouter>

@@ -27,7 +27,7 @@ const Header = () => {
                   Home
               </NavLink>
 
-              <NavLink to="/34334" className={styles.nav__item}>
+              <NavLink to="/admin" className={styles.nav__item}>
                   Login
               </NavLink>
 
