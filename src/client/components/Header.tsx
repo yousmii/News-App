@@ -21,36 +21,29 @@ const Header = () => {
         </div>
         <div>
           <nav
-              className={`${styles.nav} ${menuOpen ? styles[`nav--open`] : {}}`}
-              >
-              <a className={styles.nav__item} href={"/"}>
-                  Home
-              </a>
-              <a className={styles.nav__item} href={"/login"}>
-                  Login
-              </a>
-              <div className={styles.nav__button__container}>
-                  <Button />
-              </div>
+            className={`${styles.nav} ${menuOpen ? styles[`nav--open`] : {}}`}
+          >
+            <a className={styles.nav__item} href="/">
+              Home
+            </a>
+            <a className={styles.nav__item} href={"/login"}>
+              Login
+            </a>
           </nav>
         </div>
 
-          <div>
-              <div className={styles.header__button__container}>
-                  <Button />
-              </div>
-
-              <button className={styles.header__toggler} onClick={menuToggler}>
-                  {!menuOpen ? <BiMenuAltRight /> : <AiOutlineCloseSquare />}
-              </button>
-          </div>
+        <div>
+          <button className={styles.header__toggler} onClick={menuToggler}>
+            {!menuOpen ? <BiMenuAltRight /> : <AiOutlineCloseSquare />}
+          </button>
+        </div>
       </div>
     </div>
-    );
+  );
 };
 
 const Button = () => {
-    return <button className={styles.button}>Test</button>;
+  return <button className={styles.button}>Test</button>;
 };
 
 export default Header;
