@@ -1,1 +1,0 @@
-Currently I'm having an issue with the navbar sliding down looking a little awkward 👀
