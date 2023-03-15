@@ -27,9 +27,11 @@ const Header = () => {
                   Home
               </NavLink>
 
-              <a className={styles.nav__item} href={"/login"}>
+              <NavLink to="/34334" className={styles.nav__item}>
                   Login
-              </a>
+              </NavLink>
+
+
 
           </nav>
         </div>
