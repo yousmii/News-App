@@ -9,8 +9,9 @@
 
 body {
   font-family: $open-sans;
-  color: $text;
-  height: 200vh;
+  top: $header-height;
+  background-color: $bg;
+  border-radius: 70px;
 }
 
 button {

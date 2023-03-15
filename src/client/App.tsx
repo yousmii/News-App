@@ -32,17 +32,15 @@ function App() {
   return (
     <div>
       <Header />
-      <div className={styles.body}>
-        <div className={styles.articles}>
-          {data.map((item, index) => (
-            <div className={styles.article}>
-              <a href={item.link} target={"blank"}>
-                <img src={item.image} alt={item.title} />
-                <h2>{item.title}</h2>
-              </a>
-            </div>
-          ))}
-        </div>
+      <div className={styles.articles}>
+        {data.map((item, index) => (
+          <div className={styles.article}>
+            <a href={item.link} target={"blank"}>
+              <img src={item.image} alt={item.title} />
+              <h2>{item.title}</h2>
+            </a>
+          </div>
+        ))}
       </div>
     </div>
   );
