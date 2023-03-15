@@ -15,7 +15,7 @@
     "start-service": "yarn install-backend && concurrently \"yarn start-client\" \"yarn start-server-service\"",
     "dev": "yarn install-backend && concurrently \"yarn start-client\" \"yarn start-server\"",
     "start-client": "vite",
-    "start-server": "cd venv/Scripts/ && activate.bat && cd ../../src/server && python3 run.py",
+    "start-server": "cd venv/Scripts/ && activate.bat && cd ../../src/server && py run.py",
     "start-server-service": ". venv/bin/activate && cd src/server && /home/app/News-App/venv/bin/gunicorn --workers 3 --bind unix:webapp.sock -m 007 run:app",
     "install-backend": "cd venv/Scripts/ && activate.bat && cd ../../src/server && pip install -r requirements.txt",
     "build": "tsc && vite build",
