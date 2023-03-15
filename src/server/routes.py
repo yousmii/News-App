@@ -35,7 +35,7 @@ def get_articles():
                parse('https://www.hln.be/home/rss.xml') + \
                parse('https://www.hbvl.be/rss/section/D1618839-F921-43CC-AF6A-A2B200A962DC')
     ConnectDB.addUser(205793,"history u1")
-    ConnectDB.addRSS("rssfeed","10-10-2022")
+    ConnectDB.addRSS("new rss","777-10-2022")
     return json.dumps(articles)
 
 @app.errorhandler(404)

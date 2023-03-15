@@ -31,18 +31,12 @@ class ConnectDB():
             self.db.session.commit()
         else:
             print("user already in db")
-        print(User.query.all())
+        #print(User.query.all())
 
     def addRSS(self, rss_url: str, published_by: str):
-        if self.column_exists(RSS,rss_url):
-            print("table exists")
-        else:
-            print("table:"+"rss_url, doesn' exist.")
-        """
         rss = RSS(rss_url=rss_url, published_by=published_by)
         if not self.checkRSSExists(rss.id):
             self.db.session.add(rss)
             self.db.session.commit()
-        else:
-            print("rss already in db")
-        """
+        #print(RSS.query.all())
+
