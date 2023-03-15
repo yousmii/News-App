@@ -7,11 +7,12 @@
   box-sizing: border-box;
 }
 
+:root {
+  background-color: $bg2;
+}
+
 body {
   font-family: $open-sans;
-  top: $header-height;
-  background-color: $bg;
-  border-radius: 70px;
 }
 
 button {
