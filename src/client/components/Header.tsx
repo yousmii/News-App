@@ -5,6 +5,7 @@ import styles from "./Header.module.scss";
 import { BiMenuAltRight } from "react-icons/bi";
 import { AiOutlineCloseSquare } from "react-icons/ai";
 import { BsNewspaper } from "react-icons/bs";
+import { IoPersonCircle } from "react-icons/io5";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -26,8 +27,8 @@ const Header = () => {
             <a className={styles.nav__item} href="/">
               Home
             </a>
-            <a className={styles.nav__item} href={"/login"}>
-              Login
+            <a className={styles.nav__item__login} href={"/login"}>
+              <IoPersonCircle />
             </a>
           </nav>
         </div>

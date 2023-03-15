@@ -110,6 +110,12 @@
     &:hover {
       color: $link;
     }
+    &__login {
+      & > svg {
+        display: block;
+        font-size: 32px;
+      }
+    }
   }
 
   @include breakpoint(medium) {
