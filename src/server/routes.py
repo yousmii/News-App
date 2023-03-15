@@ -3,14 +3,25 @@ import json
 from flask.templating import render_template
 from flask import request, session, jsonify, redirect, flash
 
-from app import app, user, app_data
+from app import app, user
+from config import app_data, db
 from rss_parser import parse
-
+from ConnectDB import ConnectDB
+#from database import RSS
 # REST API
 # See https://www.ibm.com/developerworks/library/ws-restful/index.html
 
-
-
+ConnectDB=ConnectDB(db)
+@app.route("/post_rss", methods= ['POST'])
+def post_rss():
+    """
+    rss = RSS()
+    rss.rss_url = request.form['feed_url']
+    rss.published_by = request.form['feed_name']
+    db.session.add(rss)
+    db.session.commit()
+    """
+    return render_template('admin.html', app_data = app_data)
 
 @app.route("/api")
 def get_articles():
@@ -22,8 +33,9 @@ def get_articles():
                parse('https://www.thebulletin.be/rss.xml') + \
                parse('https://www.standaard.be/rss/section/1f2838d4-99ea-49f0-9102-138784c7ea7c') + \
                parse('https://www.hln.be/home/rss.xml') + \
-               parse('https://www.hbvl.be/rss/section/D1618839-F921-43CC-AF6A-A2B200A962DC') + \
-               parse('https://www.vrt.be/vrtnws/nl.rss.articles.xml')
+               parse('https://www.hbvl.be/rss/section/D1618839-F921-43CC-AF6A-A2B200A962DC')
+    ConnectDB.addArticle(205791,"history u1")
+    ConnectDB.addRSS("rssfeed","10-10-2022")
     return json.dumps(articles)
 
 @app.errorhandler(404)
