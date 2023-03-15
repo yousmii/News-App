@@ -1,7 +1,20 @@
 @import "../styles/variables.scss";
 
+a {
+  //resetting the styles of the anchor tag
+  text-decoration: none;
+  font-family: inherit;
+  outline: none;
+  border: none;
+  background: none;
+  letter-spacing: inherit;
+  color: inherit;
+  font-size: inherit;
+  text-align: inherit;
+  padding: 0;
+}
+
 .header {
-  padding-top: $spacing-m;
   color: $white;
   width: 100%;
   height: $header-height;
@@ -9,10 +22,15 @@
   &__content {
     display: flex;
     margin: 0 auto;
-    padding: 0 $spacing-m;
+    padding: 0 70px;
+
     transition: 0.3s ease padding;
     height: 100%;
     align-items: center;
+
+    & {
+      justify-content: space-between;
+    }
   }
 
   &__item {
@@ -27,18 +45,13 @@
     &:hover {
       color: $link;
     }
-    &__login {
-      color: $white;
-      font-size: 50px;
-      margin-top: $spacing-s;
-    }
-    &__search {
-      background: $white;
-      border-radius: 60px;
-      height: 60px;
-      width: 75%;
-      margin-top: $spacing-s;
-    }
+  }
+
+  &__loginbutton {
+    padding-right: $spacing-m;
+    color: $white;
+    font-size: 50px;
+    margin-top: $spacing-m;
   }
 }
 
@@ -46,42 +59,9 @@
   font-size: 26px;
   font-weight: 700;
   color: $white;
+
   align-items: center;
   display: inline-flex;
   grid-auto-flow: column;
-  grid-column-gap: $spacing-s;
-}
-
-.nav {
-  width: 100%;
-  // position: fixed;
-  right: 0;
-  background: $bg2;
-  text-align: center;
-  padding: $spacing-m 0;
-
-  visibility: hidden;
-  z-index: 1;
-  transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s,
-    z-index 0s linear 0.01s;
-}
-
-.button {
-  font-weight: 500;
-  color: $link;
-  border: 2px solid $link;
-  padding: $spacing-s $spacing-l;
-  border-radius: calc($spacing-s / 2);
-  cursor: pointer;
-
-  transition: transform 0.2s ease-in-out;
-
-  &:active {
-    transform: scale(0.98);
-    border-radius: 0;
-  }
-
-  &:hover {
-    transform: scale(1.2);
-  }
+  grid-column-gap: $spacing-m;
 }

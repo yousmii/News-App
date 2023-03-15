@@ -14,15 +14,17 @@ const Header = () => {
   return (
     <div className={styles.header}>
       <div className={styles.header__content}>
-        <div>
+        <a href={"/"}>
           <span className={styles.logo}>
             <BsNewspaper />
             <div>News Aggregator</div>
-            <div className={styles.header__item__search}></div>
-            <a className={styles.header__item__login} href={"/login"}>
-              <IoPersonCircle />
-            </a>
           </span>
+        </a>
+
+        <div className={styles.header__loginbutton}>
+          <a href={"/login"}>
+            <IoPersonCircle />
+          </a>
         </div>
       </div>
     </div>
