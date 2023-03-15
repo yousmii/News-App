@@ -7,7 +7,7 @@
         "start": "yarn run install-backend && concurrently \"yarn run start-client\" \"yarn run start-server\"",
         "start-service": "yarn run install-backend && concurrently \"yarn run start-client\" \"yarn run start-server-service\"",
         "dev": "yarn run install-backend && concurrently \"yarn run start-client\" \"yarn run start-server\"",
-        "start-client": "vite",
+        "start-client": "vite --host",
         "start-server": ". venv/bin/activate && cd src/server && python3 run.py",
         "start-server-service": ". venv/bin/activate && cd src/server && /home/app/News-App/venv/bin/gunicorn --workers 3 --bind unix:webapp.sock -m 007 run:app",
         "install-backend": "cd src/server && pip install -r requirements.txt",
