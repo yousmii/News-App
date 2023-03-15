@@ -34,9 +34,11 @@ class ConnectDB():
         #print(User.query.all())
 
     def addRSS(self, rss_url: str, published_by: str):
+        """
         rss = RSS(rss_url=rss_url, published_by=published_by)
         if not self.checkRSSExists(rss.id):
             self.db.session.add(rss)
             self.db.session.commit()
         #print(RSS.query.all())
+        """
 

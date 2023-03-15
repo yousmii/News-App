@@ -1,7 +1,7 @@
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy_utils.types import uuid
+from psycopg2._psycopg import List
 
 from config import db
+from sqlalchemy.orm import relationship, Mapped, mapped_column
 
 
 # Base = declarative_base()
@@ -28,21 +28,17 @@ class Creates(db.Model):
     created = db.Column(db.String, db.ForeignKey('admin.name', ondelete='CASCADE', onupdate='CASCADE'),
                         primary_key=True)
 
-
 class NewsSource(db.Model):
     __tablename__ = 'source'
-    name = db.Column(db.String, primary_key=True, unique=True)
-    magazine = db.Column(db.String, nullable=False)
-
+    name = db.Column(db.String,primary_key=True)
+    magazine = db.Column(db.String)
 
 class RSS(db.Model):
     __tablename__ = 'rss'
-    rss_url = db.Column(db.String, nullable=False)
     id = db.Column(db.Integer, db.Sequence('rss_id_seq'), primary_key=True)
-    published_by = db.Column(db.String,nullable=True)
-    #published_by = db.Column(db.String, db.ForeignKey('source.name', ondelete='CASCADE', onupdate='CASCADE'),
-    #                         nullable=True)
-
+    rss_url = db.Column(db.String, nullable=False)
+    source_id = db.Column(db.String, db.ForeignKey('source.name'))
+    source = relationship("NewsSource")
 
 class Labels(db.Model):
     __tablename__ = 'labels'
