@@ -13,12 +13,6 @@ class User(db.Model):
     cookie = db.Column(db.Integer, db.Sequence('user_seq'), primary_key=True)
     history = db.Column(db.String(255), nullable=True)
 
-    def add(self, cookie: int, history: str):
-        u = User(cookie=cookie, history=history)
-        db.session.add(u)
-        db.session.commit()
-
-
 class Admin(db.Model):
     __tablename__ = 'admin'
     name = db.Column(db.String(255), primary_key=True)
@@ -34,19 +28,16 @@ class Creates(db.Model):
     created = db.Column(db.String, db.ForeignKey('admin.name', ondelete='CASCADE', onupdate='CASCADE'),
                         primary_key=True)
 
-
 class NewsSource(db.Model):
     __tablename__ = 'source'
     name = db.Column(db.String, primary_key=True)
     magazine = db.Column(db.String, nullable=False)
 
-
 class RSS(db.Model):
     __tablename__ = 'rss'
     rss_url = db.Column(db.String, nullable=False)
     id= db.Column(db.Integer, db.Sequence('rss_id_seq'), primary_key=True)
-    #published_by = db.Column(db.String, db.ForeignKey('source.name', ondelete='CASCADE', onupdate='CASCADE'),
-    #                         nullable=False)
+    published_by = db.Column(db.String, db.ForeignKey('source.name', ondelete='CASCADE', onupdate='CASCADE'),nullable=False)
 
 
 class Labels(db.Model):

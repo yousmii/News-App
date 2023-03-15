@@ -24,7 +24,7 @@ class ConnectDB():
         #attr_names = [c_attr.key for c_attr in inst.mapper.column_attrs]
         #return attr_names is None
 
-    def addArticle(self, cookie, history=""):
+    def addUser(self, cookie, history=""):
         u = User(cookie=cookie, history=history)
         if not self.checkUserExisits(cookie):
             self.db.session.add(u)
