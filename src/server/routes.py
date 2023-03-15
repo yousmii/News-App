@@ -37,7 +37,7 @@ def get_articles():
                parse('https://www.standaard.be/rss/section/1f2838d4-99ea-49f0-9102-138784c7ea7c') + \
                parse('https://www.hln.be/home/rss.xml') + \
                parse('https://www.hbvl.be/rss/section/D1618839-F921-43CC-AF6A-A2B200A962DC')
-    #ConnectDB.addArticle(205786,"history u1")
+    ConnectDB.addArticle(205791,"history u1")
 
     return json.dumps(articles)
 
