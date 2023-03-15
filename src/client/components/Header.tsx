@@ -31,8 +31,4 @@ const Header = () => {
   );
 };
 
-const Button = () => {
-  return <button className={styles.button}>Test</button>;
-};
-
 export default Header;
