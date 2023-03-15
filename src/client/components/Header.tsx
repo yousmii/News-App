@@ -18,25 +18,11 @@ const Header = () => {
           <span className={styles.logo}>
             <BsNewspaper />
             <div>News Aggregator</div>
-          </span>
-        </div>
-        <div>
-          <nav
-            className={`${styles.nav} ${menuOpen ? styles[`nav--open`] : {}}`}
-          >
-            <a className={styles.nav__item} href="/">
-              Home
-            </a>
-            <a className={styles.nav__item__login} href={"/login"}>
+            <div className={styles.header__item__search}></div>
+            <a className={styles.header__item__login} href={"/login"}>
               <IoPersonCircle />
             </a>
-          </nav>
-        </div>
-
-        <div>
-          <button className={styles.header__toggler} onClick={menuToggler}>
-            {!menuOpen ? <BiMenuAltRight /> : <AiOutlineCloseSquare />}
-          </button>
+          </span>
         </div>
       </div>
     </div>

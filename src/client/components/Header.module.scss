@@ -1,67 +1,43 @@
 @import "../styles/variables.scss";
 
 .header {
-  height: $header-height;
-  // background: $bg2;
+  padding-top: $spacing-m;
   color: $white;
-  position: fixed;
-  z-index: 1000;
   width: 100%;
+  height: $header-height;
 
   &__content {
-    max-width: 1920px;
+    display: flex;
     margin: 0 auto;
     padding: 0 $spacing-m;
-
-    @include breakpoint(medium) {
-      padding: 0 $spacing-l;
-    }
     transition: 0.3s ease padding;
+    height: 100%;
+    align-items: center;
+  }
+
+  &__item {
+    padding: $spacing-m;
+
+    text-decoration: none;
+    color: inherit;
 
     height: 100%;
-    display: flex;
-    align-items: center;
 
-    & > div {
-      flex: 1;
-      white-space: nowrap;
-
-      &:nth-child(2) {
-        display: flex;
-        justify-content: flex-end;
-        height: 100%;
-
-        margin-right: $spacing-m;
-      }
-
-      &:last-of-type {
-        display: flex;
-        justify-content: flex-end;
-        flex: 0;
-      }
+    transition: 0.3s ease color;
+    &:hover {
+      color: $link;
     }
-  }
-
-  &__button__container {
-    display: none;
-    @include breakpoint(medium) {
-      display: initial;
+    &__login {
+      color: $white;
+      font-size: 50px;
+      margin-top: $spacing-s;
     }
-  }
-
-  &__toggler {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-
-    @include breakpoint(medium) {
-      display: none;
-    }
-
-    & > svg {
-      display: block;
-      font-size: 32px;
+    &__search {
+      background: $white;
+      border-radius: 60px;
+      height: 60px;
+      width: 75%;
+      margin-top: $spacing-s;
     }
   }
 }
@@ -78,7 +54,7 @@
 
 .nav {
   width: 100%;
-  position: fixed;
+  // position: fixed;
   right: 0;
   background: $bg2;
   text-align: center;
@@ -88,59 +64,6 @@
   z-index: 1;
   transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s,
     z-index 0s linear 0.01s;
-
-  &--open {
-    visibility: visible;
-    opacity: 1;
-    z-index: 1;
-    transform: translateY($header-height);
-    transition-delay: 0s, 0s, 0.3s;
-  }
-
-  &__item {
-    display: block;
-    padding: $spacing-m;
-
-    text-decoration: none;
-    color: inherit;
-
-    height: 100%;
-
-    transition: 0.3s ease color;
-    &:hover {
-      color: $link;
-    }
-    &__login {
-      & > svg {
-        display: block;
-        font-size: 32px;
-      }
-    }
-  }
-
-  @include breakpoint(medium) {
-    visibility: visible;
-    position: static;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    background: initial;
-    width: auto;
-    padding: 0;
-
-    &__item {
-      padding: 0 $spacing-l;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-  }
-
-  &__button__container {
-    @include breakpoint(medium) {
-      display: none;
-    }
-    padding: $spacing-m;
-  }
 }
 
 .button {
