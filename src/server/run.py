@@ -1,4 +1,5 @@
 from app import app
-from database import User,db
+from config import run_app
 if __name__ == '__main__':
+    run_app()
     app.run(debug=True)
