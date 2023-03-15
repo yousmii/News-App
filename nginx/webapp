@@ -1,6 +1,6 @@
 server {
     listen 80;
-    server_name 34.76.118.226 team2.ua-ppdb.me;
+    server_name 35.190.195.135 team2.ua-ppdb.me;
 
     location / {
         include proxy_params;
