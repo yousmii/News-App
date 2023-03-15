@@ -1,49 +1,31 @@
 import React, {useState, useEffect} from "react";
 import Header from "./components/Header";
-import styles from "./components/Article.module.scss"
+import {BrowserRouter, Route, Routes, Link, NavLink} from "react-router-dom";
+import styles from "./components/Header.module.scss"
 import axios from 'axios';
 
+import Homepage from "./pages/Homepage";
+import Error404 from "./pages/Error404";
+import {BsNewspaper} from "react-icons/bs";
+
+
+
 function App() {
-    const [data, setData] = useState([]);
-    const [error, setError] = useState(null);
 
-    useEffect(() => {
-        async function fetchData() {
-            try {
-                const response = await axios.get('/api');
-                setData(response.data);
-            } catch (error) {
-                setError(error.response.data.error);
-            }
-        }
+    return(
+        <BrowserRouter>
+            <main>
+                <header>
+                    <Header/>
+                </header>
+                <Routes>
+                    <Route path="/" element={<Homepage />} />
+                    <Route path="*" element={<Error404/>} />
 
-        fetchData();
-    }, []);
-
-    if (error) {
-        return (
-            <div>
-                <Header/>
-                <div className={styles.error}>{error}</div>
-            </div>
-        );
-    }
-
-    return (
-        <div>
-            <Header/>
-            <div className={styles.articles}>
-                {data.map((item, index) => (
-                    <div className={styles.article}>
-                        <a  href={item.link}target={'blank'}>
-                            <img src={item.image} alt={item.title}/>
-                            <h2>{item.title}</h2>
-                        </a>
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
+                </Routes>
+            </main>
+        </BrowserRouter>
+    )
 }
 
 export default App;
