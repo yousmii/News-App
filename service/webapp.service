@@ -1,7 +1,7 @@
 [Unit]
 #  specifies metadata and dependencies
 
-Description=Gunicorn instance to serve myproject
+Description=Gunicorn and vite instance
 After=network.target
 # tells the init system to only start this after the networking target has been reached
 # We will give our regular user account ownership of the process since it owns all of the relevant files
