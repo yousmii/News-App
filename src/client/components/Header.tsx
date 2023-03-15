@@ -5,6 +5,7 @@ import styles from "./Header.module.scss";
 import { BiMenuAltRight } from "react-icons/bi";
 import { AiOutlineCloseSquare } from "react-icons/ai";
 import { BsNewspaper } from "react-icons/bs";
+import { NavLink, Link} from "react-router-dom";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -20,30 +21,20 @@ const Header = () => {
           </span>
         </div>
         <div>
-          <nav
-              className={`${styles.nav} ${menuOpen ? styles[`nav--open`] : {}}`}
-              >
-              <a className={styles.nav__item} href={"/"}>
+          <nav className={`${styles.nav} ${menuOpen ? styles[`nav--open`] : {}}`}>
+
+              <NavLink to="/" className={styles.nav__item}>
                   Home
-              </a>
+              </NavLink>
+
               <a className={styles.nav__item} href={"/login"}>
                   Login
               </a>
-              <div className={styles.nav__button__container}>
-                  <Button />
-              </div>
+
           </nav>
         </div>
 
-          <div>
-              <div className={styles.header__button__container}>
-                  <Button />
-              </div>
 
-              <button className={styles.header__toggler} onClick={menuToggler}>
-                  {!menuOpen ? <BiMenuAltRight /> : <AiOutlineCloseSquare />}
-              </button>
-          </div>
       </div>
     </div>
     );

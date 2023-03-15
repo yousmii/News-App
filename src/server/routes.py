@@ -9,18 +9,7 @@ from rss_parser import parse
 # REST API
 # See https://www.ibm.com/developerworks/library/ws-restful/index.html
 
-@app.route("/post_rss", methods= ['POST'])
-def post_rss():
 
-
-    #rss = RSS()
-    #rss.rss_url = request.form['feed_url']
-    #rss.published_by = request.form['feed_name']
-
-    #db.session.add(rss)
-    #db.session.commit()
-
-    return render_template('admin.html', app_data = app_data)
 
 
 @app.route("/api")
