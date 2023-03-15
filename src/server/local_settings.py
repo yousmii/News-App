@@ -1,10 +1,9 @@
 
 postgresql={
-    'pguser':'judithhershko',
-    'pgpassword':'password',
+    'pguser':'app',
     'pghost':'localhost',
-    'pgport':'5432',
-    'pgdb':'alpha',
+    'pgport':'5000',
+    'pgdb':'newsapp',
 }
 
 """
