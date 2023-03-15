@@ -35,7 +35,7 @@ You need to 'trust' the role to be able to login. Add the following line to `/et
 # TYPE  DATABASE        USER            ADDRESS                 METHOD
 
 # app
-local   dbtutor         app                                     trust
+local   newsapp         app                                     trust
 ```
 
 and restart the service. Then initialize the database:
