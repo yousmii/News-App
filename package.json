@@ -11,9 +11,9 @@
     }
   },
   "scripts": {
-    "start": "npm run install-backend && concurrently \"npm run start-client\" \"npm run start-server\"",
-    "start-service": "npm run install-backend && concurrently \"npm run start-client\" \"npm run start-server-service\"",
-    "dev": "npm run install-backend && concurrently \"npm run start-client\" \"npm run start-server\"",
+    "start": "yarn install-backend && concurrently \"yarn start-client\" \"yarn start-server\"",
+    "start-service": "yarn install-backend && concurrently \"yarn start-client\" \"yarn start-server-service\"",
+    "dev": "yarn install-backend && concurrently \"yarn start-client\" \"yarn start-server\"",
     "start-client": "vite",
     "start-server": "cd venv/Scripts/ && activate.bat && cd ../../src/server && python3 run.py",
     "start-server-service": "venv/Scripts/Activate.bat && cd src/server && /home/app/News-App/venv/bin/gunicorn --workers 3 --bind unix:webapp.sock -m 007 run:app",
