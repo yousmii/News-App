@@ -6,7 +6,7 @@ from .local_settings import postgresql as settings
 
 # create engine
 def get_engine(user, passwd, host, port, db):
-    url = f"postgresql://{user}@{host}:{port}/{db}"
+    url = f"postgresql://{user}:{passwd}@{host}:{port}/{db}"
     if not database_exists(url):
         create_database(url)
     engine = create_engine(url, pool_size=50, echo=False)
@@ -18,7 +18,6 @@ engine = get_engine(settings['pguser'],
                     settings['pghost'],
                     settings['pgport'],
                     settings['pgdb'])
-engine.url.database
 
 
 def get_engine_from_settings():
@@ -41,7 +40,6 @@ def get_session():
 
 
 session = get_session()
-session
 
 
 def get_db():
