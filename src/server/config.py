@@ -12,7 +12,7 @@ def run_app():
     # create the extension
     # INITIALIZE SINGLETON SERVICES
     with app.app_context():
-        #db.create_all(db.engine)
+        # db.create_all(db.engine)
         """
         if table doesn't exists => in python console:
         from src.server.config import app
@@ -29,7 +29,5 @@ def run_app():
         db.create_all()
 
 
-from database import *
-
-if __name__ is '__main__':
+if __name__ == '__main__':
     run_app()
