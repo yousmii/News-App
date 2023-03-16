@@ -1,10 +1,5 @@
-from psycopg2._psycopg import List
-
 from config import db
-from sqlalchemy.orm import relationship, Mapped, mapped_column
-
-
-# Base = declarative_base()
+from sqlalchemy.orm import relationship
 
 
 class User(db.Model):
