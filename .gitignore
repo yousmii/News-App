@@ -1,12 +1,11 @@
-src/News-App/__pycache__/
+__pycache__/
 env/
 venv/
 .idea
 .fleet
-backend/__pycache__/
-backend/env/
-backend/venv/
-backend/api/__pycache__
+src/server/__pycache__/
+src/server/env/
+src/server/venv/
 
 # Logs
 logs
