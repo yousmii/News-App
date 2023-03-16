@@ -1,22 +1,11 @@
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy_utils.types import uuid
-
 from config import db
-
-
-# Base = declarative_base()
+from sqlalchemy.orm import relationship
 
 
 class User(db.Model):
-
     __tablename__ = 'user'
     cookie = db.Column(db.Integer, db.Sequence('user_seq'), primary_key=True)
     history = db.Column(db.String(255), nullable=True)
-
-    def add(self, cookie: int, history: str):
-        u = User(cookie=cookie, history=history)
-        db.session.add(u)
-        db.session.commit()
 
 
 class Admin(db.Model):
@@ -34,20 +23,17 @@ class Creates(db.Model):
     created = db.Column(db.String, db.ForeignKey('admin.name', ondelete='CASCADE', onupdate='CASCADE'),
                         primary_key=True)
 
-
 class NewsSource(db.Model):
     __tablename__ = 'source'
-    name = db.Column(db.String, primary_key=True)
-    magazine = db.Column(db.String, nullable=False)
-
+    name = db.Column(db.String,primary_key=True)
+    magazine = db.Column(db.String)
 
 class RSS(db.Model):
     __tablename__ = 'rss'
+    id = db.Column(db.Integer, db.Sequence('rss_id_seq'), primary_key=True)
     rss_url = db.Column(db.String, nullable=False)
-    id= db.Column(db.Integer, db.Sequence('rss_id_seq'), primary_key=True)
-    #published_by = db.Column(db.String, db.ForeignKey('source.name', ondelete='CASCADE', onupdate='CASCADE'),
-    #                         nullable=False)
-
+    source_id = db.Column(db.String, db.ForeignKey('source.name'))
+    source = relationship("NewsSource")
 
 class Labels(db.Model):
     __tablename__ = 'labels'
