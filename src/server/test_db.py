@@ -1,14 +1,25 @@
-from database import User
+import unittest
+from sqlalchemy import inspect
 from config import db
+from ConnectDB import ConnectDB
 
-"""
-try adding  entry to each database
-"""
+connect = ConnectDB(db)
 
 
-def test_user():
-    y = 200
-    u = User(cookie=y, history="history user1")
-    db.session.add(u)
-    db.session.commit()
-    print(User.query_all())
+# python3 -m unittest src/server/sql/test_db.py
+class TestStringMethods(unittest.TestCase):
+
+    def test_upper(self):
+        self.assertEqual('foo'.upper(), 'FOO')
+
+    def test_admin_exists(self):
+        t = 'admin'
+        return self.assertTrue(connect.table_exists(t))
+
+    def test_user_exists(self):
+        t = 'admin'
+        return self.assertTrue(connect.table_exists(t))
+
+
+if __name__ == '__main__':
+    unittest.main()
