@@ -1,7 +1,11 @@
 from config import db
 from sqlalchemy.orm import relationship
 
+"""
+overview:
+https://app.dbdesigner.net/designer/schema/0-ppdb-d7c61811-cf52-4f48-9926-df356a03e147
 
+"""
 class User(db.Model):
     __tablename__ = 'user'
     cookie = db.Column(db.Integer, db.Sequence('user_seq'), primary_key=True)
