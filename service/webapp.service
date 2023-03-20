@@ -1,7 +1,7 @@
 [Unit]
 #  specifies metadata and dependencies
 
-Description=Gunicorn instance to serve myproject
+Description=Gunicorn and vite instance
 After=network.target
 # tells the init system to only start this after the networking target has been reached
 # We will give our regular user account ownership of the process since it owns all of the relevant files
@@ -14,11 +14,10 @@ User=app
 Group=www-data
 
 # We'll then map out the working directory and set the PATH environmental variable so that the init system knows where our the executables for the process are located (within our virtual environment).
-WorkingDirectory=/home/app/News-App/src/News-App
-Environment="PATH=/home/app/News-App/env/bin"
+WorkingDirectory=/home/app/News-App/
 
 # We'll then specify the commanded to start the service
-ExecStart=/home/app/News-App/env/bin/gunicorn --workers 3 --bind unix:webapp.sock -m 007 wsgi:app
+ExecStart=yarn run start-service
 
 # This will tell systemd what to link this service to if we enable it to start at boot. We want this service to start when the regular multi-user system is up and running:
 [Install]

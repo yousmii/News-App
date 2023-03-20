@@ -1,0 +1,53 @@
+@import "../styles/variables.scss";
+
+a {
+  //resetting the styles of the anchor tag
+  text-decoration: none;
+  font-family: inherit;
+  outline: none;
+  border: none;
+  background: none;
+  letter-spacing: inherit;
+  color: inherit;
+  font-size: inherit;
+  text-align: inherit;
+  padding: 0;
+}
+
+.header {
+  color: $white;
+  width: 100%;
+  height: $header-height;
+
+  &__content {
+    display: flex;
+    margin: 0 auto;
+    padding: 0 70px;
+
+    transition: 0.3s ease padding;
+    height: 100%;
+    align-items: center;
+
+    & {
+      justify-content: space-between;
+    }
+  }
+
+  &__loginbutton {
+    padding-right: $spacing-m;
+    color: $white;
+    font-size: 50px;
+    margin-top: $spacing-m;
+  }
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 700;
+  color: $white;
+
+  align-items: center;
+  display: inline-flex;
+  grid-auto-flow: column;
+  grid-column-gap: $spacing-m;
+}

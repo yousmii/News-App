@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap");
+$open-sans: "Open Sans", sans-serif;
+
+$black: #353535;
+$white: #ffffff;
+$grey: #cccccc;
+$dark-blue: #284b63;
+$teal: #3c6e71;
+
+$text: #353535;
+$subtext: #5a5a5a;
+$card-bg: #ffffff;
+$bg: #cccccc;
+$bg2: #284b63;
+$link: #33c6ce;
+
+$spacing-s: 8px;
+$spacing-m: 16px;
+$spacing-l: 32px;
+
+$header-height: 72px;
+
+$small: 37.5em;
+$medium: 48em;
+$large: 64em;
+$extra-large: 75em;
+
+@mixin breakpoint($point) {
+  @if $point == small {
+    @media (min-width: $small) {
+      @content;
+    }
+  }
+  @if $point == medium {
+    @media (min-width: $medium) {
+      @content;
+    }
+  }
+  @if $point == large {
+    @media (min-width: $large) {
+      @content;
+    }
+  }
+  @if $point == extra-large {
+    @media (min-width: $extra-large) {
+      @content;
+    }
+  }
+}
