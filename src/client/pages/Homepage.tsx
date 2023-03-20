@@ -1,19 +1,20 @@
 import React, {useEffect, useState} from "react";
-import axios from "axios";
-import Header from "../components/Header";
+import axios, {AxiosError} from "axios";
 import styles from "../components/Article.module.scss";
 
 export default function Homepage() {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState<any[]>([]);
     const [error, setError] = useState(null);
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get('/api');
+                const response = await axios.get("/api");
                 setData(response.data);
             } catch (error) {
-                setError(error.response.data.error);
+                if (error instanceof AxiosError) {
+                    setError(error.response?.data.error);
+                }
             }
         }
 
@@ -23,21 +24,17 @@ export default function Homepage() {
     if (error) {
         return (
             <div>
-
-                         <Header/>
-                         <div className={styles.error}>{error}</div>
-
+                <div className={styles.error}>{error}</div>
             </div>
         );
     }
 
     return (
         <div>
-            <Header/>
             <div className={styles.articles}>
                 {data.map((item, index) => (
                     <div className={styles.article}>
-                        <a  href={item.link}target={'blank'}>
+                        <a href={item.link} target={"blank"}>
                             <img src={item.image} alt={item.title}/>
                             <h2>{item.title}</h2>
                         </a>

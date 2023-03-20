@@ -1,9 +1,11 @@
-
+__pycache__/
 env/
 venv/
 .idea
 .fleet
-src/server/__pychache__/
+src/server/__pycache__/
+src/server/env/
+src/server/venv/
 
 # Logs
 logs

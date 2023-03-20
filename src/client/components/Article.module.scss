@@ -1,17 +1,10 @@
-* {
-  font-family: 'Open Sans', sans-serif;
-  color: #c9d1d9;
-}
-
-body {
-  background: #CCCCCC;
-}
+@import "../styles/variables.scss";
 
 .error {
   padding: 10px;
   padding-top: 70px;
   background-color: #ff6961;
-  color: #fff;
+  color: $card-bg;
   font-size: 16px;
   font-weight: bold;
   border-radius: 5px;
@@ -19,10 +12,17 @@ body {
 }
 
 .articles {
+  background-color: $bg;
+  height: 100%;
+
   display: flex;
   flex-wrap: wrap;
+
   padding: 20px;
-  padding-top: 90px;
+  padding-top: 40px;
+
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
   justify-content: space-between;
 }
 
@@ -32,17 +32,24 @@ body {
   justify-content: flex-start;
   align-items: center;
   text-align: center;
+
   width: 29%;
   margin: 0 auto; /* center the container horizontally */
-  background-color: #FFFFFF; /* create the white rectangle background */
+  background-color: $card-bg; /* create the white rectangle background */
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1); /* add a subtle shadow effect */
   padding: 20px;
+
   border-radius: 20px;
   margin-bottom: 20px;
   overflow: hidden;
 }
+.article:hover {
+  transform: scale(1.01);
+  transition: all 0.1s ease-in-out;
+}
 
-.article:nth-child(1), .article:nth-child(2) {
+.article:nth-child(1),
+.article:nth-child(2) {
   width: 46%;
 }
 
@@ -62,9 +69,9 @@ body {
   border-radius: 4px;
 }
 
-.article img:hover {
-  transform: scale(1.01); /* zoom in on the thumbnail on hover */
-}
+// .article img:hover {
+//   transform: scale(1.01); /* zoom in on the thumbnail on hover */
+// }
 
 .article h2 {
   font-size: 20px;
@@ -75,8 +82,9 @@ body {
 
 .article:hover h2 {
   text-decoration: none;
-  color: #304A61;
-  font-size: 20.1px;
+  color: #304a61;
+  transform: scale(1.01);
+  transition: all 0.1s ease-in-out;
 }
 
 @media only screen and (max-width: 600px) {
