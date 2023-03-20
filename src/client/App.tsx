@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import Header from "./components/Header";
-import {BrowserRouter, Route, Routes, Link, NavLink} from "react-router-dom";
+import {BrowserRouter, Route, Routes, Link, NavLink,} from "react-router-dom";
 import styles from "./components/Header.module.scss"
 import axios from 'axios';
 
