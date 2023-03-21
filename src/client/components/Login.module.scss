@@ -1,0 +1,87 @@
+@import "../styles/variables.scss";
+
+.container {
+  background-color: $bg;
+  height: 100vh;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  padding: 20px;
+  padding-top: 40px;
+
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
+}
+
+.logincontainer {
+  background-color: $card-bg;
+  text-align: middle;
+  border-radius: 30px;
+  width: 450px;
+  height: 500px;
+}
+
+.logo {
+  margin: auto;
+  align-self: center;
+  font-weight: 700;
+  font-size: 70px;
+  color: $bg2;
+}
+
+.label {
+  display: block;
+  margin-bottom: 5px;
+  margin-left: $spacing-m;
+  font-weight: bold;
+  color: $bg2;
+}
+
+input[type="text"] {
+  color: $text;
+}
+
+input[type="text"],
+input[type="password"] {
+  background-color: $light-grey;
+  padding: 10px;
+
+  font-weight: 500;
+  font-size: 16px;
+  border-radius: 50px;
+  border: none;
+
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  background-color: $bg2;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  font-size: 15px;
+  width: 35%;
+}
+
+input[type="submit"]:hover {
+  background-color: $link;
+  transition: all 0.2s ease-in-out;
+}
+
+.form {
+  padding: 30px;
+  display: flex-box;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.button {
+  margin: 10px;
+  margin-left: 0px;
+}

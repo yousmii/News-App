@@ -1,32 +1,31 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Header from "./components/Header";
-import {BrowserRouter, Route, Routes, Link, NavLink} from "react-router-dom";
-import styles from "./components/Header.module.scss"
-import axios from 'axios';
+import { BrowserRouter, Route, Routes, Link, NavLink } from "react-router-dom";
+import styles from "./components/Header.module.scss";
+import axios from "axios";
 
 import Homepage from "./pages/Homepage";
-import Admin from "./pages/Admin"
+import Admin from "./pages/Admin";
+import Login from "./pages/Login";
 import Error404 from "./pages/Error404";
-import {BsNewspaper} from "react-icons/bs";
-
-
+import { BsNewspaper } from "react-icons/bs";
 
 function App() {
-
-    return(
-        <BrowserRouter>
-            <main>
-                <header>
-                    <Header/>
-                </header>
-                <Routes>
-                    <Route path="/" element={<Homepage />} />
-                    <Route path="/admin" element={<Admin />} />
-                    <Route path="*" element={<Error404/>} />
-                </Routes>
-            </main>
-        </BrowserRouter>
-    )
+  return (
+    <BrowserRouter>
+      <main>
+        <header>
+          <Header />
+        </header>
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/admin" element={<Admin />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="*" element={<Error404 />} />
+        </Routes>
+      </main>
+    </BrowserRouter>
+  );
 }
 
 export default App;
