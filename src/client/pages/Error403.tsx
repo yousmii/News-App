@@ -1,6 +1,16 @@
 import {useNavigate} from "react-router-dom";
+import React from "react";
+import {redirect} from "react-router-dom";
 
 export default function Error403() {
+
+    setTimeout(function () {
+
+        return redirect('/');
+
+    }, 5000)
+
+    
 
 
     return (
