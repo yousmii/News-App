@@ -1,32 +1,37 @@
 @import "../styles/variables.scss";
 
+* {
+    font-family: "Open Sans", sans-serif;
+}
+
 .container {
   background-color: $bg;
   height: 100vh;
 
+
   display: flex;
   flex-wrap: wrap;
 
-  padding: 20px;
-  padding-top: 40px;
+  padding: 40px 20px 20px;
 
   border-top-left-radius: 50px;
   border-top-right-radius: 50px;
 }
 
 .logincontainer {
+  margin: 10% auto;
   background-color: $card-bg;
-  text-align: middle;
+  text-align: center;
   border-radius: 30px;
-  width: 450px;
-  height: 500px;
+  width: 30%;
+  height: 50%;
 }
 
 .logo {
   margin: auto;
   align-self: center;
   font-weight: 700;
-  font-size: 70px;
+  font-size: 120px;
   color: $bg2;
 }
 
@@ -35,6 +40,7 @@
   margin-bottom: 5px;
   margin-left: $spacing-m;
   font-weight: bold;
+  font-size: 30px;
   color: $bg2;
 }
 
@@ -53,7 +59,8 @@ input[type="password"] {
   border: none;
 
   margin-bottom: 10px;
-  width: 100%;
+  width: 80%;
+  height: 60px;
   box-sizing: border-box;
 }
 
@@ -64,8 +71,10 @@ input[type="submit"] {
   border: none;
   border-radius: 15px;
   cursor: pointer;
-  font-size: 15px;
-  width: 35%;
+  font-size: 30px;
+  width: 25%;
+  height: 70px;
+  font-weight: bold;
 }
 
 input[type="submit"]:hover {
@@ -75,13 +84,11 @@ input[type="submit"]:hover {
 
 .form {
   padding: 30px;
-  display: flex-box;
   justify-content: center;
   align-items: center;
   width: 100%;
 }
 
 .button {
-  margin: 10px;
-  margin-left: 0px;
+  margin: 10px 10px 10px 0;
 }
