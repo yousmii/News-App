@@ -28,7 +28,7 @@ export default function Homepage() {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.articles}>
         {data.map((item, index) => (
           <div className={styles.article}>

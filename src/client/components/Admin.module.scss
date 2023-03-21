@@ -1,84 +1,100 @@
+@import "../styles/variables.scss";
+
 * {
-    font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
+}
+
+.container {
+  background-color: $bg;
+  height: 100vh;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  padding: 20px;
+  padding-top: 40px;
+
+  border-top-left-radius: 50px;
+  border-top-right-radius: 50px;
 }
 
 h1 {
-    font-size: 24px;
-    margin-top: 20px;
-    margin-bottom: 10px;
-    color: #304A61;
+  font-size: 24px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: $bg2;
 }
 
 form {
-    margin-bottom: 3em;
+  margin-bottom: 3em;
 }
 
 label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: black;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: $text;
 }
 
 input[type="text"] {
-    color: black;
+  color: $text;
 }
 
 input[type="text"],
 input[type="password"] {
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    margin-bottom: 10px;
-    width: 100%;
-    box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid $bg;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 input[type="submit"] {
-    background-color: #304A61;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+  background-color: $bg2;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 input[type="submit"]:hover {
-    background-color: #3e6a8e;
+  background-color: $link;
 }
 
 .forms {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 20px;
-    padding-top: 90px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+  padding-top: 90px;
 }
 
 .form {
-    padding: 30px;
-    justify-content: flex-start;
-    align-items: center;
-    width: 50%;
+  padding: 30px;
+  justify-content: flex-start;
+  align-items: center;
+  width: 50%;
 }
 
 .buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
 }
 
 .button {
-    margin: 10px;
-    margin-left: 0px;
+  margin: 10px;
+  margin-left: 0px;
 }
 
 .button.remove {
-    background: #BA0000;
+  background: #ba0000;
 }
 
 .button.remove:hover {
-    background: #BF2222;
+  background: #bf2222;
 }
