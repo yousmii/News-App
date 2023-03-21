@@ -1,6 +1,7 @@
 from flask import Flask
-from config import app
 
+app = Flask('News-App')
+app_data = dict()
 config_data = dict()
 config_data['app_name'] = 'NewsApp'
 config_data['dbname'] = 'dbtutor'

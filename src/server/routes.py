@@ -4,15 +4,12 @@ from flask.templating import render_template
 from flask import request, session, jsonify, redirect, flash
 
 from app import app, user
-from config import app_data, db
 from rss_parser import parse
-from ConnectDB import ConnectDB
 
 # from database import RSS
 # REST API
 # See https://www.ibm.com/developerworks/library/ws-restful/index.html
 
-ConnectDB = ConnectDB(db)
 
 
 @app.route("/post_rss", methods=['POST'])
@@ -38,10 +35,6 @@ def get_articles():
                parse('https://www.thebulletin.be/rss.xml') + \
                parse('https://www.standaard.be/rss/section/1f2838d4-99ea-49f0-9102-138784c7ea7c') + \
                parse('https://www.hbvl.be/rss/section/D1618839-F921-43CC-AF6A-A2B200A962DC')
-    ConnectDB.addUser(205793, "history u1")
-    ConnectDB.addRSS("new rss", "777-10-2022")
-    print('admin.name exists? ')
-    print(ConnectDB.column_exists('admin', 'name'))
     return json.dumps(articles)
 
 
