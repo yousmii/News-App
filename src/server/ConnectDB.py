@@ -80,4 +80,4 @@ class ConnectDB():
             self.db.session.commit()
         else:
             print("rss already in db")
-        #print(RSS.query.all())
+        # print(RSS.query.all())
