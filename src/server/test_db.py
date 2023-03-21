@@ -17,7 +17,7 @@ class TestStringMethods(unittest.TestCase):
         return self.assertTrue(connect.table_exists(t))
 
     def test_user_exists(self):
-        t = 'admin'
+        t = 'user'
         return self.assertTrue(connect.table_exists(t))
 
 
