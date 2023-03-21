@@ -1,5 +1,4 @@
 import React from "react";
-import Header from "../components/Header";
 import styles from "../components/Admin.module.scss";
 
 export default function Admin() {
