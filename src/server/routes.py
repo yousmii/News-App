@@ -91,4 +91,3 @@ def login_page():
 def logout_page():
     logout_user()
     return {'message': 'Logged out successfully'}
-
