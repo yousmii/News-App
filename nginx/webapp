@@ -1,9 +1,17 @@
 server {
     listen 80;
+
     server_name 35.190.195.135 team2.ua-ppdb.me;
 
     location / {
+      root   /home/app/News-App/dist;
+      index  index.html;
+    }
+
+    location /api {
         include proxy_params;
         proxy_pass http://unix:/home/app/News-App/src/server/webapp.sock;
     }
+
 }
+
