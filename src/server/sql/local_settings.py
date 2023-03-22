@@ -1,7 +1,7 @@
 postgresql={
-    'pguser':'youssef',
+    'pguser':'app',
     'pgpassword':'password',
     'pghost':'localhost',
     'pgport':'5432',
-    'pgdb':'youssef',
+    'pgdb':'dbtutor',
 }

@@ -96,9 +96,3 @@ def logout_page():
     logout_user()
     return {'message': 'Logged out successfully'}
 
-
-@app.route("/")
-def home():
-    response = make_response()
-    response.set_cookie("History", "het")
-    return "<h1>Hello World</h1>"
