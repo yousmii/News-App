@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import styles from "../components/Article.module.scss";
 
 export default function Homepage() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<any[]>([]);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -12,7 +12,9 @@ export default function Homepage() {
         const response = await axios.get("/api");
         setData(response.data);
       } catch (error) {
-        setError(error.response.data.error);
+        if (error instanceof AxiosError) {
+          setError(error.response?.data.error);
+        }
       }
     }
 
@@ -28,7 +30,7 @@ export default function Homepage() {
   }
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.articles}>
         {data.map((item, index) => (
           <div className={styles.article}>

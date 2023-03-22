@@ -1,0 +1,40 @@
+.errorcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+    color: black;
+}
+
+.errorheading {
+    font-size: 4rem;
+    margin-bottom: 2rem;
+}
+
+.errormessage {
+    font-size: 2rem;
+    margin-bottom: 4rem;
+}
+
+.errorimage {
+    width: 35%;
+    margin-bottom: 4rem;
+}
+
+.errorlink {
+    border-radius: 10px;
+    font-size: 2rem;
+    text-decoration: none;
+    color: black;
+    border: 2px solid white;
+    padding: 1rem 2rem;
+    transition: all 0.3s ease;
+}
+
+.errorlink:hover {
+    background-color: #2E4FC8;
+    color: white;
+}
