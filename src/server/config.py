@@ -1,18 +1,21 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from sql.sql_config import engine
+from flask_bcrypt import Bcrypt
+from flask_login import LoginManager
 
 app = Flask('News-App')
 db = SQLAlchemy()
 app_data = dict()
+bcrypt = Bcrypt(app)
+login_manager = LoginManager(app)
 
-
-# from app import config_data
+# from app import config_data``
 def run_app():
     # create the extension
     # INITIALIZE SINGLETON SERVICES
     with app.app_context():
-        #db.create_all(db.engine)
+        #db.create_all(db.engine)d
         """
         if table doesn't exists => in python console:
         from src.server.config import app
