@@ -9,6 +9,7 @@ from typing import List
 def get_resemblance(f1, f2):
     file_docs = []
 
+    # Tokenize the first file
     with open (f1) as f:
         tokens = sent_tokenize(f.read())
         for line in tokens:
@@ -21,6 +22,7 @@ def get_resemblance(f1, f2):
 
     corpus = [dictionary.doc2bow(gen_doc) for gen_doc in gen_docs]
 
+    # Generate tf-idf dictionary
     tf_idf = gensim.models.TfidfModel(corpus)
 
     sims = gensim.similarities.Similarity('.',tf_idf[corpus],
@@ -28,6 +30,7 @@ def get_resemblance(f1, f2):
 
     file2_docs = []
 
+    # Tokenize the second file
     with open (f2) as f:
         tokens = sent_tokenize(f.read())
         for line in tokens:
@@ -35,7 +38,7 @@ def get_resemblance(f1, f2):
 
     for line in file2_docs:
         query_doc = [w.lower() for w in word_tokenize(line)]
-        query_doc_bow = dictionary.doc2bow(query_doc) #update an existing dictionary and
+        query_doc_bow = dictionary.doc2bow(query_doc) #update an existing dictionary
 
     query_doc_tf_idf = tf_idf[query_doc_bow]
     return(sims[query_doc_tf_idf])
