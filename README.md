@@ -58,7 +58,7 @@ Then, we shall install the dependencies for the webapp:
 
 ```bash
 npm install
-// or if you have yarn installed
+# or if you have yarn installed
 yarn
 ```
 
@@ -76,7 +76,7 @@ Then visit http://localhost:8080
 ```bash
 cd src/client
 npm start
-// or if you have yarn installed
+# or if you have yarn installed
 yarn start
 ```
 
