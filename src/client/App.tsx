@@ -15,7 +15,7 @@ import {BsNewspaper} from "react-icons/bs";
 function App() {
 
     return(
-        <BrowserRouter>
+        <BrowserRouter> 
             <main>
                 <header>
                     <Header/>
