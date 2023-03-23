@@ -26,7 +26,7 @@ Then create a role 'app' that will create the database and be used by the applic
 
 ```sql
 CREATE ROLE app WITH LOGIN CREATEDB;
-CREATE DATABASE newsapp OWNER app;
+CREATE DATABASE dbtutor OWNER app;
 ```
 
 You need to 'trust' the role to be able to login. Add the following line to `/etc/postgresql/9.6/main/pg_hba.conf` (you need root access, version may vary). **It needs to be the first rule (above local all all peer)**.
@@ -35,15 +35,13 @@ You need to 'trust' the role to be able to login. Add the following line to `/et
 # TYPE  DATABASE        USER            ADDRESS                 METHOD
 
 # app
-local   newsapp         app                                     trust
+local   dbtutor         app                                     trust
 ```
 
 and restart the service. Then initialize the database:
 
 ```bash
 sudo systemctl restart postgresql
-
-psql newsapp -U app -f sql/schema.sql
 ```
 
 ### 3. Download Dependencies
@@ -60,7 +58,7 @@ Then, we shall install the dependencies for the webapp:
 
 ```bash
 npm install
-// or if you have yarn installed
+# or if you have yarn installed
 yarn
 ```
 
@@ -78,7 +76,7 @@ Then visit http://localhost:8080
 ```bash
 cd src/client
 npm start
-// or if you have yarn installed
+# or if you have yarn installed
 yarn start
 ```
 

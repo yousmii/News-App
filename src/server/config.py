@@ -10,7 +10,7 @@ app_data = dict()
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 
-# from app import config_data
+# from app import config_data``
 def run_app():
     # create the extension
     # INITIALIZE SINGLETON SERVICES

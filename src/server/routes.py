@@ -43,10 +43,6 @@ def get_articles():
                parse('https://www.thebulletin.be/rss.xml') + \
                parse('https://www.standaard.be/rss/section/1f2838d4-99ea-49f0-9102-138784c7ea7c') + \
                parse('https://www.hbvl.be/rss/section/D1618839-F921-43CC-AF6A-A2B200A962DC')
-    # ConnectDB.addUser(205793, "history u1")
-    # ConnectDB.addRSS("new rss", "777-10-2022")
-    # print('admin.name exists? ')
-    # print(ConnectDB.column_exists('admin', 'name'))
     return json.dumps(articles)
 
 
@@ -95,10 +91,3 @@ def login_page():
 def logout_page():
     logout_user()
     return {'message': 'Logged out successfully'}
-
-
-@app.route("/")
-def home():
-    response = make_response()
-    response.set_cookie("History", "het")
-    return "<h1>Hello World</h1>"
