@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import styles from "../components/Article.module.scss";
+import moment from "moment";
 
 export default function Homepage() {
   const [data, setData] = useState<any[]>([]);
@@ -32,11 +33,13 @@ export default function Homepage() {
   return (
     <div className={styles.container}>
       <div className={styles.articles}>
-        {data.map((item, index) => (
+        {data.map(({link, image, title, description, pub_date}, index) => (
           <div className={styles.article}>
-            <a href={item.link} target={"blank"}>
-              <img src={item.image} alt={item.title} />
-              <h2>{item.title}</h2>
+            <a href={link} target={"blank"}>
+              <img src={image} alt={title} />
+              <h2>{title}</h2>
+              <p className={styles.description}>{description}</p>
+              <p className={styles.time_ago}>{moment(pub_date).fromNow()}</p>
             </a>
           </div>
         ))}
