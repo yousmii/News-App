@@ -1,5 +1,7 @@
 import feedparser
 from bs4 import BeautifulSoup
+import dateparser
+import re
 #from database import Article,db
 #from ConnectDB import ConnectDB
 
@@ -36,9 +38,18 @@ def parse(link):
         # Get the article URL
         url = entry.link
 
+        # Get the publication date
+        pub_date = dateparser.parse(entry.published).strftime('%Y-%m-%d %H:%M:%S')
+
+        # Get the description (https://stackoverflow.com/questions/9662346/python-code-to-remove-html-tags-from-a-string)
+        clean_html_tags = re.compile('<.*?>')
+        description = re.sub(clean_html_tags, '', entry.description)
+
         article["title"] = title
+        article["description"] = description
         article["image"] = thumbnail
         article["link"] = url
+        article["pub_date"] = pub_date
         # add article to db:
         #ar1=Article(title=article["title"],photo=article["image"],link=article["link"])
         """
@@ -51,25 +62,23 @@ def parse(link):
     return articles
 
 def main():
-    # print("---vrt---")
-    # parse('https://www.vrt.be/vrtnws/en.rss.articles.xml')
-    # print("\n")
-    # print("---gva---")
-    # parse('https://www.gva.be/rss/section/ca750cdf-3d1e-4621-90ef-a3260118e21c')
-    # print("\n")
-    # print("---het nieuwsblad---")
-    # parse('https://www.nieuwsblad.be/rss/section/55178e67-15a8-4ddd-a3d8-bfe5708f8932')
-    # print("\n")
-    # print("---de morgen---")
-    # parse('https://www.demorgen.be/in-het-nieuws/rss.xml')
-    # print("\n")
-    # print("---sporza---")
-    # parse('https://sporza.be/nl.rss.xml')
+    print("---vrt---")
+    print(parse('https://www.vrt.be/vrtnws/en.rss.articles.xml'))
+    print("\n")
+    print("---gva---")
+    print(parse('https://www.gva.be/rss/section/ca750cdf-3d1e-4621-90ef-a3260118e21c'))
+    print("\n")
+    print("---het nieuwsblad---")
+    print(parse('https://www.nieuwsblad.be/rss/section/55178e67-15a8-4ddd-a3d8-bfe5708f8932'))
+    print("\n")
+    print("---de morgen---")
+    print(parse('https://www.demorgen.be/in-het-nieuws/rss.xml'))
+    print("\n")
+    print("---sporza---")
+    print(parse('https://sporza.be/nl.rss.xml'))
     print('\n')
     print('---the bulletin---')
-    articles = parse('https://www.thebulletin.be/rss.xml')
-    print("articles are:")
-    print(articles)
+    print(parse('https://www.thebulletin.be/rss.xml'))
 
     
 
