@@ -1,7 +1,7 @@
 import React from "react";
 import axios, {AxiosError} from "axios";
 
-const registerUser = async (formData) => {
+const registerUser = async (formData: any) => {
   const response = await fetch('/api/register', {
     method: 'POST',
     headers: {
