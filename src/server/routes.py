@@ -9,11 +9,10 @@ from wtforms import Form, StringField, TextAreaField, validators
 
 from app import app, user
 from config import app_data, db
-from rss_parser import parse
+from ArticlesFetcher import fetch
 from ConnectDB import ConnectDB
-from database import User
+from database import User, RSS
 
-# from database import RSS
 # REST API
 # See https://www.ibm.com/developerworks/library/ws-restful/index.html
 
@@ -32,17 +31,9 @@ def post_rss():
     return
 
 
-@app.route("/api")
+@app.route("/api/articles")
 def get_articles():
-    articles = parse('https://www.vrt.be/vrtnws/nl.rss.articles.xml') + \
-               parse('https://www.hln.be/home/rss.xml') + \
-               parse('https://www.gva.be/rss/section/ca750cdf-3d1e-4621-90ef-a3260118e21c') + \
-               parse('https://www.nieuwsblad.be/rss/section/55178e67-15a8-4ddd-a3d8-bfe5708f8932') + \
-               parse('https://www.demorgen.be/in-het-nieuws/rss.xml') + \
-               parse('https://sporza.be/nl.rss.xml') + \
-               parse('https://www.thebulletin.be/rss.xml') + \
-               parse('https://www.standaard.be/rss/section/1f2838d4-99ea-49f0-9102-138784c7ea7c') + \
-               parse('https://www.hbvl.be/rss/section/D1618839-F921-43CC-AF6A-A2B200A962DC')
+    articles = fetch()
     return json.dumps(articles)
 
 

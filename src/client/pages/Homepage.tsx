@@ -10,7 +10,7 @@ export default function Homepage() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await axios.get("/api");
+        const response = await axios.get("/api/articles");
         setData(response.data);
       } catch (error) {
         if (error instanceof AxiosError) {
