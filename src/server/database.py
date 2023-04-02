@@ -54,11 +54,6 @@ class Creates(db.Model):
     created = db.Column(db.String, db.ForeignKey('admin.name', ondelete='CASCADE', onupdate='CASCADE'),
                         primary_key=True)
 
-class NewsSource(db.Model):
-    __tablename__ = 'source'
-    name = db.Column(db.String,primary_key=True)
-    magazine = db.Column(db.String)
-
 class RSS(db.Model):
     __tablename__ = 'rss'
     id = db.Column(db.Integer, db.Sequence('rss_id_seq'), primary_key=True)
