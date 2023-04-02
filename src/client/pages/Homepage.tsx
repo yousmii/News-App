@@ -36,7 +36,7 @@ export default function Homepage() {
         {data.map(({link, image, title, description, pub_date}, index) => (
           <div className={styles.article}>
             <a href={link} target={"blank"}>
-              <img src={image} alt={title} />
+              <img src={image !== null ? image : 'img.png'} alt={title} />
               <h2>{title}</h2>
               <p className={styles.description}>{description}</p>
               <p className={styles.time_ago}>{moment(pub_date).fromNow()}</p>
