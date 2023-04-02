@@ -1,14 +1,11 @@
-import feedparser
-from bs4 import BeautifulSoup
-import dateparser
-import re
 from database import Article,db
 from ConnectDB import ConnectDB
+from sqlalchemy import desc
 
 ConnectDB=ConnectDB(db)
 
 def fetch():
-    db_articles = Article.query.all()
+    db_articles = Article.query.order_by(desc(Article.pub_date)).all()
 
     articles = []
     # Loop through each article in the feed
