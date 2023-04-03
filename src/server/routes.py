@@ -19,7 +19,7 @@ from database import User, RSS
 ConnectDB = ConnectDB(db)
 
 
-@app.route("/post_rss", methods=['POST'])
+@app.route("/api/post_rss", methods=['POST'])
 def post_rss():
     feed_data = request.get_json()
 
@@ -33,6 +33,11 @@ def post_rss():
     db.session.commit()
 
     return "Done" , 201
+
+@app.route("/api/post_admin", methods=['POST'])
+def post_admin():
+    print("requested admin to be added")
+    return "Not Implemented", 501
 
 
 @app.route("/api/articles")
