@@ -6,6 +6,7 @@ import styles from "../components/Admin.module.scss";
 
 export default function Admin() {
   class RSSForm extends Component {
+
     handleSubmit = (  e : React.ChangeEvent<HTMLFormElement>) => {
       e.preventDefault();
       console.log("submitted");
