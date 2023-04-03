@@ -75,22 +75,9 @@ input[type="submit"]:hover {
   width: 50%;
 }
 
-.buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-}
-
 .button {
   margin: 10px 10px 10px 0;
-}
-
-.button.remove {
-  background: #BA0000;
-}
-
-.button.remove:hover {
-  background: #BF2222;
+  width: 75% !important;
 }
 
 .button.add {
