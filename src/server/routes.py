@@ -19,7 +19,7 @@ from database import User, RSS
 ConnectDB = ConnectDB(db)
 
 
-@app.route("/post_rss", methods=['POST'])
+@app.route("/api/post_rss", methods=['POST'])
 def post_rss():
     feed_data = request.get_json()
 
