@@ -6,7 +6,7 @@ import styles from "../components/Admin.module.scss";
 
 export default function Admin() {
   class RSSForm extends Component {
-    handleSubmit = (e : React.ChangeEvent<HTMLFormElement>) => {
+    handleSubmit = (  e : React.ChangeEvent<HTMLFormElement>) => {
       e.preventDefault();
       console.log("submitted");
 
@@ -21,14 +21,15 @@ export default function Admin() {
       });
   };
 
+  }
 
-    render() {
-    return (
+
+  return (
     <div className={styles.container}>
       <div className={styles.forms}>
         <div className={styles.form}>
           <h1>Add new RSS Feed</h1>
-          <form onSubmit={this.handleSubmit} method="post">
+          <form onSubmit={handleSubmit} method="post">
             <label>Feed URL:</label>
             <input
               title="feedurl"
@@ -100,8 +101,3 @@ export default function Admin() {
     </div>
   );
 }
-    }
-  }
-
-
-
