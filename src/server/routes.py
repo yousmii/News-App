@@ -34,6 +34,11 @@ def post_rss():
 
     return "Done" , 201
 
+@app.route("/api/post_admin", methods=['POST'])
+def post_admin():
+    print("requested admin to be added")
+    return "Not Implemented", 501
+
 
 @app.route("/api/articles")
 def get_articles():
