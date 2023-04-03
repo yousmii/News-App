@@ -1,13 +1,34 @@
-import React from "react";
+import React, {Component} from "react";
 import styles from "../components/Admin.module.scss";
 
+
+
+
 export default function Admin() {
-  return (
+  class RSSForm extends Component {
+    handleSubmit = (e : React.ChangeEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      console.log("submitted");
+
+      const body = e.target.body.value;
+
+      fetch('post_rss', {
+        method: "POST",
+        body: JSON.stringify(body)
+      }).then((response) => {
+        console.log(response);
+        return response.json(); // do something with response JSON
+      });
+  };
+
+
+    render() {
+    return (
     <div className={styles.container}>
       <div className={styles.forms}>
         <div className={styles.form}>
           <h1>Add new RSS Feed</h1>
-          <form method="post">
+          <form onSubmit={this.handleSubmit} method="post">
             <label>Feed URL:</label>
             <input
               title="feedurl"
@@ -79,3 +100,8 @@ export default function Admin() {
     </div>
   );
 }
+    }
+  }
+
+
+
