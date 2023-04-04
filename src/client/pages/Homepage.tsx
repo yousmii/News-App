@@ -7,6 +7,7 @@ export default function Homepage() {
   const [data, setData] = useState<any[]>([]);
   const [error, setError] = useState(null);
 
+
   useEffect(() => {
     async function fetchData() {
       try {
