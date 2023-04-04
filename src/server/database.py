@@ -1,4 +1,5 @@
-from config import db, bcrypt, login_manager
+from src.server.config import db, bcrypt, login_manager
+#from config import db, bcrypt, login_manager
 from sqlalchemy.orm import relationship
 from flask_login import UserMixin
 

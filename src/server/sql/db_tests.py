@@ -1,9 +1,11 @@
 from unittest import TestCase
 
 from flask import Flask
-from src.server.config import app
 
+from src.server.ConnectDB import ConnectDB
+from src.server.config import app
 from flask_sqlalchemy import SQLAlchemy
+
 
 # don't pass in the app object yet
 db = SQLAlchemy()
@@ -14,9 +16,11 @@ class MyTest(TestCase):
     TESTING = True
 
     def __init__(self):
+        super().__init__()
         self.app = Flask('test_app')
         self.db = db
         self.config_app()
+        self.connect_db=ConnectDB(db=self.db)
 
     def config_app(self):
         self.app.config['TESTING'] = True
@@ -42,3 +46,13 @@ class MyTest(TestCase):
     def tearDown(self):
         db.session.remove()
         db.drop_all()
+
+    def testUser(self):
+        u=self.connect_db.addUser(2,"history user2")
+        # this works
+        assert u in db.session
+
+        #response = self.app.get("/")
+
+        # this raises an AssertionError
+        #assert u in db.session
