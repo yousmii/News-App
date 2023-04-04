@@ -56,3 +56,6 @@ class MyTest(TestCase):
 
         # this raises an AssertionError
         #assert u in db.session
+
+    def populate_db(self):
+        pass

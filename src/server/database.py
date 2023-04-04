@@ -1,5 +1,4 @@
-from src.server.config import db, bcrypt, login_manager
-#from config import db, bcrypt, login_manager
+from config import db, bcrypt, login_manager
 from sqlalchemy.orm import relationship
 from flask_login import UserMixin
 
@@ -8,6 +7,8 @@ overview:
 https://app.dbdesigner.net/designer/schema/0-ppdb-d7c61811-cf52-4f48-9926-df356a03e147
 
 """
+
+
 class User(db.Model):
     __tablename__ = 'user'
     cookie = db.Column(db.Integer, db.Sequence('user_seq'), primary_key=True)
@@ -29,11 +30,13 @@ class Creates(db.Model):
     created = db.Column(db.String, db.ForeignKey('admin.name', ondelete='CASCADE', onupdate='CASCADE'),
                         primary_key=True)
 
+
 class RSS(db.Model):
     __tablename__ = 'rss'
     id = db.Column(db.Integer, db.Sequence('rss_id_seq'), primary_key=True)
     rss_url = db.Column(db.String, nullable=False)
     name = db.Column(db.String)
+
 
 class Labels(db.Model):
     __tablename__ = 'labels'

@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from src.server.sql.sql_config import engine
-# from sql.sql_config import engine
+#from src.server.sql.sql_config import engine
+from sql.sql_config import engine
 from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 
