@@ -35,7 +35,16 @@ export default function Homepage() {
 
   return (
     <div className={styles.container}>
-      <Scroller/>
+       {data.map(({link, image, title, description, pub_date} : {link : any, title : any, image : any , description : any, pub_date : any}, index : any) => (
+          <div className={styles.article}>
+            <a href={link} target={"blank"}>
+              <img src={image !== null ? image : 'img.png'} alt={title} />
+              <h2>{title}</h2>
+              <p className={styles.description}>{description}</p>
+              <p className={styles.time_ago}>{moment(pub_date).fromNow()}</p>
+            </a>
+          </div>
+        ))}
 
     </div>
   );
