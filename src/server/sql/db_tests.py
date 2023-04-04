@@ -1,4 +1,6 @@
 from unittest import TestCase
+#from flask.ext.testing import TestCase
+#https://flask-testing.readthedocs.io/en/v0.4/
 
 from flask import Flask
 
