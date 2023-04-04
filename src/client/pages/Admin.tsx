@@ -77,7 +77,6 @@ class AdminForm extends Component {
         const adminPassword = e.target.password.value;
 
         const formData = {admin_name: adminName, admin_password: adminPassword};
-
         fetch('api/post_admin', {
             method: "POST",
             body: JSON.stringify(formData),

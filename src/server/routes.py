@@ -39,11 +39,7 @@ def post_rss():
 def post_admin():
 
     admin_data = request.get_json()
-    new_admin = Admin()
-    new_admin.name = admin_data['username']
-    new_admin.password = admin_data['password']
-    db.session.add(new_admin)
-    db.session.commit()
+    ConnectDB.addAdmin(admin_data['admin_name'],admin_data['admin_password'])
 
     return "Done", 201
 
