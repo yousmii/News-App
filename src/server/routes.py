@@ -6,29 +6,42 @@ from forms import RegisterForm, LoginForm
 from flask_login import login_user, logout_user
 from wtforms import Form, StringField, TextAreaField, validators
 
-
 from app import app, user
 from config import app_data, db
 from ArticlesFetcher import fetch
 from ConnectDB import ConnectDB
-from database import User, RSS
+from database import User, RSS, Admin
 
+# from database import RSS
 # REST API
 # See https://www.ibm.com/developerworks/library/ws-restful/index.html
 
 ConnectDB = ConnectDB(db)
 
 
-@app.route("/post_rss", methods=['POST'])
+@app.route("/api/post_rss", methods=['POST'])
 def post_rss():
-    """
-    rss = RSS()
-    rss.rss_url = request.form['feed_url']
-    rss.published_by = request.form['feed_name']
-    db.session.add(rss)
+    feed_data = request.get_json()
+
+    new_feed = RSS()
+
+    new_feed.name = feed_data['feed_name']
+
+    new_feed.rss_url = feed_data['feed_url']
+
+    db.session.add(new_feed)
     db.session.commit()
-    """
-    return
+
+    return "Done", 201
+
+
+@app.route("/api/post_admin", methods=['POST'])
+def post_admin():
+
+    admin_data = request.get_json()
+    ConnectDB.addAdmin(admin_data['admin_name'],admin_data['admin_password'])
+
+    return "Done", 201
 
 
 @app.route("/api/articles")
