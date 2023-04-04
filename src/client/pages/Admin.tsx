@@ -1,5 +1,7 @@
 import React, {Component} from "react";
 import styles from "../components/Admin.module.scss";
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; //inport
 
 export default function Admin() {
     return (

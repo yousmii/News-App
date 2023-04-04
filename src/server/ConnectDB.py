@@ -1,6 +1,6 @@
 ##wrapper to use the database
 from flask_sqlalchemy import SQLAlchemy
-from database import User, RSS, Admin
+from src.server.database import User, RSS, Admin
 from sqlalchemy import inspect
 
 class ConnectDB():
