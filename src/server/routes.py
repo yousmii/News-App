@@ -22,15 +22,14 @@ ConnectDB = ConnectDB(db)
 @app.route("/api/post_rss", methods=['POST'])
 def post_rss():
     feed_data = request.get_json()
-
+    """
     new_feed = RSS()
-
     new_feed.name = feed_data['feed_name']
-
     new_feed.rss_url = feed_data['feed_url']
-
     db.session.add(new_feed)
     db.session.commit()
+    """
+    ConnectDB.addRSS(feed_data['feed_url'],feed_data['feed_name'])
 
     return "Done", 201
 

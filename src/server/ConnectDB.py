@@ -79,8 +79,9 @@ class ConnectDB():
         if not self.checkRSSExists(rss.id):
             self.db.session.add(rss)
             self.db.session.commit()
+            print("RSS successfully added to database.")
         else:
-            print("rss already in db")
+            print("RSS already in db")
         # print(RSS.query.all())
 
     def addAdmin(self, username: str, password: str):
