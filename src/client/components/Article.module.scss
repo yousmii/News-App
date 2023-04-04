@@ -87,6 +87,14 @@
   transition: all 0.1s ease-in-out;
 }
 
+.description {
+  font-style: italic;
+}
+
+.time_ago {
+  font-weight: bolder;
+}
+
 @media only screen and (max-width: 600px) {
   .article,
   .article:nth-child(1),

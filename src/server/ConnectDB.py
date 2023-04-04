@@ -1,6 +1,6 @@
 ##wrapper to use the database
 from flask_sqlalchemy import SQLAlchemy
-from database import User, RSS, NewsSource, Admin
+from database import User, RSS, Admin
 from sqlalchemy import inspect
 
 
@@ -20,9 +20,6 @@ class ConnectDB():
 
     def checkAdminExists(self, username):
         return self.db.session.query(Admin.name).filter_by(name=username).first() is not None
-
-    def checkSourceExisits(self, name: str):
-        return self.db.session.query(NewsSource.name).filter_by(name=name).first() is not None
 
     def column_exists(self, table=None, column=None):
         found = False
@@ -71,19 +68,6 @@ class ConnectDB():
         else:
             print("user already in db")
         # print(User.query.all())
-
-    def addRSS(self, rss_url: str, published_by: str):
-        if not self.checkSourceExisits(published_by):
-            source = NewsSource(name=published_by)
-            self.db.session.add(source)
-            self.db.session.commit()
-        rss = RSS(rss_url=rss_url, source_id=published_by)
-        if not self.checkRSSExists(rss.id):
-            self.db.session.add(rss)
-            self.db.session.commit()
-        else:
-            print("rss already in db")
-        # print(RSS.query.all())
 
     def addAdmin(self, username: str, password: str):
         admin = Admin(name=username, password=password)
