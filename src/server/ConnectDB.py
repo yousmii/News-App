@@ -1,7 +1,6 @@
 ##wrapper to use the database
 from flask_sqlalchemy import SQLAlchemy
-from src.server.database import User, RSS, NewsSource, Admin
-#from database import User, RSS, NewsSource, Admin
+from database import User, RSS, NewsSource, Admin
 from sqlalchemy import inspect
 
 
@@ -71,7 +70,6 @@ class ConnectDB():
             self.db.session.commit()
         else:
             print("user already in db")
-        return u
         # print(User.query.all())
 
     def addRSS(self, rss_url: str, published_by: str):
@@ -85,7 +83,6 @@ class ConnectDB():
             self.db.session.commit()
         else:
             print("rss already in db")
-        return source
         # print(RSS.query.all())
 
     def addAdmin(self, username: str, password: str):

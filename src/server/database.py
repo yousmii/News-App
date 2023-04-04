@@ -29,17 +29,11 @@ class Creates(db.Model):
     created = db.Column(db.String, db.ForeignKey('admin.name', ondelete='CASCADE', onupdate='CASCADE'),
                         primary_key=True)
 
-class NewsSource(db.Model):
-    __tablename__ = 'source'
-    name = db.Column(db.String,primary_key=True)
-    magazine = db.Column(db.String)
-
 class RSS(db.Model):
     __tablename__ = 'rss'
     id = db.Column(db.Integer, db.Sequence('rss_id_seq'), primary_key=True)
     rss_url = db.Column(db.String, nullable=False)
-    source_id = db.Column(db.String, db.ForeignKey('source.name'))
-    source = relationship("NewsSource")
+    name = db.Column(db.String)
 
 class Labels(db.Model):
     __tablename__ = 'labels'
@@ -50,14 +44,10 @@ class Article(db.Model):
     __tablename__ = 'article'
     title = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=True)
-    photo = db.Column(db.String, nullable=True)
+    image = db.Column(db.String, nullable=True)
     link = db.Column(db.String, primary_key=True)
     pub_date = db.Column(db.String, nullable=False)
-    pub_time = db.Column(db.String, nullable=False)
-    references = db.Column(db.String, db.ForeignKey('source.name', onupdate='CASCADE', ondelete='CASCADE'),
-                           nullable=False)
-    rss_access = db.Column(db.INT, db.ForeignKey('rss.id', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
-    label = db.Column(db.String, db.ForeignKey('labels.label', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
+    rss = db.Column(db.INT, db.ForeignKey('rss.id', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
 
 
 class TF_IDF(db.Model):
