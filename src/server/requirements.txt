@@ -44,3 +44,4 @@ typing_extensions==4.5.0
 urllib3==1.26.14
 Werkzeug==2.2.2
 WTForms==3.0.1
+pytest-flask-sqlalchemy==1.1.0
