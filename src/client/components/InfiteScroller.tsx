@@ -5,7 +5,7 @@ import axios from "axios";
 import moment from "moment/moment";
 
 
-const App = () => {
+const Scroller = () => {
   const [data, setData] = useState<any>([]);
   const [skip, setSkip] = useState(0);
   const [hasMore, setHasMore] = useState(true);
@@ -48,3 +48,5 @@ const App = () => {
     </InfiniteScroll>
   );
 };
+
+export default Scroller;
