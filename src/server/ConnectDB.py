@@ -3,10 +3,6 @@ from flask_sqlalchemy import SQLAlchemy
 from database import User, RSS, Admin
 from sqlalchemy import inspect
 
-
-# from src.server.config import db
-
-
 class ConnectDB():
     def __init__(self, db: SQLAlchemy):
         self.db = db
