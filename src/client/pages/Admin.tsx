@@ -30,6 +30,15 @@ class RSSForm extends Component {
             }
         }).then((response) => {
             console.log(response);
+            if (response.ok) {
+                // RSS feed was successfully added
+                alert("RSS feed was successfully added to the database!");
+            } else {
+                // Display error message to user
+                response.text().then((errorMessage) => {
+                    alert("There was an error adding the RSS feed: " + errorMessage);
+                });
+            }
             return response.json();
         });
     };
@@ -87,6 +96,15 @@ class AdminForm extends Component {
             }
         }).then((response) => {
             console.log(response);
+            if (response.ok) {
+                // RSS feed was successfully added
+                alert("Admin was successfully added to the database!");
+            } else {
+                // Display error message to user
+                response.text().then((errorMessage) => {
+                    alert("There was an error adding the admin: " + errorMessage);
+                });
+            }
             return response.json();
         });
     };
