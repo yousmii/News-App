@@ -6,13 +6,13 @@ from forms import RegisterForm, LoginForm
 from flask_login import login_user, logout_user
 from wtforms import Form, StringField, TextAreaField, validators
 
+
 from app import app, user
 from config import app_data, db
 from ArticlesFetcher import fetch
 from ConnectDB import ConnectDB
-from database import User, RSS, Admin
+from database import User, RSS
 
-# from database import RSS
 # REST API
 # See https://www.ibm.com/developerworks/library/ws-restful/index.html
 
@@ -32,21 +32,22 @@ def post_rss():
     db.session.add(new_feed)
     db.session.commit()
 
-    return "Done", 201
-
+    return "Done" , 201
 
 @app.route("/api/post_admin", methods=['POST'])
 def post_admin():
-
-    admin_data = request.get_json()
-    ConnectDB.addAdmin(admin_data['admin_name'],admin_data['admin_password'])
-
-    return "Done", 201
+    print("requested admin to be added")
+    return "Not Implemented", 501
 
 
-@app.route("/api/articles")
+@app.route("/api/articles", methods=['GET'])
 def get_articles():
-    articles = fetch()
+
+    skip = request.args.get('offset', type = int)
+
+    print("route received " + str(skip) + " as 'skip' argument")
+
+    articles = fetch(skip)
     return json.dumps(articles)
 
 

@@ -30,7 +30,7 @@ class Creates(db.Model):
 
 class RSS(db.Model):
     __tablename__ = 'rss'
-    id = db.Column(db.Integer, db.Sequence('rss_id_seq'), primary_key=True)
+    id = db.Column(db.Integer, db.Sequence('rss_id_seq', start=0, increment=1), primary_key=True)
     rss_url = db.Column(db.String, nullable=False)
     name = db.Column(db.String)
 
