@@ -36,8 +36,10 @@ def post_rss():
 
 @app.route("/api/post_admin", methods=['POST'])
 def post_admin():
-    print("requested admin to be added")
-    return "Not Implemented", 501
+    admin_data = request.get_json()
+    success, message = ConnectDB.addAdmin(admin_data['admin_name'], admin_data['admin_password'])
+
+    return message, success
 
 
 @app.route("/api/articles", methods=['GET'])
