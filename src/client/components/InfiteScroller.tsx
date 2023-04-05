@@ -16,10 +16,14 @@ const Scroller = () => {
 
   const fetchData = async () => {
     const response = await axios.get(
-      '/api/articles'
+      '/api/articles' , {
+        params: {
+          offset: skip
+        }
+        }
     );
     if (response.data.length > 0) {
-      setData(response.data);
+      setData(data.concat(response.data));
       setSkip(skip + 10);
     } else {
       setHasMore(false);
@@ -32,6 +36,11 @@ const Scroller = () => {
       next={fetchData}
       hasMore={hasMore}
       loader={<h4>Loading...</h4>}
+      endMessage={
+    <p style={{ textAlign: 'center' }}>
+      <b>End of feed</b>
+    </p>
+  }
     >
       <div className={styles.articles}>
         {data.map(({link, image, title, description, pub_date} : {link : any, title : any, image : any , description : any, pub_date : any}, index : any) => (

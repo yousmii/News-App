@@ -40,9 +40,14 @@ def post_admin():
     return "Not Implemented", 501
 
 
-@app.route("/api/articles")
+@app.route("/api/articles", methods=['GET'])
 def get_articles():
-    articles = fetch()
+
+    skip = request.args.get('offset', type = int)
+
+    print("route received " + str(skip) + " as 'skip' argument")
+
+    articles = fetch(skip)
     return json.dumps(articles)
 
 

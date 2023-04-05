@@ -1,15 +1,29 @@
+import sys
+
 from database import Article,db
 from ConnectDB import ConnectDB
 from sqlalchemy import desc
 
 ConnectDB=ConnectDB(db)
 
-def fetch():
+def fetch(skip = 0):
     db_articles = Article.query.order_by(desc(Article.pub_date)).all()
 
+    last_index = len(db_articles) - 1
+
+    skip10 = skip + 10
+
     articles = []
+
+    if skip10 > last_index:
+        print("reached the end")
+        return articles
+
     # Loop through each article in the feed
-    for db_article in db_articles:
+    for i in range(skip, skip10):
+
+        db_article = db_articles[i]
+
         article = {
             "title": db_article.title,
             "description": db_article.description,
