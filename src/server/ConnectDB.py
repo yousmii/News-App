@@ -12,11 +12,11 @@ class ConnectDB():
         self.db = db
         self.counter = 1000
 
-    def checkUserExisits(self, cookie):
+    def checkUserExists(self, cookie):
         return self.db.session.query(User.cookie).filter_by(cookie=cookie).first() is not None
 
-    def checkRSSExists(self, id):
-        return self.db.session.query(RSS.id).filter_by(id=id).first() is not None
+    def checkRSSExists(self, id_):
+        return self.db.session.query(RSS.id).filter_by(id=id_).first() is not None
 
     def checkAdminExists(self, username):
         return self.db.session.query(Admin.name).filter_by(name=username).first() is not None
@@ -62,12 +62,11 @@ class ConnectDB():
 
     def addUser(self, cookie, history=""):
         u = User(cookie=cookie, history=history)
-        if not self.checkUserExisits(cookie):
+        if not self.checkUserExists(cookie):
             self.db.session.add(u)
             self.db.session.commit()
         else:
             print("user already in db")
-        # print(User.query.all())
 
     def addAdmin(self, username: str, password: str):
         admin = Admin(name=username, password=password)
