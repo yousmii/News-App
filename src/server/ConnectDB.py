@@ -73,6 +73,15 @@ class ConnectDB():
         if not self.checkAdminExists(admin.name):
             self.db.session.add(admin)
             self.db.session.commit()
-            print("New admin successfully added.")
+            return 201, "New admin successfully added."
         else:
-            print("Admin name already in database.Please chose a different username.")
+            return 500, "Admin name already in database. Please choose a different username."
+
+    def addRSS(self, feed_name: str, feed_url: str):
+        rss = RSS(name=feed_name, rss_url=feed_url)
+        if not self.checkRSSExists(rss.id):
+            self.db.session.add(rss)
+            self.db.session.commit()
+            return 201, "New RSS feed successfully added."
+        else:
+            return 500, "RSS feed already in database. Please choose a different RSS feed."

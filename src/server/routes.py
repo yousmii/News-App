@@ -23,16 +23,9 @@ ConnectDB = ConnectDB(db)
 def post_rss():
     feed_data = request.get_json()
 
-    new_feed = RSS()
+    success, message = ConnectDB.addRSS(feed_data['feed_name'], feed_data['feed_url'])
 
-    new_feed.name = feed_data['feed_name']
-
-    new_feed.rss_url = feed_data['feed_url']
-
-    db.session.add(new_feed)
-    db.session.commit()
-
-    return "Done" , 201
+    return message, success
 
 @app.route("/api/post_admin", methods=['POST'])
 def post_admin():
