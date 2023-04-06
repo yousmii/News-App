@@ -265,7 +265,7 @@ const AdminTable: React.FC = () => {
                 type="string"
                 id="deleteName"
                 value={deleteName ?? ""}
-                onChange={(event) => setDeleteName(parseInt(event.target.value))}
+                onChange={(event) => setDeleteName(event.target.value)}
             />
             <button onClick={handleDelete}>Delete</button>
         </div>
