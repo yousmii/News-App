@@ -11,7 +11,8 @@ from app import app, user
 from config import app_data, db
 from ArticlesFetcher import fetch
 from ConnectDB import ConnectDB
-from database import User, RSS
+from database import User, RSS, Admin
+from sqlalchemy import asc
 
 # REST API
 # See https://www.ibm.com/developerworks/library/ws-restful/index.html
@@ -44,6 +45,39 @@ def get_articles():
 
     articles = fetch(skip)
     return json.dumps(articles)
+
+
+@app.route("/api/rss", methods=['GET'])
+def get_feeds():
+    db_feeds = RSS.query.order_by(asc(RSS.id)).all()
+
+    feeds = []
+
+    for db_feed in db_feeds:
+        feed = {
+            "id": db_feed.id,
+            "url": db_feed.rss_url,
+            "name": db_feed.name
+        }
+        feeds.append(feed)
+
+    return json.dumps(feeds)
+
+@app.route("/api/admins", methods=['GET'])
+def get_admins():
+    db_admins = Admin.query.order_by(asc(Admin.name)).all()
+
+    admins = []
+
+    for db_admin in db_admins:
+        admin = {
+            "name": db_admin.name,
+            "password": db_admin.password,
+            "cookie_id": db_admin.cookie_id
+        }
+        admins.append(admin)
+
+    return json.dumps(admins)
 
 
 @app.errorhandler(404)

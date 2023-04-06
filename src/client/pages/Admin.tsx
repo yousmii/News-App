@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, {Component, useEffect, useState} from "react";
 import styles from "../components/Admin.module.scss";
 
 export default function Admin() {
@@ -7,6 +7,8 @@ export default function Admin() {
             <div className={styles.forms}>
                 <RSSForm/>
                 <AdminForm/>
+                <RssTable/>
+                <AdminTable/>
             </div>
         </div>
     );
@@ -142,3 +144,86 @@ class AdminForm extends Component {
         );
     }
 }
+
+interface RSSFeed {
+    id: number;
+    url: string;
+    name: string;
+}
+
+const RssTable: React.FC = () => {
+    const [rssFeeds, setRssFeeds] = useState<RSSFeed[]>([]);
+
+    useEffect(() => {
+        fetch("/api/rss")
+            .then((response) => response.json())
+            .then((data) => setRssFeeds(data));
+    }, []);
+
+    return (
+        <div>
+            <h1>RSS Table</h1>
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>URL</th>
+                    <th>Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                {rssFeeds.map((rssFeed) => (
+                    <tr key={rssFeed.id}>
+                        <td>{rssFeed.id}</td>
+                        <td>{rssFeed.url}</td>
+                        <td>{rssFeed.name}</td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+        </div>
+    );
+};
+
+interface AdminInterface {
+    name: string;
+    password: string;
+    cookie_id: string;
+}
+
+const AdminTable: React.FC = () => {
+    const [admins, setAdmins] = useState<AdminInterface[]>([]);
+
+    useEffect(() => {
+        fetch("/api/admins")
+            .then((response) => response.json())
+            .then((data) => setAdmins(data));
+    }, []);
+
+    return (
+        <div>
+            <h1>Admin Table</h1>
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>URL</th>
+                    <th>Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                {admins.map((admin) => (
+                    <tr key={admin.name}>
+                        <td>{admin.name}</td>
+                        <td>{admin.password}</td>
+                        <td>{admin.cookie_id}</td>
+                    </tr>
+                ))}
+                </tbody>
+            </table>
+        </div>
+    );
+};
+
+
+
