@@ -153,12 +153,28 @@ interface RSSFeed {
 
 const RssTable: React.FC = () => {
     const [rssFeeds, setRssFeeds] = useState<RSSFeed[]>([]);
+    const [deleteId, setDeleteId] = useState<number>();
+
 
     useEffect(() => {
         fetch("/api/rss")
             .then((response) => response.json())
             .then((data) => setRssFeeds(data));
-    }, []);
+    }, [])
+
+    const handleDelete = () => {
+        if (deleteId) {
+            fetch(`/api/delete_rss`, {method: "DELETE"})
+                .then((response) => {
+                    if (response.ok) {
+                        setRssFeeds(rssFeeds.filter((feed) => feed.id !== deleteId));
+                        setDeleteId(undefined);
+                    }
+                })
+                .catch((error) => console.error(error));
+        }
+    };
+
 
     return (
         <div>
@@ -181,6 +197,14 @@ const RssTable: React.FC = () => {
                 ))}
                 </tbody>
             </table>
+            <label htmlFor="deleteId">Delete Feed by ID:</label>
+            <input
+                type="number"
+                id="deleteId"
+                value={deleteId ?? ""}
+                onChange={(event) => setDeleteId(parseInt(event.target.value))}
+            />
+            <button onClick={handleDelete}>Delete</button>
         </div>
     );
 };
@@ -193,12 +217,27 @@ interface AdminInterface {
 
 const AdminTable: React.FC = () => {
     const [admins, setAdmins] = useState<AdminInterface[]>([]);
+    const [deleteName, setDeleteName] = useState<string>();
+
 
     useEffect(() => {
         fetch("/api/admins")
             .then((response) => response.json())
             .then((data) => setAdmins(data));
     }, []);
+
+    const handleDelete = () => {
+        if (deleteName) {
+            fetch(`/api/delete_admin`, {method: "DELETE"})
+                .then((response) => {
+                    if (response.ok) {
+                        setAdmins(admins.filter((admin) => admin.name !== deleteName));
+                        setDeleteName(undefined);
+                    }
+                })
+                .catch((error) => console.error(error));
+        }
+    };
 
     return (
         <div>
@@ -221,6 +260,14 @@ const AdminTable: React.FC = () => {
                 ))}
                 </tbody>
             </table>
+            <label htmlFor="deleteName">Delete Admin by Name:</label>
+            <input
+                type="string"
+                id="deleteName"
+                value={deleteName ?? ""}
+                onChange={(event) => setDeleteName(parseInt(event.target.value))}
+            />
+            <button onClick={handleDelete}>Delete</button>
         </div>
     );
 };
