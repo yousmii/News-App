@@ -6,7 +6,6 @@ from forms import RegisterForm, LoginForm
 from flask_login import login_user, logout_user
 from wtforms import Form, StringField, TextAreaField, validators
 
-
 from app import app, user
 from config import app_data, db
 from ArticlesFetcher import fetch
@@ -28,6 +27,7 @@ def post_rss():
 
     return message, success
 
+
 @app.route("/api/post_admin", methods=['POST'])
 def post_admin():
     admin_data = request.get_json()
@@ -36,10 +36,26 @@ def post_admin():
     return message, success
 
 
+@app.route("/api/delete_admin", methods=['GET'])
+def delete_admin():
+    delete_name = request.args.get('delete_name', type=str)
+    success = Admin.query.filter(Admin.name == delete_name).delete()
+    db.session.commit()
+    return {'message': 'Admin deleted successfully', "status": 200} if success \
+        else {'message': 'Could not delete admin', "status": 500}
+
+@app.route("/api/delete_feed", methods=['GET'])
+def delete_feed():
+    delete_id = request.args.get('delete_id', type=int)
+    success = RSS.query.filter(RSS.id == delete_id).delete()
+    db.session.commit()
+    return {'message': 'RSS Feed deleted successfully', "status": 200} if success \
+        else {'message': 'Could not delete RSS Feed', "status": 500}
+
+
 @app.route("/api/articles", methods=['GET'])
 def get_articles():
-
-    skip = request.args.get('offset', type = int)
+    skip = request.args.get('offset', type=int)
 
     print("route received " + str(skip) + " as 'skip' argument")
 
@@ -62,6 +78,7 @@ def get_feeds():
         feeds.append(feed)
 
     return json.dumps(feeds)
+
 
 @app.route("/api/admins", methods=['GET'])
 def get_admins():

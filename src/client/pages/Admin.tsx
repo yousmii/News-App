@@ -1,5 +1,6 @@
 import React, {Component, useEffect, useState} from "react";
 import styles from "../components/Admin.module.scss";
+import axios from "axios";
 
 export default function Admin() {
     return (
@@ -164,11 +165,19 @@ const RssTable: React.FC = () => {
 
     const handleDelete = () => {
         if (deleteId) {
-            fetch(`/api/delete_rss`, {method: "DELETE"})
+            axios.get(`/api/delete_feed`, {
+                    params: {
+                        delete_id: deleteId
+                    }
+                }
+            )
                 .then((response) => {
-                    if (response.ok) {
-                        setRssFeeds(rssFeeds.filter((feed) => feed.id !== deleteId));
+                    if (response.data["status"] == 200) {
+                        setRssFeeds(rssFeeds.filter((rssFeed) => rssFeed.id !== deleteId));
                         setDeleteId(undefined);
+                        alert(response.data["message"])
+                    } else {
+                        alert(response.data["message"])
                     }
                 })
                 .catch((error) => console.error(error));
@@ -228,11 +237,19 @@ const AdminTable: React.FC = () => {
 
     const handleDelete = () => {
         if (deleteName) {
-            fetch(`/api/delete_admin`, {method: "DELETE"})
+            axios.get(`/api/delete_admin`, {
+                    params: {
+                        delete_name: deleteName
+                    }
+                }
+            )
                 .then((response) => {
-                    if (response.ok) {
+                    if (response.data["status"] == 200) {
                         setAdmins(admins.filter((admin) => admin.name !== deleteName));
                         setDeleteName(undefined);
+                        alert(response.data["message"])
+                    } else {
+                        alert(response.data["message"])
                     }
                 })
                 .catch((error) => console.error(error));
@@ -245,9 +262,9 @@ const AdminTable: React.FC = () => {
             <table>
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>URL</th>
-                    <th>Name</th>
+                    <th>name</th>
+                    <th>password</th>
+                    <th>cookie_id</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -265,7 +282,7 @@ const AdminTable: React.FC = () => {
                 type="string"
                 id="deleteName"
                 value={deleteName ?? ""}
-                onChange={(event) => setDeleteName(event.target.value)}
+                onChange={(event) => setDeleteName(event.target.value as string)}
             />
             <button onClick={handleDelete}>Delete</button>
         </div>
