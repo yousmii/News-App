@@ -75,22 +75,9 @@ input[type="submit"]:hover {
   width: 50%;
 }
 
-.buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-}
-
 .button {
   margin: 10px 10px 10px 0;
-}
-
-.button.remove {
-  background: #BA0000;
-}
-
-.button.remove:hover {
-  background: #BF2222;
+  width: 75% !important;
 }
 
 .button.add {
@@ -99,4 +86,43 @@ input[type="submit"]:hover {
 
 .button.add:hover {
     background: #304F81;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+thead {
+  background-color: #f2f2f2;
+}
+
+th,
+td {
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+tr {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+button {
+  padding: 8px;
+  background-color: #0077cc;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #005fa3;
 }

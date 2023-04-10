@@ -6,44 +6,95 @@ from forms import RegisterForm, LoginForm
 from flask_login import login_user, logout_user
 from wtforms import Form, StringField, TextAreaField, validators
 
-
 from app import app, user
 from config import app_data, db
-from rss_parser import parse
+from ArticlesFetcher import fetch
 from ConnectDB import ConnectDB
-from database import User
+from database import User, RSS, Admin
+from sqlalchemy import asc
 
-# from database import RSS
 # REST API
 # See https://www.ibm.com/developerworks/library/ws-restful/index.html
 
 ConnectDB = ConnectDB(db)
 
 
-@app.route("/post_rss", methods=['POST'])
+@app.route("/api/post_rss", methods=['POST'])
 def post_rss():
-    """
-    rss = RSS()
-    rss.rss_url = request.form['feed_url']
-    rss.published_by = request.form['feed_name']
-    db.session.add(rss)
+    feed_data = request.get_json()
+
+    success, message = ConnectDB.addRSS(feed_data['feed_name'], feed_data['feed_url'])
+
+    return message, success
+
+
+@app.route("/api/post_admin", methods=['POST'])
+def post_admin():
+    admin_data = request.get_json()
+    success, message = ConnectDB.addAdmin(admin_data['admin_name'], admin_data['admin_password'])
+
+    return message, success
+
+
+@app.route("/api/delete_admin", methods=['GET'])
+def delete_admin():
+    delete_name = request.args.get('delete_name', type=str)
+    success = Admin.query.filter(Admin.name == delete_name).delete()
     db.session.commit()
-    """
-    return
+    return {'message': 'Admin deleted successfully', "status": 200} if success \
+        else {'message': 'Could not delete admin', "status": 500}
+
+@app.route("/api/delete_feed", methods=['GET'])
+def delete_feed():
+    delete_id = request.args.get('delete_id', type=int)
+    success = RSS.query.filter(RSS.id == delete_id).delete()
+    db.session.commit()
+    return {'message': 'RSS Feed deleted successfully', "status": 200} if success \
+        else {'message': 'Could not delete RSS Feed', "status": 500}
 
 
-@app.route("/api")
+@app.route("/api/articles", methods=['GET'])
 def get_articles():
-    articles = parse('https://www.vrt.be/vrtnws/nl.rss.articles.xml') + \
-               parse('https://www.hln.be/home/rss.xml') + \
-               parse('https://www.gva.be/rss/section/ca750cdf-3d1e-4621-90ef-a3260118e21c') + \
-               parse('https://www.nieuwsblad.be/rss/section/55178e67-15a8-4ddd-a3d8-bfe5708f8932') + \
-               parse('https://www.demorgen.be/in-het-nieuws/rss.xml') + \
-               parse('https://sporza.be/nl.rss.xml') + \
-               parse('https://www.thebulletin.be/rss.xml') + \
-               parse('https://www.standaard.be/rss/section/1f2838d4-99ea-49f0-9102-138784c7ea7c') + \
-               parse('https://www.hbvl.be/rss/section/D1618839-F921-43CC-AF6A-A2B200A962DC')
+    skip = request.args.get('offset', type=int)
+
+    print("route received " + str(skip) + " as 'skip' argument")
+
+    articles = fetch(skip)
     return json.dumps(articles)
+
+
+@app.route("/api/rss", methods=['GET'])
+def get_feeds():
+    db_feeds = RSS.query.order_by(asc(RSS.id)).all()
+
+    feeds = []
+
+    for db_feed in db_feeds:
+        feed = {
+            "id": db_feed.id,
+            "url": db_feed.rss_url,
+            "name": db_feed.name
+        }
+        feeds.append(feed)
+
+    return json.dumps(feeds)
+
+
+@app.route("/api/admins", methods=['GET'])
+def get_admins():
+    db_admins = Admin.query.order_by(asc(Admin.name)).all()
+
+    admins = []
+
+    for db_admin in db_admins:
+        admin = {
+            "name": db_admin.name,
+            "password": db_admin.password,
+            "cookie_id": db_admin.cookie_id
+        }
+        admins.append(admin)
+
+    return json.dumps(admins)
 
 
 @app.errorhandler(404)
