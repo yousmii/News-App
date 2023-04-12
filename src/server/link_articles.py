@@ -57,8 +57,10 @@ def link_articles():
                 duplicates_set.add(tuple(duplicate_entry))
 
     for entry in duplicates_set:
+        print(entry[0], entry[1], 1.0)
         query = "INSERT INTO tf_idf VALUES (%s, %s, %s)"
         cur.execute(query, (entry[0], entry[1], 1.0))
+    conn.commit()
 
 if __name__ == "__main__":
     link_articles()
