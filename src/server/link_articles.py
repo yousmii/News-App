@@ -48,10 +48,10 @@ def link_articles():
         res_dict = get_resemblance(res_obj, '.current_record')
         for i in range(len(res_dict)):
             if res_dict[i] > 0.8:
-                if record[1] == query_result[i+1][1]:
+                if record[1] == query_result[i][1]:
                     continue
 
-                #print(record[0] + ',\n\t ' + query_result[i+1][0] + '\n\n')
+                #print(record[0] + '\n' + query_result[i][0] + '\n\n')
                 duplicate_entry = [record[1], query_result[i][1]]
                 duplicate_entry.sort()
                 duplicates_set.add(tuple(duplicate_entry))
