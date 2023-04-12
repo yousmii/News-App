@@ -37,6 +37,7 @@ def get_resemblance_object(fin):
     # Create similarity object
     sims = gensim.similarities.Similarity('.',tf_idf[corpus],
                                             num_features=len(dictionary))
+
     return ResemblanceObject(dictionary, tf_idf, sims)
 
 # Return a dictionary of similarities between two documents

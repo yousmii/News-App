@@ -7,12 +7,8 @@ import string
 def create_source_document(cur):
     with open(".records",'w') as file:
         for record in cur:
-            title = str(record[0])
-            title = title.translate(str.maketrans("","", string.punctuation))
-            #title = title.translate({ord('?'):None})
-            title += '.'
-            file.write(title)
-            file.write('\n')
+            file.write(record[0])
+            file.write('\n\n')
 
 # Link duplicate articles to each other
 def link_articles():
@@ -32,23 +28,30 @@ def link_articles():
     cur.execute("SELECT title, link FROM article")
     query_result = list()
     for record in cur:
-        query_result.append(record)
+        title = record[0]
+        title = title.replace("\n", "")
+        title = ''.join([i for i in title if i.isalnum() or i == ' '])
+        title += '.'
+        query_result.append((title, record[1]))
 
     create_source_document(query_result)
-    res_obj = get_resemblance_object('.records')
 
+    res_obj = get_resemblance_object('.records')
+    
     duplicates_set = set()
 
     for record in query_result:
         with open(".current_record",'w') as file:
-            title = str(record[0])
-            title = title.translate(str.maketrans("","", string.punctuation))
-            title += '.'
-            file.write(title)
+            file.write(record[0])
+            file.write('\n')
 
         res_dict = get_resemblance(res_obj, '.current_record')
         for i in range(len(res_dict)):
-            if res_dict[i] > 0.8 and res_dict[i] < 0.9999:
+            if res_dict[i] > 0.8:
+                if record[1] == query_result[i+1][1]:
+                    continue
+
+                #print(record[0] + ',\n\t ' + query_result[i+1][0] + '\n\n')
                 duplicate_entry = [record[1], query_result[i][1]]
                 duplicate_entry.sort()
                 duplicates_set.add(tuple(duplicate_entry))
