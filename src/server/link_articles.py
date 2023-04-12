@@ -1,4 +1,4 @@
-from resemblance.resemblance import get_resemblance
+from resemblance.resemblance import get_resemblance, get_resemblance_object
 import psycopg2
 import numpy as np
 import string
@@ -29,13 +29,15 @@ def link_articles():
     cur = conn.cursor()
 
      
-    cur.execute("SELECT title, link FROM article;")
+    cur.execute("SELECT title, link FROM article")
     query_result = list()
     for record in cur:
         query_result.append(record)
 
-    print(len(query_result))
     create_source_document(query_result)
+    res_obj = get_resemblance_object('.records')
+
+    duplicates_set = set()
 
     for record in query_result:
         with open(".current_record",'w') as file:
@@ -44,17 +46,16 @@ def link_articles():
             title += '.'
             file.write(title)
 
-        res_dict = get_resemblance('.records', '.current_record')
+        res_dict = get_resemblance(res_obj, '.current_record')
         for i in range(len(res_dict)):
             if res_dict[i] > 0.8 and res_dict[i] < 0.9999:
-                print(res_dict[i])
-                print('(' + str(record) + ', \n\t' + str(query_result[i]) + ')\n')
+                duplicate_entry = [record[1], query_result[i][1]]
+                duplicate_entry.sort()
+                duplicates_set.add(tuple(duplicate_entry))
 
-    '''
-    Loop through all headlines again and link duplicate articles
-        If it's already on the right-hand side, link article on LHS with current entry
-    '''
-    pass
+    for entry in duplicates_set:
+        query = "INSERT INTO tf_idf VALUES (%s, %s, %s)"
+        cur.execute(query, (entry[0], entry[1], 1.0))
 
 if __name__ == "__main__":
     link_articles()
