@@ -2,6 +2,12 @@ from resemblance.resemblance import get_resemblance, get_resemblance_object
 import psycopg2
 import numpy as np
 import string
+import re
+
+'''
+Regex for url
+https:\/\/([0-z]+\.)+[0-z]*\/
+'''
 
 # Add all headlines to a single file
 def create_source_document(cur):
@@ -51,7 +57,7 @@ def link_articles():
                 if record[1] == query_result[i][1]:
                     continue
 
-                #print(record[0] + '\n' + query_result[i][0] + '\n\n')
+                print(record[0] + '\n' + query_result[i][0] + '\n\n')
                 duplicate_entry = [record[1], query_result[i][1]]
                 duplicate_entry.sort()
                 duplicates_set.add(tuple(duplicate_entry))
