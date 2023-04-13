@@ -9,6 +9,12 @@ Regex for url
 https:\/\/([0-z]+\.)+[0-z]*\/
 '''
 
+def from_same_site(url1, url2):
+    domain1 = re.search("https:\/\/([0-z]+\.)+[0-z]*\/", url1) 
+    domain2 = re.search("https:\/\/([0-z]+\.)+[0-z]*\/", url2) 
+
+    return domain1.group() == domain2.group()
+
 # Add all headlines to a single file
 def create_source_document(cur):
     with open(".records",'w') as file:
@@ -36,7 +42,7 @@ def link_articles():
     for record in cur:
         title = record[0]
         title = title.replace("\n", "")
-        title = ''.join([i for i in title if i.isalnum() or i == ' '])
+        title = ''.join([i for i in title if i.isalnum() or i == ' ']) # Strip all special characters
         title += '.'
         query_result.append((title, record[1]))
 
@@ -54,18 +60,16 @@ def link_articles():
         res_dict = get_resemblance(res_obj, '.current_record')
         for i in range(len(res_dict)):
             if res_dict[i] > 0.8:
-                if record[1] == query_result[i][1]:
-                    continue
-
-                print(record[0] + '\n' + query_result[i][0] + '\n\n')
-                duplicate_entry = [record[1], query_result[i][1]]
-                duplicate_entry.sort()
-                duplicates_set.add(tuple(duplicate_entry))
+                #print(record[0] + '\n' + query_result[i][0] + '\n\n')
+                if not from_same_site(record[1], query_result[i][1]):
+                    duplicate_entry = [record[1], query_result[i][1]]
+                    duplicate_entry.sort()
+                    duplicates_set.add(tuple(duplicate_entry))
 
     for entry in duplicates_set:
-        print(entry[0], entry[1], 1.0)
         query = "INSERT INTO tf_idf VALUES (%s, %s, %s)"
         cur.execute(query, (entry[0], entry[1], 1.0))
+
     conn.commit()
 
 if __name__ == "__main__":
