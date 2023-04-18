@@ -92,7 +92,7 @@ def get_admins():
         admin = {
             "name": db_admin.name,
             "password": db_admin.password,
-            "cookie_id": db_admin.cookie_id
+            "cookie_id": "None"
         }
         admins.append(admin)
 
