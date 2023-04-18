@@ -1,7 +1,10 @@
 ##wrapper to use the database
 from flask_sqlalchemy import SQLAlchemy
+# for testcases:
 from src.server.database import User, RSS, Admin
+# from database import User, RSS, Admin
 from sqlalchemy import inspect
+
 
 class ConnectDB():
     def __init__(self, db: SQLAlchemy):
@@ -17,7 +20,7 @@ class ConnectDB():
     def checkAdminExists(self, username):
         return self.db.session.query(Admin.name).filter_by(name=username).first() is not None
 
-    #def checkSourceExisits(self, name: str):
+    # def checkSourceExisits(self, name: str):
     #    return self.db.session.query(NewsSource.name).filter_by(name=name).first() is not None
 
     def column_exists(self, table=None, column=None):
