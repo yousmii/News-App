@@ -9,6 +9,7 @@ import Admin from "./pages/Admin";
 import Login from "./pages/Login";
 import Error404 from "./pages/Error404";
 import Error403 from "./pages/Error403";
+import RegisterForm from "./pages/RegisterPage"
 import { BsNewspaper } from "react-icons/bs";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="*" element={<Error404 />} />
           <Route path="/403" element={<Error403 />} />
+          <Route path="/register" element={<RegisterForm />} />
         </Routes>
       </main>
     </BrowserRouter>

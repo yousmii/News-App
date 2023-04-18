@@ -7,18 +7,35 @@ overview:
 https://app.dbdesigner.net/designer/schema/0-ppdb-d7c61811-cf52-4f48-9926-df356a03e147
 
 """
-class User(db.Model):
-    __tablename__ = 'user'
-    cookie = db.Column(db.Integer, db.Sequence('user_seq'), primary_key=True)
-    history = db.Column(db.String(255), nullable=True)
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer(), primary_key=True)
+    username = db.Column(db.String(length=30), nullable=False, unique=True)
+    email_address = db.Column(db.String(length=50), nullable=False, unique=True)
+    password_hash = db.Column(db.String(length=60), nullable=False)
+
+    @property
+    def password(self):
+        # password_hash?
+        return self.password
+
+    @password.setter
+    def password(self, plain_text_password):
+        self.password_hash = bcrypt.generate_password_hash(plain_text_password).decode('utf-8')
+
+    def check_password_correction(self, attempted_password):
+        return bcrypt.check_password_hash(self.password_hash, attempted_password)
 
 
 class Admin(db.Model):
     __tablename__ = 'admin'
     name = db.Column(db.String(255), primary_key=True)
     password = db.Column(db.String, nullable=False)
-    cookie_id = db.Column(db.Integer, db.ForeignKey('user.cookie', ondelete='CASCADE', onupdate='CASCADE'), unique=True)
-    cookie = db.relationship('User', backref='user')
+    id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE', onupdate='CASCADE'), unique=True)
 
 
 class Creates(db.Model):
@@ -28,11 +45,13 @@ class Creates(db.Model):
     created = db.Column(db.String, db.ForeignKey('admin.name', ondelete='CASCADE', onupdate='CASCADE'),
                         primary_key=True)
 
+
 class RSS(db.Model):
     __tablename__ = 'rss'
     id = db.Column(db.Integer, db.Sequence('rss_id_seq', start=0, increment=1), primary_key=True)
     rss_url = db.Column(db.String, nullable=False)
     name = db.Column(db.String)
+
 
 class Labels(db.Model):
     __tablename__ = 'labels'
@@ -62,5 +81,5 @@ class Feed(db.Model):
     __tablename__ = 'feed'
     article = db.Column(db.String, db.ForeignKey('article.link', ondelete='CASCADE', onupdate='CASCADE'),
                         nullable=False, primary_key=True)
-    user = db.Column(db.INT, db.ForeignKey('user.cookie', ondelete='CASCADE', onupdate='CASCADE'), nullable=False,
+    user = db.Column(db.INT, db.ForeignKey('user.id', ondelete='CASCADE', onupdate='CASCADE'), nullable=False,
                      primary_key=True)
