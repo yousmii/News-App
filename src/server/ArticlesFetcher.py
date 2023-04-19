@@ -1,5 +1,5 @@
-from database import Article,db
-from ConnectDB import ConnectDB
+from src.server.database import Article,db
+from src.server.ConnectDB import ConnectDB
 from sqlalchemy import desc
 
 ConnectDB=ConnectDB(db)
