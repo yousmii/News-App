@@ -5,12 +5,17 @@ nltk.download('punkt')
 from nltk.tokenize import word_tokenize, sent_tokenize
 from typing import List
 
-# Return a dictionary of similarities between two documents
-def get_resemblance(f1, f2):
+class ResemblanceObject:
+    def __init__(self, dictionary, tf_idf, sims):
+        self.dictionary = dictionary
+        self.tf_idf = tf_idf
+        self.sims = sims
+
+def get_resemblance_object(fin):
     file_docs = []
 
     # Open the first file and split sentences
-    with open (f1) as f:
+    with open (fin) as f:
         tokens = sent_tokenize(f.read())
         for line in tokens:
             file_docs.append(line)
@@ -33,10 +38,15 @@ def get_resemblance(f1, f2):
     sims = gensim.similarities.Similarity('.',tf_idf[corpus],
                                             num_features=len(dictionary))
 
+    return ResemblanceObject(dictionary, tf_idf, sims)
+
+# Return a dictionary of similarities between two documents
+def get_resemblance(res_obj, query_file):
+
     file2_docs = []
 
     # Tokenize query file
-    with open (f2) as f:
+    with open (query_file) as f:
         tokens = sent_tokenize(f.read())
         for line in tokens:
             file2_docs.append(line)
@@ -46,13 +56,12 @@ def get_resemblance(f1, f2):
         query_doc = [w.lower() for w in word_tokenize(line)]
 
         #update an existing dictionary and create a bag of words
-        query_doc_bow = dictionary.doc2bow(query_doc) 
+        query_doc_bow = res_obj.dictionary.doc2bow(query_doc) 
 
     # Perform a similarity query against the corpus
-    query_doc_tf_idf = tf_idf[query_doc_bow]
-    return(sims[query_doc_tf_idf])
+    query_doc_tf_idf = res_obj.tf_idf[query_doc_bow]
 
-
+    return(res_obj.sims[query_doc_tf_idf])
 
 
 if __name__ == "__main__":
