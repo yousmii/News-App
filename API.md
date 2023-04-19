@@ -16,7 +16,7 @@ delete_name         unique admin name
 ```
 
 ## Articles
-**GET** /api/rss
+**GET** /api/articles
 > Returns _skip_*_i_ amount of articles in JSON format, where _i_ is the amount of articles showed by infinite scrolling.
 ```
 skip                an integer representing the amount of infinite scrolling iterations that have passed
