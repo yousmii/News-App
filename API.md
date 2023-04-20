@@ -22,6 +22,12 @@ delete_name         unique admin name
 skip                an integer representing the amount of infinite scrolling iterations that have passed
 ```
 
+**GET** /api/search
+> Returns all articles that match the query string.
+```
+q                   query string
+```
+
 ## RSS
 **POST** /api/post_rss
 > Adds RSS feed. Returns status code and status message.
