@@ -30,6 +30,12 @@ skip                an integer representing the amount of infinite scrolling ite
 q                   query string
 ```
 
+**GET** /api/similarity
+> Returns a list of articles that were matched using TF_IDF.
+```
+article_link       a link to the article that we want the similar articles of
+```
+
 ## RSS
 **POST** /api/post_rss
 > Adds RSS feed. Returns status code and status message.
