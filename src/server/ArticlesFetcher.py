@@ -1,5 +1,5 @@
-from database import Article, db, TF_IDF
-from ConnectDB import ConnectDB
+from src.server.database import Article,db, TF_IDF
+from src.server.ConnectDB import ConnectDB
 from sqlalchemy import desc, func
 
 ConnectDB=ConnectDB(db)

@@ -8,12 +8,13 @@ from wtforms import Form, StringField, TextAreaField, validators
 from flask_wtf import csrf
 from werkzeug.datastructures import MultiDict
 
-from app import app, user
-from config import app_data, db
-from ArticlesFetcher import fetch
+
+from src.server.app import app, user
+from src.server.config import app_data, db
+from src.server.ArticlesFetcher import fetch
+from src.server.ConnectDB import ConnectDB
+from src.server.database import User, RSS, Admin, TF_IDF
 from search import search
-from ConnectDB import ConnectDB
-from database import User, RSS, Admin, TF_IDF
 from sqlalchemy import asc, or_
 
 # REST API
@@ -31,18 +32,18 @@ def post_rss():
     return message, success
 
 
-@app.route("/api/post_admin", methods=['POST'])
-def post_admin():
-    admin_data = request.get_json()
-    success, message = ConnectDB.addAdmin(admin_data['admin_name'], admin_data['admin_password'])
-
-    return message, success
+# @app.route("/api/post_admin", methods=['POST'])
+# def post_admin():
+#     admin_data = request.get_json()
+#     success, message = ConnectDB.addAdmin(admin_data['admin_name'], admin_data['admin_password'])
+#
+#     return message, success
 
 
 @app.route("/api/delete_admin", methods=['GET'])
 def delete_admin():
     delete_name = request.args.get('delete_name', type=str)
-    success = Admin.query.filter(Admin.name == delete_name).delete()
+    success = User.query.filter_by(username=delete_name).delete()
     db.session.commit()
     return {'message': 'Admin deleted successfully', "status": 200} if success \
         else {'message': 'Could not delete admin', "status": 500}
@@ -109,15 +110,13 @@ def get_feeds():
 
 @app.route("/api/admins", methods=['GET'])
 def get_admins():
-    db_admins = Admin.query.order_by(asc(Admin.name)).all()
+    db_admins = User.query.filter_by(is_admin=True).order_by(asc(User.username)).all()
 
     admins = []
 
     for db_admin in db_admins:
         admin = {
-            "name": db_admin.name,
-            "password": db_admin.password,
-            "cookie_id": "None"
+            "name": db_admin.username,
         }
         admins.append(admin)
 
@@ -151,6 +150,7 @@ def get_current_user():
         return jsonify({"error": "Unauthorized"}), 401
     return jsonify({
         "username": current_user.username,
+        "is_admin": current_user.is_admin
     }), 200
 
 
@@ -168,6 +168,23 @@ def register_page():
         login_user(attempted_user)
         if current_user.is_authenticated:
             return jsonify({'message': 'User created and logged in successfully'})
+    if form.errors != {}:
+        return jsonify({'errors': form.errors})
+
+
+@app.route('/api/registerAdmin', methods=['GET', 'POST'])
+def register_page_admin():
+    form_data = MultiDict(request.get_json())
+    form = RegisterForm(form_data)
+    if form.validate():
+        user_to_create = User(username=form.username.data,
+                              email_address=form.email_address.data,
+                              password=form.password1.data,
+                              is_admin=True)
+        db.session.add(user_to_create)
+        db.session.commit()
+        attempted_user = User.query.filter_by(username=form.username.data).first()
+        return jsonify({'message': 'Admin created successfully'})
     if form.errors != {}:
         return jsonify({'errors': form.errors})
 

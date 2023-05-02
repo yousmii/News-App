@@ -1,4 +1,4 @@
-from config import db, bcrypt, login_manager
+from src.server.config import db, bcrypt, login_manager
 from sqlalchemy.orm import relationship
 from flask_login import UserMixin
 
@@ -13,10 +13,12 @@ def load_user(user_id):
 
 
 class User(db.Model, UserMixin):
+    __tablename__ = 'user'
     id = db.Column(db.Integer(), primary_key=True)
     username = db.Column(db.String(length=30), nullable=False, unique=True)
     email_address = db.Column(db.String(length=50), nullable=False, unique=True)
     password_hash = db.Column(db.String(length=60), nullable=False)
+    is_admin = db.Column(db.Boolean, default=False)
 
     @property
     def password(self):
@@ -31,18 +33,18 @@ class User(db.Model, UserMixin):
         return bcrypt.check_password_hash(self.password_hash, attempted_password)
 
 
-class Admin(db.Model):
-    __tablename__ = 'admin'
-    name = db.Column(db.String(255), primary_key=True)
-    password = db.Column(db.String, nullable=False)
-    id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE', onupdate='CASCADE'), unique=True)
+# class Admin(db.Model):
+#     __tablename__ = 'admin'
+#     name = db.Column(db.String(255), primary_key=True)
+#     password = db.Column(db.String, nullable=False)
+#     id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE', onupdate='CASCADE'), unique=True)
 
 
 class Creates(db.Model):
     __tablename__ = 'creates'
-    creator = db.Column(db.String, db.ForeignKey('admin.name', ondelete='CASCADE', onupdate='CASCADE'),
+    creator = db.Column(db.String, db.ForeignKey('user.username', ondelete='CASCADE', onupdate='CASCADE'),
                         primary_key=True)
-    created = db.Column(db.String, db.ForeignKey('admin.name', ondelete='CASCADE', onupdate='CASCADE'),
+    created = db.Column(db.String, db.ForeignKey('user.username', ondelete='CASCADE', onupdate='CASCADE'),
                         primary_key=True)
 
 

@@ -1,6 +1,6 @@
 ##wrapper to use the database
 from flask_sqlalchemy import SQLAlchemy
-from database import User, RSS, Admin
+from src.server.database import User, RSS
 from sqlalchemy import inspect
 
 
@@ -18,8 +18,8 @@ class ConnectDB():
     def checkRSSExists(self, id_):
         return self.db.session.query(RSS.id).filter_by(id=id_).first() is not None
 
-    def checkAdminExists(self, username):
-        return self.db.session.query(Admin.name).filter_by(name=username).first() is not None
+    # def checkAdminExists(self, username):
+    #     return self.db.session.query(Admin.name).filter_by(name=username).first() is not None
 
     def column_exists(self, table=None, column=None):
         found = False
@@ -68,14 +68,14 @@ class ConnectDB():
     #     else:
     #         print("user already in db")
 
-    def addAdmin(self, username: str, password: str):
-        admin = Admin(name=username, password=password)
-        if not self.checkAdminExists(admin.name):
-            self.db.session.add(admin)
-            self.db.session.commit()
-            return 201, "New admin successfully added."
-        else:
-            return 500, "Admin name already in database. Please choose a different username."
+    # def addAdmin(self, username: str, password: str):
+    #     admin = Admin(name=username, password=password)
+    #     if not self.checkAdminExists(admin.name):
+    #         self.db.session.add(admin)
+    #         self.db.session.commit()
+    #         return 201, "New admin successfully added."
+    #     else:
+    #         return 500, "Admin name already in database. Please choose a different username."
 
     def addRSS(self, feed_name: str, feed_url: str):
         rss = RSS(name=feed_name, rss_url=feed_url)
