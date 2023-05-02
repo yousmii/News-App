@@ -1,5 +1,5 @@
 from flask import Flask
-from config import app
+from src.server.config import app
 
 config_data = dict()
 config_data['app_name'] = 'NewsApp'
