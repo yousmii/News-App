@@ -7,6 +7,7 @@ overview:
 https://app.dbdesigner.net/designer/schema/0-ppdb-d7c61811-cf52-4f48-9926-df356a03e147
 
 """
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))

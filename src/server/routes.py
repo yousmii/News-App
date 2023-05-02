@@ -9,11 +9,11 @@ from flask_wtf import csrf
 from werkzeug.datastructures import MultiDict
 
 
-from src.server.app import app, user
+from src.server.app import app
 from src.server.config import app_data, db
 from src.server.ArticlesFetcher import fetch
 from src.server.ConnectDB import ConnectDB
-from src.server.database import User, RSS, Admin, TF_IDF
+from src.server.database import User, RSS, TF_IDF
 from search import search
 from sqlalchemy import asc, or_
 
