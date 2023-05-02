@@ -1,8 +1,6 @@
-import sys
-
-from database import Article,db
-from ConnectDB import ConnectDB
-from sqlalchemy import desc
+from src.server.database import Article,db, TF_IDF
+from src.server.ConnectDB import ConnectDB
+from sqlalchemy import desc, func
 
 ConnectDB=ConnectDB(db)
 
@@ -33,6 +31,7 @@ def fetch(skip = 0):
         }
 
         articles.append(article)
+
 
     return articles
 

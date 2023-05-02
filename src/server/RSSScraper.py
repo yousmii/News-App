@@ -7,7 +7,6 @@ import psycopg2
 
 from bs4 import BeautifulSoup
 
-
 def scrape():
     print("running scraper🥱..")
     curs_obj = con.cursor()
@@ -63,6 +62,7 @@ def parse(link, rss_id, curs_obj):
         curs_obj.execute(query, (title, description, thumbnail, url, pub_date, rss_id))
 
     con.commit()
+
 
 
 if __name__ == "__main__":

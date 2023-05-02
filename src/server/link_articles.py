@@ -1,4 +1,4 @@
-from resemblance.resemblance import get_resemblance, get_resemblance_object
+from src.server.resemblance.resemblance import get_resemblance, get_resemblance_object
 import psycopg2
 import numpy as np
 import string
@@ -59,12 +59,14 @@ def link_articles():
 
         res_dict = get_resemblance(res_obj, '.current_record')
         for i in range(len(res_dict)):
-            if res_dict[i] > 0.8:
-                if not from_same_site(record[1], query_result[i][1]):
-                    print(record[0] + '\n' + query_result[i][0] + '\n\n')
-                    duplicate_entry = [record[1], query_result[i][1]]
-                    duplicate_entry.sort()
-                    duplicates_set.add(tuple(duplicate_entry))
+            print("articles", record[1], "and", query_result[i][1], "get a resemblance score of", res_dict[i])
+            if res_dict[i] > 0.9:
+                if record[1] != query_result[i][1]:
+                    if not from_same_site(record[1], query_result[i][1]):
+                        print(record[0] + '\n' + query_result[i][0] + '\n\n')
+                        duplicate_entry = [record[1], query_result[i][1]]
+                        duplicate_entry.sort()
+                        duplicates_set.add(tuple(duplicate_entry))
 
     for entry in duplicates_set:
         query = "INSERT INTO tf_idf VALUES (%s, %s, %s) ON CONFLICT DO NOTHING"

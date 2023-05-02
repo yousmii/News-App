@@ -3,11 +3,33 @@ import styles from "../components/Admin.module.scss";
 import axios from "axios";
 
 export default function Admin() {
+    useEffect(() => {
+        axios.get('/api/@me', {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (!response.data.is_admin) {
+                    alert("Not an admin");
+                    window.location.href="/";
+                } else if (response.data.status !== 200) {
+                    alert("Not logged in");
+                    window.location.href="/";
+                }
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }, [])
+
+    // prevent unauthorized access to admin page
+
     return (
         <div className={styles.container}>
             <div className={styles.forms}>
                 <RSSForm/>
-                <AdminForm/>
+                <RegisterFormAdmin/>
                 <RssTable/>
                 <AdminTable/>
             </div>
@@ -81,69 +103,125 @@ class RSSForm extends Component {
     }
 }
 
-class AdminForm extends Component {
-    handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        console.log("submitted");
+// class AdminForm extends Component {
+//     handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+//         e.preventDefault();
+//         console.log("submitted");
+//
+//         const adminName = e.target.username.value;
+//         const adminPassword = e.target.password.value;
+//
+//         const formData = {admin_name: adminName, admin_password: adminPassword};
+//
+//         fetch('api/post_admin', {
+//             method: "POST",
+//             body: JSON.stringify(formData),
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             }
+//         }).then((response) => {
+//             console.log(response);
+//             if (response.ok) {
+//                 // RSS feed was successfully added
+//                 alert("Admin was successfully added to the database!");
+//             } else {
+//                 // Display error message to user
+//                 response.text().then((errorMessage) => {
+//                     alert("There was an error adding the admin: " + errorMessage);
+//                 });
+//             }
+//             return response.json();
+//         });
+//     };
+//
+//     render() {
+//         return (
+//             <div className={styles.form}>
+//                 <h1>Add new Admin</h1>
+//                 <form onSubmit={this.handleSubmit} method="post">
+//                     <label>Username:</label>
+//                     <input
+//                         title="username"
+//                         type="text"
+//                         id="username"
+//                         name="username"
+//                         required
+//                     />
+//                     <br/>
+//                     <label>Password:</label>
+//                     <input
+//                         title="password"
+//                         type="password"
+//                         id="password"
+//                         name="password"
+//                         required
+//                     />
+//                     <br/>
+//                     <input
+//                         className={styles.button + " " + styles.add}
+//                         type="submit"
+//                         value="Add Admin"
+//                     />
+//                 </form>
+//             </div>
+//         );
+//     }
+// }
 
-        const adminName = e.target.username.value;
-        const adminPassword = e.target.password.value;
+export function RegisterFormAdmin() {
+    const [csrfToken, setCsrfToken] = useState('');
+    useEffect(() => {
+        // fetch the CSRF token from your backend
+        axios.get('/api/csrf_token')
+            .then(response => {
+                setCsrfToken(response.data.csrf_token);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, []);
 
-        const formData = {admin_name: adminName, admin_password: adminPassword};
-
-        fetch('api/post_admin', {
-            method: "POST",
-            body: JSON.stringify(formData),
+    const handleSubmit = (event : any) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+        // include the CSRF token in the form data as a hidden input field
+        formData.append('csrf_token', csrfToken);
+        // submit the form data to your backend
+        const data = {
+            username: formData.get('username'),
+            email_address: formData.get('email_address'),
+            password1: formData.get('password1'),
+            password2: formData.get('password2'),
+            csrf_token: csrfToken,
+        };
+        axios.post('/api/registerAdmin', data, {
             headers: {
-                'Content-Type': 'application/json'
-            }
-        }).then((response) => {
-            console.log(response);
-            if (response.ok) {
-                // RSS feed was successfully added
-                alert("Admin was successfully added to the database!");
-            } else {
-                // Display error message to user
-                response.text().then((errorMessage) => {
-                    alert("There was an error adding the admin: " + errorMessage);
-                });
-            }
-            return response.json();
-        });
-    };
+                'Content-Type': 'application/json',
+              },
+            })
+            .then((response) => {
+                console.log(response);
+                window.location.href = "/admin"
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+        };
 
-    render() {
-        return (
-            <div className={styles.form}>
-                <h1>Add new Admin</h1>
-                <form onSubmit={this.handleSubmit} method="post">
-                    <label>Username:</label>
-                    <input
-                        title="username"
-                        type="text"
-                        id="username"
-                        name="username"
-                        required
-                    />
-                    <br/>
-                    <label>Password:</label>
-                    <input
-                        title="password"
-                        type="password"
-                        id="password"
-                        name="password"
-                        required
-                    />
-                    <br/>
-                    <input
-                        className={styles.button + " " + styles.add}
-                        type="submit"
-                        value="Add Admin"
-                    />
-                </form>
-            </div>
-        );
-    }
+    return (
+        <form onSubmit={handleSubmit}>
+            <input type="hidden" name="csrf_token" value={csrfToken} />
+            <label>Username:</label>
+            <input type="text" name="username" /><br />
+            <label>Email address:</label>
+            <input type="email" name="email_address" /><br />
+            <label>Password:</label>
+            <input type="password" name="password1" /><br />
+            <label>Confirm password:</label>
+            <input type="password" name="password2" /><br />
+            <button type="submit">Register</button>
+        </form>
+    );
 }
 
 interface RSSFeed {
@@ -263,16 +341,12 @@ const AdminTable: React.FC = () => {
                 <thead>
                 <tr>
                     <th>name</th>
-                    <th>password</th>
-                    <th>cookie_id</th>
                 </tr>
                 </thead>
                 <tbody>
                 {admins.map((admin) => (
                     <tr key={admin.name}>
                         <td>{admin.name}</td>
-                        <td>{admin.password}</td>
-                        <td>{admin.cookie_id}</td>
                     </tr>
                 ))}
                 </tbody>
