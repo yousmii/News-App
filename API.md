@@ -1,19 +1,21 @@
 ## Admins
-**POST** /api/post_admin
-> Adds admin. Returns status code and status message.
-```
-username            a string of X characters
-password            a string of X characters
-```
-
 **GET** /api/admins
-> Returns all admin's name, password and cookie_id in JSON format.
+> Returns all admin names in JSON format.
 
 **GET** /api/delete_admin
 > Delete an admin. Returns status code and status message.
 ```
 delete_name         unique admin name
 ```
+
+**GET, POST** /api/registerAdmin
+> Tries to add a new Admin (user with is_admin set to true). Returns a status message.
+```
+username            a string of 3-30 characters
+email_address       a valid email
+password            a string of 6-30 characters
+```
+
 
 ## Articles
 **GET** /api/articles
@@ -47,7 +49,7 @@ delete_id           unique ID of the feed to be deleted
 
 ## Account
 **GET** /api/@me
-> Returns the identity of the user.
+> Returns the identity of the user and tells us if he is an admin.
 
 **GET** /api/csrf_token
 > Returns a CSRF token to prevent cross-site request forgery.
@@ -55,16 +57,16 @@ delete_id           unique ID of the feed to be deleted
 **GET, POST** /api/register
 > Tries to add a new user. Returns a status message.
 ```
-username            a string of X characters
-email_address       a string of X characters
-password            a string of X characters
+username            a string of 3-30 characters
+email_address       a valid email
+password            a string of 6-30 characters
 ```
 
 **GET, POST** /api/login
 > Adds user to session if username and password match a database entry. Returns a status message.
 ```
-username            a string of X characters
-password            a string of X characters
+username            a string of 3-30 characters
+password            a string of 6-30 characters
 ```
 
 /api/logout
