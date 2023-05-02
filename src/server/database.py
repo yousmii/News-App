@@ -70,9 +70,9 @@ class Article(db.Model):
 
 class TF_IDF(db.Model):
     __tablename__ = 'tf_idf'
-    article1 = db.Column(db.String, db.ForeignKey('article.link', ondelete='CASCADE', onupdate='CASCADE'),
+    article1 = db.Column(db.String, db.ForeignKey('article.link', onupdate='CASCADE'),
                          nullable=False, primary_key=True)
-    article2 = db.Column(db.String, db.ForeignKey('article.link', ondelete='CASCADE', onupdate='CASCADE'),
+    article2 = db.Column(db.String, db.ForeignKey('article.link', onupdate='CASCADE'),
                          nullable=False, primary_key=True)
     value = db.Column(db.INT, nullable=False)
 

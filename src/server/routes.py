@@ -13,8 +13,8 @@ from config import app_data, db
 from ArticlesFetcher import fetch
 from search import search
 from ConnectDB import ConnectDB
-from database import User, RSS, Admin
-from sqlalchemy import asc
+from database import User, RSS, Admin, TF_IDF
+from sqlalchemy import asc, or_
 
 # REST API
 # See https://www.ibm.com/developerworks/library/ws-restful/index.html
@@ -64,6 +64,24 @@ def get_articles():
 
     articles = fetch(skip)
     return json.dumps(articles)
+
+@app.route("/api/similarity/", methods=['GET'])
+def get_similar_articles():
+    article_link = request.args.get('article_link', type=str)
+    print(article_link)
+    # Retrieve all rows in the tf_idf table where the given article ID is present
+    rows = db.session.query(TF_IDF).filter(or_(TF_IDF.article1 == article_link, TF_IDF.article2 == article_link)).all()
+
+    # Create a set of unique article IDs that are similar to the given article ID
+    similar_articles = set()
+    for row in rows:
+        if row.article1 == article_link:
+            similar_articles.add(row.article2)
+        else:
+            similar_articles.add(row.article1)
+
+    # Convert the set of similar article IDs to a list and return it as a JSON response
+    return jsonify(list(similar_articles))
 
 @app.route("/api/search", methods=['GET'])
 def get_search():
