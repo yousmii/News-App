@@ -70,7 +70,7 @@ def link_articles():
 
     for entry in duplicates_set:
         query = "INSERT INTO tf_idf VALUES (%s, %s) ON CONFLICT DO NOTHING"
-        cur.execute(query, (entry[0], entry[1], 1.0))
+        cur.execute(query, (entry[0], entry[1]))
 
     conn.commit()
 
