@@ -43,7 +43,8 @@
   margin-bottom: 20px;
   overflow: hidden;
 }
-.article:hover {
+
+.article_link:hover {
   transform: scale(1.01);
   transition: all 0.1s ease-in-out;
 }
@@ -53,7 +54,7 @@
   width: 46%;
 }
 
-.article a {
+.article_link {
   display: block;
   text-decoration: none;
 }
@@ -80,7 +81,7 @@
   color: black;
 }
 
-.article:hover h2 {
+.article_link:hover h2 {
   text-decoration: none;
   color: #304a61;
   transform: scale(1.01);
@@ -93,6 +94,17 @@
 
 .time_ago {
   font-weight: bolder;
+}
+
+.published_by {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.published_by:hover {
+  text-decoration: underline;
+  font-weight: bolder;
+  transition: all 0.1s ease-in-out;
 }
 
 @media only screen and (max-width: 600px) {

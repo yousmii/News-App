@@ -1,32 +1,18 @@
-from src.server.database import Article,db, TF_IDF
+from src.server.database import Article,db
 from src.server.ConnectDB import ConnectDB
-from sqlalchemy import desc, func
+from sqlalchemy import desc
 
 ConnectDB=ConnectDB(db)
 
-def fetch(skip = 0):
+def search(input_string: str):
     db_articles = Article.query.order_by(desc(Article.pub_date)).all()
-
-    last_index = len(db_articles) - 1
-
-    skip10 = skip + 10
-
-    stop = last_index
-
-    if skip10 < last_index:
-        stop = skip10
 
     articles = []
 
-    if skip > last_index:
-        print("reached the end")
-        return articles
-
-    # Loop through each article in the feed
-    for i in range(skip, stop):
-
-        db_article = db_articles[i]
-
+    for db_article in db_articles:
+        if db_article.title.find(input_string) == -1:
+            continue
+        
         article = {
             "title": db_article.title,
             "description": db_article.description,
@@ -37,11 +23,7 @@ def fetch(skip = 0):
 
         articles.append(article)
 
-
     return articles
 
-
-
-
 if __name__ == "__main__":
-    fetch()
+    search("Be")
