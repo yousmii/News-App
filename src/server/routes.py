@@ -8,6 +8,7 @@ from wtforms import Form, StringField, TextAreaField, validators
 from flask_wtf import csrf
 from werkzeug.datastructures import MultiDict
 
+
 from src.server.app import app, user
 from src.server.config import app_data, db
 from src.server.ArticlesFetcher import fetch
@@ -62,6 +63,12 @@ def get_articles():
     print("route received " + str(skip) + " as 'skip' argument")
 
     articles = fetch(skip)
+    return json.dumps(articles)
+
+@app.route("/api/search", methods=['GET'])
+def get_search():
+    query_string = request.args.get('q', type=str)
+    articles = search(query_string)
     return json.dumps(articles)
 
 
