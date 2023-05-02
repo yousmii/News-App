@@ -147,11 +147,15 @@ def get_csrf_token():
 @app.route("/api/@me", methods=['GET'])
 def get_current_user():
     if not current_user.is_authenticated:
-        return jsonify({"error": "Unauthorized"}), 401
+        return jsonify({
+            "error": "Unauthorized",
+            "status": 401
+        })
     return jsonify({
         "username": current_user.username,
-        "is_admin": current_user.is_admin
-    }), 200
+        "is_admin": current_user.is_admin,
+        "status": 200
+    })
 
 
 @app.route('/api/register', methods=['GET', 'POST'])

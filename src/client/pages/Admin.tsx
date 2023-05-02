@@ -3,34 +3,27 @@ import styles from "../components/Admin.module.scss";
 import axios from "axios";
 
 export default function Admin() {
-    const [username, setUsername] = useState<string | null>(null);
-    const [is_admin, setIs_admin] = useState<boolean>(false)
-
-    const user = (event: any) => {
-        event.preventDefault()
+    useEffect(() => {
         axios.get('/api/@me', {
             headers: {
                 'Content-Type': 'application/json'
             }
         })
             .then(response => {
-                if (response.status === 200) {
-                    setUsername(response.data.username)
-                    setIs_admin(response.data.is_admin)
-                }
-                else {
-                    console.log("Not logged in")
+                if (!response.data.is_admin) {
+                    alert("Not an admin");
+                    window.location.href="/";
+                } else if (response.data.status !== 200) {
+                    alert("Not logged in");
+                    window.location.href="/";
                 }
             })
             .catch(error => {
-                console.log(error)
+                console.log(error);
             })
-    }
+    }, [])
 
     // prevent unauthorized access to admin page
-    // if (!is_admin) {
-    //     window.location.href="/"
-    // }
 
     return (
         <div className={styles.container}>
