@@ -77,7 +77,7 @@ class TF_IDF(db.Model):
                          nullable=False, primary_key=True)
     article2 = db.Column(db.String, db.ForeignKey('article.link', onupdate='CASCADE'),
                          nullable=False, primary_key=True)
-    value = db.Column(db.INT, nullable=False)
+
 
 
 class Feed(db.Model):
