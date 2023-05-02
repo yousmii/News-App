@@ -8,12 +8,12 @@ from wtforms import Form, StringField, TextAreaField, validators
 from flask_wtf import csrf
 from werkzeug.datastructures import MultiDict
 
-from app import app, user
-from config import app_data, db
-from ArticlesFetcher import fetch
-from search import search
-from ConnectDB import ConnectDB
-from database import User, RSS, Admin
+
+from src.server.app import app, user
+from src.server.config import app_data, db
+from src.server.ArticlesFetcher import fetch
+from src.server.ConnectDB import ConnectDB
+from src.server.database import User, RSS, Admin
 from sqlalchemy import asc
 
 # REST API

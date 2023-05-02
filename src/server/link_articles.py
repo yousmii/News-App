@@ -1,4 +1,4 @@
-from resemblance.resemblance import get_resemblance, get_resemblance_object
+from src.server.resemblance.resemblance import get_resemblance, get_resemblance_object
 import psycopg2
 import numpy as np
 import string
