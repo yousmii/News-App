@@ -40,8 +40,8 @@ article_link       a link to the article that we want the similar articles of
 **POST** /api/post_rss
 > Adds RSS feed. Returns status code and status message.
 ```
-feed_name           a string of X characters
-feed_url            a string of X characters
+feed_name           a string of maximum 255 characters
+feed_url            a string of maximum 255 characters
 ```
 
 **GET** /api/delete_feed
