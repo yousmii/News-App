@@ -97,7 +97,7 @@ const Scroller = () => {
                                         <React.Fragment key={similarArticleId}>
                                             <a href={`${similarArticleId}`} target="_blank"
                                                rel="noopener noreferrer" className={styles.published_by}>
-                                                {similarArticleId}
+                                                <img src={'http://www.google.com/s2/favicons?domain=' + similarArticleId} alt='favicon' className={styles.favicon}/>
                                             </a>
                                         </React.Fragment>
                                     ))}
