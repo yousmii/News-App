@@ -3,6 +3,7 @@ import React, {useEffect, useState} from "react";
 import { IoPersonCircle } from "react-icons/io5";
 import axios from "axios";
 import Scroller from "../components/InfiteScroller";
+import {Link} from "react-router-dom";
 
 export default function Login() {
   const [csrfToken, setCsrfToken] = useState('');
@@ -68,9 +69,14 @@ export default function Login() {
             required
           />
           <br />
-          <input className={styles.button} type="submit" value="Login" />
+           <div className={styles.login_and_register_buttons}>
+               <input className={styles.button} type="submit" value="Login"/>
+               <Link to={"/register"}>
+                   <button className={styles.register}>Register</button>
+               </Link>
+           </div>
         </form>
-      </div>)
+      </div>
     </div>
   );
 }

@@ -40,8 +40,8 @@ article_link       a link to the article that we want the similar articles of
 **POST** /api/post_rss
 > Adds RSS feed. Returns status code and status message.
 ```
-feed_name           a string of X characters
-feed_url            a string of X characters
+feed_name           a string of maximum 255 characters
+feed_url            a string of maximum 255 characters
 ```
 
 **GET** /api/delete_feed
@@ -60,7 +60,7 @@ delete_id           unique ID of the feed to be deleted
 **GET** /api/csrf_token
 > Returns a CSRF token to prevent cross-site request forgery.
 
-**GET, POST** /api/register
+**POST** /api/register
 > Tries to add a new user. Returns a status message.
 ```
 username            a string of 3-30 characters
@@ -68,12 +68,12 @@ email_address       a valid email
 password            a string of 6-30 characters
 ```
 
-**GET, POST** /api/login
+**POST** /api/login
 > Adds user to session if username and password match a database entry. Returns a status message.
 ```
 username            a string of 3-30 characters
 password            a string of 6-30 characters
 ```
 
-/api/logout
+**POST** /api/logout
 > Remove user from session. Also cleans up the remember-me cookie if it exists. Returns a status message.
