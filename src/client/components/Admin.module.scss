@@ -5,20 +5,15 @@
 }
 
 .container {
-  background-color: $bg;
-  height: 100vh;
-
+  display: block;
   padding: 40px 20px 20px;
-
-  border-top-left-radius: 50px;
-  border-top-right-radius: 50px;
 }
 
 h1 {
   font-size: 24px;
   margin-top: 20px;
   margin-bottom: 10px;
-  color: #304a61;
+  color: $bg2;
 }
 
 form {
@@ -61,18 +56,11 @@ input[type="submit"]:hover {
   background-color: #3e6a8e;
 }
 
-.forms {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 90px 20px 20px;
-}
-
 .form {
-  padding: 30px;
-  justify-content: flex-start;
+  margin: auto;
+  justify-content: center;
   align-items: center;
-  width: 50%;
+  width: $large;
 }
 
 .button {
@@ -117,7 +105,7 @@ tr:hover {
 
 button {
   padding: 8px;
-  background-color: #0077cc;
+  background-color: $dark-blue;
   color: #fff;
   border: none;
   border-radius: 4px;
@@ -125,5 +113,5 @@ button {
 }
 
 button:hover {
-  background-color: #005fa3;
+  background-color: $dark-blue;
 }

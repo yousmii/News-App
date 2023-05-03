@@ -28,12 +28,10 @@ export default function Admin() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.forms}>
-        <RSSForm />
-        <RegisterFormAdmin />
-        <RssTable />
-        <AdminTable />
-      </div>
+      <RSSForm />
+      <RegisterFormAdmin />
+      <RssTable />
+      <AdminTable />
     </div>
   );
 }
@@ -211,22 +209,25 @@ export function RegisterFormAdmin() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input type="hidden" name="csrf_token" value={csrfToken} />
-      <label>Username:</label>
-      <input type="text" name="username" />
-      <br />
-      <label>Email address:</label>
-      <input type="email" name="email_address" />
-      <br />
-      <label>Password:</label>
-      <input type="password" name="password1" />
-      <br />
-      <label>Confirm password:</label>
-      <input type="password" name="password2" />
-      <br />
-      <input className={styles.button} type="submit" value="Register" />
-    </form>
+    <div className={styles.form}>
+      <h1>Admin</h1>
+      <form onSubmit={handleSubmit}>
+        <input type="hidden" name="csrf_token" value={csrfToken} />
+        <label>Username:</label>
+        <input type="text" name="username" />
+        <br />
+        <label>Email address:</label>
+        <input type="email" name="email_address" />
+        <br />
+        <label>Password:</label>
+        <input type="password" name="password1" />
+        <br />
+        <label>Confirm password:</label>
+        <input type="password" name="password2" />
+        <br />
+        <input className={styles.button} type="submit" value="Register" />
+      </form>
+    </div>
   );
 }
 
@@ -268,7 +269,7 @@ const RssTable: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className={styles.form}>
       <h1>RSS Table</h1>
       <table>
         <thead>
@@ -338,7 +339,7 @@ const AdminTable: React.FC = () => {
   };
 
   return (
-    <div>
+    <div className={styles.form}>
       <h1>Admin Table</h1>
       <table>
         <thead>
