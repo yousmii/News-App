@@ -1,21 +1,13 @@
 @import "../styles/variables.scss";
 
 * {
-    font-family: "Open Sans", sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 .container {
-  background-color: $bg;
-  height: 100vh;
-
-
   display: flex;
   flex-wrap: wrap;
-
   padding: 40px 20px 20px;
-
-  border-top-left-radius: 50px;
-  border-top-right-radius: 50px;
 }
 
 .logincontainer {
@@ -23,12 +15,11 @@
   background-color: $card-bg;
   text-align: center;
   border-radius: 30px;
-  width: 40%;
-  height: 90%;
+  width: $medium;
+  height: $large;
 }
 
 .logo {
-  margin: auto;
   align-self: center;
   font-weight: 700;
   font-size: 120px;
@@ -38,14 +29,14 @@
 .label {
   display: block;
   margin-bottom: 5px;
-  margin-left: $spacing-m;
   font-weight: bold;
-  font-size: 30px;
-  color: $bg2;
+  font-size: $title-size;
+  color: $dark-blue;
 }
 
 input[type="text"] {
   color: $text;
+  font-size: $subtitle-size;
 }
 
 input[type="text"],
@@ -54,12 +45,8 @@ input[type="password"] {
   padding: 10px;
 
   font-weight: 500;
-  font-size: 16px;
   border-radius: 50px;
-  border: none;
-
   margin-bottom: 10px;
-  width: 80%;
   height: 60px;
   box-sizing: border-box;
 }
@@ -69,10 +56,10 @@ input[type="submit"] {
   color: white;
   padding: 10px;
   border: none;
-  border-radius: 15px;
+  border-radius: 30px;
   cursor: pointer;
-  font-size: 30px;
-  width: 25%;
+
+  width: 7em;
   height: 70px;
   font-weight: bold;
 }
@@ -86,7 +73,7 @@ input[type="submit"]:hover {
   padding: 30px;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  width: $medium;
 }
 
 .button {

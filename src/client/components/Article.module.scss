@@ -12,17 +12,11 @@
 }
 
 .articles {
-  background-color: $bg;
-  height: 100%;
-
   display: flex;
   flex-wrap: wrap;
 
   padding: 20px;
   padding-top: 40px;
-
-  border-top-left-radius: 50px;
-  border-top-right-radius: 50px;
   justify-content: space-between;
 }
 
@@ -69,10 +63,6 @@
   transition: transform 0.2s ease-in-out; /* add a transition effect */
   border-radius: 4px;
 }
-
-// .article img:hover {
-//   transform: scale(1.01); /* zoom in on the thumbnail on hover */
-// }
 
 .article h2 {
   font-size: 20px;

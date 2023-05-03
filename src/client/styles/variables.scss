@@ -21,10 +21,14 @@ $spacing-l: 32px;
 
 $header-height: 72px;
 
-$small: 37.5em;
-$medium: 48em;
+$small: 32em;
+$medium: 38em;
 $large: 64em;
 $extra-large: 75em;
+
+$subtext-size: 14px;
+$title-size: 24px;
+$subtitle-size: 18px;
 
 @mixin breakpoint($point) {
   @if $point == small {
