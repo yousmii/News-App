@@ -69,7 +69,6 @@ def get_articles():
 @app.route("/api/similarity/", methods=['GET'])
 def get_similar_articles():
     article_link = request.args.get('article_link', type=str)
-    print(article_link)
     # Retrieve all rows in the tf_idf table where the given article ID is present
     rows = db.session.query(TF_IDF).filter(or_(TF_IDF.article1 == article_link, TF_IDF.article2 == article_link)).all()
 
