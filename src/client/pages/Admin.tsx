@@ -296,7 +296,7 @@ const RssTable: React.FC = () => {
         value={deleteId ?? ""}
         onChange={(event) => setDeleteId(parseInt(event.target.value))}
       />
-      <button onClick={handleDelete}>Delete</button>
+      <button className={styles.deleteButton} onClick={handleDelete}>Delete</button>
     </div>
   );
 };
@@ -362,7 +362,7 @@ const AdminTable: React.FC = () => {
         value={deleteName ?? ""}
         onChange={(event) => setDeleteName(event.target.value as string)}
       />
-      <button onClick={handleDelete}>Delete</button>
+      <button className={styles.deleteButton} onClick={handleDelete}>Delete</button>
     </div>
   );
 };
