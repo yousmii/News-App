@@ -1,49 +1,51 @@
 import styles from "../components/Login.module.scss";
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { IoPersonCircle } from "react-icons/io5";
 import axios from "axios";
 import Scroller from "../components/InfiteScroller";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Login() {
-  const [csrfToken, setCsrfToken] = useState('');
+  const [csrfToken, setCsrfToken] = useState("");
 
   useEffect(() => {
-      // fetch the CSRF token from your backend
-      axios.get('/api/csrf_token')
-            .then(response => {
-              setCsrfToken(response.data.csrf_token);
-            })
-            .catch(error => {
-              console.log(error);
-            });
-      }, []);
+    // fetch the CSRF token from your backend
+    axios
+      .get("/api/csrf_token")
+      .then((response) => {
+        setCsrfToken(response.data.csrf_token);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-  const handleLogin = (event : any) => {
+  const handleLogin = (event: any) => {
     event.preventDefault();
     const formData = new FormData(event.target);
     // include the CSRF token in the form data as a hidden input field
-    formData.append('csrf_token', csrfToken);
+    formData.append("csrf_token", csrfToken);
     // submit the form data to your backend
     const data = {
-        username: formData.get('username'),
-        password: formData.get('password'),
-        csrf_token: csrfToken,
+      username: formData.get("username"),
+      password: formData.get("password"),
+      csrf_token: csrfToken,
     };
-    axios.post('/api/login', data, {
+    axios
+      .post("/api/login", data, {
         headers: {
-            'Content-Type': 'application/json',
-          }
-        })
-        .then(response => {
-            console.log(response)
-            window.location.reload()
-            window.location.href = "/"
-        })
-        .catch((error) => {
-            console.log(error);
-        });
-    };
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        window.location.reload();
+        window.location.href = "/";
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div className={styles.container}>
       <div className={styles.logincontainer}>
@@ -69,12 +71,12 @@ export default function Login() {
             required
           />
           <br />
-           <div className={styles.login_and_register_buttons}>
-               <input className={styles.button} type="submit" value="Login"/>
-               <Link to={"/register"}>
-                   <button className={styles.register}>Register</button>
-               </Link>
-           </div>
+          <div className={styles.login_and_register_buttons}>
+            <input className={styles.button} type="submit" value="Login" />
+            <Link to={"/register"}>
+              <button className={styles.register}>Register</button>
+            </Link>
+          </div>
         </form>
       </div>
     </div>
