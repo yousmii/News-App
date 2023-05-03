@@ -135,11 +135,16 @@
   display: block;
   margin-top: 5px;
   font-size: 12px;
-  white-space: nowrap;
+  white-space: pre-wrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .published_by:hover {
   text-decoration: underline;
+}
+
+.favicon {
+  max-width: 16px;
+  max-height: 16px;
 }
