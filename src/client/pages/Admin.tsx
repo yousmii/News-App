@@ -239,7 +239,6 @@ interface RSSFeed {
 
 const RssTable: React.FC = () => {
     const [rssFeeds, setRssFeeds] = useState<RSSFeed[]>([]);
-    const [deleteId, setDeleteId] = useState<number>();
 
     useEffect(() => {
         fetch("/api/rss")
@@ -247,25 +246,22 @@ const RssTable: React.FC = () => {
             .then((data) => setRssFeeds(data));
     }, []);
 
-    const handleDelete = () => {
-        if (deleteId) {
-            axios
-                .get(`/api/delete_feed`, {
-                    params: {
-                        delete_id: deleteId,
-                    },
-                })
-                .then((response) => {
-                    if (response.data["status"] == 200) {
-                        setRssFeeds(rssFeeds.filter((rssFeed) => rssFeed.id !== deleteId));
-                        setDeleteId(undefined);
-                        alert(response.data["message"]);
-                    } else {
-                        alert(response.data["message"]);
-                    }
-                })
-                .catch((error) => console.error(error));
-        }
+    const handleDelete = (id: number) => {
+        axios
+            .get(`/api/delete_feed`, {
+                params: {
+                    delete_id: id,
+                },
+            })
+            .then((response) => {
+                if (response.data["status"] == 200) {
+                    setRssFeeds(rssFeeds.filter((rssFeed) => rssFeed.id !== id));
+                    alert(response.data["message"]);
+                } else {
+                    alert(response.data["message"]);
+                }
+            })
+            .catch((error) => console.error(error));
     };
 
     return (
@@ -278,6 +274,7 @@ const RssTable: React.FC = () => {
                         <th>ID</th>
                         <th>URL</th>
                         <th>Name</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -286,22 +283,18 @@ const RssTable: React.FC = () => {
                             <td>{rssFeed.id}</td>
                             <td>{rssFeed.url}</td>
                             <td>{rssFeed.name}</td>
+                            <td>
+                                <button className={styles.deleteButton} onClick={() => handleDelete(rssFeed.id)}>X</button>
+                            </td>
                         </tr>
                     ))}
                     </tbody>
                 </table>
             </div>
-            <label htmlFor="deleteId">Delete Feed by ID:</label>
-            <input
-                type="number"
-                id="deleteId"
-                value={deleteId ?? ""}
-                onChange={(event) => setDeleteId(parseInt(event.target.value))}
-            />
-            <button className={styles.deleteButton} onClick={handleDelete}>Delete</button>
         </div>
     );
 };
+
 
 interface AdminInterface {
     name: string;
@@ -311,7 +304,6 @@ interface AdminInterface {
 
 const AdminTable: React.FC = () => {
     const [admins, setAdmins] = useState<AdminInterface[]>([]);
-    const [deleteName, setDeleteName] = useState<string>();
 
     useEffect(() => {
         fetch("/api/admins")
@@ -319,25 +311,22 @@ const AdminTable: React.FC = () => {
             .then((data) => setAdmins(data));
     }, []);
 
-    const handleDelete = () => {
-        if (deleteName) {
-            axios
-                .get(`/api/delete_admin`, {
-                    params: {
-                        delete_name: deleteName,
-                    },
-                })
-                .then((response) => {
-                    if (response.data["status"] == 200) {
-                        setAdmins(admins.filter((admin) => admin.name !== deleteName));
-                        setDeleteName(undefined);
-                        alert(response.data["message"]);
-                    } else {
-                        alert(response.data["message"]);
-                    }
-                })
-                .catch((error) => console.error(error));
-        }
+    const handleDelete = (name: string) => {
+        axios
+            .get(`/api/delete_admin`, {
+                params: {
+                    delete_name: name,
+                },
+            })
+            .then((response) => {
+                if (response.data["status"] == 200) {
+                    setAdmins(admins.filter((admin) => admin.name !== name));
+                    alert(response.data["message"]);
+                } else {
+                    alert(response.data["message"]);
+                }
+            })
+            .catch((error) => console.error(error));
     };
 
     return (
@@ -347,24 +336,18 @@ const AdminTable: React.FC = () => {
                 <thead>
                 <tr>
                     <th>name</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 {admins.map((admin) => (
                     <tr key={admin.name}>
                         <td>{admin.name}</td>
+                        <td><button className={styles.deleteButton} onClick={() => handleDelete(admin.name)}>X</button></td>
                     </tr>
                 ))}
                 </tbody>
             </table>
-            <label htmlFor="deleteName">Delete Admin by Name:</label>
-            <input
-                type="string"
-                id="deleteName"
-                value={deleteName ?? ""}
-                onChange={(event) => setDeleteName(event.target.value as string)}
-            />
-            <button className={styles.deleteButton} onClick={handleDelete}>Delete</button>
         </div>
     );
 };
