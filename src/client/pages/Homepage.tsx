@@ -20,6 +20,7 @@ export default function Homepage() {
     }, []);
 
     const handleSearch = (query: string) => {
+        setSearchQuery(query)
         axios.get('/api/search', {
             params: {
                 q: query
@@ -33,16 +34,13 @@ export default function Homepage() {
             })
     }
 
-    const handleClear = () => {
-        window.location.href = "/";
-    }
-
     return (
         <div>
             <div>
-                <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
-                <button onClick={() => handleSearch(searchQuery)}>Search</button>
-                <button onClick={handleClear}>Clear</button>
+                <input type="text"
+                       value={searchQuery}
+                       onChange={(e) =>
+                        handleSearch(e.target.value)} />
             </div>
             <div className={styles.container}>
                 {searchResults ?
