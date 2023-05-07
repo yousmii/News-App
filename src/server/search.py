@@ -10,8 +10,10 @@ def search(input_string: str):
     articles = []
 
     for db_article in db_articles:
-        if db_article.title.find(input_string) == -1:
+        text = db_article.title + db_article.description
+        if text.find(input_string) == -1:
             continue
+
         
         article = {
             "title": db_article.title,
