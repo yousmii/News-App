@@ -36,15 +36,17 @@ def link_articles():
     # Open a cursor to perform database operations
     cur = conn.cursor()
 
+    cur.execute('TRUNCATE TABLE tf_idf CASCADE')
+
      
-    cur.execute("SELECT title, link FROM article")
+    cur.execute("SELECT title, description, link FROM article")
     query_result = list()
     for record in cur:
-        title = record[0]
-        title = title.replace("\n", "")
-        title = ''.join([i for i in title if i.isalnum() or i == ' ']) # Strip all special characters
-        title += '.'
-        query_result.append((title, record[1]))
+        text = record[0] + " " + record[1]
+        text = text.replace("\n", "")
+        text = ''.join([i if (i.isalnum()) else ' ' for i in text]) # Strip all special characters
+        text += '.'
+        query_result.append((text, record[2]))
 
     create_source_document(query_result)
 
@@ -54,16 +56,21 @@ def link_articles():
 
     for record in query_result:
         with open(".current_record",'w') as file:
-            file.write(record[0])
+            text = record[0] + " " + record[1]
+            text = text.replace("\n", "")
+            text = ''.join([i if (i.isalnum()) else ' ' for i in text]) # Strip all special characters
+            text += '.'
+            file.write(text)
             file.write('\n')
 
         res_dict = get_resemblance(res_obj, '.current_record')
+        print("--------------------------------------------------------------------------------------------------------------------")
+        print(f"Linking article {record[0]}:")
         for i in range(len(res_dict)):
-            print("articles", record[1], "and", query_result[i][1], "get a resemblance score of", res_dict[i])
-            if res_dict[i] > 0.9:
+            if res_dict[i] > 0.3:
                 if record[1] != query_result[i][1]:
+                    print(f"\t>> score: `{res_dict[i]}` for `{query_result[i][0]}`")
                     if not from_same_site(record[1], query_result[i][1]):
-                        print(record[0] + '\n' + query_result[i][0] + '\n\n')
                         duplicate_entry = [record[1], query_result[i][1]]
                         duplicate_entry.sort()
                         duplicates_set.add(tuple(duplicate_entry))
