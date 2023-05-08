@@ -21,6 +21,7 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(length=60), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
 
+
     @property
     def password(self):
         # password_hash?
@@ -59,6 +60,7 @@ class RSS(db.Model):
 class Labels(db.Model):
     __tablename__ = 'labels'
     label = db.Column(db.String, primary_key=True)
+    articles = relationship()
 
 
 class Article(db.Model):
@@ -69,6 +71,8 @@ class Article(db.Model):
     link = db.Column(db.String, primary_key=True)
     pub_date = db.Column(db.String, nullable=False)
     rss = db.Column(db.INT, db.ForeignKey('rss.id', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
+    labels = relationship('Labels', secondary= 'article_labels', back_populates='article')
+
 
 
 class TF_IDF(db.Model):
@@ -86,3 +90,12 @@ class Feed(db.Model):
                         nullable=False, primary_key=True)
     user = db.Column(db.INT, db.ForeignKey('user.id', ondelete='CASCADE', onupdate='CASCADE'), nullable=False,
                      primary_key=True)
+
+
+class ArticleLabels(db.Model):
+
+    __tablename__= 'article_labels'
+
+
+
+
