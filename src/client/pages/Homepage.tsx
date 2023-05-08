@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import styles from "../components/Article.module.scss";
 import moment from "moment";
@@ -15,15 +15,14 @@ export default function Homepage() {
         const q = params.get('q');
         if (q) {
             setSearchQuery(q);
-            handleSearch(q);
+            handleSearch();
         }
     }, []);
 
-    const handleSearch = (query: string) => {
-        setSearchQuery(query)
+    const handleSearch = () => {
         axios.get('/api/search', {
             params: {
-                q: query
+                q: searchQuery
             }
         })
             .then(response => {
@@ -34,13 +33,20 @@ export default function Homepage() {
             })
     }
 
+    const handleKeyDown = (event: any) => {
+        if (event.key === 'Enter') {
+            handleSearch()
+        }
+    };
+
     return (
         <div>
             <div>
                 <input type="text"
                        value={searchQuery}
                        onChange={(e) =>
-                        handleSearch(e.target.value)} />
+                           setSearchQuery(e.target.value)}
+                       onKeyDown={handleKeyDown}/>
             </div>
             <div className={styles.container}>
                 {searchResults ?
@@ -56,7 +62,8 @@ export default function Homepage() {
                                 return (
                                     <div className={styles.article}>
                                         <a href={link} target={"blank"} className={styles.article_link}>
-                                            <img className={styles.favicon} height="16" alt={"favicon"} width="16" src={'http://www.google.com/s2/favicons?domain=' + link} />
+                                            <img className={styles.favicon} height="16" alt={"favicon"} width="16"
+                                                 src={'http://www.google.com/s2/favicons?domain=' + link}/>
                                             <img src={image !== null ? image : 'img.png'} alt={title}/>
                                             <h2>{title}</h2>
                                             <p className={styles.description}>{description}</p>
@@ -68,7 +75,7 @@ export default function Homepage() {
                         </div>
                     ) :
                     (
-                        <Scroller />
+                        <Scroller/>
                     )
                 }
             </div>
