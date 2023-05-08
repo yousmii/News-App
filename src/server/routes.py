@@ -23,7 +23,7 @@ from sqlalchemy import asc, or_
 ConnectDB = ConnectDB(db)
 
 
-@app.route("/api/post_rss", methods=['POST'])
+@app.route("/api/rss", methods=['POST'])
 def post_rss():
     feed_data = request.get_json()
 
@@ -40,7 +40,7 @@ def post_rss():
 #     return message, success
 
 
-@app.route("/api/delete_admin", methods=['GET'])
+@app.route("/api/admin", methods=['DELETE'])
 def delete_admin():
     delete_name = request.args.get('delete_name', type=str)
     success = User.query.filter_by(username=delete_name).delete()
@@ -48,7 +48,7 @@ def delete_admin():
     return {'message': 'Admin deleted successfully', "status": 200} if success \
         else {'message': 'Could not delete admin', "status": 500}
 
-@app.route("/api/delete_feed", methods=['GET'])
+@app.route("/api/rss", methods=['DELETE'])
 def delete_feed():
     delete_id = request.args.get('delete_id', type=int)
     success = RSS.query.filter(RSS.id == delete_id).delete()
