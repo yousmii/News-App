@@ -107,7 +107,7 @@ def get_feeds():
     return json.dumps(feeds)
 
 
-@app.route("/api/admins", methods=['GET'])
+@app.route("/api/admin", methods=['GET'])
 def get_admins():
     db_admins = User.query.filter_by(is_admin=True).order_by(asc(User.username)).all()
 
@@ -157,7 +157,7 @@ def get_current_user():
     })
 
 
-@app.route('/api/register', methods=['GET', 'POST'])
+@app.route('/api/user', methods=['POST'])
 def register_page():
     form_data = MultiDict(request.get_json())
     form = RegisterForm(form_data)
@@ -175,7 +175,7 @@ def register_page():
         return jsonify({'errors': form.errors})
 
 
-@app.route('/api/registerAdmin', methods=['GET', 'POST'])
+@app.route('/api/admin', methods=['POST'])
 def register_page_admin():
     form_data = MultiDict(request.get_json())
     form = RegisterForm(form_data)
