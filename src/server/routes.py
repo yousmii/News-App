@@ -40,10 +40,10 @@ def post_rss():
 #     return message, success
 
 
-@app.route("/api/admin", methods=['DELETE'])
+@app.route("/api/admins", methods=['DELETE'])
 def delete_admin():
-    delete_name = request.args.get('delete_name', type=str)
-    success = User.query.filter_by(username=delete_name).delete()
+    name = request.args.get('name', type=str)
+    success = User.query.filter_by(username=name).delete()
     db.session.commit()
     return {'message': 'Admin deleted successfully', "status": 200} if success \
         else {'message': 'Could not delete admin', "status": 500}
@@ -175,7 +175,7 @@ def register_page():
         return jsonify({'errors': form.errors})
 
 
-@app.route('/api/registerAdmin', methods=['GET', 'POST'])
+@app.route('/api/admins', methods=['POST'])
 def register_page_admin():
     form_data = MultiDict(request.get_json())
     form = RegisterForm(form_data)
