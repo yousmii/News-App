@@ -61,7 +61,6 @@ def delete_feed():
 def get_articles():
     skip = request.args.get('offset', type=int)
 
-    print("route received " + str(skip) + " as 'skip' argument")
 
     articles = fetch(skip)
     return json.dumps(articles)

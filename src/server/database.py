@@ -60,7 +60,7 @@ class RSS(db.Model):
 class Labels(db.Model):
     __tablename__ = 'labels'
     label = db.Column(db.String, primary_key=True)
-    articles = relationship()
+
 
 
 class Article(db.Model):
@@ -71,7 +71,7 @@ class Article(db.Model):
     link = db.Column(db.String, primary_key=True)
     pub_date = db.Column(db.String, nullable=False)
     rss = db.Column(db.INT, db.ForeignKey('rss.id', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
-    labels = relationship('Labels', secondary= 'article_labels', back_populates='article')
+
 
 
 
@@ -92,9 +92,7 @@ class Feed(db.Model):
                      primary_key=True)
 
 
-class ArticleLabels(db.Model):
 
-    __tablename__= 'article_labels'
 
 
 

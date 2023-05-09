@@ -28,6 +28,8 @@ def parse(link, rss_id, curs_obj):
 
     # Loop through each article in the feed
     for entry in feed.entries:
+
+        print(entry)
         # Get the article title
         title = entry.title
 
