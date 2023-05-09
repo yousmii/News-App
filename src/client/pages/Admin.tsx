@@ -311,16 +311,16 @@ const AdminTable: React.FC = () => {
             .then((data) => setAdmins(data));
     }, []);
 
-    const handleDelete = (name: string) => {
+    const handleDelete = (delete_name: string) => {
         axios
-            .get(`/api/delete_admin`, {
+            .get(`/api/admin`, {
                 params: {
-                    delete_name: name,
+                    name: delete_name,
                 },
             })
             .then((response) => {
                 if (response.data["status"] == 200) {
-                    setAdmins(admins.filter((admin) => admin.name !== name));
+                    setAdmins(admins.filter((admin) => admin.name !== delete_name));
                     alert(response.data["message"]);
                 } else {
                     alert(response.data["message"]);
