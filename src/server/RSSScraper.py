@@ -1,6 +1,7 @@
 import time
 
 import dateparser
+from datetime import datetime, timedelta
 import re
 import feedparser
 import psycopg2
@@ -11,8 +12,18 @@ def scrape():
     print("running scraper🥱..")
     curs_obj = con.cursor()
 
-    curs_obj.execute('TRUNCATE TABLE article CASCADE')
+    # delete articles older than 30 days
+    thirty_days_ago = datetime.now() - timedelta(days=30)
 
+    curs_obj.execute('SELECT pub_date, link FROM article')
+    pub_dates, links = zip(*curs_obj.fetchall())
+
+    for pub_date, link in zip(pub_dates, links):
+        if datetime.strptime(pub_date, '%Y-%m-%d %H:%M:%S') < thirty_days_ago:
+            print(f"Deleting article {link}, because it is from {pub_date}")
+            curs_obj.execute('DELETE FROM article WHERE link = %s', (link,))
+
+    # parse new articles
     curs_obj.execute('SELECT * FROM rss')
     rss_feeds = curs_obj.fetchall()
     for rss_feed in rss_feeds:
@@ -52,13 +63,17 @@ def parse(link, rss_id, curs_obj):
         url = entry.link
 
         # Get the publication date
-        pub_date = dateparser.parse(entry.published).strftime('%Y-%m-%d %H:%M:%S')
+        try:
+            pub_date = dateparser.parse(entry.published).strftime('%Y-%m-%d %H:%M:%S')
+        except Exception as e:
+            print(f"{url} has no pub_date and is probably a null article")
+            continue
 
         # Get the description (https://stackoverflow.com/questions/9662346/python-code-to-remove-html-tags-from-a-string)
         clean_html_tags = re.compile('<.*?>')
         description = re.sub(clean_html_tags, '', entry.description)
 
-        query = "INSERT INTO article VALUES (%s, %s, %s, %s, %s, %s)"
+        query = "INSERT INTO article VALUES (%s, %s, %s, %s, %s, %s) ON CONFLICT DO NOTHING"
         curs_obj.execute(query, (title, description, thumbnail, url, pub_date, rss_id))
 
     con.commit()
