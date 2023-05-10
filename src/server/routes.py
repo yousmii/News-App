@@ -40,7 +40,7 @@ def post_rss():
 #     return message, success
 
 
-@app.route("/api/admin", methods=['DELETE'])
+@app.route("/api/admins", methods=['DELETE'])
 def delete_admin():
     delete_name = request.args.get('delete_name', type=str)
     success = User.query.filter_by(username=delete_name).delete()
@@ -107,7 +107,7 @@ def get_feeds():
     return json.dumps(feeds)
 
 
-@app.route("/api/admin", methods=['GET'])
+@app.route("/api/admins", methods=['GET'])
 def get_admins():
     db_admins = User.query.filter_by(is_admin=True).order_by(asc(User.username)).all()
 
@@ -157,7 +157,7 @@ def get_current_user():
     })
 
 
-@app.route('/api/user', methods=['POST'])
+@app.route('/api/users', methods=['POST'])
 def register_page():
     form_data = MultiDict(request.get_json())
     form = RegisterForm(form_data)
@@ -175,7 +175,7 @@ def register_page():
         return jsonify({'errors': form.errors})
 
 
-@app.route('/api/admin', methods=['POST'])
+@app.route('/api/admins', methods=['POST'])
 def register_page_admin():
     form_data = MultiDict(request.get_json())
     form = RegisterForm(form_data)
@@ -192,7 +192,7 @@ def register_page_admin():
         return jsonify({'errors': form.errors})
 
 
-@app.route('/api/login', methods=['GET', 'POST'])
+@app.route('/api/login', methods=['POST'])
 def login_page():
     form_data = MultiDict(request.get_json())
     form = LoginForm(form_data)

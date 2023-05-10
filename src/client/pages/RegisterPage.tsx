@@ -31,14 +31,14 @@ export default function RegisterForm() {
       csrf_token: csrfToken,
     };
     axios
-      .post("/api/register", data, {
+      .post("/api/users", data, {
         headers: {
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
         console.log(response);
-        window.location.href = "/";
+        //window.location.href = "/";
       })
       .catch((error) => {
         console.log(error);

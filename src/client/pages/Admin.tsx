@@ -39,14 +39,13 @@ export default function Admin() {
 class RSSForm extends Component {
     handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log("submitted");
 
         const feedName = e.target.feed_name.value;
         const feedUrl = e.target.feed_url.value;
 
         const formData = {feed_name: feedName, feed_url: feedUrl};
 
-        fetch("api/post_rss", {
+        fetch("api/rss", {
             method: "POST",
             body: JSON.stringify(formData),
             headers: {
@@ -194,7 +193,7 @@ export function RegisterFormAdmin() {
             csrf_token: csrfToken,
         };
         axios
-            .post("/api/registerAdmin", data, {
+            .post("/api/admins", data, {
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -246,16 +245,16 @@ const RssTable: React.FC = () => {
             .then((data) => setRssFeeds(data));
     }, []);
 
-    const handleDelete = (id: number) => {
+    const handleDelete = (delete_id: number) => {
         axios
-            .get(`/api/delete_feed`, {
+            .delete(`/api/rss`, {
                 params: {
-                    delete_id: id,
+                    id: delete_id,
                 },
             })
             .then((response) => {
                 if (response.data["status"] == 200) {
-                    setRssFeeds(rssFeeds.filter((rssFeed) => rssFeed.id !== id));
+                    setRssFeeds(rssFeeds.filter((rssFeed) => rssFeed.id !== delete_id));
                     alert(response.data["message"]);
                 } else {
                     alert(response.data["message"]);
@@ -311,16 +310,16 @@ const AdminTable: React.FC = () => {
             .then((data) => setAdmins(data));
     }, []);
 
-    const handleDelete = (name: string) => {
+    const handleDelete = (delete_name: string) => {
         axios
-            .get(`/api/delete_admin`, {
+            .delete(`/api/admins`, {
                 params: {
-                    delete_name: name,
+                    name: delete_name,
                 },
             })
             .then((response) => {
                 if (response.data["status"] == 200) {
-                    setAdmins(admins.filter((admin) => admin.name !== name));
+                    setAdmins(admins.filter((admin) => admin.name !== delete_name));
                     alert(response.data["message"]);
                 } else {
                     alert(response.data["message"]);
