@@ -18,7 +18,12 @@ def scrape():
     thirty_days_ago = datetime.now() - timedelta(days=30)
 
     curs_obj.execute('SELECT pub_date, link FROM article')
-    pub_dates, links = zip(*curs_obj.fetchall())
+    try:
+        pub_dates, links = zip(*curs_obj.fetchall())
+    except ValueError:
+        # no articles in table yet
+        pub_dates = []
+        links = []
 
     for pub_date, link in zip(pub_dates, links):
         if datetime.strptime(pub_date, '%Y-%m-%d %H:%M:%S') < thirty_days_ago:
@@ -66,6 +71,11 @@ def parse(link, rss_id, curs_obj):
             img_tag = soup.find('img')
             if img_tag:
                 thumbnail = img_tag['src']
+
+        if not thumbnail:
+            if "media_content" in entry:
+                url = entry.media_content[0]["url"]
+                thumbnail = url if not "" else None
 
         # Get the article URL
         url = entry.link
