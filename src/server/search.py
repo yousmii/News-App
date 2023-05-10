@@ -99,8 +99,7 @@ def search(input_string: str):
                     }
                 }
             }
-        },
-        "sort": [{"pub_date": {"order": "desc"}}]
+        }
     }
 
     # Execute the search
