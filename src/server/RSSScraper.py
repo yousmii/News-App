@@ -8,6 +8,8 @@ import psycopg2
 
 from bs4 import BeautifulSoup
 
+from link_articles import link_articles
+
 def scrape():
     print("running scraper🥱..")
     curs_obj = con.cursor()
@@ -32,6 +34,12 @@ def scrape():
     curs_obj.close()
 
     print("successfully scraped new articles✅")
+
+    print("linking the new articles🥱..")
+
+    link_articles()
+
+    print("successfully linked new articles✅")
 
 
 def parse(link, rss_id, curs_obj):
@@ -90,4 +98,4 @@ if __name__ == "__main__":
     )
     while True:
         scrape()
-        time.sleep(60)
+        time.sleep(300)
