@@ -2,6 +2,9 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import styles from "../components/Article.module.scss";
 import moment from "moment";
+import {usePromiseTracker} from "react-promise-tracker";
+import {trackPromise} from 'react-promise-tracker';
+import * as Loader from "react-loader-spinner";
 
 import Scroller from "../components/InfiteScroller"
 
@@ -19,18 +22,22 @@ export default function Homepage() {
         }
     }, []);
 
+    const {promiseInProgress} = usePromiseTracker();
+
     const handleSearch = () => {
-        axios.get('/api/search', {
-            params: {
-                q: searchQuery
-            }
-        })
-            .then(response => {
-                setSearchResults(response.data);
+        trackPromise(
+            axios.get('/api/search', {
+                params: {
+                    q: searchQuery
+                }
             })
-            .catch(error => {
-                console.log(error)
-            })
+                .then(response => {
+                    setSearchResults(response.data);
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+        )
     }
 
     const handleKeyDown = (event: any) => {
@@ -47,6 +54,21 @@ export default function Homepage() {
                        onChange={(e) =>
                            setSearchQuery(e.target.value)}
                        onKeyDown={handleKeyDown}/>
+            </div>
+            <div>
+                {promiseInProgress &&
+                    <div
+                        style={{
+                            width: "100%",
+                            height: "100",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center"
+                        }}
+                    >
+                        <Loader.ThreeDots color="#284B63" height="100" width="100"/>
+                    </div>
+                }
             </div>
             <div className={styles.container}>
                 {searchResults ?
