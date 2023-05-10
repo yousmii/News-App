@@ -46,7 +46,7 @@ class RSSForm extends Component {
 
         const formData = {feed_name: feedName, feed_url: feedUrl};
 
-        fetch("api/post_rss", {
+        fetch("api/rss", {
             method: "POST",
             body: JSON.stringify(formData),
             headers: {
@@ -194,7 +194,7 @@ export function RegisterFormAdmin() {
             csrf_token: csrfToken,
         };
         axios
-            .post("/api/registerAdmin", data, {
+            .post("/api/admins", data, {
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -248,7 +248,7 @@ const RssTable: React.FC = () => {
 
     const handleDelete = (id: number) => {
         axios
-            .get(`/api/delete_feed`, {
+            .delete(`/api/rss`, {
                 params: {
                     delete_id: id,
                 },
@@ -313,7 +313,7 @@ const AdminTable: React.FC = () => {
 
     const handleDelete = (delete_name: string) => {
         axios
-            .get(`/api/admin`, {
+            .delete(`/api/admins`, {
                 params: {
                     name: delete_name,
                 },

@@ -157,7 +157,7 @@ def get_current_user():
     })
 
 
-@app.route('/api/register', methods=['GET', 'POST'])
+@app.route('/api/users', methods=['GET', 'POST'])
 def register_page():
     form_data = MultiDict(request.get_json())
     form = RegisterForm(form_data)

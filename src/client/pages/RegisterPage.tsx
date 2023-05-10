@@ -31,7 +31,7 @@ export default function RegisterForm() {
       csrf_token: csrfToken,
     };
     axios
-      .post("/api/register", data, {
+      .post("/api/users", data, {
         headers: {
           "Content-Type": "application/json",
         },
