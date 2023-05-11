@@ -12,17 +12,11 @@
 }
 
 .articles {
-  background-color: $bg;
-  height: 100%;
-
   display: flex;
   flex-wrap: wrap;
 
   padding: 20px;
   padding-top: 40px;
-
-  border-top-left-radius: 50px;
-  border-top-right-radius: 50px;
   justify-content: space-between;
 }
 
@@ -43,7 +37,8 @@
   margin-bottom: 20px;
   overflow: hidden;
 }
-.article:hover {
+
+.article_link:hover {
   transform: scale(1.01);
   transition: all 0.1s ease-in-out;
 }
@@ -53,7 +48,7 @@
   width: 46%;
 }
 
-.article a {
+.article_link {
   display: block;
   text-decoration: none;
 }
@@ -69,10 +64,6 @@
   border-radius: 4px;
 }
 
-// .article img:hover {
-//   transform: scale(1.01); /* zoom in on the thumbnail on hover */
-// }
-
 .article h2 {
   font-size: 20px;
   font-weight: bolder;
@@ -80,7 +71,7 @@
   color: black;
 }
 
-.article:hover h2 {
+.article_link:hover h2 {
   text-decoration: none;
   color: #304a61;
   transform: scale(1.01);
@@ -95,10 +86,65 @@
   font-weight: bolder;
 }
 
+.published_by {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.published_by:hover {
+  text-decoration: underline;
+  font-weight: bolder;
+  transition: all 0.1s ease-in-out;
+}
+
 @media only screen and (max-width: 600px) {
   .article,
   .article:nth-child(1),
   .article:nth-child(2) {
     width: 100%;
   }
+}
+
+.article_link {
+  display: block;
+  text-decoration: none;
+  color: black;
+}
+
+.article h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #304a61;
+}
+
+.article p {
+  margin-bottom: 10px;
+  color: #304a61;
+}
+
+.description {
+  font-size: 16px;
+}
+
+.time_ago {
+  font-size: 14px;
+  color: #aaa;
+}
+
+.published_by {
+  display: block;
+  margin-top: 5px;
+  font-size: 12px;
+  white-space: pre-wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.published_by:hover {
+  text-decoration: underline;
+}
+
+.favicon {
+  max-width: 16px;
+  max-height: 16px;
 }

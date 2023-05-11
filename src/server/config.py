@@ -1,14 +1,24 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from sql.sql_config import engine
+from sqlalchemy.orm import relationship
+
+from src.server.sql.sql_config import engine
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager
+from flask_login import LoginManager, UserMixin
 
 app = Flask('News-App')
 db = SQLAlchemy()
 app_data = dict()
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
+
+
+
+
+
+
+
+
 
 # from app import config_data``
 def run_app():
@@ -30,6 +40,8 @@ def run_app():
     db.init_app(app)
     with app.app_context():
         db.create_all()
+
+
 
 
 if __name__ == '__main__':

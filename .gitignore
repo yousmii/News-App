@@ -31,3 +31,10 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.vim
+
+# Resemblance workfiles
+src/server/.0
+src/server/.records
+src/server/.current_record
+yarn.lock

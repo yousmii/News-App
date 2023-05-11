@@ -1,42 +1,85 @@
-import React, { useEffect, useState } from "react";
-import axios, { AxiosError } from "axios";
+import React, {useEffect, useState} from "react";
+import axios from "axios";
 import styles from "../components/Article.module.scss";
 import moment from "moment";
 
 import Scroller from "../components/InfiteScroller"
 
 export default function Homepage() {
-  const [data, setData] = useState<any[]>([]);
-  const [error, setError] = useState(null);
+    const [username, setUsername] = useState<string | null>(null);
+    const [searchQuery, setSearchQuery] = useState<string>("");
+    const [searchResults, setSearchResults] = useState<any>(null);
 
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await axios.get("/api/articles");
-        setData(response.data);
-      } catch (error) {
-        if (error instanceof AxiosError) {
-          setError(error.response?.data.error);
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const q = params.get('q');
+        if (q) {
+            setSearchQuery(q);
+            handleSearch();
         }
-      }
+    }, []);
+
+    const handleSearch = () => {
+        axios.get('/api/search', {
+            params: {
+                q: searchQuery
+            }
+        })
+            .then(response => {
+                setSearchResults(response.data);
+            })
+            .catch(error => {
+                console.log(error)
+            })
     }
 
-    fetchData();
-  }, []);
+    const handleKeyDown = (event: any) => {
+        if (event.key === 'Enter') {
+            handleSearch()
+        }
+    };
 
-  if (error) {
     return (
-      <div>
-        <div className={styles.error}>{error}</div>
-      </div>
+        <div>
+            <div>
+                <input type="text"
+                       value={searchQuery}
+                       onChange={(e) =>
+                           setSearchQuery(e.target.value)}
+                       onKeyDown={handleKeyDown}/>
+            </div>
+            <div className={styles.container}>
+                {searchResults ?
+                    (
+                        <div className={styles.articles}>
+                            {searchResults.map(({link, image, title, description, pub_date}: {
+                                link: any,
+                                title: any,
+                                image: any,
+                                description: any,
+                                pub_date: any,
+                            }) => {
+                                return (
+                                    <div className={styles.article}>
+                                        <a href={link} target={"blank"} className={styles.article_link}>
+                                            <img className={styles.favicon} height="16" alt={"favicon"} width="16"
+                                                 src={'http://www.google.com/s2/favicons?domain=' + link}/>
+                                            <img src={image !== null ? image : 'img.png'} alt={title}/>
+                                            <h2>{title}</h2>
+                                            <p className={styles.description}>{description}</p>
+                                            <p className={styles.time_ago}>{moment(pub_date).fromNow()}</p>
+                                        </a>
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    ) :
+                    (
+                        <Scroller/>
+                    )
+                }
+            </div>
+        </div>
     );
-  }
-
-  return (
-    <div className={styles.container}>
-      <Scroller/>
-
-    </div>
-  );
 }
+
