@@ -57,9 +57,11 @@ class RSS(db.Model):
     name = db.Column(db.String)
 
 
-class Labels(db.Model):
-    __tablename__ = 'labels'
+
+class Label(db.Model):
+    __tablename__ = "label"
     label = db.Column(db.String, primary_key=True)
+    articles = relationship('Article', secondary='article_label',backref="label")
 
 
 
@@ -71,6 +73,20 @@ class Article(db.Model):
     link = db.Column(db.String, primary_key=True)
     pub_date = db.Column(db.String, nullable=False)
     rss = db.Column(db.INT, db.ForeignKey('rss.id', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
+    clickCount = db.Column(db.INT, nullable=False)
+    labels = relationship('Label', secondary='article_label', backref="article")
+
+
+class Article_Labels(db.Model):
+    __tablename__ = "article_label"
+    article_id = db.Column(db.String, db.ForeignKey('article.link', onupdate="CASCADE", ondelete='CASCADE'),primary_key= True)
+    label_id = db.Column(db.String, db.ForeignKey('label.label', onupdate="CASCADE", ondelete='CASCADE'), primary_key= True)
+
+
+
+
+
+
 
 
 

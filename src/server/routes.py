@@ -13,7 +13,7 @@ from src.server.app import app
 from src.server.config import app_data, db
 from src.server.ArticlesFetcher import fetch
 from src.server.ConnectDB import ConnectDB
-from src.server.database import User, RSS, TF_IDF
+from src.server.database import User, RSS, TF_IDF, Article
 from search import search
 from sqlalchemy import asc, or_
 
@@ -23,7 +23,7 @@ from sqlalchemy import asc, or_
 ConnectDB = ConnectDB(db)
 
 
-@app.route("/api/rss", methods=['POST'])
+@app.route("/api/post_rss", methods=['POST'])
 def post_rss():
     feed_data = request.get_json()
 
@@ -40,10 +40,10 @@ def post_rss():
 #     return message, success
 
 
-@app.route("/api/admins", methods=['DELETE'])
+@app.route("/api/admin", methods=['DELETE'])
 def delete_admin():
-    name = request.args.get('name', type=str)
-    success = User.query.filter_by(username=name).delete()
+    delete_name = request.args.get('delete_name', type=str)
+    success = User.query.filter_by(username=delete_name).delete()
     db.session.commit()
     return {'message': 'Admin deleted successfully', "status": 200} if success \
         else {'message': 'Could not delete admin', "status": 500}
@@ -55,6 +55,24 @@ def delete_feed():
     db.session.commit()
     return {'message': 'RSS Feed deleted successfully', "status": 200} if success \
         else {'message': 'Could not delete RSS Feed', "status": 500}
+
+
+
+@app.route("/api/article_clicked", methods=['GET', 'PUT'])
+def increment_click():
+
+    article_link = request.args.get('article_link', type=str)
+    print("THE LINK OF THE CLICKED ARTICLE IS")
+    print(article_link)
+    success = Article.query.filter(Article.link == article_link).update({Article.clickCount: Article.clickCount + 1})
+    print(success)
+    click_count = Article.query.filter(Article.link == article_link)
+    print(click_count)
+    for i in click_count:
+        print(i.clickCount)
+    db.session.commit()
+    return {'message': 'Click count for article incremented successfully', "status": 200} if success \
+        else {'message': 'Could not increment click count for article', "status": 500}
 
 
 @app.route("/api/articles", methods=['GET'])
@@ -174,7 +192,7 @@ def register_page():
         return jsonify({'errors': form.errors})
 
 
-@app.route('/api/admins', methods=['POST'])
+@app.route('/api/registerAdmin', methods=['GET', 'POST'])
 def register_page_admin():
     form_data = MultiDict(request.get_json())
     form = RegisterForm(form_data)

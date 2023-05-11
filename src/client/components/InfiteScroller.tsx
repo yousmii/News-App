@@ -12,7 +12,21 @@ const Scroller = () => {
 
     useEffect(() => {
         fetchData();
+
+
     }, []);
+
+
+    const handleClick = (link : string) => (event: any) => {
+
+        axios.get('api/article_clicked', {
+            params: {
+                article_link : link,
+            },
+        })
+    };
+
+
 
     const fetchData = async () => {
         const response = await axios.get(
@@ -82,8 +96,8 @@ const Scroller = () => {
                     similarArticles: any
                 }) => {
                     return (
-                        <div className={styles.article}>
-                            <a href={link} target={"blank"} className={styles.article_link}>
+                        <div className={styles.article} >
+                            <a href={link} target={"blank"} className={styles.article_link} onClick={handleClick(link)}>
                                 <img className={styles.favicon} height="16" alt={"favicon"} width="16" src={'http://www.google.com/s2/favicons?domain=' + link} />
                                 <img src={image !== null ? image : 'img.png'} alt={title}/>
                                 <h2>{title}</h2>
