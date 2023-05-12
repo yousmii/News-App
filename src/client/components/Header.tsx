@@ -25,7 +25,6 @@ const Header = () => {
       .then(response => {
           if (response.status === 200) {
               setUsername(response.data.username)
-              console.log(response.data.username)
           }
           else {
               console.log("Not logged in")

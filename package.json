@@ -20,6 +20,7 @@
         "axios-hooks": "^4.0.0",
         "csurf": "^1.11.0",
         "esbuild": "^0.17.12",
+        "js-cookie": "^3.0.5",
         "moment": "^2.29.4",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
@@ -30,6 +31,7 @@
         "react-router-dom": "^6.9.0"
     },
     "devDependencies": {
+        "@types/js-cookie": "^3.0.3",
         "@types/react": "^18.0.27",
         "@types/react-dom": "^18.0.10",
         "@vitejs/plugin-react": "^3.1.0",

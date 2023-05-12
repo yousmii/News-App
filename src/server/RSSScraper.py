@@ -91,8 +91,8 @@ def parse(link, rss_id, curs_obj):
         clean_html_tags = re.compile('<.*?>')
         description = re.sub(clean_html_tags, '', entry.description)
 
-        query = "INSERT INTO article VALUES (%s, %s, %s, %s, %s, %s) ON CONFLICT DO NOTHING"
-        curs_obj.execute(query, (title, description, thumbnail, url, pub_date, rss_id))
+        query = "INSERT INTO article VALUES (%s, %s, %s, %s, %s, %s, %s) ON CONFLICT DO NOTHING"
+        curs_obj.execute(query, (title, description, thumbnail, url, pub_date, rss_id, 0))
 
     con.commit()
 

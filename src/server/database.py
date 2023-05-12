@@ -34,11 +34,11 @@ class User(db.Model, UserMixin):
         return bcrypt.check_password_hash(self.password_hash, attempted_password)
 
 
-# class Admin(db.Model):
-#     __tablename__ = 'admin'
-#     name = db.Column(db.String(255), primary_key=True)
-#     password = db.Column(db.String, nullable=False)
-#     id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE', onupdate='CASCADE'), unique=True)
+class History(db.Model):
+    __tablename__ = 'history'
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True)
+    article_link = db.Column(db.String, db.ForeignKey('article.link', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True)
+    read_on = db.Column(db.DateTime, nullable=False)
 
 
 class Creates(db.Model):
@@ -69,13 +69,14 @@ class Article(db.Model):
     link = db.Column(db.String, primary_key=True)
     pub_date = db.Column(db.String, nullable=False)
     rss = db.Column(db.INT, db.ForeignKey('rss.id', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
+    views = db.Column(db.Integer, nullable=False, default=0)
 
 
 class TF_IDF(db.Model):
     __tablename__ = 'tf_idf'
-    article1 = db.Column(db.String, db.ForeignKey('article.link', onupdate='CASCADE'),
+    article1 = db.Column(db.String, db.ForeignKey('article.link', onupdate='CASCADE', ondelete='CASCADE'),
                          nullable=False, primary_key=True)
-    article2 = db.Column(db.String, db.ForeignKey('article.link', onupdate='CASCADE'),
+    article2 = db.Column(db.String, db.ForeignKey('article.link', onupdate='CASCADE', ondelete='CASCADE'),
                          nullable=False, primary_key=True)
     value = db.Column(db.INT, nullable=False)
 

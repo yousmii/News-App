@@ -1,10 +1,10 @@
+import datetime
 import json
 
 from flask.templating import render_template
 from flask import request, session, jsonify, redirect, flash, json, make_response, request
 from forms import RegisterForm, LoginForm
-from flask_login import login_user, logout_user, current_user
-from wtforms import Form, StringField, TextAreaField, validators
+from flask_login import login_user, logout_user, current_user, login_required
 from flask_wtf import csrf
 from werkzeug.datastructures import MultiDict
 
@@ -13,7 +13,7 @@ from src.server.app import app
 from src.server.config import app_data, db
 from src.server.ArticlesFetcher import fetch
 from src.server.ConnectDB import ConnectDB
-from src.server.database import User, RSS, TF_IDF
+from src.server.database import User, RSS, TF_IDF, Article, History
 from search import search
 from sqlalchemy import asc, or_
 
@@ -30,14 +30,6 @@ def post_rss():
     success, message = ConnectDB.addRSS(feed_data['feed_name'], feed_data['feed_url'])
 
     return message, success
-
-
-# @app.route("/api/post_admin", methods=['POST'])
-# def post_admin():
-#     admin_data = request.get_json()
-#     success, message = ConnectDB.addAdmin(admin_data['admin_name'], admin_data['admin_password'])
-#
-#     return message, success
 
 
 @app.route("/api/admins", methods=['DELETE'])
@@ -68,6 +60,7 @@ def get_articles():
 
 @app.route("/api/similarity/", methods=['GET'])
 def get_similar_articles():
+    print("hallo", flush=True)
     article_link = request.args.get('article_link', type=str)
     # Retrieve all rows in the tf_idf table where the given article ID is present
     rows = db.session.query(TF_IDF).filter(or_(TF_IDF.article1 == article_link, TF_IDF.article2 == article_link)).all()
@@ -157,8 +150,33 @@ def get_current_user():
     })
 
 
-@app.route('/api/users', methods=['GET', 'POST'])
-def register_page():
+@app.route('/api/history', methods=['POST'])
+@login_required
+def click():
+    user_id = current_user.id
+    article = Article.query.filter_by(link=request.get_json().get('link')).first()
+    if article is None:
+        return jsonify({'error': 'Article does not exist'})
+    history_to_add = History(user_id=user_id,
+                             article_link=article.link,
+                             read_on=datetime.datetime.now())
+    db.session.add(history_to_add)
+    db.session.commit()
+    return jsonify({'message': 'tracked history successfully'})
+
+
+@app.route('/api/articles/view', methods=['PUT'])
+def view():
+    article = Article.query.filter_by(link=request.get_json().get('link')).first()
+    if article is None:
+        return jsonify({'error': 'Article does not exist'})
+    article.views += 1
+    db.session.commit()
+    return jsonify({'message': 'view added successfully', "views": article.views})
+
+
+@app.route('/api/users', methods=['POST'])
+def register_user():
     form_data = MultiDict(request.get_json())
     form = RegisterForm(form_data)
     if form.validate():
@@ -176,7 +194,10 @@ def register_page():
 
 
 @app.route('/api/admins', methods=['POST'])
-def register_page_admin():
+@login_required
+def register_admin():
+    if not current_user.is_admin:
+        return jsonify({'errors': 'You are not an admin'})
     form_data = MultiDict(request.get_json())
     form = RegisterForm(form_data)
     if form.validate():
@@ -186,26 +207,25 @@ def register_page_admin():
                               is_admin=True)
         db.session.add(user_to_create)
         db.session.commit()
-        attempted_user = User.query.filter_by(username=form.username.data).first()
         return jsonify({'message': 'Admin created successfully'})
     if form.errors != {}:
         return jsonify({'errors': form.errors})
 
 
 @app.route('/api/login', methods=['GET', 'POST'])
-def login_page():
+def login():
     form_data = MultiDict(request.get_json())
     form = LoginForm(form_data)
     if form.validate_on_submit():
         attempted_user = User.query.filter_by(username=form.username.data).first()
         if attempted_user and attempted_user.check_password_correction(attempted_password=form.password.data):
             login_user(attempted_user)
-            return jsonify({'message': 'User logged in successfully'})
+            return jsonify({'message': 'User logged in successfully'}), 200
         else:
-            return jsonify({'errors': 'Username and password do not match! Please try again'})
+            return jsonify({'errors': 'Username and password do not match! Please try again'}), 400
 
 
 @app.route('/api/logout')
-def logout_page():
+def logout():
     logout_user()
     return {'message': 'Logged out successfully'}
