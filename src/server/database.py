@@ -38,7 +38,7 @@ class History(db.Model):
     __tablename__ = 'history'
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True)
     article_link = db.Column(db.String, db.ForeignKey('article.link', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True)
-    read_on = db.Column(db.DateTime, nullable=False)
+    read_on = db.Column(db.String, nullable=False)
 
 
 class Creates(db.Model):

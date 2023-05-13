@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import json
 
 from flask.templating import render_template
@@ -61,7 +61,6 @@ def get_articles():
 
 @app.route("/api/similarity/", methods=['GET'])
 def get_similar_articles():
-    print("hallo", flush=True)
     article_link = request.args.get('article_link', type=str)
     # Retrieve all rows in the tf_idf table where the given article ID is present
     rows = db.session.query(TF_IDF).filter(or_(TF_IDF.article1 == article_link, TF_IDF.article2 == article_link)).all()
@@ -156,11 +155,16 @@ def get_current_user():
 def click():
     user_id = current_user.id
     article = Article.query.filter_by(link=request.get_json().get('link')).first()
+
     if article is None:
         return jsonify({'error': 'Article does not exist'})
-    history_to_add = History(user_id=user_id,
-                             article_link=article.link,
-                             read_on=datetime.datetime.now())
+
+    history_to_add = History(
+        user_id=user_id,
+        article_link=article.link,
+        read_on=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    )
+
     db.session.add(history_to_add)
     db.session.commit()
     return jsonify({'message': 'tracked history successfully'})
@@ -181,9 +185,11 @@ def register_user():
     form_data = MultiDict(request.get_json())
     form = RegisterForm(form_data)
     if form.validate():
-        user_to_create = User(username=form.username.data,
-                              email_address=form.email_address.data,
-                              password=form.password1.data)
+        user_to_create = User(
+            username=form.username.data,
+            email_address=form.email_address.data,
+            password=form.password1.data
+        )
         db.session.add(user_to_create)
         db.session.commit()
         attempted_user = User.query.filter_by(username=form.username.data).first()
@@ -202,10 +208,12 @@ def register_admin():
     form_data = MultiDict(request.get_json())
     form = RegisterForm(form_data)
     if form.validate():
-        user_to_create = User(username=form.username.data,
-                              email_address=form.email_address.data,
-                              password=form.password1.data,
-                              is_admin=True)
+        user_to_create = User(
+            username=form.username.data,
+            email_address=form.email_address.data,
+            password=form.password1.data,
+            is_admin=True
+        )
         db.session.add(user_to_create)
         db.session.commit()
         return jsonify({'message': 'Admin created successfully'})
