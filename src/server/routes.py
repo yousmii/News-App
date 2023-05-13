@@ -22,6 +22,35 @@ from sqlalchemy import asc, or_
 
 ConnectDB = ConnectDB(db)
 
+# @app.errorhandler(404)
+# def not_found_error(error):
+#     return jsonify({'error': 'Page not found'}), 404
+#
+#
+# @app.errorhandler(403)
+# def forbidden_error(error):
+#     return jsonify({'error': 'Forbidden'}), 403
+#
+#
+# @app.errorhandler(500)
+# def internal_server_error(error):
+#     return jsonify({'error': 'Internal server error'}), 500
+
+@app.route("/api/rss", methods=['GET'])
+def get_feeds():
+    db_feeds = RSS.query.order_by(asc(RSS.id)).all()
+
+    feeds = []
+
+    for db_feed in db_feeds:
+        feed = {
+            "id": db_feed.id,
+            "url": db_feed.rss_url,
+            "name": db_feed.name
+        }
+        feeds.append(feed)
+
+    return json.dumps(feeds)
 
 @app.route("/api/rss", methods=['POST'])
 def post_rss():
@@ -31,15 +60,6 @@ def post_rss():
 
     return message, success
 
-
-@app.route("/api/admins", methods=['DELETE'])
-def delete_admin():
-    name = request.args.get('name', type=str)
-    success = User.query.filter_by(username=name).delete()
-    db.session.commit()
-    return {'message': 'Admin deleted successfully', "status": 200} if success \
-        else {'message': 'Could not delete admin', "status": 500}
-
 @app.route("/api/rss", methods=['DELETE'])
 def delete_feed():
     delete_id = request.args.get('delete_id', type=int)
@@ -48,6 +68,47 @@ def delete_feed():
     return {'message': 'RSS Feed deleted successfully', "status": 200} if success \
         else {'message': 'Could not delete RSS Feed', "status": 500}
 
+@app.route("/api/admins", methods=['GET'])
+def get_admins():
+    db_admins = User.query.filter_by(is_admin=True).order_by(asc(User.username)).all()
+
+    admins = []
+
+    for db_admin in db_admins:
+        admin = {
+            "name": db_admin.username,
+        }
+        admins.append(admin)
+
+    return json.dumps(admins)
+
+@app.route('/api/admins', methods=['POST'])
+@login_required
+def register_admin():
+    if not current_user.is_admin:
+        return jsonify({'errors': 'You are not an admin'})
+    form_data = MultiDict(request.get_json())
+    form = RegisterForm(form_data)
+    if form.validate():
+        user_to_create = User(
+            username=form.username.data,
+            email_address=form.email_address.data,
+            password=form.password1.data,
+            is_admin=True
+        )
+        db.session.add(user_to_create)
+        db.session.commit()
+        return jsonify({'message': 'Admin created successfully'})
+    if form.errors != {}:
+        return jsonify({'errors': form.errors})
+
+@app.route("/api/admins", methods=['DELETE'])
+def delete_admin():
+    name = request.args.get('name', type=str)
+    success = User.query.filter_by(username=name).delete()
+    db.session.commit()
+    return {'message': 'Admin deleted successfully', "status": 200} if success \
+        else {'message': 'Could not delete admin', "status": 500}
 
 @app.route("/api/articles", methods=['GET'])
 def get_articles():
@@ -58,6 +119,15 @@ def get_articles():
     # articles = fetch(skip)
     articles = fetchPopular(skip)
     return json.dumps(articles)
+
+@app.route('/api/articles/view', methods=['PUT'])
+def view():
+    article = Article.query.filter_by(link=request.get_json().get('link')).first()
+    if article is None:
+        return jsonify({'error': 'Article does not exist'})
+    article.views += 1
+    db.session.commit()
+    return jsonify({'message': 'view added successfully', "views": article.views})
 
 @app.route("/api/similarity/", methods=['GET'])
 def get_similar_articles():
@@ -82,103 +152,29 @@ def get_search():
     articles = search(query_string)
     return json.dumps(articles)
 
-
-@app.route("/api/rss", methods=['GET'])
-def get_feeds():
-    db_feeds = RSS.query.order_by(asc(RSS.id)).all()
-
-    feeds = []
-
-    for db_feed in db_feeds:
-        feed = {
-            "id": db_feed.id,
-            "url": db_feed.rss_url,
-            "name": db_feed.name
-        }
-        feeds.append(feed)
-
-    return json.dumps(feeds)
-
-
-@app.route("/api/admins", methods=['GET'])
-def get_admins():
-    db_admins = User.query.filter_by(is_admin=True).order_by(asc(User.username)).all()
-
-    admins = []
-
-    for db_admin in db_admins:
-        admin = {
-            "name": db_admin.username,
-        }
-        admins.append(admin)
-
-    return json.dumps(admins)
-
-
-@app.errorhandler(404)
-def not_found_error(error):
-    return jsonify({'error': 'Page not found'}), 404
-
-
-@app.errorhandler(403)
-def forbidden_error(error):
-    return jsonify({'error': 'Forbidden'}), 403
-
-
-@app.errorhandler(500)
-def internal_server_error(error):
-    return jsonify({'error': 'Internal server error'}), 500
-
-
-@app.route('/api/csrf_token', methods=['GET'])
-def get_csrf_token():
-    csrf_token = csrf.generate_csrf()
-    return jsonify({'csrf_token': csrf_token})
-
-
-@app.route("/api/@me", methods=['GET'])
-def get_current_user():
-    if not current_user.is_authenticated:
-        return jsonify({
-            "error": "Unauthorized",
-            "status": 401
-        })
-    return jsonify({
-        "username": current_user.username,
-        "is_admin": current_user.is_admin,
-        "status": 200
-    })
-
-
 @app.route('/api/history', methods=['POST'])
 @login_required
 def click():
     user_id = current_user.id
-    article = Article.query.filter_by(link=request.get_json().get('link')).first()
+    article_link = request.get_json().get('link')
+    article = Article.query.filter_by(link=article_link).first()
 
     if article is None:
         return jsonify({'error': 'Article does not exist'})
 
-    history_to_add = History(
-        user_id=user_id,
-        article_link=article.link,
-        read_on=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    )
+    exists = History.query.filter_by(article_link=article_link).first()
+    if exists:
+        exists.read_on = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    else:
+        history_to_add = History(
+            user_id=user_id,
+            article_link=article.link,
+            read_on=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+        )
+        db.session.add(history_to_add)
 
-    db.session.add(history_to_add)
     db.session.commit()
     return jsonify({'message': 'tracked history successfully'})
-
-
-@app.route('/api/articles/view', methods=['PUT'])
-def view():
-    article = Article.query.filter_by(link=request.get_json().get('link')).first()
-    if article is None:
-        return jsonify({'error': 'Article does not exist'})
-    article.views += 1
-    db.session.commit()
-    return jsonify({'message': 'view added successfully', "views": article.views})
-
 
 @app.route('/api/users', methods=['POST'])
 def register_user():
@@ -199,27 +195,23 @@ def register_user():
     if form.errors != {}:
         return jsonify({'errors': form.errors})
 
+@app.route('/api/csrf_token', methods=['GET'])
+def get_csrf_token():
+    csrf_token = csrf.generate_csrf()
+    return jsonify({'csrf_token': csrf_token})
 
-@app.route('/api/admins', methods=['POST'])
-@login_required
-def register_admin():
-    if not current_user.is_admin:
-        return jsonify({'errors': 'You are not an admin'})
-    form_data = MultiDict(request.get_json())
-    form = RegisterForm(form_data)
-    if form.validate():
-        user_to_create = User(
-            username=form.username.data,
-            email_address=form.email_address.data,
-            password=form.password1.data,
-            is_admin=True
-        )
-        db.session.add(user_to_create)
-        db.session.commit()
-        return jsonify({'message': 'Admin created successfully'})
-    if form.errors != {}:
-        return jsonify({'errors': form.errors})
-
+@app.route("/api/@me", methods=['GET'])
+def get_current_user():
+    if not current_user.is_authenticated:
+        return jsonify({
+            "error": "Unauthorized",
+            "status": 401
+        })
+    return jsonify({
+        "username": current_user.username,
+        "is_admin": current_user.is_admin,
+        "status": 200
+    })
 
 @app.route('/api/login', methods=['GET', 'POST'])
 def login():
@@ -232,7 +224,6 @@ def login():
             return jsonify({'message': 'User logged in successfully'}), 200
         else:
             return jsonify({'errors': 'Username and password do not match! Please try again'}), 400
-
 
 @app.route('/api/logout')
 def logout():
