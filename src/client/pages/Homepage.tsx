@@ -114,6 +114,7 @@ export default function Homepage() {
 
     return (
         <div>
+            { /* Search Bar */ }
             <div>
                 <input type="text"
                        value={searchQuery}
@@ -121,6 +122,7 @@ export default function Homepage() {
                            setSearchQuery(e.target.value)}
                        onKeyDown={handleKeyDown}/>
             </div>
+            { /* Search Animation */ }
             <div>
                 {promiseInProgress &&
                     <div
@@ -136,6 +138,7 @@ export default function Homepage() {
                     </div>
                 }
             </div>
+            { /* Articles */}
             <div className={styles.container}>
                 {searchResults ?
                     (
