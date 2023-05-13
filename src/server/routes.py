@@ -11,7 +11,7 @@ from werkzeug.datastructures import MultiDict
 
 from src.server.app import app
 from src.server.config import app_data, db
-from src.server.ArticlesFetcher import fetch
+from src.server.ArticlesFetcher import fetch, fetchPopular
 from src.server.ConnectDB import ConnectDB
 from src.server.database import User, RSS, TF_IDF, Article, History
 from search import search
@@ -55,7 +55,8 @@ def get_articles():
 
     print("route received " + str(skip) + " as 'skip' argument")
 
-    articles = fetch(skip)
+    # articles = fetch(skip)
+    articles = fetchPopular(skip)
     return json.dumps(articles)
 
 @app.route("/api/similarity/", methods=['GET'])
