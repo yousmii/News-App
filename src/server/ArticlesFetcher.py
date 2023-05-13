@@ -13,14 +13,19 @@ def fetch(skip = 0):
 
     skip10 = skip + 10
 
+    stop = last_index
+
+    if skip10 < last_index:
+        stop = skip10
+
     articles = []
 
-    if skip10 > last_index:
+    if skip > last_index:
         print("reached the end")
         return articles
 
     # Loop through each article in the feed
-    for i in range(skip, skip10):
+    for i in range(skip, stop):
 
         db_article = db_articles[i]
 
