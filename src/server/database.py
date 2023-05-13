@@ -21,7 +21,6 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(length=60), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
 
-
     @property
     def password(self):
         # password_hash?
@@ -34,11 +33,13 @@ class User(db.Model, UserMixin):
     def check_password_correction(self, attempted_password):
         return bcrypt.check_password_hash(self.password_hash, attempted_password)
 
-# class Admin(db.Model):
-#     __tablename__ = 'admin'
-#     name = db.Column(db.String(255), primary_key=True)
-#     password = db.Column(db.String, nullable=False)
-#     id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE', onupdate='CASCADE'), unique=True)
+
+class History(db.Model):
+    __tablename__ = 'history'
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True)
+    article_link = db.Column(db.String, db.ForeignKey('article.link', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True)
+    read_on = db.Column(db.String, nullable=False)
+
 
 class Creates(db.Model):
     __tablename__ = 'creates'
@@ -46,6 +47,7 @@ class Creates(db.Model):
                         primary_key=True)
     created = db.Column(db.String, db.ForeignKey('user.username', ondelete='CASCADE', onupdate='CASCADE'),
                         primary_key=True)
+
 
 class RSS(db.Model):
     __tablename__ = 'rss'
@@ -67,6 +69,7 @@ class Article(db.Model):
     pub_date = db.Column(db.String, nullable=False)
     rss = db.Column(db.INT, db.ForeignKey('rss.id', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
     labels = relationship('Label', secondary='article_label', backref="article")
+    views = db.Column(db.Integer, nullable=False, default=0)
 
 class Article_Labels(db.Model):
     __tablename__ = "article_label"

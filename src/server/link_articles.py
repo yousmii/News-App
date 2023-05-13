@@ -64,12 +64,9 @@ def link_articles():
             file.write('\n')
 
         res_dict = get_resemblance(res_obj, '.current_record')
-        print("--------------------------------------------------------------------------------------------------------------------")
-        print(f"Linking article {record[0]}:")
         for i in range(len(res_dict)):
             if res_dict[i] > 0.3:
                 if record[1] != query_result[i][1]:
-                    print(f"\t>> score: `{res_dict[i]}` for `{query_result[i][0]}`")
                     if not from_same_site(record[1], query_result[i][1]):
                         duplicate_entry = [record[1], query_result[i][1]]
                         duplicate_entry.sort()

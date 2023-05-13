@@ -99,8 +99,7 @@ def search(input_string: str):
                     }
                 }
             }
-        },
-        "sort": [{"pub_date": {"order": "desc"}}]
+        }
     }
 
     # Execute the search
@@ -117,6 +116,8 @@ def search(input_string: str):
             "pub_date": hit["_source"]["pub_date"]
         }
         articles.append(article)
+
+    print(*articles, sep="\n")
 
     return articles
 
