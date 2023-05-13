@@ -34,13 +34,11 @@ class User(db.Model, UserMixin):
     def check_password_correction(self, attempted_password):
         return bcrypt.check_password_hash(self.password_hash, attempted_password)
 
-
 # class Admin(db.Model):
 #     __tablename__ = 'admin'
 #     name = db.Column(db.String(255), primary_key=True)
 #     password = db.Column(db.String, nullable=False)
 #     id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE', onupdate='CASCADE'), unique=True)
-
 
 class Creates(db.Model):
     __tablename__ = 'creates'
@@ -49,21 +47,16 @@ class Creates(db.Model):
     created = db.Column(db.String, db.ForeignKey('user.username', ondelete='CASCADE', onupdate='CASCADE'),
                         primary_key=True)
 
-
 class RSS(db.Model):
     __tablename__ = 'rss'
     id = db.Column(db.Integer, db.Sequence('rss_id_seq', start=0, increment=1), primary_key=True)
     rss_url = db.Column(db.String, nullable=False)
     name = db.Column(db.String)
 
-
-
 class Label(db.Model):
     __tablename__ = "label"
     label = db.Column(db.String, primary_key=True)
     articles = relationship('Article', secondary='article_label',backref="label")
-
-
 
 class Article(db.Model):
     __tablename__ = 'article'
@@ -73,23 +66,12 @@ class Article(db.Model):
     link = db.Column(db.String, primary_key=True)
     pub_date = db.Column(db.String, nullable=False)
     rss = db.Column(db.INT, db.ForeignKey('rss.id', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
-    clickCount = db.Column(db.INT, nullable=False)
     labels = relationship('Label', secondary='article_label', backref="article")
-
 
 class Article_Labels(db.Model):
     __tablename__ = "article_label"
     article_id = db.Column(db.String, db.ForeignKey('article.link', onupdate="CASCADE", ondelete='CASCADE'),primary_key= True)
     label_id = db.Column(db.String, db.ForeignKey('label.label', onupdate="CASCADE", ondelete='CASCADE'), primary_key= True)
-
-
-
-
-
-
-
-
-
 
 class TF_IDF(db.Model):
     __tablename__ = 'tf_idf'
@@ -98,18 +80,9 @@ class TF_IDF(db.Model):
     article2 = db.Column(db.String, db.ForeignKey('article.link', onupdate='CASCADE'),
                          nullable=False, primary_key=True)
 
-
-
 class Feed(db.Model):
     __tablename__ = 'feed'
     article = db.Column(db.String, db.ForeignKey('article.link', ondelete='CASCADE', onupdate='CASCADE'),
                         nullable=False, primary_key=True)
     user = db.Column(db.INT, db.ForeignKey('user.id', ondelete='CASCADE', onupdate='CASCADE'), nullable=False,
                      primary_key=True)
-
-
-
-
-
-
-
