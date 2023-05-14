@@ -13,7 +13,7 @@ from src.server.app import app
 from src.server.config import app_data, db
 from src.server.ArticlesFetcher import fetch, fetchPopular
 from src.server.ConnectDB import ConnectDB
-from src.server.database import User, RSS, TF_IDF, Article, History
+from src.server.database import User, RSS, TF_IDF, Article, History, Label
 from search import search
 from sqlalchemy import asc, or_
 
@@ -110,6 +110,25 @@ def delete_admin():
     return {'message': 'Admin deleted successfully', "status": 200} if success \
         else {'message': 'Could not delete admin', "status": 500}
 
+@app.route('/api/users', methods=['POST'])
+def register_user():
+    form_data = MultiDict(request.get_json())
+    form = RegisterForm(form_data)
+    if form.validate():
+        user_to_create = User(
+            username=form.username.data,
+            email_address=form.email_address.data,
+            password=form.password1.data
+        )
+        db.session.add(user_to_create)
+        db.session.commit()
+        attempted_user = User.query.filter_by(username=form.username.data).first()
+        login_user(attempted_user)
+        if current_user.is_authenticated:
+            return jsonify({'message': 'User created and logged in successfully'})
+    if form.errors != {}:
+        return jsonify({'errors': form.errors})
+
 @app.route("/api/articles", methods=['GET'])
 def get_articles():
     skip = request.args.get('offset', type=int)
@@ -119,6 +138,12 @@ def get_articles():
     # articles = fetch(skip)
     articles = fetchPopular(skip)
     return json.dumps(articles)
+
+@app.route("/api/labels", methods=['GET'])
+def get_labels():
+    labels = Label.query.all()
+
+    return jsonify([label.label for label in labels])
 
 @app.route('/api/articles/view', methods=['PUT'])
 def view():
@@ -176,24 +201,6 @@ def click():
     db.session.commit()
     return jsonify({'message': 'tracked history successfully'})
 
-@app.route('/api/users', methods=['POST'])
-def register_user():
-    form_data = MultiDict(request.get_json())
-    form = RegisterForm(form_data)
-    if form.validate():
-        user_to_create = User(
-            username=form.username.data,
-            email_address=form.email_address.data,
-            password=form.password1.data
-        )
-        db.session.add(user_to_create)
-        db.session.commit()
-        attempted_user = User.query.filter_by(username=form.username.data).first()
-        login_user(attempted_user)
-        if current_user.is_authenticated:
-            return jsonify({'message': 'User created and logged in successfully'})
-    if form.errors != {}:
-        return jsonify({'errors': form.errors})
 
 @app.route('/api/csrf_token', methods=['GET'])
 def get_csrf_token():
