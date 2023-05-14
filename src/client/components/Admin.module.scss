@@ -53,6 +53,10 @@ input[type="submit"] {
   font-size: 16px;
 }
 
+#register:hover {
+  background-color: #3e6a8e;
+}
+
 input[type="submit"]:hover {
   background-color: #3e6a8e;
 }
@@ -60,10 +64,70 @@ input[type="submit"]:hover {
 .form {
   width: 90vw;
   overflow: hidden;
-  overflow-x: scroll;
+  overflow-x: auto;
   margin: auto;
   justify-content: center;
   align-items: center;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0 auto;
+  text-align: left;
+  box-sizing: border-box;
+  border-radius: 20px !important;
+}
+
+#rssId {
+  padding-left: 0;
+  text-align: center;
+}
+
+.RssData {
+  padding: 5px 0;
+  padding-left: 5px;
+}
+
+#RssButton {
+  background: $bg;
+  padding: 8px 16px;
+  border: none ;
+}
+
+.RssRow {
+  box-sizing: border-box;
+  width: auto;
+}
+
+#name {
+  border-top-left-radius: 10px;
+  border: none;
+}
+
+#url {
+  border-top-right-radius: 10px;
+  border: none;
+}
+
+#feeds:last-child #feedName {
+  border-bottom-left-radius: 10px;
+  border: none;
+}
+
+#feeds:last-child #feedUrl {
+  border-bottom-right-radius: 10px;
+  border: none;
+}
+
+#adminNameHead {
+  border-radius: 10px 10px 0 0;
+  border: none;
+}
+
+#admins:last-child td:first-child {
+  border-radius: 0 0 10px 10px;
+  border: none;
 }
 
 .button {
@@ -77,15 +141,9 @@ input[type="submit"]:hover {
 }
 
 .button.add:hover {
-  background: #304f81;
+  background: #3e6a8e;
 }
 
-table {
-  border-collapse: collapse;
-  width: 150vw;
-  margin: 0 auto;
-  text-align: left;
-}
 
 thead {
   background-color: #f2f2f2;
@@ -115,7 +173,8 @@ tr:hover {
 }
 
 .deleteButton:hover {
-  background-color: $dark-blue;
+  transition: ease-in 0.2s;
+  background-color: #3e6a8e;
 }
 
 @media (max-width: 768px) {

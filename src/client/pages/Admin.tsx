@@ -1,4 +1,6 @@
 import React, {Component, useEffect, useState} from "react";
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from "../components/Admin.module.scss";
 import axios from "axios";
 
@@ -101,71 +103,6 @@ class RSSForm extends Component {
     }
 }
 
-// class AdminForm extends Component {
-//     handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
-//         e.preventDefault();
-//         console.log("submitted");
-//
-//         const adminName = e.target.username.value;
-//         const adminPassword = e.target.password.value;
-//
-//         const formData = {admin_name: adminName, admin_password: adminPassword};
-//
-//         fetch('api/post_admin', {
-//             method: "POST",
-//             body: JSON.stringify(formData),
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             }
-//         }).then((response) => {
-//             console.log(response);
-//             if (response.ok) {
-//                 // RSS feed was successfully added
-//                 alert("Admin was successfully added to the database!");
-//             } else {
-//                 // Display error message to user
-//                 response.text().then((errorMessage) => {
-//                     alert("There was an error adding the admin: " + errorMessage);
-//                 });
-//             }
-//             return response.json();
-//         });
-//     };
-//
-//     render() {
-//         return (
-//             <div className={styles.form}>
-//                 <h1>Add new Admin</h1>
-//                 <form onSubmit={this.handleSubmit} method="post">
-//                     <label>Username:</label>
-//                     <input
-//                         title="username"
-//                         type="text"
-//                         id="username"
-//                         name="username"
-//                         required
-//                     />
-//                     <br/>
-//                     <label>Password:</label>
-//                     <input
-//                         title="password"
-//                         type="password"
-//                         id="password"
-//                         name="password"
-//                         required
-//                     />
-//                     <br/>
-//                     <input
-//                         className={styles.button + " " + styles.add}
-//                         type="submit"
-//                         value="Add Admin"
-//                     />
-//                 </form>
-//             </div>
-//         );
-//     }
-// }
-
 export function RegisterFormAdmin() {
     const [csrfToken, setCsrfToken] = useState("");
     useEffect(() => {
@@ -225,7 +162,7 @@ export function RegisterFormAdmin() {
                 <label>Confirm password:</label>
                 <input type="password" name="password2"/>
                 <br/>
-                <input className={styles.button} type="submit" value="Register"/>
+                <input className={styles.button} id={styles.register} type="submit" value="Register"/>
             </form>
         </div>
     );
@@ -270,21 +207,20 @@ const RssTable: React.FC = () => {
             <div>
                 <table>
                     <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>URL</th>
-                        <th>Name</th>
-                        <th></th>
+                    <tr className={styles.RssRow}>
+                        <th id={styles.name}>Name</th>
+                        <th id={styles.url}>URL</th>
                     </tr>
                     </thead>
                     <tbody>
                     {rssFeeds.map((rssFeed) => (
-                        <tr key={rssFeed.id}>
-                            <td>{rssFeed.id}</td>
-                            <td>{rssFeed.url}</td>
-                            <td>{rssFeed.name}</td>
-                            <td>
-                                <button className={styles.deleteButton} onClick={() => handleDelete(rssFeed.id)}>X</button>
+                        <tr key={rssFeed.id} className={styles.RssRow} id={styles.feeds}>
+                            <td className={styles.RssData} id={styles.feedName}>{rssFeed.name}</td>
+                            <td className={styles.RssData} id={styles.feedUrl}>{rssFeed.url}</td>
+                            <td className={styles.RssData} id={styles.RssButton}>
+                                <button className={styles.deleteButton} onClick={() => handleDelete(rssFeed.id)}>
+                                    <FontAwesomeIcon icon={faTrashAlt} />
+                                </button>
                             </td>
                         </tr>
                     ))}
@@ -335,15 +271,18 @@ const AdminTable: React.FC = () => {
             <table>
                 <thead>
                 <tr>
-                    <th>name</th>
-                    <th></th>
+                    <th id={styles.adminNameHead}>Name</th>
                 </tr>
                 </thead>
                 <tbody>
                 {admins.map((admin) => (
-                    <tr key={admin.name}>
-                        <td>{admin.name}</td>
-                        <td><button className={styles.deleteButton} onClick={() => handleDelete(admin.name)}>X</button></td>
+                    <tr key={admin.name} id={styles.admins}>
+                        <td id={styles.adminName}>{admin.name}</td>
+                        <td className={styles.RssData} id={styles.RssButton}>
+                            <button className={styles.deleteButton} onClick={() => handleDelete(admin.name)}>
+                                <FontAwesomeIcon icon={faTrashAlt} />
+                            </button>
+                        </td>
                     </tr>
                 ))}
                 </tbody>
