@@ -50,15 +50,7 @@ def scrape():
 def parse(link, rss_id, curs_obj):
     feed = feedparser.parse(link)
 
-
     labels = []
-
-    if hasattr(feed, 'channel'):
-        print(feed.channel.title)
-
-
-
-
 
     # Loop through each article in the feed
     for entry in feed.entries:
@@ -72,7 +64,6 @@ def parse(link, rss_id, curs_obj):
         elif hasattr(entry, 'vrtns_nstag'):
             labels.append(entry.vrtns_nstag)
 
-        print(entry)
         # Get the article title
         title = entry.title
 
@@ -116,12 +107,12 @@ def parse(link, rss_id, curs_obj):
         curs_obj.execute(query, (title, description, thumbnail, url, pub_date, rss_id, 0))
 
         for label in labels:
-            print(label)
-            query1 = "INSERT INTO label VALUES (%s) ON CONFLICT DO NOTHING "
+            query1 = "INSERT INTO label VALUES (%s) ON CONFLICT DO NOTHING"
             curs_obj.execute(query1, [label])
-            print("label insert attempted")
+            print(f"article: `{title}`")
+            print(f">> label: `{label}`\n")
 
-            query2 = "INSERT INTO article_label VALUES (%s, %s)"
+            query2 = "INSERT INTO article_label VALUES (%s, %s) ON CONFLICT DO NOTHING"
             curs_obj.execute(query2, (url, label))
 
     con.commit()
