@@ -148,3 +148,29 @@
   max-width: 16px;
   max-height: 16px;
 }
+
+.labels_container {
+  padding: 20px 10px;
+  overflow-x: auto;
+}
+
+.labels {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.label {
+  display: inline-block;
+  padding: 8px 16px;
+  margin-right: 8px;
+  border-radius: 20px;
+  background-color: #e6e6e6;
+  font-size: 14px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.label:hover {
+  background-color: #d3d3d3;
+}
+

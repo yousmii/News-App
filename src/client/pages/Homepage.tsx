@@ -13,6 +13,7 @@ export default function Homepage() {
     const [username, setUsername] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [searchResults, setSearchResults] = useState<any>(null);
+    const [labels, setLabels] = useState<any>([]);
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
@@ -26,23 +27,37 @@ export default function Homepage() {
     const {promiseInProgress} = usePromiseTracker();
 
     useEffect(() => {
-      axios.get('/api/@me', {
-      headers: {
-          'Content-Type': 'application/json'
-      }
-  })
-      .then(response => {
-          if (response.status === 200) {
-              setUsername(response.data.username)
-          }
-          else {
-              console.log("Not logged in")
-          }
-      })
-      .catch(error => {
-          console.log(error)
-      })
-  }, [])
+        axios.get('/api/@me', {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => {
+                if (response.status === 200) {
+                    setUsername(response.data.username)
+                } else {
+                    console.log("Not logged in")
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }, [])
+
+    useEffect(() => {
+        axios.get('/api/labels')
+            .then(response => {
+                if (response.status === 200) {
+                    setLabels(response.data)
+                    console.log(labels)
+                } else {
+                    console.log("Could not get labels")
+                }
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }, [])
 
     const handleSearch = () => {
         trackPromise(
@@ -66,55 +81,54 @@ export default function Homepage() {
         }
     };
 
-    const TrackHistory = (link: string)  => {
-       const data = {
-           link: link
-       }
-       axios.put('/api/articles/view', data, {
-           headers: {
-               'Content-Type': 'application/json'
-           }
-       }).catch(error => {
-           console.log(error)
-       })
-       if (username !== null) {
-           axios.post('/api/history', data, {
-               headers: {
-                   'Content-Type': 'application/json'
-               }
-           }).catch(error => {
-               console.log(error)
-           })
-       }
-       else {
-           if (!Cookies.get("history_index")) {
-               Cookies.set("history_index", "0");
-           }
-           let AddCookie: boolean = false;
-           if (Cookies.get("history_"+Cookies.get("history_index")) === undefined) {
-               let array : string[] = []
-               Cookies.set("history_"+Cookies.get("history_index"), JSON.stringify(array));
-           }
-           let cookieValue = Cookies.get("history_" + Cookies.get("history_index"))
-           if (typeof cookieValue === "string") {
-               let Cookie_history = JSON.parse(cookieValue);
-               Cookie_history.push(link);
-               if (Cookie_history.length > 100) {
-                   AddCookie = true
-               }
-               Cookies.set("history_" + Cookies.get("history_index"), JSON.stringify(Cookie_history));
-           }
-           let indexValue = Cookies.get("history_index")
-           if (typeof indexValue === "string" && AddCookie) {
-               let newIndex : string = indexValue + 1;
-               Cookies.set("history_index", newIndex);
-           }
-       }
+    const TrackHistory = (link: string) => {
+        const data = {
+            link: link
+        }
+        axios.put('/api/articles/view', data, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).catch(error => {
+            console.log(error)
+        })
+        if (username !== null) {
+            axios.post('/api/history', data, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            }).catch(error => {
+                console.log(error)
+            })
+        } else {
+            if (!Cookies.get("history_index")) {
+                Cookies.set("history_index", "0");
+            }
+            let AddCookie: boolean = false;
+            if (Cookies.get("history_" + Cookies.get("history_index")) === undefined) {
+                let array: string[] = []
+                Cookies.set("history_" + Cookies.get("history_index"), JSON.stringify(array));
+            }
+            let cookieValue = Cookies.get("history_" + Cookies.get("history_index"))
+            if (typeof cookieValue === "string") {
+                let Cookie_history = JSON.parse(cookieValue);
+                Cookie_history.push(link);
+                if (Cookie_history.length > 100) {
+                    AddCookie = true
+                }
+                Cookies.set("history_" + Cookies.get("history_index"), JSON.stringify(Cookie_history));
+            }
+            let indexValue = Cookies.get("history_index")
+            if (typeof indexValue === "string" && AddCookie) {
+                let newIndex: string = indexValue + 1;
+                Cookies.set("history_index", newIndex);
+            }
+        }
     }
 
     return (
         <div>
-            { /* Search Bar */ }
+            { /* Search Bar */}
             <div>
                 <input type="text"
                        value={searchQuery}
@@ -122,7 +136,7 @@ export default function Homepage() {
                            setSearchQuery(e.target.value)}
                        onKeyDown={handleKeyDown}/>
             </div>
-            { /* Search Animation */ }
+            { /* Search Animation */}
             <div>
                 {promiseInProgress &&
                     <div
@@ -137,6 +151,16 @@ export default function Homepage() {
                         <Loader.ThreeDots color="#284B63" height="100" width="100"/>
                     </div>
                 }
+            </div>
+            { /* Labels */}
+            <div className={styles.labels_container}>
+                <div className={styles.labels} style={{display: "flex"}}>
+                    {
+                        labels.map((label: any) => (
+                            <li className={styles.label} key={label}>{label}</li>
+                        ))
+                    }
+                </div>
             </div>
             { /* Articles */}
             <div className={styles.container}>
