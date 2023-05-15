@@ -186,13 +186,6 @@ def click():
         )
         db.session.add(history_to_add)
 
-    history_to_add = History(
-        user_id=user_id,
-        article_link=article.link,
-        read_on=datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    )
-
-    db.session.add(history_to_add)
     db.session.commit()
     return jsonify({'message': 'tracked history successfully'})
 
