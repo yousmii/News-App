@@ -1,16 +1,30 @@
 ##wrapper to use the database
 from flask_sqlalchemy import SQLAlchemy
-from src.server.database import RSS
+from src.server.database import RSS, User
 from sqlalchemy import inspect
+from src.server.config import app
 
 
-# from src.server.config import db
-
-
-class ConnectDB():
+class ConnectDB:
     def __init__(self, db: SQLAlchemy):
         self.db = db
         self.counter = 1000
+        with app.app_context():
+            self.add_default_admin()
+
+    def add_default_admin(self):
+        # Add default admin user if he does not exist already
+        exists = User.query.filter_by(username="admin").first()
+        if not exists:
+            admin_user = User(
+                username="admin",
+                email_address="admin@team2.ua-ppdb.me",
+                password="team2-admin",
+                is_admin = True
+            )
+            self.db.session.add(admin_user)
+            self.db.session.commit()
+
 
     def checkRSSExists(self, id_):
         return self.db.session.query(RSS.id).filter_by(id=id_).first() is not None
