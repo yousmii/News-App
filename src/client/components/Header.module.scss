@@ -41,3 +41,18 @@
     }
   }
 }
+
+.pointer {
+  padding: 10px;
+  font-weight: bold;
+}
+
+.pointer:hover {
+  cursor: pointer;
+}
+
+#dashboard {
+  position: absolute;
+  font-weight: bold;
+  right: 150px;
+}

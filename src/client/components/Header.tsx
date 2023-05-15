@@ -13,6 +13,7 @@ import handleLogout from "./Logout";
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [username, setUsername] = useState<string | null>(null);
+  const [is_admin, setIs_admin] = useState<boolean>(false);
   const menuToggler = () => setMenuOpen((p) => !p);
 
 
@@ -25,6 +26,7 @@ const Header = () => {
       .then(response => {
           if (response.status === 200) {
               setUsername(response.data.username)
+              setIs_admin(response.data.is_admin)
           }
           else {
               console.log("Not logged in")
@@ -36,24 +38,31 @@ const Header = () => {
   }, [])
   return (
     <div className={styles.header}>
-      <div className={styles.header__content}>
-        <a href={"/"}>
-          <span className={styles.logo}>
-            <BsNewspaper />
-            <div>News Aggregator</div>
-          </span>
-        </a>
-        {username != null
-            ? (<h2>
-                <button onClick={handleLogout}>{username}</button>
-            </h2>)
-            : (<div className={styles.header__loginbutton}>
-                <a href={"/login"}>
-                    <IoPersonCircle />
-                 </a>
-                </div>)}
-
-      </div>
+        <div className={styles.header__content}>
+            <a href={"/"}>
+                <span className={styles.logo}>
+                    <BsNewspaper />
+                    <div>News Aggregator</div>
+                </span>
+            </a>
+            {is_admin &&
+                <a href={"/admin"} id={styles.dashboard}>
+                    Dashboard
+                </a>
+            }
+            {username != null
+                ?
+                <div>
+                    <button className={styles.pointer} onClick={handleLogout}>Logout</button>
+                </div>
+                :
+                <div className={styles.header__loginbutton}>
+                    <a href={"/login"}>
+                        <IoPersonCircle />
+                    </a>
+                </div>
+            }
+        </div>
     </div>
   );
 };
