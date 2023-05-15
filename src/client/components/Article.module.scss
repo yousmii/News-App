@@ -174,9 +174,20 @@
   background-color: #d3d3d3;
 }
 
-.searchBar {
+.filteringContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+}
+.searchBarContainer {
   padding: 20px 10px;
   position: relative;
+  flex-grow: 1;
+}
+
+.searchBar {
+  color: white;
 }
 
 .searchIcon {
@@ -185,4 +196,34 @@
   right: 30px;
   transform: translateY(-60%);
 }
+
+.sortBy {
+  position: relative;
+  display: inline-block;
+}
+
+.sortBySelect {
+  padding: 8px 16px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 20px;
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+.sortBySelect:focus {
+  outline: none;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
+}
+
+.sortBySelect::-ms-expand {
+  display: none;
+}
+
+.sortBySelect option {
+  font-size: 16px;
+  font-weight: bold;
+}
+
 

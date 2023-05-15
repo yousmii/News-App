@@ -5,7 +5,7 @@ import moment from "moment";
 import {usePromiseTracker} from "react-promise-tracker";
 import {trackPromise} from 'react-promise-tracker';
 import * as Loader from "react-loader-spinner";
-import { BsSearch} from "react-icons/bs";
+import {BsSearch} from "react-icons/bs";
 
 import Scroller from "../components/InfiteScroller"
 import Cookies from "js-cookie";
@@ -129,32 +129,42 @@ export default function Homepage() {
 
     return (
         <div>
-            { /* Search Bar */}
-            <div className={styles.searchBar}>
-                <input type="text"
-                       placeholder="Search"
-                       value={searchQuery}
-                       onChange={(e) =>
-                           setSearchQuery(e.target.value)}
-                       onKeyDown={handleKeyDown}/>
-                <BsSearch className={styles.searchIcon}/>
+            <div className={styles.filteringContainer}>
+                { /* Search Bar */}
+                <div className={styles.searchBarContainer}>
+                    <input type="text"
+                           placeholder="Search"
+                           value={searchQuery}
+                           onChange={(e) =>
+                               setSearchQuery(e.target.value)}
+                           onKeyDown={handleKeyDown}
+                           className={styles.searchBar}/>
+                    <BsSearch className={styles.searchIcon}/>
+                </div>
+                { /* Placeholder Sort By */}
+                <div className={styles.sortBy}>
+                    <select value="Sort By" className={styles.sortBySelect}>
+                        <option value="Recency">Recency</option>
+                        <option value="Popularity">Popularity</option>
+                    </select>
+                </div>
             </div>
             { /* Search Animation */}
-            <div>
-                {promiseInProgress &&
-                    <div
-                        style={{
-                            width: "100%",
-                            height: "100",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center"
-                        }}
-                    >
-                        <Loader.ThreeDots color="#284B63" height="100" width="100"/>
-                    </div>
-                }
-            </div>
+                <div>
+                    {promiseInProgress &&
+                        <div
+                            style={{
+                                width: "100%",
+                                height: "100",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center"
+                            }}
+                        >
+                            <Loader.ThreeDots color="#284B63" height="100" width="100"/>
+                        </div>
+                    }
+                </div>
             { /* Labels */}
             <div className={styles.labels_container}>
                 <div className={styles.labels} style={{display: "flex"}}>
