@@ -50,11 +50,10 @@ def scrape():
 def parse(link, rss_id, curs_obj):
     feed = feedparser.parse(link)
 
-    labels = []
-
     # Loop through each article in the feed
     for entry in feed.entries:
-        labels.clear()
+        labels = []
+
         if hasattr(entry, 'tags'):
             print(entry.tags)
             for i in entry.tags:
@@ -62,7 +61,13 @@ def parse(link, rss_id, curs_obj):
                 labels.append(i.term)
 
         elif hasattr(entry, 'vrtns_nstag'):
-            labels.append(entry.vrtns_nstag)
+            label_string = entry.vrtns_nstag
+            if "|" in label_string:
+                labels += label_string.split("|")
+            elif "&" in label_string:
+                labels += re.split(r' *& *', label_string)
+            else:
+                labels.append(entry.vrtns_nstag)
 
         # Get the article title
         title = entry.title
