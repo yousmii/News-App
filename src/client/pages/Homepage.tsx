@@ -5,6 +5,7 @@ import moment from "moment";
 import {usePromiseTracker} from "react-promise-tracker";
 import {trackPromise} from 'react-promise-tracker';
 import * as Loader from "react-loader-spinner";
+import { BsSearch} from "react-icons/bs";
 
 import Scroller from "../components/InfiteScroller"
 import Cookies from "js-cookie";
@@ -129,12 +130,14 @@ export default function Homepage() {
     return (
         <div>
             { /* Search Bar */}
-            <div>
+            <div className={styles.searchBar}>
                 <input type="text"
+                       placeholder="Search"
                        value={searchQuery}
                        onChange={(e) =>
                            setSearchQuery(e.target.value)}
                        onKeyDown={handleKeyDown}/>
+                <BsSearch className={styles.searchIcon}/>
             </div>
             { /* Search Animation */}
             <div>

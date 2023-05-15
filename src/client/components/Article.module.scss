@@ -174,3 +174,15 @@
   background-color: #d3d3d3;
 }
 
+.searchBar {
+  padding: 20px 10px;
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  transform: translateY(-60%);
+}
+
