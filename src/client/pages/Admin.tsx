@@ -14,11 +14,9 @@ export default function Admin() {
             })
             .then((response) => {
                 if (!response.data.is_admin) {
-                    alert("Not an admin");
-                    // window.location.href = "/";
+                    window.location.href = "/403";
                 } else if (response.data.status !== 200) {
-                    alert("Not logged in");
-                    // window.location.href = "/";
+                    window.location.href = "/403";
                 }
             })
             .catch((error) => {
