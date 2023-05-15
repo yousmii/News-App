@@ -7,8 +7,12 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager
 
 app = Flask('News-App')
-db = SQLAlchemy()
 app_data = dict()
+app.secret_key = '*^*(*&)(*)(*afafafaSDD47j\3yX R~X@H!jmM]Lwf/,?KT'
+app_data['app_name'] = 'NewsApp'
+# INITIALIZE SINGLETON SERVICES
+app.config["SQLALCHEMY_DATABASE_URI"] = engine.url
+db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 login_manager = LoginManager(app)
 
@@ -26,10 +30,6 @@ def run_app():
         `run_app()`
         """
         pass
-    app.secret_key = '*^*(*&)(*)(*afafafaSDD47j\3yX R~X@H!jmM]Lwf/,?KT'
-    app_data['app_name'] = 'NewsApp'
-    # INITIALIZE SINGLETON SERVICES
-    app.config["SQLALCHEMY_DATABASE_URI"] = engine.url
     db.init_app(app)
     with app.app_context():
         db.create_all()
