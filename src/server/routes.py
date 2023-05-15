@@ -22,8 +22,9 @@ from sqlalchemy import asc, or_
 
 ConnectDB = ConnectDB(db)
 
-
+# Add a feed to the database
 @app.route("/api/rss", methods=['POST'])
+@login_required
 def post_rss():
     feed_data = request.get_json()
 
@@ -31,8 +32,9 @@ def post_rss():
 
     return message, success
 
-
+# Delete an admin
 @app.route("/api/admins", methods=['DELETE'])
+@login_required
 def delete_admin():
     name = request.args.get('name', type=str)
     success = User.query.filter_by(username=name).delete()
@@ -40,7 +42,9 @@ def delete_admin():
     return {'message': 'Admin deleted successfully', "status": 200} if success \
         else {'message': 'Could not delete admin', "status": 500}
 
+# Delete an rss feed
 @app.route("/api/rss", methods=['DELETE'])
+@login_required
 def delete_feed():
     delete_id = request.args.get('delete_id', type=int)
     success = RSS.query.filter(RSS.id == delete_id).delete()
@@ -48,7 +52,7 @@ def delete_feed():
     return {'message': 'RSS Feed deleted successfully', "status": 200} if success \
         else {'message': 'Could not delete RSS Feed', "status": 500}
 
-
+# Return all articles
 @app.route("/api/articles", methods=['GET'])
 def get_articles():
     skip = request.args.get('offset', type=int)
@@ -59,6 +63,7 @@ def get_articles():
     articles = fetchPopular(skip)
     return json.dumps(articles)
 
+# Return all similar articles
 @app.route("/api/similarity/", methods=['GET'])
 def get_similar_articles():
     article_link = request.args.get('article_link', type=str)
@@ -76,14 +81,16 @@ def get_similar_articles():
     # Convert the set of similar article IDs to a list and return it as a JSON response
     return jsonify(list(similar_articles))
 
+# Return all relevant articles
 @app.route("/api/search", methods=['GET'])
 def get_search():
     query_string = request.args.get('q', type=str)
     articles = search(query_string)
     return json.dumps(articles)
 
-
+# Get all rss feeds
 @app.route("/api/rss", methods=['GET'])
+@login_required
 def get_feeds():
     db_feeds = RSS.query.order_by(asc(RSS.id)).all()
 
@@ -101,6 +108,7 @@ def get_feeds():
 
 
 @app.route("/api/admins", methods=['GET'])
+@login_required
 def get_admins():
     db_admins = User.query.filter_by(is_admin=True).order_by(asc(User.username)).all()
 
@@ -129,13 +137,13 @@ def forbidden_error(error):
 def internal_server_error(error):
     return jsonify({'error': 'Internal server error'}), 500
 
-
+# Get CSRF token
 @app.route('/api/csrf_token', methods=['GET'])
 def get_csrf_token():
     csrf_token = csrf.generate_csrf()
     return jsonify({'csrf_token': csrf_token})
 
-
+# Return user identity
 @app.route("/api/@me", methods=['GET'])
 def get_current_user():
     if not current_user.is_authenticated:
@@ -169,7 +177,7 @@ def click():
     db.session.commit()
     return jsonify({'message': 'tracked history successfully'})
 
-
+# Add a view to an article's counter
 @app.route('/api/articles/view', methods=['PUT'])
 def view():
     article = Article.query.filter_by(link=request.get_json().get('link')).first()
@@ -179,7 +187,7 @@ def view():
     db.session.commit()
     return jsonify({'message': 'view added successfully', "views": article.views})
 
-
+# Add a user
 @app.route('/api/users', methods=['POST'])
 def register_user():
     form_data = MultiDict(request.get_json())
@@ -199,7 +207,7 @@ def register_user():
     if form.errors != {}:
         return jsonify({'errors': form.errors})
 
-
+# Add an admin
 @app.route('/api/admins', methods=['POST'])
 @login_required
 def register_admin():
@@ -219,7 +227,6 @@ def register_admin():
         return jsonify({'message': 'Admin created successfully'})
     if form.errors != {}:
         return jsonify({'errors': form.errors})
-
 
 @app.route('/api/login', methods=['GET', 'POST'])
 def login():
