@@ -38,19 +38,15 @@ export default function Login() {
         },
       })
       .then((response) => {
-        console.log("oeifjzeoifjizoefjizejfizejfz")
         if (response.status === 200) {
           console.log(response);
-          window.location.reload();
-          // window.location.href = "/";
+          window.location.href = "/";
         }
         else if (response.status === 400) {
           window.location.reload();
-          console.log('hoizjfizojf')
         }
       })
       .catch((error) => {
-        console.log("qsmoifjzoiefjoizejfoizej")
         console.log(error.message);
       });
   };
