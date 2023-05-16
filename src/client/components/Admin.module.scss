@@ -5,7 +5,7 @@
 }
 
 .container {
-  display: block;
+  display: flexbox;
   padding: 40px 20px 20px;
 }
 
@@ -51,6 +51,7 @@ input[type="submit"] {
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  text-align: center;
 }
 
 #register:hover {
@@ -92,7 +93,7 @@ table {
 #RssButton {
   background: $bg;
   padding: 8px 16px;
-  border: none ;
+  border: none;
 }
 
 .RssRow {
@@ -144,7 +145,6 @@ table {
   background: #3e6a8e;
 }
 
-
 thead {
   background-color: #f2f2f2;
 }
@@ -186,4 +186,62 @@ tr:hover {
 
 .noScroll {
   overflow: hidden;
+}
+
+.titlecontainer {
+  padding-top: 2em;
+  text-align: center;
+  display: flexbox;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.8em;
+}
+
+.title {
+  font-size: 40px;
+  color: $dark-blue;
+  font-weight: 700;
+  margin-top: 0.3em;
+}
+
+.logo {
+  font-size: 80px;
+  margin-bottom: -30px;
+  color: $bg2;
+}
+
+.pagescontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: $small) {
+    flex-direction: column;
+  }
+}
+
+.pagecontainer {
+  width: 18em;
+  height: 18em;
+  background-color: #fff;
+  border-radius: 40px;
+  margin: 0.7em;
+
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.35));
+}
+
+.pagecontent {
+  top: 25%;
+  position: relative;
+  color: $dark-blue;
+  font-weight: 700;
+  font-size: 35px;
+  text-align: center;
+}
+.logorss {
+  font-size: 62px;
+}
+
+.logouser {
+  font-size: 90px;
+  margin-bottom: -0.4em;
 }
