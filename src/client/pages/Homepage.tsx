@@ -6,6 +6,7 @@ import {usePromiseTracker} from "react-promise-tracker";
 import {trackPromise} from 'react-promise-tracker';
 import * as Loader from "react-loader-spinner";
 import {BsSearch} from "react-icons/bs";
+import Carousel from "../components/Carousel";
 
 import Scroller from "../components/InfiteScroller"
 import Cookies from "js-cookie";
@@ -14,7 +15,6 @@ export default function Homepage() {
     const [username, setUsername] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [searchResults, setSearchResults] = useState<any>(null);
-    const [labels, setLabels] = useState<any>([]);
 
     useEffect(() => {
         const params = new URLSearchParams(window.location.search);
@@ -45,22 +45,7 @@ export default function Homepage() {
             })
     }, [])
 
-    useEffect(() => {
-        axios.get('/api/labels')
-            .then(response => {
-                if (response.status === 200) {
-                    setLabels(response.data)
-                    console.log(labels)
-                } else {
-                    console.log("Could not get labels")
-                }
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }, [])
-
-    const handleFilter = (event: any, labelFilter: string) => {
+    const handleFilter = (labelFilter: string) => {
         axios.get('/api/filter', {
             params: {
                 label: labelFilter
@@ -180,16 +165,7 @@ export default function Homepage() {
                     }
                 </div>
             { /* Labels */}
-            <div className={styles.labels_container}>
-                <div className={styles.labels} style={{display: "flex"}}>
-                    {
-                        labels.map((label: string) => (
-                            <button onClick={(event) => handleFilter(event, label)}
-                            >{label}</button>
-                        ))
-                    }
-                </div>
-            </div>
+            <Carousel handleFilter={handleFilter}/>
             { /* Articles */}
             <div className={styles.container}>
                 {searchResults ?
