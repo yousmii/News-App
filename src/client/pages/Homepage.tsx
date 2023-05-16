@@ -1,4 +1,4 @@
-import React, {isValidElement, useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import axios from "axios";
 import styles from "../components/Article.module.scss";
 import moment from "moment";
@@ -6,6 +6,7 @@ import {usePromiseTracker} from "react-promise-tracker";
 import {trackPromise} from 'react-promise-tracker';
 import * as Loader from "react-loader-spinner";
 import {BsSearch} from "react-icons/bs";
+import Carousel from "../components/Carousel";
 
 import Scroller from "../components/InfiteScroller"
 import Cookies from "js-cookie";
@@ -18,7 +19,6 @@ export default function Homepage() {
     const [searchFilter, setSearchFilter] = useState<string>("Recency")
 
     useEffect(() => {
-
         const params = new URLSearchParams(window.location.search);
         const q = params.get('q');
         if (q) {
@@ -76,6 +76,7 @@ export default function Homepage() {
     }, [])
 
     const handleFilter = (event: any, labelFilter: string) => {
+    const handleFilter = (labelFilter: string) => {
         axios.get('/api/filter', {
             params: {
                 label: labelFilter
@@ -208,16 +209,7 @@ export default function Homepage() {
                     }
                 </div>
             { /* Labels */}
-            <div className={styles.labels_container}>
-                <div className={styles.labels} style={{display: "flex"}}>
-                    {
-                        labels.map((label: string) => (
-                            <button onClick={(event) => handleFilter(event, label)}
-                            >{label}</button>
-                        ))
-                    }
-                </div>
-            </div>
+            <Carousel handleFilter={handleFilter}/>
             { /* Articles */}
             <div className={styles.container}>
                 {searchResults ?
