@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {isValidElement, useEffect, useState} from "react";
 import axios from "axios";
 import styles from "../components/Article.module.scss";
 import moment from "moment";
@@ -15,8 +15,10 @@ export default function Homepage() {
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [searchResults, setSearchResults] = useState<any>(null);
     const [labels, setLabels] = useState<any>([]);
+    const [searchFilter, setSearchFilter] = useState<string>("Recency")
 
     useEffect(() => {
+
         const params = new URLSearchParams(window.location.search);
         const q = params.get('q');
         if (q) {
@@ -28,6 +30,17 @@ export default function Homepage() {
     const {promiseInProgress} = usePromiseTracker();
 
     useEffect(() => {
+
+
+        //const filter = JSON.parse(localStorage.getItem('filter') || "")
+
+        //console.log("CALLING")
+
+        //if (filter != null) {
+
+          //  setSearchFilter(filter)
+        //}
+
         axios.get('/api/@me', {
             headers: {
                 'Content-Type': 'application/json'
@@ -46,6 +59,8 @@ export default function Homepage() {
     }, [])
 
     useEffect(() => {
+
+
         axios.get('/api/labels')
             .then(response => {
                 if (response.status === 200) {
@@ -78,7 +93,8 @@ export default function Homepage() {
         trackPromise(
             axios.get('/api/search', {
                 params: {
-                    q: searchQuery
+                    q: searchQuery,
+                    f: searchFilter
                 }
             })
                 .then(response => {
@@ -141,6 +157,18 @@ export default function Homepage() {
         }
     }
 
+    const onChange = (event : any) => {
+
+        const value = event.target.value;
+        setSearchFilter(value);
+
+        localStorage.setItem('filter',JSON.stringify(searchFilter))
+
+        console.log("CHANGES")
+
+
+    };
+
     return (
         <div>
             <div className={styles.filteringContainer}>
@@ -156,8 +184,8 @@ export default function Homepage() {
                     <BsSearch className={styles.searchIcon}/>
                 </div>
                 { /* Placeholder Sort By */}
-                <div className={styles.sortBy}>
-                    <select value="Sort By" className={styles.sortBySelect}>
+                <div className={styles.sortBy} >
+                    <select value={searchFilter} className={styles.sortBySelect} onChange={onChange}>
                         <option value="Recency">Recency</option>
                         <option value="Popularity">Popularity</option>
                     </select>
@@ -218,7 +246,13 @@ export default function Homepage() {
                         </div>
                     ) :
                     (
-                        <Scroller/>
+                        <Scroller
+
+                            filter={searchFilter}
+
+
+                        />
+
                     )
                 }
             </div>
