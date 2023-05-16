@@ -76,10 +76,23 @@ def get_article_by_label():
     # strip quotes from label_name
     label_name = label_name.replace("'", "").replace('"', '')
 
-    articles = Article_Labels.query.filter_by(label = label_name).all()
-    article_links = [article.article for article in articles]
+    articles_label_pairs = Article_Labels.query.filter_by(label = label_name).all()
+    article_links = [pair.article for pair in articles_label_pairs]
+    articles = []
+    for link in article_links:
+        articles_to_add = list(Article.query.filter_by(link = link).all())
+        for article_to_add in articles_to_add:
+            articles.append(
+                {
+                    "title": article_to_add.title,
+                    "description": article_to_add.description,
+                    "image": article_to_add.image,
+                    "link": article_to_add.link,
+                    "pub_date": article_to_add.pub_date
+                }
+            )
 
-    return jsonify(article_links)
+    return jsonify(articles)
 
 # Return all similar articles
 @app.route("/api/similarity/", methods=['GET'])
