@@ -56,11 +56,22 @@ def delete_feed():
 @app.route("/api/articles", methods=['GET'])
 def get_articles():
     skip = request.args.get('offset', type=int)
+    filter = request.args.get('filter', type=str)
 
     print("route received " + str(skip) + " as 'skip' argument")
 
     # articles = fetch(skip)
-    articles = fetchPopular(skip)
+
+    articles = []
+
+    if filter == "Popularity":
+        articles = fetchPopular(skip)
+        print("POPULAR")
+
+    if filter == "Recency":
+        articles = fetch(skip)
+        print("RECENT")
+
     return json.dumps(articles)
 
 # Return all labels
@@ -116,7 +127,10 @@ def get_similar_articles():
 @app.route("/api/search", methods=['GET'])
 def get_search():
     query_string = request.args.get('q', type=str)
-    articles = search(query_string)
+    filter = request.args.get('f', type=str)
+
+    if filter == "Recency":
+        articles = search(query_string)
     return json.dumps(articles)
 
 # Get all rss feeds
