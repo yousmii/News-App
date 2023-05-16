@@ -132,12 +132,20 @@
 }
 
 .published_by {
-  display: block;
+  display: inline-block;
   margin-top: 5px;
   font-size: 12px;
   white-space: pre-wrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+#published_by_container {
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .published_by:hover {

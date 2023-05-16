@@ -41,14 +41,6 @@ class History(db.Model):
     read_on = db.Column(db.String, nullable=False)
 
 
-class Creates(db.Model):
-    __tablename__ = 'creates'
-    creator = db.Column(db.String, db.ForeignKey('user.username', ondelete='CASCADE', onupdate='CASCADE'),
-                        primary_key=True)
-    created = db.Column(db.String, db.ForeignKey('user.username', ondelete='CASCADE', onupdate='CASCADE'),
-                        primary_key=True)
-
-
 class RSS(db.Model):
     __tablename__ = 'rss'
     id = db.Column(db.Integer, db.Sequence('rss_id_seq', start=0, increment=1), primary_key=True)
