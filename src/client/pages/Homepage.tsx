@@ -60,6 +60,20 @@ export default function Homepage() {
             })
     }, [])
 
+    const handleFilter = (event: any, labelFilter: string) => {
+        axios.get('/api/filter', {
+            params: {
+                label: labelFilter
+            }
+        })
+            .then(response => {
+                setSearchResults(response.data)
+        })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+
     const handleSearch = () => {
         trackPromise(
             axios.get('/api/search', {
@@ -169,8 +183,9 @@ export default function Homepage() {
             <div className={styles.labels_container}>
                 <div className={styles.labels} style={{display: "flex"}}>
                     {
-                        labels.map((label: any) => (
-                            <li className={styles.label} key={label}>{label}</li>
+                        labels.map((label: string) => (
+                            <button onClick={(event) => handleFilter(event, label)}
+                            >{label}</button>
                         ))
                     }
                 </div>
