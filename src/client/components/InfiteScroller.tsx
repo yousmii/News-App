@@ -159,16 +159,19 @@ const Scroller = () => {
                             {similarArticles.length > 0 && (
                                 <p>
                                     Also published by:{' '}
-                                    {similarArticles.map((similarArticleId: any) => (
-                                        <React.Fragment key={similarArticleId}>
-                                            <a href={`${similarArticleId}`} target="_blank"
-                                               rel="noopener noreferrer" className={styles.published_by}>
-                                                <img
-                                                    src={'http://www.google.com/s2/favicons?domain=' + similarArticleId}
-                                                    alt='favicon' className={styles.favicon}/>
-                                            </a>
-                                        </React.Fragment>
-                                    ))}
+                                    <div id={styles.published_by_container}>
+                                        {similarArticles.map((similarArticleId: any) => (
+                                            <React.Fragment key={similarArticleId}>
+                                                <a href={`${similarArticleId}`} target="_blank"
+                                                   rel="noopener noreferrer" className={styles.published_by}>
+                                                    <img
+                                                        src={'http://www.google.com/s2/favicons?domain=' + similarArticleId}
+                                                        alt='favicon' className={styles.favicon}/>
+                                                </a>
+                                            </React.Fragment>
+                                        ))}
+                                    </div>
+
                                 </p>
                             )}
                         </div>
