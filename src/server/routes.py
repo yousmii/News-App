@@ -13,7 +13,7 @@ from src.server.app import app
 from src.server.config import app_data, db
 from src.server.ArticlesFetcher import fetch, fetchPopular
 from src.server.ConnectDB import ConnectDB
-from src.server.database import User, RSS, TF_IDF, Article, History, Label
+from src.server.database import User, RSS, TF_IDF, Article, History, Label, Article_Labels
 from search import search
 from sqlalchemy import asc, or_
 
@@ -69,6 +69,17 @@ def get_labels():
     labels = Label.query.all()
 
     return jsonify([label.label for label in labels])
+
+@app.route("/api/filter", methods=['GET'])
+def get_article_by_label():
+    label_name = request.args.get('label', type=str)
+    # strip quotes from label_name
+    label_name = label_name.replace("'", "").replace('"', '')
+
+    articles = Article_Labels.query.filter_by(label = label_name).all()
+    article_links = [article.article for article in articles]
+
+    return jsonify(article_links)
 
 # Return all similar articles
 @app.route("/api/similarity/", methods=['GET'])
