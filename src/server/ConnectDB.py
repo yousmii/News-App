@@ -1,25 +1,33 @@
 ##wrapper to use the database
 from flask_sqlalchemy import SQLAlchemy
-from src.server.database import RSS
+from src.server.database import RSS, User
 from sqlalchemy import inspect
+from src.server.config import app
 
 
-# from src.server.config import db
-
-
-class ConnectDB():
+class ConnectDB:
     def __init__(self, db: SQLAlchemy):
         self.db = db
         self.counter = 1000
+        with app.app_context():
+            self.add_default_admin()
 
-    # def checkUserExists(self, cookie):
-    #     return self.db.session.query(User.cookie).filter_by(cookie=cookie).first() is not None
+    def add_default_admin(self):
+        # Add default admin user if he does not exist already
+        exists = User.query.filter_by(username="admin").first()
+        if not exists:
+            admin_user = User(
+                username="admin",
+                email_address="admin@team2.ua-ppdb.me",
+                password="team2-admin",
+                is_admin = True
+            )
+            self.db.session.add(admin_user)
+            self.db.session.commit()
+
 
     def checkRSSExists(self, id_):
         return self.db.session.query(RSS.id).filter_by(id=id_).first() is not None
-
-    # def checkAdminExists(self, username):
-    #     return self.db.session.query(Admin.name).filter_by(name=username).first() is not None
 
     def column_exists(self, table=None, column=None):
         found = False
@@ -59,23 +67,6 @@ class ConnectDB():
                             found = True
                             return found
         return found
-
-    # def addUser(self, cookie, history=""):
-    #     u = User(cookie=cookie, history=history)
-    #     if not self.checkUserExists(cookie):
-    #         self.db.session.add(u)
-    #         self.db.session.commit()
-    #     else:
-    #         print("user already in db")
-
-    # def addAdmin(self, username: str, password: str):
-    #     admin = Admin(name=username, password=password)
-    #     if not self.checkAdminExists(admin.name):
-    #         self.db.session.add(admin)
-    #         self.db.session.commit()
-    #         return 201, "New admin successfully added."
-    #     else:
-    #         return 500, "Admin name already in database. Please choose a different username."
 
     def addRSS(self, feed_name: str, feed_url: str):
         rss = RSS(name=feed_name, rss_url=feed_url)

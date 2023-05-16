@@ -38,12 +38,16 @@ export default function Login() {
         },
       })
       .then((response) => {
-        console.log(response);
-        window.location.reload();
-        window.location.href = "/";
+        if (response.status === 200) {
+          console.log(response);
+          window.location.href = "/";
+        }
+        else if (response.status === 400) {
+          window.location.reload();
+        }
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.message);
       });
   };
   return (

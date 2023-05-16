@@ -21,7 +21,6 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(length=60), nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
 
-
     @property
     def password(self):
         # password_hash?
@@ -35,19 +34,11 @@ class User(db.Model, UserMixin):
         return bcrypt.check_password_hash(self.password_hash, attempted_password)
 
 
-# class Admin(db.Model):
-#     __tablename__ = 'admin'
-#     name = db.Column(db.String(255), primary_key=True)
-#     password = db.Column(db.String, nullable=False)
-#     id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE', onupdate='CASCADE'), unique=True)
-
-
-class Creates(db.Model):
-    __tablename__ = 'creates'
-    creator = db.Column(db.String, db.ForeignKey('user.username', ondelete='CASCADE', onupdate='CASCADE'),
-                        primary_key=True)
-    created = db.Column(db.String, db.ForeignKey('user.username', ondelete='CASCADE', onupdate='CASCADE'),
-                        primary_key=True)
+class History(db.Model):
+    __tablename__ = 'history'
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True)
+    article_link = db.Column(db.String, db.ForeignKey('article.link', ondelete='CASCADE', onupdate='CASCADE'), primary_key=True)
+    read_on = db.Column(db.String, nullable=False)
 
 
 class RSS(db.Model):
@@ -55,8 +46,6 @@ class RSS(db.Model):
     id = db.Column(db.Integer, db.Sequence('rss_id_seq', start=0, increment=1), primary_key=True)
     rss_url = db.Column(db.String, nullable=False)
     name = db.Column(db.String)
-
-
 
 class Label(db.Model):
     __tablename__ = "label"
@@ -73,24 +62,21 @@ class Article(db.Model):
     link = db.Column(db.String, primary_key=True)
     pub_date = db.Column(db.String, nullable=False)
     rss = db.Column(db.INT, db.ForeignKey('rss.id', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
-    clickCount = db.Column(db.INT, nullable=False)
-    labels = relationship('Label', secondary='article_label', backref="article")
+    views = db.Column(db.Integer, nullable=False, default=0)
 
+    labels = relationship('Label', secondary = 'article_label')
 
 class Article_Labels(db.Model):
     __tablename__ = "article_label"
-    article_id = db.Column(db.String, db.ForeignKey('article.link', onupdate="CASCADE", ondelete='CASCADE'),primary_key= True)
-    label_id = db.Column(db.String, db.ForeignKey('label.label', onupdate="CASCADE", ondelete='CASCADE'), primary_key= True)
-
+    article = db.Column(db.String, db.ForeignKey('article.link', onupdate="CASCADE", ondelete='CASCADE'),primary_key=True)
+    label = db.Column(db.String, db.ForeignKey('label.label', onupdate="CASCADE", ondelete='CASCADE'), primary_key=True)
 
 class TF_IDF(db.Model):
     __tablename__ = 'tf_idf'
-    article1 = db.Column(db.String, db.ForeignKey('article.link', ondelete='CASCADE', onupdate='CASCADE'),
+    article1 = db.Column(db.String, db.ForeignKey('article.link', onupdate='CASCADE'),
                          nullable=False, primary_key=True)
     article2 = db.Column(db.String, db.ForeignKey('article.link', onupdate='CASCADE'),
                          nullable=False, primary_key=True)
-
-
 
 class Feed(db.Model):
     __tablename__ = 'feed'
@@ -98,10 +84,3 @@ class Feed(db.Model):
                         nullable=False, primary_key=True)
     user = db.Column(db.INT, db.ForeignKey('user.id', ondelete='CASCADE', onupdate='CASCADE'), nullable=False,
                      primary_key=True)
-
-
-
-
-
-
-
