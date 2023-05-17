@@ -133,9 +133,6 @@ export default function Homepage() {
         setFilter(value);
 
         Cookies.set('filter', value);
-
-        console.log("CHANGES");
-
     };
 
 

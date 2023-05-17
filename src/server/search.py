@@ -117,8 +117,6 @@ def search(input_string: str):
         }
         articles.append(article)
 
-    print(*articles, sep="\n")
-
     return articles
 
 
