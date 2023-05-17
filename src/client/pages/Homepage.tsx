@@ -21,10 +21,8 @@ export default function Homepage() {
 
         const filter = Cookies.get('filter')
 
-        console.log(filter)
 
         if (filter != null) {
-
             setSearchFilter(filter)
         }
 
@@ -147,7 +145,8 @@ export default function Homepage() {
 
         console.log("CHANGES");
 
-        window.location.reload();
+        window.location.reload()
+
 
 
     };

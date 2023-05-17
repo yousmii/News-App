@@ -13,16 +13,20 @@ const Scroller = (props : any) => {
     const [skip, setSkip] = useState(0);
     const [hasMore, setHasMore] = useState(true);
     const [username, setUsername] = useState<string | null>(null);
-    const [searchFilter, setSearchFilter] = useState<string>(props.filter)
+    const [searchFilter, setSearchFilter] = useState<string>(Cookies.get('filter')!)
     const [dataLength, setDataLength] = useState<any>(0)
 
 
     useEffect(() => {
 
 
-        setSearchFilter(props.filter);
+        const filter = Cookies.get('filter');
 
-        console.log(searchFilter)
+        if (typeof filter === "string") {
+
+            setSearchFilter(filter)
+
+        }
 
         fetchData();
 
@@ -42,15 +46,21 @@ const Scroller = (props : any) => {
                 console.log(error)
             })
 
-        console.log(searchFilter)
     }, [props.filter]);
 
     const fetchData = async () => {
+
+            console.log("FETCHING WITH FOLLOWING FILTER");
+            console.log(Cookies.get('filter'))
+
         const response = await axios.get(
+
+
             '/api/articles', {
                 params: {
                     offset: skip,
-                    filter: searchFilter
+                    filter: Cookies.get('filter')!
+
                 }
             }
         );

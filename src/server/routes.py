@@ -68,7 +68,7 @@ def get_articles():
         articles = fetchPopular(skip)
         print("POPULAR")
 
-    if filter == "Recency":
+    elif filter == "Recency":
         articles = fetch(skip)
         print("RECENT")
 
