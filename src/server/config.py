@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 
 from src.server.sql.sql_config import engine
 from flask_bcrypt import Bcrypt
-from flask_login import LoginManager
+from flask_login import LoginManager, UserMixin
 
 app = Flask('News-App')
 app_data = dict()

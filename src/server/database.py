@@ -50,8 +50,9 @@ class RSS(db.Model):
 class Label(db.Model):
     __tablename__ = "label"
     label = db.Column(db.String, primary_key=True)
+    articles = relationship('Article', secondary='article_label',backref="label")
 
-    articles = relationship('Article', secondary='article_label')
+
 
 class Article(db.Model):
     __tablename__ = 'article'

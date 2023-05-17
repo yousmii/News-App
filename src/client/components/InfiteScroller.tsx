@@ -8,13 +8,24 @@ import {Simulate} from "react-dom/test-utils";
 import error = Simulate.error;
 
 
-const Scroller = () => {
+const Scroller = (props : any) => {
     const [articles, setArticles] = useState<any>([]);
     const [skip, setSkip] = useState(0);
     const [hasMore, setHasMore] = useState(true);
     const [username, setUsername] = useState<string | null>(null);
+    const [searchFilter, setSearchFilter] = useState<string>(props.filter)
+    const [dataLength, setDataLength] = useState<any>(0)
+
 
     useEffect(() => {
+
+
+        setSearchFilter(props.filter);
+
+        console.log(searchFilter)
+
+        fetchData();
+
         axios.get('/api/@me', {
             headers: {
                 'Content-Type': 'application/json'
@@ -30,14 +41,16 @@ const Scroller = () => {
             .catch(error => {
                 console.log(error)
             })
-        fetchData();
-    }, []);
+
+        console.log(searchFilter)
+    }, [props.filter]);
 
     const fetchData = async () => {
         const response = await axios.get(
             '/api/articles', {
                 params: {
-                    offset: skip
+                    offset: skip,
+                    filter: searchFilter
                 }
             }
         );
@@ -74,6 +87,7 @@ const Scroller = () => {
 
             setArticles(articles.concat(newData));
             setSkip(skip + 10);
+            setDataLength(dataLength+response.data.length)
         } else {
             setHasMore(false);
         }
@@ -127,7 +141,7 @@ const Scroller = () => {
 
     return (
         <InfiniteScroll
-            dataLength={articles.length}
+            dataLength={dataLength}
             next={fetchData}
             hasMore={hasMore}
             loader={<h4>Loading...</h4>}
@@ -136,6 +150,7 @@ const Scroller = () => {
                     <b>End of feed</b>
                 </p>
             }
+
         >
             <div className={styles.articles}>
                 {articles.map(({link, image, title, description, pub_date, similarArticles}: {
