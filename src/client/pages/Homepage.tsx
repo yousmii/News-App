@@ -15,10 +15,21 @@ export default function Homepage() {
     const [username, setUsername] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [searchResults, setSearchResults] = useState<any>(null);
-    const [labels, setLabels] = useState<any>([]);
     const [searchFilter, setSearchFilter] = useState<string>("Recency")
 
     useEffect(() => {
+
+        const filter = Cookies.get('filter')
+
+        console.log(filter)
+
+        if (filter != null) {
+
+            setSearchFilter(filter)
+        }
+
+
+
         const params = new URLSearchParams(window.location.search);
         const q = params.get('q');
         if (q) {
@@ -30,17 +41,6 @@ export default function Homepage() {
     const {promiseInProgress} = usePromiseTracker();
 
     useEffect(() => {
-
-
-        //const filter = JSON.parse(localStorage.getItem('filter') || "")
-
-        //console.log("CALLING")
-
-        //if (filter != null) {
-
-          //  setSearchFilter(filter)
-        //}
-
         axios.get('/api/@me', {
             headers: {
                 'Content-Type': 'application/json'
@@ -58,24 +58,6 @@ export default function Homepage() {
             })
     }, [])
 
-    useEffect(() => {
-
-
-        axios.get('/api/labels')
-            .then(response => {
-                if (response.status === 200) {
-                    setLabels(response.data)
-                    console.log(labels)
-                } else {
-                    console.log("Could not get labels")
-                }
-            })
-            .catch(error => {
-                console.log(error)
-            })
-    }, [])
-
-    const handleFilter = (event: any, labelFilter: string) => {
     const handleFilter = (labelFilter: string) => {
         axios.get('/api/filter', {
             params: {
@@ -94,8 +76,7 @@ export default function Homepage() {
         trackPromise(
             axios.get('/api/search', {
                 params: {
-                    q: searchQuery,
-                    f: searchFilter
+                    q: searchQuery
                 }
             })
                 .then(response => {
@@ -157,18 +138,20 @@ export default function Homepage() {
             }
         }
     }
-
     const onChange = (event : any) => {
 
         const value = event.target.value;
         setSearchFilter(value);
 
-        localStorage.setItem('filter',JSON.stringify(searchFilter))
+        Cookies.set('filter', value);
 
-        console.log("CHANGES")
+        console.log("CHANGES");
+
+        window.location.reload();
 
 
     };
+
 
     return (
         <div>
@@ -185,8 +168,8 @@ export default function Homepage() {
                     <BsSearch className={styles.searchIcon}/>
                 </div>
                 { /* Placeholder Sort By */}
-                <div className={styles.sortBy} >
-                    <select value={searchFilter} className={styles.sortBySelect} onChange={onChange}>
+                <div className={styles.sortBy}>
+                    <select value= {searchFilter} className={styles.sortBySelect} onChange={onChange}>
                         <option value="Recency">Recency</option>
                         <option value="Popularity">Popularity</option>
                     </select>
@@ -238,17 +221,10 @@ export default function Homepage() {
                         </div>
                     ) :
                     (
-                        <Scroller
-
-                            filter={searchFilter}
-
-
-                        />
-
+                        <Scroller/>
                     )
                 }
             </div>
         </div>
     );
 }
-

@@ -20,16 +20,9 @@ const Scroller = (props : any) => {
     useEffect(() => {
 
 
-
-
-        const scrollable = document.getElementById("scrollableDiv")!;
-        window.scrollTo(0, 0);
-        setDataLength(0);
-        setHasMore(true);
-        setArticles([]);
-        setSkip(0);
-
         setSearchFilter(props.filter);
+
+        console.log(searchFilter)
 
         fetchData();
 
