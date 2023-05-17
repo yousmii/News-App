@@ -58,7 +58,7 @@ def get_articles():
     skip = request.args.get('offset', type=int)
     filter = request.args.get('filter', type=str)
 
-    print("route received " + str(skip) + " as 'skip' argument")
+    print("route received " + str(skip) + " as 'skip' argument", flush=True)
 
     # articles = fetch(skip)
 
@@ -66,13 +66,14 @@ def get_articles():
 
     if filter == "Popularity":
         articles = fetchPopular(skip)
-        print("POPULAR")
+        print("POPULAR", flush=True)
 
-    if filter == "Recency":
+    elif filter == "Recency":
         articles = fetch(skip)
-        print("RECENT")
+        print("RECENT", flush=True)
 
     else:
+        print("else", flush=True)
         articles = fetch(skip)
 
     return json.dumps(articles)

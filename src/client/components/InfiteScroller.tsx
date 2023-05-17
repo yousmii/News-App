@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import InfiniteScroll from "react-infinite-scroll-component";
 import styles from "../components/Article.module.scss";
 import Cookies from "js-cookie";
@@ -13,21 +13,18 @@ const Scroller = ({f}: {f: string}) => {
     const [skip, setSkip] = useState(0);
     const [hasMore, setHasMore] = useState(true);
     const [username, setUsername] = useState<string | null>(null);
-    const [currentFilter, setCurrentFilter] = useState<string>("recency")
+    const firstRender = useRef(true);
 
     useEffect(() => {
     // This code will execute whenever the `filter` value changes
-        console.log('Filter value has changed:', f);
-        if (f === currentFilter) {
+        if (firstRender.current) {
+            firstRender.current = false;
             return;
-
-        } else {
-            setCurrentFilter(f);
-            setArticles([]);
-            setSkip(0); // Reset skip value
-            setHasMore(true);
-            fetchData();
         }
+        console.log('Filter value has changed:', f);
+        setArticles([]);
+        setHasMore(true);
+        fetchData(true);
   }, [f]);
 
     useEffect(() => {
@@ -49,12 +46,18 @@ const Scroller = ({f}: {f: string}) => {
         fetchData();
     }, []);
 
-    const fetchData = async () => {
+    const fetchData = async (reset: boolean = false) => {
+        let apiSkip = 0;
+        if (reset) {
+            setSkip(prevState => 10);
+        } else {
+            apiSkip = skip;
+        }
         const response = await axios.get(
             '/api/articles', {
                 params: {
-                    offset: skip,
-                    filter: currentFilter
+                    offset: apiSkip,
+                    filter: f
                 }
             }
         );
@@ -88,9 +91,10 @@ const Scroller = ({f}: {f: string}) => {
                 ...group.article,
                 similarArticles: group.similarArticles
             }));
-
-            setArticles(articles.concat(newData));
-            setSkip(skip + 10);
+            if (!reset) {
+                setSkip(prevSkip => prevSkip + 10);
+            }
+            setArticles((prevArticles: any[]) => prevArticles.concat(newData));
         } else {
             setHasMore(false);
         }

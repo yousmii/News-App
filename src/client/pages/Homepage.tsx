@@ -15,7 +15,7 @@ export default function Homepage() {
     const [username, setUsername] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [searchResults, setSearchResults] = useState<any>(null);
-    const [filter, setFilter] = useState<string>("recency");
+    const [filter, setFilter] = useState<string>("Recency");
 
     useEffect(() => {
 
