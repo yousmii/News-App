@@ -72,6 +72,9 @@ def get_articles():
         articles = fetch(skip)
         print("RECENT")
 
+    else:
+        articles = fetch(skip)
+
     return json.dumps(articles)
 
 # Return all labels
