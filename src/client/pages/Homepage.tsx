@@ -15,20 +15,9 @@ export default function Homepage() {
     const [username, setUsername] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [searchResults, setSearchResults] = useState<any>(null);
-    const [searchFilter, setSearchFilter] = useState<string>("Recency")
+    const [filter, setFilter] = useState<string>("recency");
 
     useEffect(() => {
-
-        const filter = Cookies.get('filter')
-
-        console.log(filter)
-
-        if (filter != null) {
-
-            setSearchFilter(filter)
-        }
-
-
 
         const params = new URLSearchParams(window.location.search);
         const q = params.get('q');
@@ -141,14 +130,11 @@ export default function Homepage() {
     const onChange = (event : any) => {
 
         const value = event.target.value;
-        setSearchFilter(value);
+        setFilter(value);
 
         Cookies.set('filter', value);
 
         console.log("CHANGES");
-
-        window.location.reload();
-
 
     };
 
@@ -169,8 +155,8 @@ export default function Homepage() {
                 </div>
                 { /* Placeholder Sort By */}
                 <div className={styles.sortBy}>
-                    <select value= {searchFilter} className={styles.sortBySelect} onChange={onChange}>
-                        <option value="Recency">Recency</option>
+                    <select value={filter} className={styles.sortBySelect} onChange={onChange}>
+                        <option value="Recency" >Recency</option>
                         <option value="Popularity">Popularity</option>
                     </select>
                 </div>
@@ -221,10 +207,11 @@ export default function Homepage() {
                         </div>
                     ) :
                     (
-                        <Scroller/>
+                        <Scroller f={filter}/>
                     )
                 }
             </div>
         </div>
     );
 }
+

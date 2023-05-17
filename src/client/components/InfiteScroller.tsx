@@ -8,24 +8,29 @@ import {Simulate} from "react-dom/test-utils";
 import error = Simulate.error;
 
 
-const Scroller = (props : any) => {
+const Scroller = ({f}: {f: string}) => {
     const [articles, setArticles] = useState<any>([]);
     const [skip, setSkip] = useState(0);
     const [hasMore, setHasMore] = useState(true);
     const [username, setUsername] = useState<string | null>(null);
-    const [searchFilter, setSearchFilter] = useState<string>(props.filter)
-    const [dataLength, setDataLength] = useState<any>(0)
-
+    const [currentFilter, setCurrentFilter] = useState<string>("recency")
 
     useEffect(() => {
+    // This code will execute whenever the `filter` value changes
+        console.log('Filter value has changed:', f);
+        if (f === currentFilter) {
+            return;
 
+        } else {
+            setCurrentFilter(f);
+            setArticles([]);
+            setSkip(0); // Reset skip value
+            setHasMore(true);
+            fetchData();
+        }
+  }, [f]);
 
-        setSearchFilter(props.filter);
-
-        console.log(searchFilter)
-
-        fetchData();
-
+    useEffect(() => {
         axios.get('/api/@me', {
             headers: {
                 'Content-Type': 'application/json'
@@ -41,16 +46,15 @@ const Scroller = (props : any) => {
             .catch(error => {
                 console.log(error)
             })
-
-        console.log(searchFilter)
-    }, [props.filter]);
+        fetchData();
+    }, []);
 
     const fetchData = async () => {
         const response = await axios.get(
             '/api/articles', {
                 params: {
                     offset: skip,
-                    filter: searchFilter
+                    filter: currentFilter
                 }
             }
         );
@@ -87,7 +91,6 @@ const Scroller = (props : any) => {
 
             setArticles(articles.concat(newData));
             setSkip(skip + 10);
-            setDataLength(dataLength+response.data.length)
         } else {
             setHasMore(false);
         }
@@ -141,7 +144,7 @@ const Scroller = (props : any) => {
 
     return (
         <InfiniteScroll
-            dataLength={dataLength}
+            dataLength={articles.length}
             next={fetchData}
             hasMore={hasMore}
             loader={<h4>Loading...</h4>}
@@ -150,7 +153,6 @@ const Scroller = (props : any) => {
                     <b>End of feed</b>
                 </p>
             }
-
         >
             <div className={styles.articles}>
                 {articles.map(({link, image, title, description, pub_date, similarArticles}: {
