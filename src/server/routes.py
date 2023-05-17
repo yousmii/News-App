@@ -88,9 +88,11 @@ def get_labels():
 def get_article_by_label():
     label_name = request.args.get('label', type=str)
     # strip quotes from label_name
-    label_name = label_name.replace("'", "").replace('"', '')
+    labels = label_name.replace("'", "").replace('"', '')
+    labels = labels.split(',')
 
-    articles_label_pairs = Article_Labels.query.filter_by(label = label_name).all()
+    articles_label_pairs = Article_Labels.query.filter(Article_Labels.label.in_(labels)).all()
+    #articles_label_pairs = Article_Labels.query.filter_by(label = labels).all()
     article_links = [pair.article for pair in articles_label_pairs]
     articles = []
     for link in article_links:
