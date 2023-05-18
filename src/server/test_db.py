@@ -1,7 +1,7 @@
 import unittest
 from sqlalchemy import inspect
-from .config import db
-from ConnectDB import ConnectDB
+from src.server.config import db
+from src.server.ConnectDB import ConnectDB
 
 connect = ConnectDB(db)
 

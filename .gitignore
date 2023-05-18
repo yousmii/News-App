@@ -37,3 +37,7 @@ dist-ssr
 src/server/.0
 src/server/.records
 src/server/.current_record
+yarn.lock
+
+# egg files??
+News_app.egg-info/*

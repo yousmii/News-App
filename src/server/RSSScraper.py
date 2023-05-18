@@ -1,19 +1,36 @@
 import time
 
 import dateparser
+from datetime import datetime, timedelta
 import re
 import feedparser
 import psycopg2
 
 from bs4 import BeautifulSoup
 
+from link_articles import link_articles
 
 def scrape():
     print("running scraper🥱..")
     curs_obj = con.cursor()
 
-    curs_obj.execute('TRUNCATE TABLE article CASCADE')
+    # delete articles older than 30 days
+    thirty_days_ago = datetime.now() - timedelta(days=30)
 
+    curs_obj.execute('SELECT pub_date, link FROM article')
+    try:
+        pub_dates, links = zip(*curs_obj.fetchall())
+    except ValueError:
+        # no articles in table yet
+        pub_dates = []
+        links = []
+
+    for pub_date, link in zip(pub_dates, links):
+        if datetime.strptime(pub_date, '%Y-%m-%d %H:%M:%S') < thirty_days_ago:
+            print(f"Deleting article {link}, because it is from {pub_date}")
+            curs_obj.execute('DELETE FROM article WHERE link = %s', (link,))
+
+    # parse new articles
     curs_obj.execute('SELECT * FROM rss')
     rss_feeds = curs_obj.fetchall()
     for rss_feed in rss_feeds:
@@ -23,12 +40,35 @@ def scrape():
 
     print("successfully scraped new articles✅")
 
+    print("linking the new articles🥱..")
+
+    link_articles()
+
+    print("successfully linked new articles✅")
+
 
 def parse(link, rss_id, curs_obj):
     feed = feedparser.parse(link)
 
     # Loop through each article in the feed
     for entry in feed.entries:
+        labels = []
+
+        if hasattr(entry, 'tags'):
+            print(entry.tags)
+            for i in entry.tags:
+                print(i.term)
+                labels.append(i.term)
+
+        elif hasattr(entry, 'vrtns_nstag'):
+            label_string = entry.vrtns_nstag
+            if "|" in label_string:
+                labels += label_string.split("|")
+            elif "&" in label_string:
+                labels += re.split(r' *& *', label_string)
+            else:
+                labels.append(entry.vrtns_nstag)
+
         # Get the article title
         title = entry.title
 
@@ -49,20 +89,39 @@ def parse(link, rss_id, curs_obj):
             if img_tag:
                 thumbnail = img_tag['src']
 
+        if not thumbnail:
+            if "media_content" in entry:
+                url = entry.media_content[0]["url"]
+                thumbnail = url if not "" else None
+
         # Get the article URL
         url = entry.link
 
         # Get the publication date
-        pub_date = dateparser.parse(entry.published).strftime('%Y-%m-%d %H:%M:%S')
+        try:
+            pub_date = dateparser.parse(entry.published).strftime('%Y-%m-%d %H:%M:%S')
+        except Exception as e:
+            print(f"{url} has no pub_date and is probably a null article")
+            continue
 
         # Get the description (https://stackoverflow.com/questions/9662346/python-code-to-remove-html-tags-from-a-string)
         clean_html_tags = re.compile('<.*?>')
         description = re.sub(clean_html_tags, '', entry.description)
 
-        query = "INSERT INTO article VALUES (%s, %s, %s, %s, %s, %s)"
-        curs_obj.execute(query, (title, description, thumbnail, url, pub_date, rss_id))
+        query = "INSERT INTO article VALUES (%s, %s, %s, %s, %s, %s, %s) ON CONFLICT DO NOTHING "
+        curs_obj.execute(query, (title, description, thumbnail, url, pub_date, rss_id, 0))
+
+        for label in labels:
+            query1 = "INSERT INTO label VALUES (%s) ON CONFLICT DO NOTHING"
+            curs_obj.execute(query1, [label])
+            print(f"article: `{title}`")
+            print(f">> label: `{label}`\n")
+
+            query2 = "INSERT INTO article_label VALUES (%s, %s) ON CONFLICT DO NOTHING"
+            curs_obj.execute(query2, (url, label))
 
     con.commit()
+
 
 
 if __name__ == "__main__":
@@ -75,4 +134,4 @@ if __name__ == "__main__":
     )
     while True:
         scrape()
-        time.sleep(60)
+        time.sleep(300)

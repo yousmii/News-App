@@ -1,24 +1,19 @@
 @import "../styles/variables.scss";
 
 * {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 .container {
-  background-color: $bg;
-  height: 100vh;
-
+  display: flexbox;
   padding: 40px 20px 20px;
-
-  border-top-left-radius: 50px;
-  border-top-right-radius: 50px;
 }
 
 h1 {
   font-size: 24px;
   margin-top: 20px;
   margin-bottom: 10px;
-  color: #304A61;
+  color: $bg2;
 }
 
 form {
@@ -34,6 +29,7 @@ label {
 
 input[type="text"] {
   color: black;
+  max-width: 100%;
 }
 
 input[type="text"],
@@ -48,52 +44,105 @@ input[type="password"] {
 }
 
 input[type="submit"] {
-  background-color: #304A61;
+  background-color: #304a61;
   color: white;
   padding: 10px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   font-size: 16px;
+  text-align: center;
+}
+
+#register:hover {
+  background-color: #3e6a8e;
 }
 
 input[type="submit"]:hover {
   background-color: #3e6a8e;
 }
 
-.forms {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 90px 20px 20px;
-}
-
 .form {
-  padding: 30px;
-  justify-content: flex-start;
+  width: 90vw;
+  overflow: hidden;
+  overflow-x: auto;
+  margin: auto;
+  justify-content: center;
   align-items: center;
-  width: 50%;
-}
-
-.button {
-  margin: 10px 10px 10px 0;
-  width: 75% !important;
-}
-
-.button.add {
-    background: #304A61;
-}
-
-.button.add:hover {
-    background: #304F81;
 }
 
 table {
   border-collapse: collapse;
   width: 100%;
-  max-width: 800px;
   margin: 0 auto;
   text-align: left;
+  box-sizing: border-box;
+  border-radius: 20px !important;
+}
+
+#rssId {
+  padding-left: 0;
+  text-align: center;
+}
+
+.RssData {
+  padding: 5px 0;
+  padding-left: 5px;
+}
+
+#RssButton {
+  background: $bg;
+  padding: 8px 16px;
+  border: none;
+}
+
+.RssRow {
+  box-sizing: border-box;
+  width: auto;
+}
+
+#name {
+  border-top-left-radius: 10px;
+  border: none;
+}
+
+#url {
+  border-top-right-radius: 10px;
+  border: none;
+}
+
+#feeds:last-child #feedName {
+  border-bottom-left-radius: 10px;
+  border: none;
+}
+
+#feeds:last-child #feedUrl {
+  border-bottom-right-radius: 10px;
+  border: none;
+}
+
+#adminNameHead {
+  border-radius: 10px 10px 0 0;
+  border: none;
+}
+
+#admins:last-child td:first-child {
+  border-radius: 0 0 10px 10px;
+  border: none;
+}
+
+.button {
+  margin: 10px 10px 10px 0;
+  width: 75% !important;
+  background: $bg2;
+}
+
+.button.add {
+  background: #304a61;
+}
+
+.button.add:hover {
+  background: #3e6a8e;
 }
 
 thead {
@@ -114,15 +163,85 @@ tr:hover {
   background-color: #ddd;
 }
 
-button {
+.deleteButton {
   padding: 8px;
-  background-color: #0077cc;
+  background-color: $dark-blue;
   color: #fff;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
 
-button:hover {
-  background-color: #005fa3;
+.deleteButton:hover {
+  transition: ease-in 0.2s;
+  background-color: #3e6a8e;
+}
+
+@media (max-width: 768px) {
+  table {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}
+
+.noScroll {
+  overflow: hidden;
+}
+
+.titlecontainer {
+  padding-top: 2em;
+  text-align: center;
+  display: flexbox;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.8em;
+}
+
+.title {
+  font-size: 40px;
+  color: $dark-blue;
+  font-weight: 700;
+  margin-top: 0.3em;
+}
+
+.logo {
+  font-size: 80px;
+  margin-bottom: -30px;
+  color: $bg2;
+}
+
+.pagescontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: $small) {
+    flex-direction: column;
+  }
+}
+
+.pagecontainer {
+  width: 18em;
+  height: 18em;
+  background-color: #fff;
+  border-radius: 40px;
+  margin: 0.7em;
+
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.35));
+}
+
+.pagecontent {
+  top: 25%;
+  position: relative;
+  color: $dark-blue;
+  font-weight: 700;
+  font-size: 35px;
+  text-align: center;
+}
+.logorss {
+  font-size: 62px;
+}
+
+.logouser {
+  font-size: 90px;
+  margin-bottom: -0.4em;
 }
