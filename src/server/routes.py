@@ -76,10 +76,7 @@ def get_labels():
 
 @app.route("/api/filter", methods=['GET'])
 def get_article_by_label():
-    label_name = request.args.get('label', type=str)
-    # strip quotes from label_name
-    labels = label_name.replace("'", "").replace('"', '')
-    labels = labels.split(',')
+    labels = request.args.getlist('labels[]')
 
     articles_label_pairs = Article_Labels.query.filter(Article_Labels.label.in_(labels)).all()
     #articles_label_pairs = Article_Labels.query.filter_by(label = labels).all()
