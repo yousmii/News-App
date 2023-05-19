@@ -11,11 +11,26 @@ import Carousel from "../components/Carousel";
 import Scroller from "../components/InfiteScroller"
 import Cookies from "js-cookie";
 
+function toggleLabel(labelArray: string[], label: string): string[] {
+  const index = labelArray.indexOf(label);
+
+  if (index > -1) {
+    // Label found, remove it
+    labelArray.splice(index, 1);
+  } else {
+    // Label not found, add it
+    labelArray.push(label);
+  }
+
+  return labelArray;
+}
+
 export default function Homepage() {
     const [username, setUsername] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [searchResults, setSearchResults] = useState<any>(null);
-    const [filter, setFilter] = useState<string>("recency");
+    const [filter, setFilter] = useState<string>("Recency");
+    const [activeLabels, setActiveLabels] = useState<string[]>([])
 
     useEffect(() => {
 
@@ -48,9 +63,11 @@ export default function Homepage() {
     }, [])
 
     const handleFilter = (labelFilter: string) => {
+        setActiveLabels(toggleLabel(activeLabels, labelFilter));
+        console.log(activeLabels);
         axios.get('/api/filter', {
             params: {
-                label: labelFilter
+                labels: activeLabels
             }
         })
             .then(response => {
@@ -133,9 +150,6 @@ export default function Homepage() {
         setFilter(value);
 
         Cookies.set('filter', value);
-
-        console.log("CHANGES");
-
     };
 
 

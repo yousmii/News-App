@@ -58,20 +58,10 @@ def get_articles():
     skip = request.args.get('offset', type=int)
     filter = request.args.get('filter', type=str)
 
-    print("route received " + str(skip) + " as 'skip' argument")
-
-    # articles = fetch(skip)
-
-    articles = []
-
     if filter == "Popularity":
         articles = fetchPopular(skip)
-        print("POPULAR")
-
-    if filter == "Recency":
+    elif filter == "Recency":
         articles = fetch(skip)
-        print("RECENT")
-
     else:
         articles = fetch(skip)
 
@@ -86,10 +76,7 @@ def get_labels():
 
 @app.route("/api/filter", methods=['GET'])
 def get_article_by_label():
-    label_name = request.args.get('label', type=str)
-    # strip quotes from label_name
-    labels = label_name.replace("'", "").replace('"', '')
-    labels = labels.split(',')
+    labels = request.args.getlist('labels[]')
 
     articles_label_pairs = Article_Labels.query.filter(Article_Labels.label.in_(labels)).all()
     #articles_label_pairs = Article_Labels.query.filter_by(label = labels).all()
@@ -132,10 +119,7 @@ def get_similar_articles():
 @app.route("/api/search", methods=['GET'])
 def get_search():
     query_string = request.args.get('q', type=str)
-    filter = request.args.get('f', type=str)
-
-    if filter == "Recency":
-        articles = search(query_string)
+    articles = search(query_string)
     return json.dumps(articles)
 
 # Get all rss feeds
