@@ -6,6 +6,7 @@ venv/
 src/server/__pycache__/
 src/server/env/
 src/server/venv/
+src/server/sql/local_settings.py
 
 # Logs
 logs
