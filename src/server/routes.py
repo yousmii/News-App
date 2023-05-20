@@ -11,7 +11,7 @@ from werkzeug.datastructures import MultiDict
 
 from src.server.app import app
 from src.server.config import app_data, db
-from src.server.ArticlesFetcher import fetch, fetchPopular
+from src.server.ArticlesFetcher import ArticlesFetcher
 from src.server.ConnectDB import ConnectDB
 from src.server.database import User, RSS, TF_IDF, Article, History, Label, Article_Labels
 from search import search
@@ -21,6 +21,7 @@ from sqlalchemy import asc, or_
 # See https://www.ibm.com/developerworks/library/ws-restful/index.html
 
 ConnectDB = ConnectDB(db)
+articles_fetcher = ArticlesFetcher()
 
 # Add a feed to the database
 @app.route("/api/rss", methods=['POST'])
@@ -59,11 +60,11 @@ def get_articles():
     filter = request.args.get('filter', type=str)
 
     if filter == "Popularity":
-        articles = fetchPopular(skip)
+        articles = articles_fetcher.fetch_popular(skip)
     elif filter == "Recency":
-        articles = fetch(skip)
+        articles = articles_fetcher.fetch_recent(skip)
     else:
-        articles = fetch(skip)
+        articles = articles_fetcher.fetch_recent(skip)
 
     return json.dumps(articles)
 
