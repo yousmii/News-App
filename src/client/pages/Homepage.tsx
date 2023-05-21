@@ -172,6 +172,7 @@ export default function Homepage() {
                     <select value={filter} className={styles.sortBySelect} onChange={onChange}>
                         <option value="Recency" >Recency</option>
                         <option value="Popularity">Popularity</option>
+                        <option value="Recommended">Recommended</option>
                     </select>
                 </div>
             </div>
