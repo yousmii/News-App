@@ -57,12 +57,14 @@ def delete_feed():
 @app.route("/api/articles", methods=['GET'])
 def get_articles():
     skip = request.args.get('offset', type=int)
-    filter = request.args.get('filter', type=str)
+    filter_ = request.args.get('filter', type=str)
 
-    if filter == "Popularity":
+    if filter_ == "Popularity":
         articles = articles_fetcher.fetch_popular(skip)
-    elif filter == "Recency":
+    elif filter_ == "Recency":
         articles = articles_fetcher.fetch_recent(skip)
+    elif filter_ == "Recommended":
+        articles = articles_fetcher.fetch_recommended(current_user.id, skip)
     else:
         articles = articles_fetcher.fetch_recent(skip)
 
