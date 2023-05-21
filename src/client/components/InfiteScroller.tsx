@@ -8,24 +8,26 @@ import {Simulate} from "react-dom/test-utils";
 import error = Simulate.error;
 
 
-const Scroller = ({f}: {f: string}) => {
+
+const Scroller = ({ sort, labels, query }: { sort: string; labels: string[]; query: string }) => {
+    const [username, setUsername] = useState<string | null>(null);
     const [articles, setArticles] = useState<any>([]);
     const [skip, setSkip] = useState(0);
-    const [hasMore, setHasMore] = useState(true);
-    const [username, setUsername] = useState<string | null>(null);
+    const hasMore = useRef(true);
     const firstRender = useRef(true);
 
+    const fetchArticles = async (reset: boolean = false) => {
+        await fetchData(reset)
+    }
+
     useEffect(() => {
-    // This code will execute whenever the `filter` value changes
         if (firstRender.current) {
             firstRender.current = false;
             return;
         }
-        console.log('Filter value has changed:', f);
-        setArticles([]);
-        setHasMore(true);
-        fetchData(true);
-  }, [f]);
+        hasMore.current = true;
+        fetchArticles(true);
+  }, [sort, labels, query]);
 
     useEffect(() => {
         axios.get('/api/@me', {
@@ -43,21 +45,21 @@ const Scroller = ({f}: {f: string}) => {
             .catch(error => {
                 console.log(error)
             })
-        fetchData();
+        fetchArticles(false);
     }, []);
 
-    const fetchData = async (reset: boolean = false) => {
-        let apiSkip = 0;
+    const fetchDataApi = async (reset: boolean = false) => {
+        let offsetValue = articles.length;
         if (reset) {
-            setSkip(prevState => 10);
-        } else {
-            apiSkip = skip;
+            offsetValue = 0;
         }
         const response = await axios.get(
             '/api/articles', {
                 params: {
-                    offset: apiSkip,
-                    filter: f
+                    offset: offsetValue,
+                    sort: sort,
+                    searchQuery: query,
+                    labels: labels
                 }
             }
         );
@@ -91,14 +93,34 @@ const Scroller = ({f}: {f: string}) => {
                 ...group.article,
                 similarArticles: group.similarArticles
             }));
-            if (!reset) {
-                setSkip(prevSkip => prevSkip + 10);
+            if (reset) {
+                setArticles((prevApiArticles: any[]) => newData)
+            } else {
+                setArticles((prevApiArticles: any[]) => prevApiArticles.concat(newData))
             }
-            setArticles((prevArticles: any[]) => prevArticles.concat(newData));
         } else {
-            setHasMore(false);
+            hasMore.current = false;
         }
     };
+
+    const fetchData = async (reset: boolean = false) => {
+        if (reset) {
+            await fetchDataApi(true);
+        } else if (skip >= articles.length && hasMore) {
+            await fetchDataApi(false);
+        } else if (skip >= articles.length && !hasMore) {
+            return;
+        }
+        if (reset && articles.length > 10) {
+            setSkip(prevState => 10);
+        } else if (reset && articles.length <= 10) {
+            setSkip(prevState => articles.length);
+        } else if (articles.length > skip + 10) {
+            setSkip((prevSkip) => prevSkip + 10);
+        } else {
+            setSkip(prevState => articles.length)
+        }
+    }
 
     const TrackHistory = (link: string) => {
         const linkData = {
@@ -111,7 +133,6 @@ const Scroller = ({f}: {f: string}) => {
         }).catch(error => {
             console.log(error)
         })
-        console.log(username)
         if (username !== null) {
             axios.post('/api/history', linkData, {
                 headers: {
@@ -146,11 +167,15 @@ const Scroller = ({f}: {f: string}) => {
         }
     };
 
+    console.log("re render")
+    console.log(articles)
+    console.log(skip)
+
     return (
         <InfiniteScroll
             dataLength={articles.length}
-            next={fetchData}
-            hasMore={hasMore}
+            next={fetchArticles}
+            hasMore={hasMore.current}
             loader={<h4>Loading...</h4>}
             endMessage={
                 <p style={{textAlign: 'center'}}>
@@ -159,7 +184,7 @@ const Scroller = ({f}: {f: string}) => {
             }
         >
             <div className={styles.articles}>
-                {articles.map(({link, image, title, description, pub_date, similarArticles}: {
+                {   articles.slice(0,skip).map(({link, image, title, description, pub_date, similarArticles}: {
                     link: any,
                     title: any,
                     image: any,

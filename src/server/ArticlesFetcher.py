@@ -1,80 +1,72 @@
 from datetime import datetime, timedelta
 
-from src.server.database import Article,db, TF_IDF
+from src.server.database import Article, db, TF_IDF, Article_Labels
 from src.server.ConnectDB import ConnectDB
 from sqlalchemy import desc, func, cast, Date
 
-ConnectDB=ConnectDB(db)
+ConnectDB = ConnectDB(db)
 
-def fetch(skip = 0):
+
+def get_article_by_label(labels):
+    articles_label_pairs = Article_Labels.query.filter(Article_Labels.label.in_(labels)).all()
+    article_links = [pair.article for pair in articles_label_pairs]
+    articles = []
+    for link in article_links:
+        articles_to_add = list(Article.query.filter_by(link=link).all())
+        for article_to_add in articles_to_add:
+            articles.append(
+                {
+                    "title": article_to_add.title,
+                    "description": article_to_add.description,
+                    "image": article_to_add.image,
+                    "link": article_to_add.link,
+                    "pub_date": article_to_add.pub_date
+                }
+            )
+
+    return articles
+
+
+def newFetch():
     db_articles = Article.query.order_by(desc(Article.pub_date)).all()
-
-    last_index = len(db_articles) - 1
-
-    skip10 = skip + 10
-
-    stop = last_index
-
-    if skip10 < last_index:
-        stop = skip10
-
     articles = []
-
-    if skip > last_index:
-        print("reached the end")
-        return articles
-
-    # Loop through each article in the feed
-    for i in range(skip, stop):
-
-        db_article = db_articles[i]
-
-        article = {
-            "title": db_article.title,
-            "description": db_article.description,
-            "image": db_article.image,
-            "link": db_article.link,
-            "pub_date": db_article.pub_date
-        }
-
-        articles.append(article)
-
+    for article in db_articles:
+        articles.append(
+            {
+                "title": article.title,
+                "description": article.description,
+                "image": article.image,
+                "link": article.link,
+                "pub_date": article.pub_date
+            }
+        )
 
     return articles
 
 
-def fetchPopular(skip = 0):
+
+def newFetchPopular():
     seven_days_ago = datetime.now() - timedelta(days=7)
-    db_articles = Article.query.filter(cast(Article.pub_date, Date) >= seven_days_ago.date()).order_by(desc(Article.views)).all()
+    db_articles = Article.query.filter(cast(Article.pub_date, Date) >= seven_days_ago.date()).order_by(
+        desc(Article.views)).all()
 
-
-    last_index = len(db_articles) - 1
-
-    skip10 = skip + 10
+    db_articles.extend(Article.query.filter(
+        cast(Article.pub_date, Date) < seven_days_ago.date()
+    ).order_by(desc(Article.pub_date)).all())
 
     articles = []
-
-    if skip10 > last_index:
-        return fetch(skip-10)
-
-    # Loop through each article in the feed
-    for i in range(skip, skip10):
-        db_article = db_articles[i]
-
-        article = {
-            "title": db_article.title,
-            "description": db_article.description,
-            "image": db_article.image,
-            "link": db_article.link,
-            "pub_date": db_article.pub_date
-        }
-
-        articles.append(article)
+    for article in db_articles:
+        articles.append(
+            {
+                "title": article.title,
+                "description": article.description,
+                "image": article.image,
+                "link": article.link,
+                "pub_date": article.pub_date
+            }
+        )
 
     return articles
-
-
-
 
 if __name__ == "__main__":
-    fetch()
+    newFetch()

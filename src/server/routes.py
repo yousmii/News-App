@@ -1,8 +1,7 @@
 from datetime import datetime
 import json
 
-from flask.templating import render_template
-from flask import request, session, jsonify, redirect, flash, json, make_response, request
+from flask import jsonify, json, request
 from forms import RegisterForm, LoginForm
 from flask_login import login_user, logout_user, current_user, login_required
 from flask_wtf import csrf
@@ -11,7 +10,7 @@ from werkzeug.datastructures import MultiDict
 
 from src.server.app import app
 from src.server.config import app_data, db
-from src.server.ArticlesFetcher import fetch, fetchPopular
+from src.server.ArticlesFetcher import newFetch, newFetchPopular, get_article_by_label
 from src.server.ConnectDB import ConnectDB
 from src.server.database import User, RSS, TF_IDF, Article, History, Label, Article_Labels
 from search import search
@@ -55,17 +54,62 @@ def delete_feed():
 # Return all articles
 @app.route("/api/articles", methods=['GET'])
 def get_articles():
+
     skip = request.args.get('offset', type=int)
-    filter = request.args.get('filter', type=str)
+    sort = request.args.get('sort', type=str)
+    searchQuery = request.args.get('searchQuery', type=str)
+    labels = request.args.getlist('labels[]')
 
-    if filter == "Popularity":
-        articles = fetchPopular(skip)
-    elif filter == "Recency":
-        articles = fetch(skip)
+    common_articles = []
+
+    if searchQuery != "":
+        common_articles = search(searchQuery)
+    elif len(labels) > 0:
+        print("labels", flush=True)
+        print(labels, flush=True)
+        common_articles = get_article_by_label(labels)
     else:
-        articles = fetch(skip)
+        if sort == "Popularity":
+            common_articles = newFetchPopular()
+        elif sort == "Recency":
+            common_articles = newFetch()
 
-    return json.dumps(articles)
+
+    final_articles = []
+
+    # label_articles = get_article_by_label(labels)
+    #
+    # search_articles = search(searchQuery)
+    #
+    # if len(labels) <= 0 and searchQuery == "":
+    #     common_articles = articles
+    #
+    # elif len(labels) > 0:
+    #     if searchQuery == "":
+    #         common_articles = label_articles
+    #     else:
+    #         for article1 in articles:
+    #             for article2 in label_articles:
+    #                 for article3 in search_articles:
+    #                     if article1.link == article2.link == article3.link:
+    #                         common_articles.append(article1)
+    #
+    # else:
+    #     common_articles = search_articles
+
+    last_index = len(common_articles) - 1
+
+    skip100 = skip + 100
+
+    stop = last_index
+
+    if skip100 < last_index:
+        stop = skip100
+
+    for i in range(skip, stop):
+        final_articles.append(common_articles[i])
+
+    return json.dumps(final_articles)
 
 # Return all labels
 @app.route("/api/labels", methods=['GET'])
@@ -74,28 +118,6 @@ def get_labels():
 
     return jsonify([label.label for label in labels])
 
-@app.route("/api/filter", methods=['GET'])
-def get_article_by_label():
-    labels = request.args.getlist('labels[]')
-
-    articles_label_pairs = Article_Labels.query.filter(Article_Labels.label.in_(labels)).all()
-    #articles_label_pairs = Article_Labels.query.filter_by(label = labels).all()
-    article_links = [pair.article for pair in articles_label_pairs]
-    articles = []
-    for link in article_links:
-        articles_to_add = list(Article.query.filter_by(link = link).all())
-        for article_to_add in articles_to_add:
-            articles.append(
-                {
-                    "title": article_to_add.title,
-                    "description": article_to_add.description,
-                    "image": article_to_add.image,
-                    "link": article_to_add.link,
-                    "pub_date": article_to_add.pub_date
-                }
-            )
-
-    return jsonify(articles)
 
 # Return all similar articles
 @app.route("/api/similarity/", methods=['GET'])
