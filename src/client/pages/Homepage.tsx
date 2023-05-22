@@ -7,6 +7,7 @@ import {trackPromise} from 'react-promise-tracker';
 import * as Loader from "react-loader-spinner";
 import {BsSearch} from "react-icons/bs";
 import Carousel from "../components/Carousel";
+import {ShareButton} from "../components/ShareButton";
 
 import Scroller from "../components/InfiteScroller"
 import Cookies from "js-cookie";
@@ -192,6 +193,7 @@ export default function Homepage() {
                     }
                 </div>
             { /* Labels */}
+            <ShareButton url="team2.ua-ppdb.me"/>
             <Carousel handleFilter={handleFilter}/>
             { /* Articles */}
             <div className={styles.container}>
