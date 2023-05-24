@@ -2,14 +2,11 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import styles from "../components/Article.module.scss";
 import moment from "moment";
-import {usePromiseTracker} from "react-promise-tracker";
-import {trackPromise} from 'react-promise-tracker';
 import * as Loader from "react-loader-spinner";
 import {BsSearch} from "react-icons/bs";
 import Carousel from "../components/Carousel";
 
 import Scroller from "../components/InfiteScroller"
-import Cookies from "js-cookie";
 
 function toggleLabel(labelArray: string[], label: string): string[] {
   const index = labelArray.indexOf(label);
@@ -41,7 +38,6 @@ export default function Homepage() {
         }
     }, []);
 
-    const {promiseInProgress} = usePromiseTracker();
 
     useEffect(() => {
         axios.get('/api/@me', {
@@ -102,22 +98,6 @@ export default function Homepage() {
                     </select>
                 </div>
             </div>
-            { /* Search Animation */}
-                <div>
-                    {promiseInProgress &&
-                        <div
-                            style={{
-                                width: "100%",
-                                height: "100",
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center"
-                            }}
-                        >
-                            <Loader.ThreeDots color="#284B63" height="100" width="100"/>
-                        </div>
-                    }
-                </div>
             { /* Labels */}
             <Carousel handleFilter={handleFilter}/>
             { /* Articles */}

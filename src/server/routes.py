@@ -56,6 +56,7 @@ def delete_feed():
 def get_articles():
 
     skip = request.args.get('offset', type=int)
+    print(skip, flush=True)
     sort = request.args.get('sort', type=str)
     searchQuery = request.args.get('searchQuery', type=str)
     labels = request.args.getlist('labels[]')
@@ -64,10 +65,12 @@ def get_articles():
 
     if searchQuery != "":
         common_articles = search(searchQuery)
+        print(len(common_articles), flush=True)
     elif len(labels) > 0:
         print("labels", flush=True)
         print(labels, flush=True)
         common_articles = get_article_by_label(labels)
+        print(common_articles, flush=True)
     else:
         if sort == "Popularity":
             common_articles = newFetchPopular()
@@ -106,9 +109,13 @@ def get_articles():
     if skip100 < last_index:
         stop = skip100
 
-    for i in range(skip, stop):
-        final_articles.append(common_articles[i])
+    if stop == 0 and skip != 1:
+        final_articles.append(common_articles[0])
+    else:
+        for i in range(skip, stop+1):
+            final_articles.append(common_articles[i])
 
+    print(len(final_articles), flush=True)
     return json.dumps(final_articles)
 
 # Return all labels
