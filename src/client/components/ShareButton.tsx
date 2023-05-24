@@ -38,11 +38,6 @@ export const ShareButton = ({ url }) => {
       <button onClick={copyToClipboard} className={styles.shareButton}>
         <FontAwesomeIcon icon={faCopy} data-tip="Copy to Clipboard" />
       </button>
-      {isCopied && (
-        <div className={styles.notification}>
-          Link copied to clipboard!
-        </div>
-      )}
     </div>
   );
 };
