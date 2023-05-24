@@ -193,7 +193,6 @@ export default function Homepage() {
                     }
                 </div>
             { /* Labels */}
-            <ShareButton url="team2.ua-ppdb.me"/>
             <Carousel handleFilter={handleFilter}/>
             { /* Articles */}
             <div className={styles.container}>
@@ -217,6 +216,7 @@ export default function Homepage() {
                                             <p className={styles.description}>{description}</p>
                                             <p className={styles.time_ago}>{moment(pub_date).fromNow()}</p>
                                         </a>
+                                        <ShareButton url={link}/>
                                     </div>
                                 )
                             })}

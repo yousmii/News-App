@@ -5,6 +5,7 @@ import Cookies from "js-cookie";
 import axios from "axios";
 import moment from "moment/moment";
 import {Simulate} from "react-dom/test-utils";
+import {ShareButton} from "../components/ShareButton";
 import error = Simulate.error;
 
 
@@ -178,7 +179,7 @@ const Scroller = ({f}: {f: string}) => {
                                 <p className={styles.time_ago}>{moment(pub_date).fromNow()}</p>
                             </a>
                             {similarArticles.length > 0 && (
-                                <p>
+                                <div>
                                     Also published by:{' '}
                                     <div id={styles.published_by_container}>
                                         {similarArticles.map((similarArticleId: any) => (
@@ -192,9 +193,9 @@ const Scroller = ({f}: {f: string}) => {
                                             </React.Fragment>
                                         ))}
                                     </div>
-
-                                </p>
+                                </div>
                             )}
+                            <ShareButton url={link}/>
                         </div>
                     )
                 })}
