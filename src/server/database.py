@@ -50,7 +50,7 @@ class RSS(db.Model):
 class Label(db.Model):
     __tablename__ = "label"
     label = db.Column(db.String, primary_key=True)
-    articles = relationship('Article', secondary='article_label',backref="label")
+    articles = relationship('Article', secondary='article_label',backref="Label")
 
 
 
@@ -64,7 +64,9 @@ class Article(db.Model):
     rss = db.Column(db.INT, db.ForeignKey('rss.id', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
     views = db.Column(db.Integer, nullable=False, default=0)
 
-    labels = relationship('Label', secondary = 'article_label')
+    #removed relationship from Article table
+
+
 
 class Article_Labels(db.Model):
     __tablename__ = "article_label"

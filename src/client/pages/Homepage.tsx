@@ -167,6 +167,7 @@ export default function Homepage() {
                     <BsSearch className={styles.searchIcon}/>
                 </div>
                 { /* Placeholder Sort By */}
+
                 <div className={styles.sortBy}>
                     <select value= {searchFilter} className={styles.sortBySelect} onChange={onChange}>
                         <option value="Recency">Recency</option>
