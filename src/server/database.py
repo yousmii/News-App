@@ -52,8 +52,6 @@ class Label(db.Model):
     label = db.Column(db.String, primary_key=True)
     articles = relationship('Article', secondary='article_label',backref="label")
 
-
-
 class Article(db.Model):
     __tablename__ = 'article'
     title = db.Column(db.String, nullable=False)
@@ -63,8 +61,6 @@ class Article(db.Model):
     pub_date = db.Column(db.String, nullable=False)
     rss = db.Column(db.INT, db.ForeignKey('rss.id', onupdate='CASCADE', ondelete='CASCADE'), nullable=False)
     views = db.Column(db.Integer, nullable=False, default=0)
-
-    labels = relationship('Label', secondary = 'article_label')
 
 class Article_Labels(db.Model):
     __tablename__ = "article_label"
