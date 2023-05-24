@@ -2,14 +2,11 @@ import React, {useEffect, useState} from "react";
 import axios from "axios";
 import styles from "../components/Article.module.scss";
 import moment from "moment";
-import {usePromiseTracker} from "react-promise-tracker";
-import {trackPromise} from 'react-promise-tracker';
 import * as Loader from "react-loader-spinner";
 import {BsSearch} from "react-icons/bs";
 import Carousel from "../components/Carousel";
 
 import Scroller from "../components/InfiteScroller"
-import Cookies from "js-cookie";
 
 function toggleLabel(labelArray: string[], label: string): string[] {
   const index = labelArray.indexOf(label);
@@ -21,15 +18,15 @@ function toggleLabel(labelArray: string[], label: string): string[] {
     // Label not found, add it
     labelArray.push(label);
   }
-
+  console.log("toggle")
   return labelArray;
 }
 
 export default function Homepage() {
     const [username, setUsername] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState<string>("");
-    const [searchResults, setSearchResults] = useState<any>(null);
-    const [filter, setFilter] = useState<string>("Recency");
+    const [finalQuery, setFinalQuery] = useState<string>("");
+    const [sort, setSort] = useState<string>("Recency");
     const [activeLabels, setActiveLabels] = useState<string[]>([])
 
     useEffect(() => {
@@ -38,11 +35,9 @@ export default function Homepage() {
         const q = params.get('q');
         if (q) {
             setSearchQuery(q);
-            handleSearch();
         }
     }, []);
 
-    const {promiseInProgress} = usePromiseTracker();
 
     useEffect(() => {
         axios.get('/api/@me', {
@@ -63,93 +58,20 @@ export default function Homepage() {
     }, [])
 
     const handleFilter = (labelFilter: string) => {
-        setActiveLabels(toggleLabel(activeLabels, labelFilter));
-        console.log(activeLabels);
-        axios.get('/api/filter', {
-            params: {
-                labels: activeLabels
-            }
-        })
-            .then(response => {
-                setSearchResults(response.data)
-        })
-            .catch(error => {
-                console.log(error)
-            })
-    }
-
-    const handleSearch = () => {
-        trackPromise(
-            axios.get('/api/search', {
-                params: {
-                    q: searchQuery
-                }
-            })
-                .then(response => {
-                    setSearchResults(response.data);
-                })
-                .catch(error => {
-                    console.log(error)
-                })
-        )
+        let temp = toggleLabel(activeLabels, labelFilter);
+        setActiveLabels([]);
+        setActiveLabels(prevState => prevState.concat(temp))
     }
 
     const handleKeyDown = (event: any) => {
         if (event.key === 'Enter') {
-            handleSearch()
+            setFinalQuery(searchQuery)
         }
     };
 
-    const TrackHistory = (link: string) => {
-        const data = {
-            link: link
-        }
-        axios.put('/api/articles/view', data, {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }).catch(error => {
-            console.log(error)
-        })
-        if (username !== null) {
-            axios.post('/api/history', data, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).catch(error => {
-                console.log(error)
-            })
-        } else {
-            if (!Cookies.get("history_index")) {
-                Cookies.set("history_index", "0");
-            }
-            let AddCookie: boolean = false;
-            if (Cookies.get("history_" + Cookies.get("history_index")) === undefined) {
-                let array: string[] = []
-                Cookies.set("history_" + Cookies.get("history_index"), JSON.stringify(array));
-            }
-            let cookieValue = Cookies.get("history_" + Cookies.get("history_index"))
-            if (typeof cookieValue === "string") {
-                let Cookie_history = JSON.parse(cookieValue);
-                Cookie_history.push(link);
-                if (Cookie_history.length > 100) {
-                    AddCookie = true
-                }
-                Cookies.set("history_" + Cookies.get("history_index"), JSON.stringify(Cookie_history));
-            }
-            let indexValue = Cookies.get("history_index")
-            if (typeof indexValue === "string" && AddCookie) {
-                let newIndex: string = indexValue + 1;
-                Cookies.set("history_index", newIndex);
-            }
-        }
-    }
     const onChange = (event : any) => {
-
         const value = event.target.value;
-        setFilter(value);
-
-        Cookies.set('filter', value);
+        setSort(value);
     };
 
 
@@ -169,62 +91,18 @@ export default function Homepage() {
                 </div>
                 { /* Placeholder Sort By */}
                 <div className={styles.sortBy}>
-                    <select value={filter} className={styles.sortBySelect} onChange={onChange}>
+                    <select value={sort} className={styles.sortBySelect} onChange={onChange}>
                         <option value="Recency" >Recency</option>
                         <option value="Popularity">Popularity</option>
-                        <option value="Recommended">Recommended</option>
+                        {username ? <option value="Recommended">Recommended</option> : null}
                     </select>
                 </div>
             </div>
-            { /* Search Animation */}
-                <div>
-                    {promiseInProgress &&
-                        <div
-                            style={{
-                                width: "100%",
-                                height: "100",
-                                display: "flex",
-                                justifyContent: "center",
-                                alignItems: "center"
-                            }}
-                        >
-                            <Loader.ThreeDots color="#284B63" height="100" width="100"/>
-                        </div>
-                    }
-                </div>
             { /* Labels */}
             <Carousel handleFilter={handleFilter}/>
             { /* Articles */}
             <div className={styles.container}>
-                {searchResults ?
-                    (
-                        <div className={styles.articles}>
-                            {searchResults.map(({link, image, title, description, pub_date}: {
-                                link: any,
-                                title: any,
-                                image: any,
-                                description: any,
-                                pub_date: any,
-                            }) => {
-                                return (
-                                    <div onClick={() => TrackHistory(link)} className={styles.article}>
-                                        <a href={link} target={"blank"} className={styles.article_link}>
-                                            <img className={styles.favicon} height="16" alt={"favicon"} width="16"
-                                                 src={'http://www.google.com/s2/favicons?domain=' + link}/>
-                                            <img src={image !== null ? image : 'img.png'} alt={title}/>
-                                            <h2>{title}</h2>
-                                            <p className={styles.description}>{description}</p>
-                                            <p className={styles.time_ago}>{moment(pub_date).fromNow()}</p>
-                                        </a>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    ) :
-                    (
-                        <Scroller f={filter}/>
-                    )
-                }
+                <Scroller labels={activeLabels} sort={sort} query={finalQuery}/>
             </div>
         </div>
     );
