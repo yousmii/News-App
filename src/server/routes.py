@@ -56,68 +56,24 @@ def delete_feed():
 # Return all articles
 @app.route("/api/articles", methods=['GET'])
 def get_articles():
-
+    # GET http:/5001/articles?offset=0&sort="Recommended"&searchQuery=20&labels[]
     skip = request.args.get('offset', type=int)
-    print(skip, flush=True)
     sort = request.args.get('sort', type=str)
     searchQuery = request.args.get('searchQuery', type=str)
     labels = request.args.getlist('labels[]')
 
-    common_articles = []
-
-    if searchQuery != "":
-        common_articles = search(searchQuery)
-        print(len(common_articles), flush=True)
-    elif len(labels) > 0:
-        print("labels", flush=True)
-        print(labels, flush=True)
-        common_articles = get_article_by_label(labels)
-        print(common_articles, flush=True)
-    else:
-        if sort == "Popularity":
-            common_articles = newFetchPopular()
-        elif sort == "Recency":
-            common_articles = newFetch()
-
-
     final_articles = []
 
-    # label_articles = get_article_by_label(labels)
-    #
-    # search_articles = search(searchQuery)
-    #
-    # if len(labels) <= 0 and searchQuery == "":
-    #     common_articles = articles
-    #
-    # elif len(labels) > 0:
-    #     if searchQuery == "":
-    #         common_articles = label_articles
-    #     else:
-    #         for article1 in articles:
-    #             for article2 in label_articles:
-    #                 for article3 in search_articles:
-    #                     if article1.link == article2.link == article3.link:
-    #                         common_articles.append(article1)
-    #
-    # else:
-    #     common_articles = search_articles
-
-    last_index = len(common_articles) - 1
-
-    skip100 = skip + 100
-
-    stop = last_index
-
-    if skip100 < last_index:
-        stop = skip100
-
-    if stop == 0 and skip != 1:
-        final_articles.append(common_articles[0])
+    if searchQuery != "":
+        final_articles = search(searchQuery)
     else:
-        for i in range(skip, stop+1):
-            final_articles.append(common_articles[i])
+        if sort == "Popularity":
+            final_articles = articles_fetcher.fetch_popular(labels, skip)
+        elif sort == "Recency":
+            final_articles = articles_fetcher.fetch_recent(labels, skip)
+        elif sort == "Recommended":
+            final_articles = articles_fetcher.fetch_recommended(labels, current_user.id, skip)
 
-    print(len(final_articles), flush=True)
     return json.dumps(final_articles)
 
 # Return all labels
@@ -145,13 +101,6 @@ def get_similar_articles():
 
     # Convert the set of similar article IDs to a list and return it as a JSON response
     return jsonify(list(similar_articles))
-
-# Return all relevant articles
-@app.route("/api/search", methods=['GET'])
-def get_search():
-    query_string = request.args.get('q', type=str)
-    articles = search(query_string)
-    return json.dumps(articles)
 
 # Get all rss feeds
 @app.route("/api/rss", methods=['GET'])

@@ -92,8 +92,8 @@ export default function Homepage() {
                 { /* Placeholder Sort By */}
                 <div className={styles.sortBy}>
                     <select value={sort} className={styles.sortBySelect} onChange={onChange}>
-                        <option value="Recency" >Recency</option>
-                        <option value="Popularity">Popularity</option>
+                        <option value="Recency" >Recent</option>
+                        <option value="Popularity">Popular</option>
                         {username ? <option value="Recommended">Recommended</option> : null}
                     </select>
                 </div>
