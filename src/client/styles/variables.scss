@@ -3,3 +3,68 @@
 
 $open-sans: "Open Sans", sans-serif;
 $basic-font: "Basic", sans-serif;
+
+//------------------- Colors -------------------//
+$grey-blue: #d6e0e8;
+$white: #ffffff;
+$teal: #3c6e71;
+$dark-blue: #042849;
+$light-grey: #d9d9d9;
+$light-teal: #1ad0db;
+
+$background: #d6e0e8;
+$card-bg: #ffffff;
+$border1: #3c6e71;
+$border2: #042849;
+$label-bg: #d9d9d9;
+$link: #1ad0db;
+
+//------------------- Spacing -------------------//
+$spacing-xs: 8px;
+$spacing-s: 12px;
+$spacing-m: 16px;
+$spacing-l: 32px;
+$spacing-xl: 64px;
+
+$xsmall: 10em;
+$small: 24em;
+$medium: 38em;
+$large: 64em;
+$extra-large: 75em;
+
+$header-height: 80px;
+
+$subtext-size: 14px;
+$subtitle-size: 18px;
+$title-size: 22px;
+$heading-size: 32px;
+$logo-size: 50px;
+
+//----------------- Breakpoints ------------------//
+@mixin breakpoint($point) {
+  @if $point == xsmall {
+    @media (min-width: $xsmall) {
+      @content;
+    }
+  }
+  @if $point == small {
+    @media (min-width: $small) {
+      @content;
+    }
+  }
+  @if $point == medium {
+    @media (min-width: $medium) {
+      @content;
+    }
+  }
+  @if $point == large {
+    @media (min-width: $large) {
+      @content;
+    }
+  }
+  @if $point == extra-large {
+    @media (min-width: $extra-large) {
+      @content;
+    }
+  }
+}
