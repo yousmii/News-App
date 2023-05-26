@@ -27,7 +27,7 @@
   background-color: rgb(240,240,240);
   height: 80%;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 15px;
   flex-shrink: 0;
   white-space: nowrap;
   display: flex;
@@ -59,6 +59,11 @@
 #right_button[disabled]:hover {
   background-color: inherit;
   cursor: default;
+}
+
+.label[include] {
+  background-color: lightskyblue;
+  outline: solid 1px royalblue;
 }
 
 

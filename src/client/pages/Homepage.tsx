@@ -10,9 +10,22 @@ import Carousel from "../components/Carousel";
 import DropdownCheckbox from "../components/DropdownCheckbox";
 import {MultiSelect} from "react-multi-select-component";
 // @ts-ignore
-
-import Scroller from "../components/InfiteScroller"
 import Cookies from "js-cookie";
+import Scroller from "../components/InfiteScroller"
+
+function toggleLabel(labelArray: string[], label: string): string[] {
+  const index = labelArray.indexOf(label);
+
+  if (index > -1) {
+    // Label found, remove it
+    labelArray.splice(index, 1);
+  } else {
+    // Label not found, add it
+    labelArray.push(label);
+  }
+  console.log("toggle")
+  return labelArray;
+}
 
 export default function Homepage() {
     const [username, setUsername] = useState<string | null>(null);
@@ -21,6 +34,9 @@ export default function Homepage() {
     const [searchFilter, setSearchFilter] = useState<string>("Recency")
     const [selected, setSelected] = useState<any>([]);
     const [rssOptions, setRssOptions] = useState<any>([])
+    const [finalQuery, setFinalQuery] = useState<string>("");
+    const [sort, setSort] = useState<string>("Recency");
+    const [activeLabels, setActiveLabels] = useState<string[]>([])
 
     useEffect(() => {
 
@@ -192,6 +208,7 @@ export default function Homepage() {
 
 
 
+        setSort(value);
     };
 
 
@@ -210,24 +227,12 @@ export default function Homepage() {
                     <BsSearch className={styles.searchIcon}/>
                 </div>
                 { /* Placeholder Sort By */}
-
                 <div className={styles.sortBy}>
                     <select value= {searchFilter} className={styles.sortBySelect} onChange={onChange}>
                         <option value="Recency">Recency</option>
                         <option value="Popularity">Popularity</option>
                     </select>
                 </div>
-                <div>
-                    <pre>{JSON.stringify(selected)}</pre>
-                    <MultiSelect
-                        options={rssOptions}
-                        value={selected}
-                        onChange={setSelected}
-                        labelledBy="Select"
-                        disableSearch={true}
-                    />
-                </div>
-
             </div>
             { /* Search Animation */}
                 <div>
@@ -249,35 +254,7 @@ export default function Homepage() {
             <Carousel handleFilter={handleFilter}/>
             { /* Articles */}
             <div className={styles.container}>
-                {searchResults ?
-                    (
-                        <div className={styles.articles}>
-                            {searchResults.map(({link, image, title, description, pub_date}: {
-                                link: any,
-                                title: any,
-                                image: any,
-                                description: any,
-                                pub_date: any,
-                            }) => {
-                                return (
-                                    <div onClick={() => TrackHistory(link)} className={styles.article}>
-                                        <a href={link} target={"blank"} className={styles.article_link}>
-                                            <img className={styles.favicon} height="16" alt={"favicon"} width="16"
-                                                 src={'http://www.google.com/s2/favicons?domain=' + link}/>
-                                            <img src={image !== null ? image : 'img.png'} alt={title}/>
-                                            <h2>{title}</h2>
-                                            <p className={styles.description}>{description}</p>
-                                            <p className={styles.time_ago}>{moment(pub_date).fromNow()}</p>
-                                        </a>
-                                    </div>
-                                )
-                            })}
-                        </div>
-                    ) :
-                    (
-                        <Scroller/>
-                    )
-                }
+                <Scroller labels={activeLabels} sort={sort} query={finalQuery}/>
             </div>
         </div>
     );

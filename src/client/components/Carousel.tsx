@@ -14,6 +14,14 @@ function Carousel({ handleFilter }: CarouselProps) {
   const [labels, setLabels] = useState<any>([]);
   const [loading, setLoading] = useState<boolean>(true); // New loading state
 
+  const handleSelect = (buttonItem: HTMLButtonElement) => {
+    if (buttonItem.hasAttribute("include")) {
+      buttonItem.removeAttribute("include");
+    } else {
+      buttonItem.setAttribute("include", "include");
+    }
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -101,7 +109,7 @@ function Carousel({ handleFilter }: CarouselProps) {
       const buttonItem = document.createElement('button');
       buttonItem.textContent = label;
       buttonItem.className = styles.label;
-      buttonItem.onclick = () => handleFilter(label);
+      buttonItem.onclick = () => {handleFilter(label); handleSelect(buttonItem)};
       labelsListElement?.appendChild(buttonItem);
     });
 
