@@ -1,80 +1,138 @@
 from datetime import datetime, timedelta
-
-from src.server.database import Article,db, TF_IDF
+from src.server.resemblance.resemblance import get_resemblance, get_resemblance_object
+from src.server.database import Article, db, TF_IDF, History
 from src.server.ConnectDB import ConnectDB
-from sqlalchemy import desc, func, cast, Date
+from sqlalchemy import desc, cast, Date, or_
 
-ConnectDB=ConnectDB(db)
+from src.server.link_articles import create_source_document, from_same_site
 
-def fetch(skip = 0):
-    db_articles = Article.query.order_by(desc(Article.pub_date)).all()
+ConnectDB = ConnectDB(db)
+#
+def get_similar_articles(article_link):
+    # Retrieve all rows in the tf_idf table where the given article ID is present
+    rows = db.session.query(TF_IDF).filter(
+        or_(TF_IDF.article1 == article_link, TF_IDF.article2 == article_link)
+    ).all()
 
-    last_index = len(db_articles) - 1
+    # Create a set of unique article IDs that are similar to the given article ID
+    similar_articles = set()
+    for row in rows:
+        if row.article1 == article_link:
+            similar_articles.add(row.article2)
+        else:
+            similar_articles.add(row.article1)
+    return similar_articles
 
-    skip10 = skip + 10
+class ArticlesFetcher:
+    def __init__(self):
+        self.article_links = []
 
-    stop = last_index
+    def create_articles(self, skip, stop, db_articles):
+        if skip == 0:
+            self.article_links = []
 
-    if skip10 < last_index:
-        stop = skip10
 
-    articles = []
+        articles = []
+        for i in range(skip, stop):
+            db_article = db_articles[i]
 
-    if skip > last_index:
-        print("reached the end")
+            # Create a set of unique article IDs that are similar to the given article ID
+            similar_articles = get_similar_articles(db_article.link)
+
+            add = not any([similar_article for similar_article in similar_articles if similar_article in self.article_links])
+
+
+            if add:
+                self.article_links.append(db_article.link)
+
+                article = {
+                    "title": db_article.title,
+                    "description": db_article.description,
+                    "image": db_article.image,
+                    "link": db_article.link,
+                    "pub_date": db_article.pub_date
+                }
+
+                articles.append(article)
+
         return articles
 
-    # Loop through each article in the feed
-    for i in range(skip, stop):
+    def fetch_recent(self, skip = 0):
+        db_articles = Article.query.order_by(desc(Article.pub_date)).all()
 
-        db_article = db_articles[i]
+        last_index = len(db_articles) - 1
 
-        article = {
-            "title": db_article.title,
-            "description": db_article.description,
-            "image": db_article.image,
-            "link": db_article.link,
-            "pub_date": db_article.pub_date
-        }
+        skip10 = skip + 10
 
-        articles.append(article)
+        stop = last_index
 
+        if skip10 < last_index:
+            stop = skip10
 
-    return articles
+        if skip > last_index:
+            print("reached the end")
+            return []
 
+        return self.create_articles( skip, stop, db_articles)
 
-def fetchPopular(skip = 0):
-    seven_days_ago = datetime.now() - timedelta(days=7)
-    db_articles = Article.query.filter(cast(Article.pub_date, Date) >= seven_days_ago.date()).order_by(desc(Article.views)).all()
+    def fetch_popular(self, skip = 0):
+        seven_days_ago = datetime.now() - timedelta(days=7)
+        db_articles = Article.query.filter(cast(Article.pub_date, Date) >= seven_days_ago.date()).order_by(desc(Article.views)).all()
 
+        last_index = len(db_articles) - 1
 
-    last_index = len(db_articles) - 1
+        skip10 = skip + 10
 
-    skip10 = skip + 10
+        if skip10 > last_index:
+            return self.fetch_recent(skip - 10)
 
-    articles = []
+        return self.create_articles(skip, skip10, db_articles)
 
-    if skip10 > last_index:
-        return fetch(skip-10)
+    def fetch_recommended(self, user_id, skip=0):
+        history_objs: list[History] =  History.query.filter(History.user_id == user_id).all()
 
-    # Loop through each article in the feed
-    for i in range(skip, skip10):
-        db_article = db_articles[i]
+        all_articles = Article.query.all()
+        clicked_articles = [history_obj.article_link for history_obj in history_objs]
 
-        article = {
-            "title": db_article.title,
-            "description": db_article.description,
-            "image": db_article.image,
-            "link": db_article.link,
-            "pub_date": db_article.pub_date
-        }
+        # Loop over all articles
+        query_result = []
+        for article_obj in all_articles:
+            text = article_obj.title + " " + article_obj.description
+            text = text.replace("\n", "")
+            text = ''.join([i if (i.isalnum()) else ' ' for i in text])  # Strip all special characters
+            text += '.'
+            query_result.append((text, article_obj.link))
 
-        articles.append(article)
+        create_source_document(query_result)
 
-    return articles
+        res_obj = get_resemblance_object('.records')
 
+        duplicates_set = set()
 
+        # Loop over the articles in history
+        for link in clicked_articles:
+            article = Article.query.filter(Article.link == link).all()[0]
+            with open(".current_record", 'w') as file:
+                text = article.title + " " + article.description
+                text = text.replace("\n", "")
+                text = ''.join([i if (i.isalnum()) else ' ' for i in text])  # Strip all special characters
+                text += '.'
+                file.write(text)
+                file.write('\n')
 
+            res_dict = get_resemblance(res_obj, '.current_record')
+            for i in range(len(res_dict)):
+                if res_dict[i] > 0.05:
+                    if article.link != query_result[i][1]:
+                        if not from_same_site(article.link, query_result[i][1]):
+                            duplicates_set.add(query_result[i][1])
+        db_articles = [Article.query.filter(Article.link == duplicate_link).first() for duplicate_link in duplicates_set]
 
-if __name__ == "__main__":
-    fetch()
+        last_index = len(db_articles) - 1
+
+        skip10 = skip + 10
+
+        if skip10 > last_index:
+            return self.fetch_recent(skip - 10)
+
+        return self.create_articles(skip, skip10, db_articles)
