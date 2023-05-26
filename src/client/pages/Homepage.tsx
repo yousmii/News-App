@@ -179,11 +179,6 @@ export default function Homepage() {
 
         setRssOptions(dropDownValue)
 
-
-
-
-
-
     };
 
 
@@ -232,6 +227,9 @@ export default function Homepage() {
                         <option value="Recency">Recency</option>
                         <option value="Popularity">Popularity</option>
                     </select>
+                </div>
+                <div>
+                    <MultiSelect options={rssOptions} value={selected} labelledBy={"Selected"} onChange={setSelected}/>
                 </div>
             </div>
             { /* Search Animation */}
