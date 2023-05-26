@@ -7,6 +7,9 @@ import {trackPromise} from 'react-promise-tracker';
 import * as Loader from "react-loader-spinner";
 import {BsSearch} from "react-icons/bs";
 import Carousel from "../components/Carousel";
+import DropdownCheckbox from "../components/DropdownCheckbox";
+import {MultiSelect} from "react-multi-select-component";
+// @ts-ignore
 
 import Scroller from "../components/InfiteScroller"
 import Cookies from "js-cookie";
@@ -16,10 +19,22 @@ export default function Homepage() {
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [searchResults, setSearchResults] = useState<any>(null);
     const [searchFilter, setSearchFilter] = useState<string>("Recency")
+    const [selected, setSelected] = useState<any>([]);
+    const [rssOptions, setRssOptions] = useState<any>([])
 
     useEffect(() => {
 
         const filter = Cookies.get('filter')
+
+        const list = getRssList()
+
+        console.log("LISSSSSSSSSSTT")
+        console.log(list)
+
+        setRssOptions(list)
+
+        console.log("THIS IS OPRIONS RSS")
+        console.log(rssOptions)
 
 
         if (filter != null) {
@@ -136,6 +151,34 @@ export default function Homepage() {
             }
         }
     }
+
+    const getRssList = async () =>  {
+        const API = await axios.get("api/rss");
+        const responseData = API.data
+
+        const dropDownValue = responseData.map((response : any) => ({
+            "value" : response.id,
+            "label" : response.name
+        }))
+
+        setRssOptions(dropDownValue)
+
+
+
+
+
+
+    };
+
+
+
+    const options = [
+
+          { label: "Grapes 🍇", value: "grapes" },
+          { label: "Mango 🥭", value: "mango" },
+          { label: "Strawberry 🍓", value: "strawberry", disabled: true },
+    ];
+
     const onChange = (event : any) => {
 
         const value = event.target.value;
@@ -174,6 +217,17 @@ export default function Homepage() {
                         <option value="Popularity">Popularity</option>
                     </select>
                 </div>
+                <div>
+                    <pre>{JSON.stringify(selected)}</pre>
+                    <MultiSelect
+                        options={rssOptions}
+                        value={selected}
+                        onChange={setSelected}
+                        labelledBy="Select"
+                        disableSearch={true}
+                    />
+                </div>
+
             </div>
             { /* Search Animation */}
                 <div>

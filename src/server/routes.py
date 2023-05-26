@@ -22,6 +22,8 @@ from sqlalchemy import asc, or_
 
 ConnectDB = ConnectDB(db)
 
+
+
 # Add a feed to the database
 @app.route("/api/rss", methods=['POST'])
 @login_required
@@ -138,7 +140,6 @@ def get_search():
 
 # Get all rss feeds
 @app.route("/api/rss", methods=['GET'])
-@login_required
 def get_feeds():
     db_feeds = RSS.query.order_by(asc(RSS.id)).all()
 
