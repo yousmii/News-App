@@ -134,6 +134,7 @@ def get_search():
     query_string = request.args.get('q', type=str)
     filter = request.args.get('f', type=str)
 
+
     if filter == "Recency":
         articles = search(query_string)
     return json.dumps(articles)
