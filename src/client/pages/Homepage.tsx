@@ -54,7 +54,7 @@ export default function Homepage() {
 
 
         if (filter != null) {
-            setSearchFilter(filter)
+            setSort(filter)
         }
 
 
@@ -88,24 +88,18 @@ export default function Homepage() {
     }, [])
 
     const handleFilter = (labelFilter: string) => {
-        axios.get('/api/filter', {
-            params: {
-                label: labelFilter
-            }
-        })
-            .then(response => {
-                setSearchResults(response.data)
-        })
-            .catch(error => {
-                console.log(error)
-            })
+        let temp = toggleLabel(activeLabels, labelFilter);
+        setActiveLabels([]);
+        setActiveLabels(prevState => prevState.concat(temp))
     }
+
 
     const handleSearch = () => {
         trackPromise(
             axios.get('/api/search', {
                 params: {
-                    q: searchQuery
+                    q: searchQuery,
+                    exclude: selected.map((pair: any) => pair.value)
                 }
             })
                 .then(response => {
@@ -209,6 +203,9 @@ export default function Homepage() {
     };
 
 
+
+
+
     return (
         <div>
             <div className={styles.filteringContainer}>
@@ -225,12 +222,13 @@ export default function Homepage() {
                 </div>
                 { /* Placeholder Sort By */}
                 <div className={styles.sortBy}>
-                    <select value= {searchFilter} className={styles.sortBySelect} onChange={onChange}>
+                    <select value= {sort} className={styles.sortBySelect} onChange={onChange}>
                         <option value="Recency">Recency</option>
                         <option value="Popularity">Popularity</option>
                     </select>
                 </div>
                 <div>
+                    <pre>{JSON.stringify(selected)} </pre>
                     <MultiSelect options={rssOptions} value={selected} labelledBy={"Selected"} onChange={setSelected}/>
                 </div>
             </div>
@@ -254,7 +252,7 @@ export default function Homepage() {
             <Carousel handleFilter={handleFilter}/>
             { /* Articles */}
             <div className={styles.container}>
-                <Scroller labels={activeLabels} sort={sort} query={finalQuery}/>
+                <Scroller labels={activeLabels} sort={sort} query={finalQuery} excluded={selected}/>
             </div>
         </div>
     );

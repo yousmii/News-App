@@ -63,6 +63,7 @@ def get_articles():
     sort = request.args.get('sort', type=str)
     searchQuery = request.args.get('searchQuery', type=str)
     labels = request.args.getlist('labels[]')
+    excluded = request.args.getlist('exclude[]')
 
     final_articles = []
 
@@ -70,11 +71,11 @@ def get_articles():
         final_articles = search(searchQuery)
     else:
         if sort == "Popularity":
-            final_articles = articles_fetcher.fetch_popular(labels, skip)
+            final_articles = articles_fetcher.fetch_popular(labels, excluded, skip)
         elif sort == "Recency":
-            final_articles = articles_fetcher.fetch_recent(labels, skip)
+            final_articles = articles_fetcher.fetch_recent(labels, excluded, skip)
         elif sort == "Recommended":
-            final_articles = articles_fetcher.fetch_recommended(labels, current_user.id, skip)
+            final_articles = articles_fetcher.fetch_recommended(labels, current_user.id, excluded, skip)
 
     return json.dumps(final_articles)
 
