@@ -229,7 +229,7 @@ export default function Homepage() {
                 </div>
                 <div>
                     <pre>{JSON.stringify(selected)} </pre>
-                    <MultiSelect options={rssOptions} value={selected} labelledBy={"Selected"} onChange={setSelected}/>
+                    <MultiSelect options={rssOptions} value={selected} labelledBy={"Selected"} onChange={setSelected} />
                 </div>
             </div>
             { /* Search Animation */}
