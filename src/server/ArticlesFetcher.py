@@ -104,7 +104,7 @@ class ArticlesFetcher:
         skip10 = skip + 10
 
         if skip10 > last_index:
-            return self.fetch_recent(labels, skip - 10)
+            return self.fetch_recent(labels, skip)
 
         return self.create_articles(skip, skip10, results)
 
@@ -162,7 +162,7 @@ class ArticlesFetcher:
         skip10 = skip + 10
 
         if skip10 > last_index:
-            return self.fetch_recent(labels, skip - 10)
+            return self.fetch_recent(labels)
 
         return self.create_articles(skip, skip10, results)
 
