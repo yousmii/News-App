@@ -199,11 +199,13 @@ export default function Homepage() {
 
         console.log("CHANGES");
 
+        setSort(value);
+
+
         window.location.reload()
 
 
 
-        setSort(value);
     };
 
 
