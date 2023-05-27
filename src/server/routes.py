@@ -1,8 +1,7 @@
 from datetime import datetime
 import json
 
-from flask.templating import render_template
-from flask import request, session, jsonify, redirect, flash, json, make_response, request
+from flask import jsonify, json, request
 from forms import RegisterForm, LoginForm
 from flask_login import login_user, logout_user, current_user, login_required
 from flask_wtf import csrf
@@ -12,6 +11,7 @@ from werkzeug.datastructures import MultiDict
 from src.server.app import app
 from src.server.config import app_data, db
 from src.server.ArticlesFetcher import ArticlesFetcher
+# from src.server.ArticlesFetcher import newFetch, newFetchPopular, get_article_by_label
 from src.server.ConnectDB import ConnectDB
 from src.server.database import User, RSS, TF_IDF, Article, History, Label, Article_Labels
 from search import search
@@ -22,6 +22,8 @@ from sqlalchemy import asc, or_
 
 ConnectDB = ConnectDB(db)
 articles_fetcher = ArticlesFetcher()
+
+
 
 # Add a feed to the database
 @app.route("/api/rss", methods=['POST'])
@@ -56,19 +58,26 @@ def delete_feed():
 # Return all articles
 @app.route("/api/articles", methods=['GET'])
 def get_articles():
+    # GET http:/5001/articles?offset=0&sort="Recommended"&searchQuery=20&labels[]
     skip = request.args.get('offset', type=int)
-    filter_ = request.args.get('filter', type=str)
+    sort = request.args.get('sort', type=str)
+    searchQuery = request.args.get('searchQuery', type=str)
+    labels = request.args.getlist('labels[]')
+    excluded = request.args.getlist('exclude[]')
 
-    if filter_ == "Popularity":
-        articles = articles_fetcher.fetch_popular(skip)
-    elif filter_ == "Recency":
-        articles = articles_fetcher.fetch_recent(skip)
-    elif filter_ == "Recommended":
-        articles = articles_fetcher.fetch_recommended(current_user.id, skip)
+    final_articles = []
+
+    if searchQuery != "":
+        final_articles = search(searchQuery)
     else:
-        articles = articles_fetcher.fetch_recent(skip)
+        if sort == "Popularity":
+            final_articles = articles_fetcher.fetch_popular(labels, excluded, skip)
+        elif sort == "Recency":
+            final_articles = articles_fetcher.fetch_recent(labels, excluded, skip)
+        elif sort == "Recommended":
+            final_articles = articles_fetcher.fetch_recommended(labels, current_user.id, excluded, skip)
 
-    return json.dumps(articles)
+    return json.dumps(final_articles)
 
 # Return all labels
 @app.route("/api/labels", methods=['GET'])
@@ -77,28 +86,6 @@ def get_labels():
 
     return jsonify([label.label for label in labels])
 
-@app.route("/api/filter", methods=['GET'])
-def get_article_by_label():
-    labels = request.args.getlist('labels[]')
-
-    articles_label_pairs = Article_Labels.query.filter(Article_Labels.label.in_(labels)).all()
-    #articles_label_pairs = Article_Labels.query.filter_by(label = labels).all()
-    article_links = [pair.article for pair in articles_label_pairs]
-    articles = []
-    for link in article_links:
-        articles_to_add = list(Article.query.filter_by(link = link).all())
-        for article_to_add in articles_to_add:
-            articles.append(
-                {
-                    "title": article_to_add.title,
-                    "description": article_to_add.description,
-                    "image": article_to_add.image,
-                    "link": article_to_add.link,
-                    "pub_date": article_to_add.pub_date
-                }
-            )
-
-    return jsonify(articles)
 
 # Return all similar articles
 @app.route("/api/similarity/", methods=['GET'])
@@ -118,16 +105,8 @@ def get_similar_articles():
     # Convert the set of similar article IDs to a list and return it as a JSON response
     return jsonify(list(similar_articles))
 
-# Return all relevant articles
-@app.route("/api/search", methods=['GET'])
-def get_search():
-    query_string = request.args.get('q', type=str)
-    articles = search(query_string)
-    return json.dumps(articles)
-
 # Get all rss feeds
 @app.route("/api/rss", methods=['GET'])
-@login_required
 def get_feeds():
     db_feeds = RSS.query.order_by(asc(RSS.id)).all()
 
