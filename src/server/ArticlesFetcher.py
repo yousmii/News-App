@@ -61,7 +61,7 @@ class ArticlesFetcher:
 
     def fetch_recent(self, labels, exclude, skip=0):
         filtered_articles: list[str] = self.get_article_by_label(labels)
-        db_articles: list[Article] = Article.query.filter(Article.rss not in exclude).order_by(desc(Article.pub_date)).all()
+        db_articles: list[Article] = Article.query.filter(Article.rss.notin_(exclude)).order_by(desc(Article.pub_date)).all()
 
         if filtered_articles:
             results = []
@@ -91,7 +91,7 @@ class ArticlesFetcher:
         print(exclude)
         filtered_articles: list[str] = self.get_article_by_label(labels)
         seven_days_ago = datetime.now() - timedelta(days=7)
-        db_articles = Article.query.filter(cast(Article.pub_date, Date) >= seven_days_ago.date(), Article.rss not in exclude).order_by(desc(Article.views)).all()
+        db_articles = Article.query.filter(cast(Article.pub_date, Date) >= seven_days_ago.date(), Article.rss.notin_(exclude)).order_by(desc(Article.views)).all()
 
         if filtered_articles:
             results = []
@@ -114,7 +114,7 @@ class ArticlesFetcher:
         filtered_articles: list[str] = self.get_article_by_label(labels)
         history_objs: list[History] = History.query.filter(History.user_id == user_id).all()
 
-        all_articles = Article.query.filter(Article.rss not in exclude).all()
+        all_articles = Article.query.filter(Article.rss.notin_(exclude)).all()
         clicked_articles = [history_obj.article_link for history_obj in history_objs]
 
         # Loop over all articles
