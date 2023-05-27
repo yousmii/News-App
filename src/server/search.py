@@ -84,6 +84,7 @@ def search(input_string: str):
 
     # Define the query
     query = {
+        "size": 1000,
         "query": {
             "bool": {
                 "should": [
