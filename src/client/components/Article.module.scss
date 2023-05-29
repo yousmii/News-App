@@ -12,6 +12,7 @@
 }
 
 .articles {
+  top: $header-height;
   display: flex;
   flex-wrap: wrap;
 
@@ -181,9 +182,9 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-
 }
 .searchBarContainer {
+  margin-top: $header-height;
   padding: 20px 10px;
   position: relative;
   flex-grow: 1;
@@ -201,6 +202,8 @@
 }
 
 .sortBy {
+  margin-top: $header-height;
+  padding: 20px 10px;
   position: relative;
   display: inline-block;
 }
@@ -228,5 +231,3 @@
   font-size: 16px;
   font-weight: bold;
 }
-
-

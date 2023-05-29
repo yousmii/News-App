@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 
-import styles from "./Header.module.scss";
+import styles from "./modules/Header.module.scss";
 
-import { BiMenuAltRight } from "react-icons/bi";
+import { BiLogOutCircle, BiMenuAltRight } from "react-icons/bi";
 import { AiOutlineCloseSquare } from "react-icons/ai";
 import { BsNewspaper } from "react-icons/bs";
 import { IoPersonCircle } from "react-icons/io5";
+import { MdDashboard } from "react-icons/md";
+import Login from "../assets/login.svg";
+import Register from "../assets/register.svg";
+
 import axios from "axios";
 import Logout from "./Logout";
 import handleLogout from "./Logout";
@@ -40,25 +44,42 @@ const Header = () => {
       <div className={styles.header__content}>
         {is_admin && (
           <a href={"/admin"} id={styles.dashboard}>
-            Dashboard
+            <MdDashboard />
           </a>
         )}
+
         <a href={"/"}>
-          <span className={styles.header__logo}>- News Aggregator -</span>
+          <span className={styles.header__logo}>News Central</span>
         </a>
-        {username != null ? (
-          <div>
-            <button className={styles.pointer} onClick={handleLogout}>
-              Logout
-            </button>
-          </div>
-        ) : (
-          <div className={styles.header__loginbutton}>
-            <a href={"/login"}>
-              <IoPersonCircle />
-            </a>
-          </div>
-        )}
+        <div className={styles.header__accountactions}>
+          {username != null ? (
+            <div className={styles.header__logoutbutton}>
+              <button onClick={handleLogout}>
+                <BiLogOutCircle />
+              </button>
+            </div>
+          ) : (
+            <div>
+              <div className={styles.header__loginbutton}>
+                <a href={"/login"}>
+                  <img src={Login} alt="Login" />
+                </a>
+              </div>
+
+              <div className={styles.header__loginbutton}>
+                <a href={"/register"}>
+                  <img src={Register} alt="Register" />
+                </a>
+              </div>
+
+              <div className={styles.header__loginbutton}>
+                <a href={"/login"}>
+                  <IoPersonCircle />
+                </a>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

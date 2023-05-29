@@ -20,16 +20,18 @@ function App() {
         <header>
           <Header />
         </header>
-        <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/admin" element={<Admin />} />
-          <Route path="/admin/rss" element={<RSS />} />
-          <Route path="/admin/users" element={<Users />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="*" element={<Error404 />} />
-          <Route path="/403" element={<Error403 />} />
-          <Route path="/register" element={<RegisterForm />} />
-        </Routes>
+        <div className="maincontent">
+          <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/rss" element={<RSS />} />
+            <Route path="/admin/users" element={<Users />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="*" element={<Error404 />} />
+            <Route path="/403" element={<Error403 />} />
+            <Route path="/register" element={<RegisterForm />} />
+          </Routes>
+        </div>
       </main>
     </BrowserRouter>
   );

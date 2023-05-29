@@ -1,13 +1,36 @@
-@import "../styles/variables.scss";
+@import "../../styles/variables.scss";
 
 .header {
-  background-color: $bg2;
-  color: $dark-blue;
+  overflow: hidden;
+  width: 100%;
   height: $header-height;
 
+  position: fixed; // stays on screen, even during scrolling
+  z-index: 100; // always on top
+
+  background-color: $bg2;
+  color: $dark-blue;
+  border-bottom: 3px solid $dark-blue;
+
   &__logo {
-    font-size: $title-size;
+    font-size: $logo-size;
     font-family: $basic-font;
+    grid-auto-flow: column;
+    justify-content: center;
+
+    z-index: 200;
+
+    float: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    @include breakpoint(xsmall) {
+      font-size: 30px;
+    }
+    @include breakpoint(medium) {
+      font-size: $logo-size;
+    }
   }
 
   &__content {
@@ -23,10 +46,73 @@
     }
   }
 
-  &__loginbutton {
+  &__accountactions {
+    position: relative;
     padding-right: $spacing-m;
-    color: $white;
-    font-size: 50px;
-    margin-top: $spacing-m;
+  }
+
+  @include breakpoint(small) {
+    &__loginbutton:nth-child(1),
+    &__loginbutton:nth-child(2) {
+      display: none;
+    }
+    &__loginbutton:nth-child(3) {
+      display: flex;
+      font-size: $logo-size;
+      padding: 0%;
+      margin-top: 12px;
+    }
+  }
+  @include breakpoint(medium) {
+    &__loginbutton:nth-child(1),
+    &__loginbutton:nth-child(2) {
+      display: initial;
+    }
+    &__loginbutton:nth-child(3) {
+      display: none;
+    }
+  }
+
+  &__loginbutton {
+    display: inline;
+    padding-right: $spacing-m;
+    font-family: $open-sans;
+    font-size: $title-size;
+  }
+
+  &__loginbutton:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: all 0.1s ease-in-out;
+  }
+
+  &__logoutbutton {
+    padding-right: $spacing-m;
+    font-family: $open-sans;
+    font-size: 45px;
+    margin-top: 10px;
+    @include breakpoint(small) {
+      font-size: 30px;
+    }
+    @include breakpoint(medium) {
+      font-size: 45px;
+    }
+  }
+  &__logoutbutton:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: all 0.1s ease-in-out;
+  }
+}
+
+#dashboard {
+  font-size: $logo-size;
+  margin-top: 10px;
+
+  @include breakpoint(xsmall) {
+    font-size: 30px;
+  }
+  @include breakpoint(medium) {
+    font-size: $logo-size;
   }
 }

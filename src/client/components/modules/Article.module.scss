@@ -1,15 +1,100 @@
 @import "../../styles/variables.scss";
 
-.articles-container {
-  display: flex;
-  flex-wrap: wrap;
-  align-self: center;
-  width: 50%;
+.articlescontainer {
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-left: 10px;
 
-  padding: 20px;
-  padding-top: 40px;
-  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+
+  width: 80%;
+
+  transition: 0.1s ease margin-left, 0.1s ease margin-right;
+  @include breakpoint(small) {
+    width: 100%;
+  }
+  @include breakpoint(medium) {
+    width: 50%;
+  }
 }
 
 .article {
+  background: $card-bg;
+
+  height: 220px;
+  max-width: 98%;
+  width: 700px;
+
+  margin-bottom: $spacing-m;
+
+  border-radius: 20px;
+  border: 3px solid $teal;
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+  &__content {
+    display: inline-grid;
+    grid-template-columns: 10% repeat(4, 1fr);
+    grid-gap: $spacing-xs;
+
+    font-family: $open-sans;
+  }
+
+  &__sourcedata {
+    display: flex;
+    justify-content: space-between;
+    font-size: $subtext-size;
+    padding-bottom: 15px;
+  }
+
+  &__info {
+    position: relative;
+    padding: $spacing-s;
+
+    overflow: hidden;
+    grid-column-start: 4;
+    grid-column-end: end;
+  }
+
+  &__img {
+    border-radius: 10px;
+
+    margin: $spacing-s;
+    grid-column-start: 1;
+    grid-column-end: 4;
+
+    width: 100%;
+    height: 190px;
+
+    object-fit: cover;
+  }
+}
+
+.description {
+  display: inline-block;
+
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+
+  max-height: 4.5em;
+  line-height: 1.5em;
+  overflow: hidden;
+
+  color: $text;
+  font-size: 75%;
+}
+
+.title {
+  font-size: 100%;
+  color: $dark-blue;
+  text-decoration: none;
+
+  max-height: 4.3em;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.sources {
+  display: flex;
 }
