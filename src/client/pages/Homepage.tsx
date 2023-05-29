@@ -93,7 +93,7 @@ export default function Homepage() {
                 <div className={styles.sortBy}>
                     <select value={sort} className={styles.sortBySelect} onChange={onChange}>
                         <option value="Recency" >Recent</option>
-                        <option value="Popularity">Popular</option>
+                        <option value="Popularity">Trending</option>
                         {username ? <option value="Recommended">Recommended</option> : null}
                     </select>
                 </div>
