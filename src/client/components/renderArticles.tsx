@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import styles from "./module/Article.module.scss";
+import styles from "./modules/Article.module.scss";
 import moment from "moment";
 import axios from "axios";
 import Cookies from "js-cookie";

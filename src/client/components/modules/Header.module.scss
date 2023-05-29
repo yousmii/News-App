@@ -1,0 +1,32 @@
+@import "../styles/variables.scss";
+
+.header {
+  background-color: $bg2;
+  color: $dark-blue;
+  height: $header-height;
+
+  &__logo {
+    font-size: $title-size;
+    font-family: $basic-font;
+  }
+
+  &__content {
+    display: flex;
+    padding: 30px;
+
+    transition: 0.3s ease padding;
+    height: 100%;
+    align-items: center;
+
+    & {
+      justify-content: space-between;
+    }
+  }
+
+  &__loginbutton {
+    padding-right: $spacing-m;
+    color: $white;
+    font-size: 50px;
+    margin-top: $spacing-m;
+  }
+}
