@@ -1,0 +1,247 @@
+@import "../styles/variables.scss";
+
+* {
+  font-family: "Open Sans", sans-serif;
+}
+
+.container {
+  display: flexbox;
+  padding: 40px 20px 20px;
+}
+
+h1 {
+  font-size: 24px;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  color: $bg2;
+}
+
+form {
+  margin-bottom: 3em;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: black;
+}
+
+input[type="text"] {
+  color: black;
+  max-width: 100%;
+}
+
+input[type="text"],
+input[type="password"] {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  background-color: #304a61;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+}
+
+#register:hover {
+  background-color: #3e6a8e;
+}
+
+input[type="submit"]:hover {
+  background-color: #3e6a8e;
+}
+
+.form {
+  width: 90vw;
+  overflow: hidden;
+  overflow-x: auto;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 0 auto;
+  text-align: left;
+  box-sizing: border-box;
+  border-radius: 20px !important;
+}
+
+#rssId {
+  padding-left: 0;
+  text-align: center;
+}
+
+.RssData {
+  padding: 5px 0;
+  padding-left: 5px;
+}
+
+#RssButton {
+  background: $bg;
+  padding: 8px 16px;
+  border: none;
+}
+
+.RssRow {
+  box-sizing: border-box;
+  width: auto;
+}
+
+#name {
+  border-top-left-radius: 10px;
+  border: none;
+}
+
+#url {
+  border-top-right-radius: 10px;
+  border: none;
+}
+
+#feeds:last-child #feedName {
+  border-bottom-left-radius: 10px;
+  border: none;
+}
+
+#feeds:last-child #feedUrl {
+  border-bottom-right-radius: 10px;
+  border: none;
+}
+
+#adminNameHead {
+  border-radius: 10px 10px 0 0;
+  border: none;
+}
+
+#admins:last-child td:first-child {
+  border-radius: 0 0 10px 10px;
+  border: none;
+}
+
+.button {
+  margin: 10px 10px 10px 0;
+  width: 75% !important;
+  background: $bg2;
+}
+
+.button.add {
+  background: #304a61;
+}
+
+.button.add:hover {
+  background: #3e6a8e;
+}
+
+thead {
+  background-color: #f2f2f2;
+}
+
+th,
+td {
+  padding: 12px;
+  border: 1px solid #ddd;
+}
+
+tr {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}
+
+.deleteButton {
+  padding: 8px;
+  background-color: $dark-blue;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  transition: ease-in 0.2s;
+  background-color: #3e6a8e;
+}
+
+@media (max-width: 768px) {
+  table {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+}
+
+.noScroll {
+  overflow: hidden;
+}
+
+.titlecontainer {
+  padding-top: 2em;
+  text-align: center;
+  display: flexbox;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.8em;
+}
+
+.title {
+  font-size: 40px;
+  color: $dark-blue;
+  font-weight: 700;
+  margin-top: 0.3em;
+}
+
+.logo {
+  font-size: 80px;
+  margin-bottom: -30px;
+  color: $bg2;
+}
+
+.pagescontainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  @media screen and (max-width: $small) {
+    flex-direction: column;
+  }
+}
+
+.pagecontainer {
+  width: 18em;
+  height: 18em;
+  background-color: #fff;
+  border-radius: 40px;
+  margin: 0.7em;
+
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.35));
+}
+
+.pagecontent {
+  top: 25%;
+  position: relative;
+  color: $dark-blue;
+  font-weight: 700;
+  font-size: 35px;
+  text-align: center;
+}
+.logorss {
+  font-size: 62px;
+}
+
+.logouser {
+  font-size: 90px;
+  margin-bottom: -0.4em;
+}

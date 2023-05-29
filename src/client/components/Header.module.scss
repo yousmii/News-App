@@ -1,0 +1,56 @@
+@import "../styles/variables.scss";
+
+.header {
+  background-color: $bg2;
+  color: $white;
+  height: $header-height;
+
+  &__content {
+    display: flex;
+    padding: 30px;
+
+    transition: 0.3s ease padding;
+    height: 100%;
+    align-items: center;
+
+    & {
+      justify-content: space-between;
+    }
+  }
+
+  &__loginbutton {
+    padding-right: $spacing-m;
+    color: $white;
+    font-size: 50px;
+    margin-top: $spacing-m;
+  }
+}
+
+.logo {
+  font-size: $title-size;
+  font-weight: 700;
+  color: $white;
+
+  align-items: center;
+  display: inline-flex;
+  grid-auto-flow: column;
+  grid-column-gap: $spacing-m;
+  @media screen and (max-width: $small) {
+    :nth-last-child(1) {
+      font-size: $subtitle-size;
+    }
+  }
+}
+
+.pointer {
+  padding: 10px;
+  font-weight: bold;
+}
+
+.pointer:hover {
+  cursor: pointer;
+}
+
+#dashboard {
+  font-weight: bold;
+}
