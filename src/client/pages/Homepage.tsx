@@ -28,6 +28,7 @@ export default function Homepage() {
     const [finalQuery, setFinalQuery] = useState<string>("");
     const [sort, setSort] = useState<string>("Recency");
     const [activeLabels, setActiveLabels] = useState<string[]>([])
+    const [searched, setSearched] = useState<boolean>(false)
 
     useEffect(() => {
 
@@ -66,6 +67,7 @@ export default function Homepage() {
     const handleKeyDown = (event: any) => {
         if (event.key === 'Enter') {
             setFinalQuery(searchQuery)
+            setSearched(true)
         }
     };
 
@@ -90,16 +92,18 @@ export default function Homepage() {
                     <BsSearch className={styles.searchIcon}/>
                 </div>
                 { /* Placeholder Sort By */}
+                {searched ? null :
                 <div className={styles.sortBy}>
                     <select value={sort} className={styles.sortBySelect} onChange={onChange}>
                         <option value="Recency" >Recent</option>
                         <option value="Popularity">Trending</option>
                         {username ? <option value="Recommended">Recommended</option> : null}
                     </select>
-                </div>
+                </div>}
             </div>
             { /* Labels */}
-            <Carousel handleFilter={handleFilter}/>
+            {searched ? null : <Carousel handleFilter={handleFilter}/> }
+
             { /* Articles */}
             <div className={styles.container}>
                 <Scroller labels={activeLabels} sort={sort} query={finalQuery}/>
