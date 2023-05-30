@@ -20,6 +20,7 @@ const Scroller = ({ sort, labels, query, excluded }: { sort: string; labels: str
     const {promiseInProgress} = usePromiseTracker();
 
     useEffect(() => {
+        setSkip(0);
         hasMore.current = true;
         updateShownArticles(true);
     }, [sort, labels, query, excluded]);
@@ -58,7 +59,9 @@ const Scroller = ({ sort, labels, query, excluded }: { sort: string; labels: str
                 ...group.article,
                 similarArticles: group.similarArticles
             }));
-        setSkip(prevState => prevState+100);
+        if (! reset) {
+            setSkip(prevState => prevState+100);
+        }
         if (response.data.length > 0) {
             console.log(response.data)
             if (reset) {
