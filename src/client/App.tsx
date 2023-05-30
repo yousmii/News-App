@@ -20,7 +20,7 @@ function App() {
         <header>
           <Header />
         </header>
-        <div className="maincontent">
+        <body>
           <Routes>
             <Route path="/" element={<Homepage />} />
             <Route path="/admin" element={<Admin />} />
@@ -31,7 +31,7 @@ function App() {
             <Route path="/403" element={<Error403 />} />
             <Route path="/register" element={<RegisterForm />} />
           </Routes>
-        </div>
+        </body>
       </main>
     </BrowserRouter>
   );

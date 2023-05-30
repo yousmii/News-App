@@ -12,7 +12,12 @@
 }
 
 body {
+  padding-top: 50px;
   font-family: $open-sans;
+}
+
+header {
+  padding-top: 0;
 }
 
 button {
