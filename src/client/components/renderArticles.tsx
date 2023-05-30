@@ -3,6 +3,7 @@ import styles from "./Article.module.scss";
 import moment from "moment";
 import axios from "axios";
 import Cookies from "js-cookie";
+import { ShareButton } from './ShareButton';
 
 
 function RenderArticles({ articles }: {articles: any}) {
@@ -92,6 +93,7 @@ function RenderArticles({ articles }: {articles: any}) {
                             <a href={link} target={"blank"} className={styles.article_link}>
                                 <img className={styles.favicon} height="16" alt={"favicon"} width="16"
                                      src={'http://www.google.com/s2/favicons?domain=' + link}/>
+                                <ShareButton url={link} />
                                 <img src={image !== null ? image : 'img.png'} alt={title}/>
                                 <h2>{title}</h2>
                                 <p className={styles.description}>{description}</p>
