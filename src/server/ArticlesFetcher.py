@@ -37,25 +37,29 @@ class ArticlesFetcher:
         for i in range(skip, stop):
             db_article = db_articles[i]
 
+
+            if db_article.link in self.article_links:
+                continue
+
             # Create a set of unique article IDs that are similar to the given article ID
             similar_articles = get_similar_articles(db_article.link)
 
-            add = not any([similar_article for similar_article in similar_articles if similar_article in self.article_links])
+            if any([similar_article for similar_article in similar_articles if similar_article in self.article_links]):
+                continue
 
-            if add:
-                self.article_links.append(db_article.link)
+            self.article_links.append(db_article.link)
 
-                article = {
-                    "title": db_article.title,
-                    "description": db_article.description,
-                    "image": db_article.image,
-                    "link": db_article.link,
-                    "pub_date": db_article.pub_date
-                }
+            article = {
+                "title": db_article.title,
+                "description": db_article.description,
+                "image": db_article.image,
+                "link": db_article.link,
+                "pub_date": db_article.pub_date
+            }
 
-                articles.append(article)
+            articles.append(article)
 
-        print([i["title"] for i in articles], flush=True)
+        print(*[i["title"] for i in articles], sep="\n", flush=True)
 
         return articles
 
