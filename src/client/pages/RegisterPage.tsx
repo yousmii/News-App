@@ -59,7 +59,7 @@ export default function RegisterForm() {
           <label className={styles.label}>Email address:</label>
           <input type="email" name="email_address" />
           <br />
-          <label className={styles.label}>Password:</label>
+          <label className={styles.label}>Password (at least 6 characters):</label>
           <input type="password" name="password1" />
           <br />
           <label className={styles.label}>Confirm password:</label>
