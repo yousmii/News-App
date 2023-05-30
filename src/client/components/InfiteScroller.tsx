@@ -19,13 +19,13 @@ const Scroller = ({ sort, labels, query, excluded }: { sort: string; labels: str
     const {promiseInProgress} = usePromiseTracker();
 
     useEffect(() => {
-        console.log("enable hasmore")
         hasMore.current = true;
         updateShownArticles(true);
     }, [sort, labels, query, excluded]);
 
     const fetchDataApi = async (reset: boolean = false) => {
         let offsetValue = articles.length;
+        console.log(offsetValue)
         if (reset) {
             offsetValue = 0;
         }
@@ -64,31 +64,23 @@ const Scroller = ({ sort, labels, query, excluded }: { sort: string; labels: str
                 setArticles((prevApiArticles: any[]) => prevApiArticles.concat(newData))
             }
         } else {
-            console.log("disable hasmore")
             hasMore.current = false;
         }
     };
 
     const updateShownArticles = (reset: boolean = false) => {
-        console.log("enter updateShownArticles")
-        console.log(hasMore.current)
-        console.log(articles)
         if (reset) {
             fetchDataApi(true);
         } else if (shownArticles.length == articles.length && hasMore.current) {
             fetchDataApi(false);
         }  else if (articles.length > shownArticles.length + 10) {
-            console.log("hallo")
             setShownArticles(prevState => articles.slice(0, prevState.length + 10));
         } else {
-            console.log("hey")
             setShownArticles(prevState => articles.slice());
         }
-        console.log("exit updateShownArticles")
     }
 
     useEffect(() => {
-        console.log("useeffect")
         if (articles.length <= 100) {
             if (articles.length < 10) {
                 setShownArticles(prevState => articles.slice());

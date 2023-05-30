@@ -139,6 +139,52 @@
   border-radius: 5px;
 }
 
+.favicon:hover {
+  background-color: lightskyblue;
+}
+
 .sources {
   display: flex;
+}
+
+#sourcesMenu {
+  align-items: center;
+  justify-items: center;
+}
+
+#extraSources {
+  display: none;
+  background-color: $light-grey;
+  width: 35px;
+  position: absolute;
+  flex-direction: column;
+  border-radius: 8px;
+}
+
+#extraSources[enabled] {
+  display: flex;
+}
+
+#source {
+  text-align: center;
+  padding-top :2px;
+  display: block;
+  margin: 0;
+}
+
+#source:hover {
+  transition: 0.4s;
+}
+
+#alsoBy {
+  text-align: center;
+  width: 35px;
+  transform: scale(1.5);
+  padding-bottom: 3px;
+  justify-content: center;
+}
+
+#alsoBy:hover {
+  transition: 0.4s;
+  transform: scale(1.5);
 }
