@@ -3,10 +3,16 @@ server {
 
     server_name 35.190.195.135 team2.ua-ppdb.me;
 
+
     location / {
-      root   /home/app/News-App/dist;
-      index  index.html;
-    }
+        root   /home/app/News-App/dist;
+                try_files $uri /index.html;
+        }
+
+    location /docs/api {
+                alias /home/app/News-App/build;
+                try_files $uri $uri/ =404;
+        }
 
     location /api {
         include proxy_params;
@@ -14,4 +20,3 @@ server {
     }
 
 }
-
