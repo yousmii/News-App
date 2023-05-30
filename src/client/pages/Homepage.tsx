@@ -5,7 +5,10 @@ import moment from "moment";
 import * as Loader from "react-loader-spinner";
 import {BsSearch} from "react-icons/bs";
 import Carousel from "../components/Carousel";
-
+import DropdownCheckbox from "../components/DropdownCheckbox";
+import {MultiSelect} from "react-multi-select-component";
+// @ts-ignore
+import Cookies from "js-cookie";
 import Scroller from "../components/InfiteScroller"
 
 function toggleLabel(labelArray: string[], label: string): string[] {
@@ -25,12 +28,37 @@ function toggleLabel(labelArray: string[], label: string): string[] {
 export default function Homepage() {
     const [username, setUsername] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState<string>("");
+    const [selected, setSelected] = useState<any>([]);
+    const [rssOptions, setRssOptions] = useState<any>([])
     const [finalQuery, setFinalQuery] = useState<string>("");
     const [sort, setSort] = useState<string>("Recency");
     const [activeLabels, setActiveLabels] = useState<string[]>([])
     const [searched, setSearched] = useState<boolean>(false)
 
+    const getRssList = async () =>  {
+        const API = await axios.get("api/rss");
+        const responseData = API.data
+
+        const dropDownValue = responseData.map((response : any) => ({
+            "value" : response.id,
+            "label" : response.name
+        }))
+
+        setRssOptions(dropDownValue)
+
+    };
+
     useEffect(() => {
+
+        const filter = Cookies.get('filter')
+
+        const list = getRssList()
+
+        setRssOptions(list)
+
+        if (filter != null) {
+            setSort(filter)
+        }
 
         const params = new URLSearchParams(window.location.search);
         const q = params.get('q');
@@ -99,14 +127,19 @@ export default function Homepage() {
                         <option value="Popularity">Trending</option>
                         {username ? <option value="Recommended">Recommended</option> : null}
                     </select>
-                </div>}
+                </div>
+                }
+                <div>
+                    <pre>{JSON.stringify(selected)} </pre>
+                    <MultiSelect options={rssOptions} value={selected} labelledBy={"Selected"} onChange={setSelected}/>
+                </div>
             </div>
             { /* Labels */}
             {searched ? null : <Carousel handleFilter={handleFilter}/> }
 
             { /* Articles */}
             <div className={styles.container}>
-                <Scroller labels={activeLabels} sort={sort} query={finalQuery}/>
+                <Scroller excluded={selected} labels={activeLabels} sort={sort} query={finalQuery}/>
             </div>
         </div>
     );

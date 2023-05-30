@@ -59,9 +59,9 @@ class ArticlesFetcher:
 
         return articles
 
-    def fetch_recent(self, labels, skip=0):
+    def fetch_recent(self, labels, exclude, skip=0):
         filtered_articles: list[str] = self.get_article_by_label(labels)
-        db_articles: list[Article] = Article.query.order_by(desc(Article.pub_date)).all()
+        db_articles: list[Article] = Article.query.filter(Article.rss.notin_(exclude)).order_by(desc(Article.pub_date)).all()
 
         if filtered_articles:
             results = []
@@ -86,10 +86,12 @@ class ArticlesFetcher:
 
         return self.create_articles(skip, stop, results)
 
-    def fetch_popular(self, labels, skip=0):
+    def fetch_popular(self, labels, exclude, skip=0):
+
+        print(exclude)
         filtered_articles: list[str] = self.get_article_by_label(labels)
         seven_days_ago = datetime.now() - timedelta(days=7)
-        db_articles = Article.query.filter(cast(Article.pub_date, Date) >= seven_days_ago.date()).order_by(desc(Article.views)).all()
+        db_articles = Article.query.filter(cast(Article.pub_date, Date) >= seven_days_ago.date(), Article.rss.notin_(exclude)).order_by(desc(Article.views)).all()
 
         if filtered_articles:
             results = []
@@ -108,11 +110,11 @@ class ArticlesFetcher:
 
         return self.create_articles(skip, skip10, results)
 
-    def fetch_recommended(self, labels, user_id, skip=0):
+    def fetch_recommended(self, labels, user_id, exclude, skip=0):
         filtered_articles: list[str] = self.get_article_by_label(labels)
         history_objs: list[History] = History.query.filter(History.user_id == user_id).all()
 
-        all_articles = Article.query.all()
+        all_articles = Article.query.filter(Article.rss.notin_(exclude)).all()
         clicked_articles = [history_obj.article_link for history_obj in history_objs]
 
         # Loop over all articles
