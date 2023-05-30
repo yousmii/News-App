@@ -11,7 +11,7 @@ import {trackPromise} from 'react-promise-tracker';
 
 
 
-const Scroller = ({ sort, labels, query }: { sort: string; labels: string[]; query: string }) => {
+const Scroller = ({ sort, labels, query, excluded }: { sort: string; labels: string[]; query: string; excluded: string[] }) => {
     const [articles, setArticles] = useState<any[]>([]);
     const [shownArticles, setShownArticles] = useState<any[]>([]);
     const [skip, setSkip] = useState<number>(0);
@@ -20,9 +20,10 @@ const Scroller = ({ sort, labels, query }: { sort: string; labels: string[]; que
     const {promiseInProgress} = usePromiseTracker();
 
     useEffect(() => {
+        setSkip(0);
         hasMore.current = true;
         updateShownArticles(true);
-    }, [sort, labels, query]);
+    }, [sort, labels, query, excluded]);
 
     const fetchDataApi = async (reset: boolean = false) => {
         // let offsetValue = articles.length;
@@ -37,7 +38,8 @@ const Scroller = ({ sort, labels, query }: { sort: string; labels: string[]; que
                     offset: offsetValue,
                     sort: sort,
                     searchQuery: query,
-                    labels: labels
+                    labels: labels,
+                    exclude: excluded.map((pair : any) => pair.value)
                 }
             }
         ))
@@ -57,7 +59,9 @@ const Scroller = ({ sort, labels, query }: { sort: string; labels: string[]; que
                 ...group.article,
                 similarArticles: group.similarArticles
             }));
-        setSkip(prevState => prevState+100);
+        if (! reset) {
+            setSkip(prevState => prevState+100);
+        }
         if (response.data.length > 0) {
             console.log(response.data)
             if (reset) {

@@ -102,6 +102,16 @@ export default function Homepage() {
   return (
     <div>
       <div className={styles.filteringContainer}>
+        {/* Exclude Select */}
+        <div>
+          <MultiSelect
+            hasSelectAll={false}
+            options={rssOptions}
+            value={selected}
+            labelledBy={"Selected"}
+            onChange={setSelected}
+          />
+        </div>
         {/* Search Bar */}
         <div className={styles.searchBarContainer}>
           <input
