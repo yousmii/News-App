@@ -43,6 +43,21 @@ a {
   text-align: inherit;
   padding: 0;
 }
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: none;
+}
 
 input {
   font-family: inherit;
@@ -54,4 +69,20 @@ input {
   font-size: inherit;
   text-align: inherit;
   padding: 0;
+}
+
+select {
+  font-family: inherit;
+  outline: none;
+  border: none;
+  background: none;
+  background-color: none;
+  letter-spacing: inherit;
+  color: inherit;
+  font-size: inherit;
+  text-align: inherit;
+  padding: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
 }

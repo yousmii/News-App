@@ -89,86 +89,94 @@ function RenderArticles({ articles }: { articles: any }) {
   };
 
   return (
-    <div className={styles.articlescontainer}>
-      {articles.map(
-        ({
-          link,
-          image,
-          title,
-          description,
-          pub_date,
-          similarArticles,
-        }: {
-          link: any;
-          title: any;
-          image: any;
-          description: any;
-          pub_date: any;
-          similarArticles: any;
-        }) => {
-          return (
-            <div
-              key={link}
-              onClick={() => TrackHistory(link)}
-              className={styles.article}
-            >
-              <a href={link} target={"blank"} className={styles.article__link}>
-                <div className={styles.article__content}>
-                  <img
-                    className={styles.article__img}
-                    src={image !== null ? image : "img.png"}
-                    alt={title}
-                  />
-                  <div className={styles.article__info}>
-                    <div className={styles.article__sourcedata}>
-                      <div className={styles.sources}>
-                        <img
-                          className={styles.favicon}
-                          height="16"
-                          alt={"favicon"}
-                          width="16"
-                          src={
-                            "http://www.google.com/s2/favicons?domain=" + link
-                          }
-                        />
-                        {similarArticles.length > 0 && (
-                          <p>
-                            <div>
-                              {similarArticles.map((similarArticleId: any) => (
-                                <React.Fragment key={similarArticleId}>
-                                  <a
-                                    href={`${similarArticleId}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
-                                    <img
-                                      src={
-                                        "http://www.google.com/s2/favicons?domain=" +
-                                        similarArticleId
-                                      }
-                                      alt="favicon"
-                                      className={styles.favicon}
-                                    />
-                                  </a>
-                                </React.Fragment>
-                              ))}
-                            </div>
-                          </p>
-                        )}
+    <div className={styles.container}>
+      <div className={styles.articlescontainer}>
+        {articles.map(
+          ({
+            link,
+            image,
+            title,
+            description,
+            pub_date,
+            similarArticles,
+          }: {
+            link: any;
+            title: any;
+            image: any;
+            description: any;
+            pub_date: any;
+            similarArticles: any;
+          }) => {
+            return (
+              <div
+                key={link}
+                onClick={() => TrackHistory(link)}
+                className={styles.article}
+              >
+                <a
+                  href={link}
+                  target={"blank"}
+                  className={styles.article__link}
+                >
+                  <div className={styles.article__content}>
+                    <img
+                      className={styles.article__img}
+                      src={image !== null ? image : "img.png"}
+                      alt={title}
+                    />
+                    <div className={styles.article__info}>
+                      <div className={styles.article__sourcedata}>
+                        <div className={styles.sources}>
+                          <img
+                            className={styles.favicon}
+                            alt={"favicon"}
+                            src={
+                              "http://www.google.com/s2/favicons?domain=" + link
+                            }
+                          />
+                          {similarArticles.length > 0 && (
+                            <p>
+                              <div>
+                                {similarArticles.map(
+                                  (similarArticleId: any) => (
+                                    <React.Fragment key={similarArticleId}>
+                                      <a
+                                        href={`${similarArticleId}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                      >
+                                        <img
+                                          src={
+                                            "http://www.google.com/s2/favicons?domain=" +
+                                            similarArticleId
+                                          }
+                                          alt="favicon"
+                                          className={styles.favicon}
+                                        />
+                                      </a>
+                                    </React.Fragment>
+                                  )
+                                )}
+                              </div>
+                            </p>
+                          )}
+                        </div>
+                        <p className={styles.time_ago}>
+                          {moment(pub_date).fromNow()}
+                        </p>
                       </div>
-                      <p className={styles.time_ago}>
-                        {moment(pub_date).fromNow()}
-                      </p>
+                      <div className={styles.articletext}>
+                        <h2 className={styles.title}>{title}</h2>
+                        <p className={styles.description}>{description}</p>
+                      </div>
                     </div>
-                    <h2 className={styles.title}>{title}</h2>
-                    <p className={styles.description}>{description}</p>
                   </div>
-                </div>
-              </a>
-            </div>
-          );
-        }
-      )}
+                </a>
+              </div>
+            );
+          }
+        )}
+      </div>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import axios from "axios";
 import styles from "../components/modules/Searchbar.module.scss";
 import moment from "moment";
 import * as Loader from "react-loader-spinner";
-import { BsSearch } from "react-icons/bs";
+import { BsFilter, BsSearch, BsTriangle, BsTriangleFill } from "react-icons/bs";
 import Carousel from "../components/Carousel";
 
 import Scroller from "../components/InfiteScroller";
@@ -88,19 +88,30 @@ export default function Homepage() {
           />
           <BsSearch className={styles.searchIcon} />
         </div>
-        {/* Placeholder Sort By */}
+
+        {/* Sort By */}
         <div className={styles.sortBy}>
           <select
             value={sort}
             className={styles.sortBySelect}
             onChange={onChange}
           >
-            <option value="Recency">Recent</option>
-            <option value="Popularity">Popular</option>
-            {username ? <option value="Recommended">Recommended</option> : null}
+            <option className={styles.sortOption} value="Recency">
+              <p>Recent</p>
+            </option>
+            <option className={styles.sortOption} value="Popularity">
+              <p>Trending</p>
+            </option>
+            {username ? (
+              <option className={styles.sortOption} value="Recommended">
+                <p>Recommended</p>
+              </option>
+            ) : null}
           </select>
+          <BsFilter className={styles.sortIcon} />
         </div>
       </div>
+
       {/* Labels */}
       <Carousel handleFilter={handleFilter} />
 
