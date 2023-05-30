@@ -64,7 +64,7 @@
       margin-top: 12px;
     }
   }
-  @include breakpoint(medium) {
+  @include breakpoint(large) {
     &__loginbutton:nth-child(1),
     &__loginbutton:nth-child(2) {
       display: initial;

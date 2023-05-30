@@ -1,4 +1,4 @@
-import styles from "../components/Login.module.scss";
+import styles from "../components/modules/Login.module.scss";
 import React, { useEffect, useState } from "react";
 import { IoPersonCircle } from "react-icons/io5";
 import axios from "axios";
@@ -55,28 +55,36 @@ export default function Login() {
           <IoPersonCircle />
         </span>
         <form className={styles.form} onSubmit={handleLogin}>
-          <label className={styles.label}>Username:</label>
-          <input
-            title="username"
-            type="text"
-            id="username"
-            name="username"
-            required
-          />
-          <br />
-          <label className={styles.label}>Password:</label>
-          <input
-            title="password"
-            type="password"
-            id="password"
-            name="password"
-            required
-          />
-          <br />
-          <div className={styles.login_and_register_buttons}>
-            <input className={styles.button} type="submit" value="Login" />
+          <div className={styles.field}>
+            <label className={styles.label}>Username:</label>
+            <input
+              className={styles.input}
+              title="username"
+              type="text"
+              id="username"
+              name="username"
+              required
+            />
+          </div>
+          <div className={styles.field}>
+            <label className={styles.label}>Password:</label>
+            <input
+              className={styles.input}
+              title="password"
+              type="password"
+              id="password"
+              name="password"
+              required
+            />
+          </div>
+          <div className={styles.buttons}>
+            <input
+              className={styles.button__login}
+              type="submit"
+              value="Login"
+            />
             <Link to={"/register"}>
-              <button className={styles.register}>Register</button>
+              <button className={styles.button__register}>Register?</button>
             </Link>
           </div>
         </form>

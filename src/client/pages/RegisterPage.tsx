@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
-import styles from "../components/Register.module.scss";
+import styles from "../components/modules/Register.module.scss";
 import { IoPersonCircle } from "react-icons/io5";
 
 export default function RegisterForm() {
