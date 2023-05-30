@@ -74,14 +74,14 @@ export function RegisterFormAdmin() {
       csrf_token: csrfToken,
     };
     axios
-      .post("/api/admins", data, {
+      .post("../api/admins", data, {
         headers: {
           "Content-Type": "application/json",
         },
       })
       .then((response) => {
         console.log(response);
-        window.location.href = "/admin";
+        window.location.href = "/admin/users";
       })
       .catch((error) => {
         console.log(error);
