@@ -77,12 +77,12 @@ class ArticlesFetcher:
 
         last_index = len(results) - 1
 
-        skip10 = skip + 10
+        skip100 = skip + 100
 
         stop = last_index if not last_index == 0 else 1
 
-        if skip10 < last_index:
-            stop = skip10
+        if skip100 < last_index:
+            stop = skip100
 
         if skip > last_index:
             print("reached the end")
@@ -107,12 +107,12 @@ class ArticlesFetcher:
 
         last_index = len(results) - 1
 
-        skip10 = skip + 10
+        skip100 = skip + 100
 
-        if skip10 > last_index:
+        if skip100 > last_index:
             return self.fetch_recent(labels, skip)
 
-        return self.create_articles(skip, skip10, results)
+        return self.create_articles(skip, skip100, results)
 
     def fetch_recommended(self, labels, user_id, exclude, skip=0):
         filtered_articles: list[str] = self.get_article_by_label(labels)
@@ -165,12 +165,12 @@ class ArticlesFetcher:
 
         last_index = len(results) - 1
 
-        skip10 = skip + 10
+        skip100 = skip + 100
 
-        if skip10 > last_index:
-            return self.fetch_recent(labels)
+        if skip100 > last_index:
+            return self.fetch_recent(labels, exclude)
 
-        return self.create_articles(skip, skip10, results)
+        return self.create_articles(skip, skip100, results)
 
     def get_article_by_label(self, labels):
         articles_label_pairs = Article_Labels.query.filter(Article_Labels.label.in_(labels)).all()
