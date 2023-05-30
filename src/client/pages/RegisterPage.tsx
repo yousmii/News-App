@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import styles from "../components/modules/Register.module.scss";
 import { IoPersonCircle } from "react-icons/io5";
+import { BsTriangleFill } from "react-icons/bs";
 
 export default function RegisterForm() {
   const [csrfToken, setCsrfToken] = useState("");
@@ -52,20 +53,35 @@ export default function RegisterForm() {
           <IoPersonCircle />
         </span>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <input type="hidden" name="csrf_token" value={csrfToken} />
-          <label className={styles.label}>Username:</label>
-          <input type="text" name="username" />
-          <br />
-          <label className={styles.label}>Email address:</label>
-          <input type="email" name="email_address" />
-          <br />
-          <label className={styles.label}>Password:</label>
-          <input type="password" name="password1" />
-          <br />
-          <label className={styles.label}>Confirm password:</label>
-          <input type="password" name="password2" />
-          <br />
-          <input className={styles.button} type="submit" value="Register" />
+          <input
+            className={styles.input}
+            type="hidden"
+            name="csrf_token"
+            value={csrfToken}
+          />
+          <div className={styles.field}>
+            <label className={styles.label}>Username:</label>
+            <input className={styles.input} type="text" name="username" />
+          </div>
+          <div className={styles.field}>
+            <label className={styles.label}>Email address:</label>
+            <input className={styles.input} type="email" name="email_address" />
+          </div>
+          <div className={styles.field}>
+            <label className={styles.label}>Password:</label>
+            <input className={styles.input} type="password" name="password1" />
+          </div>
+          <div className={styles.field}>
+            <label className={styles.label}>Confirm password:</label>
+            <input className={styles.input} type="password" name="password2" />
+          </div>
+          <div className={styles.buttons}>
+            <input
+              className={styles.button__login}
+              type="submit"
+              value="Register"
+            />
+          </div>
         </form>
       </div>
     </div>
