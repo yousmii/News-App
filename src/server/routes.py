@@ -23,10 +23,13 @@ from sqlalchemy import asc, or_
 ConnectDB = ConnectDB(db)
 articles_fetcher = ArticlesFetcher()
 
+
+
 # Add a feed to the database
 @app.route("/api/rss", methods=['POST'])
 @login_required
 def post_rss():
+    print("we get here", flush=True)
     feed_data = request.get_json()
 
     success, message = ConnectDB.addRSS(feed_data['feed_name'], feed_data['feed_url'])
@@ -61,6 +64,7 @@ def get_articles():
     sort = request.args.get('sort', type=str)
     searchQuery = request.args.get('searchQuery', type=str)
     labels = request.args.getlist('labels[]')
+    excluded = request.args.getlist('exclude[]')
 
     final_articles = []
 
@@ -68,11 +72,11 @@ def get_articles():
         final_articles = search(searchQuery)
     else:
         if sort == "Popularity":
-            final_articles = articles_fetcher.fetch_popular(labels, skip)
+            final_articles = articles_fetcher.fetch_popular(labels, excluded, skip)
         elif sort == "Recency":
-            final_articles = articles_fetcher.fetch_recent(labels, skip)
+            final_articles = articles_fetcher.fetch_recent(labels, excluded, skip)
         elif sort == "Recommended":
-            final_articles = articles_fetcher.fetch_recommended(labels, current_user.id, skip)
+            final_articles = articles_fetcher.fetch_recommended(labels, current_user.id, excluded, skip)
 
     return json.dumps(final_articles)
 
@@ -104,7 +108,6 @@ def get_similar_articles():
 
 # Get all rss feeds
 @app.route("/api/rss", methods=['GET'])
-@login_required
 def get_feeds():
     db_feeds = RSS.query.order_by(asc(RSS.id)).all()
 

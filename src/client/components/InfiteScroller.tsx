@@ -11,7 +11,7 @@ import {trackPromise} from 'react-promise-tracker';
 
 
 
-const Scroller = ({ sort, labels, query }: { sort: string; labels: string[]; query: string }) => {
+const Scroller = ({ sort, labels, query, excluded }: { sort: string; labels: string[]; query: string; excluded: string[]}) => {
     const [articles, setArticles] = useState<any[]>([]);
     const [shownArticles, setShownArticles] = useState<any[]>([]);
     const hasMore = useRef(true);
@@ -22,7 +22,7 @@ const Scroller = ({ sort, labels, query }: { sort: string; labels: string[]; que
         console.log("enable hasmore")
         hasMore.current = true;
         updateShownArticles(true);
-    }, [sort, labels, query]);
+    }, [sort, labels, query, excluded]);
 
     const fetchDataApi = async (reset: boolean = false) => {
         let offsetValue = articles.length;
@@ -35,7 +35,8 @@ const Scroller = ({ sort, labels, query }: { sort: string; labels: string[]; que
                     offset: offsetValue,
                     sort: sort,
                     searchQuery: query,
-                    labels: labels
+                    labels: labels,
+                    exclude: excluded.map((pair : any) => pair.value)
                 }
             }
         ))

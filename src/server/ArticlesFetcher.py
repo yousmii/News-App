@@ -37,31 +37,35 @@ class ArticlesFetcher:
         for i in range(skip, stop):
             db_article = db_articles[i]
 
+
+            if db_article.link in self.article_links:
+                continue
+
             # Create a set of unique article IDs that are similar to the given article ID
             similar_articles = get_similar_articles(db_article.link)
 
-            add = not any([similar_article for similar_article in similar_articles if similar_article in self.article_links])
+            if any([similar_article for similar_article in similar_articles if similar_article in self.article_links]):
+                continue
 
-            if add:
-                self.article_links.append(db_article.link)
+            self.article_links.append(db_article.link)
 
-                article = {
-                    "title": db_article.title,
-                    "description": db_article.description,
-                    "image": db_article.image,
-                    "link": db_article.link,
-                    "pub_date": db_article.pub_date
-                }
+            article = {
+                "title": db_article.title,
+                "description": db_article.description,
+                "image": db_article.image,
+                "link": db_article.link,
+                "pub_date": db_article.pub_date
+            }
 
-                articles.append(article)
+            articles.append(article)
 
-        print([i["title"] for i in articles], flush=True)
+        print(*[i["title"] for i in articles], sep="\n", flush=True)
 
         return articles
 
-    def fetch_recent(self, labels, skip=0):
+    def fetch_recent(self, labels, exclude, skip=0):
         filtered_articles: list[str] = self.get_article_by_label(labels)
-        db_articles: list[Article] = Article.query.order_by(desc(Article.pub_date)).all()
+        db_articles: list[Article] = Article.query.filter(Article.rss.notin_(exclude)).order_by(desc(Article.pub_date)).all()
 
         if filtered_articles:
             results = []
@@ -86,10 +90,12 @@ class ArticlesFetcher:
 
         return self.create_articles(skip, stop, results)
 
-    def fetch_popular(self, labels, skip=0):
+    def fetch_popular(self, labels, exclude, skip=0):
+
+        print(exclude)
         filtered_articles: list[str] = self.get_article_by_label(labels)
         seven_days_ago = datetime.now() - timedelta(days=7)
-        db_articles = Article.query.filter(cast(Article.pub_date, Date) >= seven_days_ago.date()).order_by(desc(Article.views)).all()
+        db_articles = Article.query.filter(cast(Article.pub_date, Date) >= seven_days_ago.date(), Article.rss.notin_(exclude)).order_by(desc(Article.views)).all()
 
         if filtered_articles:
             results = []
@@ -104,15 +110,15 @@ class ArticlesFetcher:
         skip10 = skip + 10
 
         if skip10 > last_index:
-            return self.fetch_recent(labels, skip - 10)
+            return self.fetch_recent(labels, skip)
 
         return self.create_articles(skip, skip10, results)
 
-    def fetch_recommended(self, labels, user_id, skip=0):
+    def fetch_recommended(self, labels, user_id, exclude, skip=0):
         filtered_articles: list[str] = self.get_article_by_label(labels)
         history_objs: list[History] = History.query.filter(History.user_id == user_id).all()
 
-        all_articles = Article.query.all()
+        all_articles = Article.query.filter(Article.rss.notin_(exclude)).all()
         clicked_articles = [history_obj.article_link for history_obj in history_objs]
 
         # Loop over all articles
@@ -162,7 +168,7 @@ class ArticlesFetcher:
         skip10 = skip + 10
 
         if skip10 > last_index:
-            return self.fetch_recent(labels, skip - 10)
+            return self.fetch_recent(labels)
 
         return self.create_articles(skip, skip10, results)
 

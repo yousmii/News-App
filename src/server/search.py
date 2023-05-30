@@ -28,9 +28,9 @@ def convert_date_string(date_str):
 
 
 def search(input_string: str):
-    ELASTIC_PASSWORD = "d3XoONXMROuT84slk7qMft9O"
-    CLOUD_ID = "PPDB:dXMtY2VudHJhbDEuZ2NwLmNsb3VkLmVzLmlvOjQ0MyRmODg1MTM4ZDU3NjI0NDZhOGM5MjhhZjQ1NmJhZmUwMCQxZjg0Y2M0YT" \
-               "YyNTM0YTU2YmVkMDcwYTM3MmUyYzg5Ng=="
+    ELASTIC_PASSWORD = "fFftgz1UyyTjaPnzIWSkcDN6"
+    CLOUD_ID = "PPDB:dXMtY2VudHJhbDEuZ2NwLmNsb3VkLmVzLmlvOjQ0MyRkNDZiMzBjYjdiMjI0MGY4YmJjZDg2MGFjZTk5NmM5ZiQ4NDVjYjhkOD" \
+               "kxNTc0MzQ3ODY4Nzc2N2JmY2YyYmE4Yg=="
 
     # Connect to Elasticsearch cluster
     es = Elasticsearch(
@@ -84,6 +84,7 @@ def search(input_string: str):
 
     # Define the query
     query = {
+        "size": 1000,
         "query": {
             "bool": {
                 "should": [
