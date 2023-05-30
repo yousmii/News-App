@@ -31,6 +31,7 @@
     "react-icons": "^4.7.1",
     "react-infinite-scroll-component": "^6.1.0",
     "react-loader-spinner": "^5.3.4",
+    "react-multi-select-component": "^4.3.4",
     "react-promise-tracker": "^2.1.1",
     "react-router-dom": "^6.9.0"
   },
