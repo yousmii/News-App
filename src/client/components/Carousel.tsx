@@ -1,9 +1,8 @@
-import React, {useEffect, useRef, useState} from 'react';
-import styles from './Carousel.module.scss';
+import React, { useEffect, useRef, useState } from "react";
+import styles from "./modules/Carousel.module.scss";
 import axios from "axios";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 type CarouselProps = {
   handleFilter: (label: string) => void;
@@ -20,16 +19,16 @@ function Carousel({ handleFilter }: CarouselProps) {
     } else {
       buttonItem.setAttribute("include", "include");
     }
-  }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('/api/labels');
+        const response = await axios.get("/api/labels");
         if (response.status === 200) {
           setLabels(response.data);
         } else {
-          console.log('Could not get labels');
+          console.log("Could not get labels");
         }
       } catch (error) {
         console.log(error);
@@ -41,7 +40,6 @@ function Carousel({ handleFilter }: CarouselProps) {
     fetchData();
   }, []);
 
-
   useEffect(() => {
     if (loading) {
       return;
@@ -51,26 +49,25 @@ function Carousel({ handleFilter }: CarouselProps) {
     const labelWidth = 100; // Set the width of each label item
     let currentPosition = labelsContainer.scrollLeft;
 
-
     // Function to scroll the labels to the left or right
-    const scrollLabels = (direction: 'left' | 'right') => {
-      if (direction === 'left') {
-        currentPosition = currentPosition - (labelWidth * 4);
+    const scrollLabels = (direction: "left" | "right") => {
+      if (direction === "left") {
+        currentPosition = currentPosition - labelWidth * 4;
         if (currentPosition < 0) {
           currentPosition = 0;
         }
         labelsContainer.scrollTo({
           left: currentPosition,
-          behavior: 'smooth',
+          behavior: "smooth",
         });
-      } else if (direction === 'right') {
-        currentPosition = currentPosition + (labelWidth * 4);
+      } else if (direction === "right") {
+        currentPosition = currentPosition + labelWidth * 4;
         if (currentPosition > (labelsList?.scrollWidth || 0)) {
-          currentPosition = (labelsList?.scrollWidth || 0);
+          currentPosition = labelsList?.scrollWidth || 0;
         }
         labelsContainer.scrollTo({
           left: currentPosition,
-          behavior: 'smooth',
+          behavior: "smooth",
         });
       }
 
@@ -86,30 +83,33 @@ function Carousel({ handleFilter }: CarouselProps) {
       const leftButton = document.getElementById(styles.left_button);
       const rightButton = document.getElementById(styles.right_button);
 
-      if (leftButton && (currentPosition === 0)) {
+      if (leftButton && currentPosition === 0) {
         leftButton.style.opacity = "0.3";
-        leftButton.setAttribute("disabled","disabled")
+        leftButton.setAttribute("disabled", "disabled");
       } else if (leftButton) {
-          leftButton.style.opacity = "1";
-          leftButton.removeAttribute('disabled')
+        leftButton.style.opacity = "1";
+        leftButton.removeAttribute("disabled");
       }
 
-      if (rightButton && ((currentPosition + containerWidth) >= listWidth)) {
+      if (rightButton && currentPosition + containerWidth >= listWidth) {
         rightButton.style.opacity = "0.3";
-        rightButton.setAttribute("disabled","disabled")
-      } else if(rightButton) {
-          rightButton.style.opacity = "1";
-          rightButton.removeAttribute('disabled')
+        rightButton.setAttribute("disabled", "disabled");
+      } else if (rightButton) {
+        rightButton.style.opacity = "1";
+        rightButton.removeAttribute("disabled");
       }
     };
 
     // Populate the labels in the DOM
     const labelsListElement = labelsList as HTMLUListElement;
     labels.forEach((label: string) => {
-      const buttonItem = document.createElement('button');
+      const buttonItem = document.createElement("button");
       buttonItem.textContent = label;
       buttonItem.className = styles.label;
-      buttonItem.onclick = () => {handleFilter(label); handleSelect(buttonItem)};
+      buttonItem.onclick = () => {
+        handleFilter(label);
+        handleSelect(buttonItem);
+      };
       labelsListElement?.appendChild(buttonItem);
     });
 
@@ -121,29 +121,29 @@ function Carousel({ handleFilter }: CarouselProps) {
     const rightButton = document.getElementById(styles.right_button);
 
     const handleLeftClick = () => {
-      scrollLabels('left');
+      scrollLabels("left");
     };
 
     const handleRightClick = () => {
-      scrollLabels('right');
+      scrollLabels("right");
     };
 
     if (leftButton) {
-      leftButton.addEventListener('click', handleLeftClick);
+      leftButton.addEventListener("click", handleLeftClick);
     }
 
     if (rightButton) {
-      rightButton.addEventListener('click', handleRightClick);
+      rightButton.addEventListener("click", handleRightClick);
     }
 
     return () => {
       // Clean up event listeners when the component unmounts
       if (leftButton) {
-        leftButton.removeEventListener('click', handleLeftClick);
+        leftButton.removeEventListener("click", handleLeftClick);
       }
 
       if (rightButton) {
-        rightButton.removeEventListener('click', handleRightClick);
+        rightButton.removeEventListener("click", handleRightClick);
       }
     };
   }, [labels]);
@@ -151,20 +151,20 @@ function Carousel({ handleFilter }: CarouselProps) {
   return (
     <div className={styles.carousel}>
       <button id={styles.left_button}>
-        <FontAwesomeIcon icon={faArrowRight} rotation={180} style={{color: "#153a7a",}} />
+        <FontAwesomeIcon
+          icon={faArrowRight}
+          rotation={180}
+          style={{ color: "#153a7a" }}
+        />
       </button>
       <div className={styles.labelsContainer} ref={labelsContainerRef}>
-        <ul className={styles.labelList}>
-
-        </ul>
+        <ul className={styles.labelList}></ul>
       </div>
       <button id={styles.right_button} disabled={loading || !labels.length}>
-        <FontAwesomeIcon icon={faArrowRight} style={{color: "#153a7a",}} />
+        <FontAwesomeIcon icon={faArrowRight} style={{ color: "#153a7a" }} />
       </button>
     </div>
   );
 }
 
 export default Carousel;
-
-

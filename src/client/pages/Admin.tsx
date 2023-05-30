@@ -1,12 +1,18 @@
 import React, { Component, useEffect, useState } from "react";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styles from "../components/Admin.module.scss";
+import styles from "../components/modules/Admin.module.scss";
 import axios from "axios";
 import AdminNavbar from "../components/AdminNavbar";
 import { IoPersonCircle } from "react-icons/io5";
 import { BiRss } from "react-icons/bi";
-import { BsKeyFill, BsRssFill } from "react-icons/bs";
+import {
+  BsKeyFill,
+  BsPersonBadgeFill,
+  BsPersonCircle,
+  BsRssFill,
+} from "react-icons/bs";
+import { MdDashboard } from "react-icons/md";
 
 export default function Admin() {
   useEffect(() => {
@@ -31,12 +37,12 @@ export default function Admin() {
   // prevent unauthorized access to admin page
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className={styles.titlecontainer}>
         <div className={styles.logo}>
-          <IoPersonCircle />
+          <MdDashboard />
         </div>
-        <div className={styles.title}>Hello admin</div>
+        <div className={styles.title}>Admin Dashboard</div>
       </div>
 
       <div className={styles.pagescontainer}>
@@ -54,7 +60,7 @@ export default function Admin() {
           <div className={styles.pagecontainer}>
             <div className={styles.pagecontent}>
               <div className={styles.logouser}>
-                <IoPersonCircle />
+                <BsPersonBadgeFill />
               </div>
               Users
             </div>
