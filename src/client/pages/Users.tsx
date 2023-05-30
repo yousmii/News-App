@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { Component, useEffect, useState } from "react";
 import { BiPlusCircle } from "react-icons/bi";
+import { BsPersonBadgeFill } from "react-icons/bs";
 import { IoPersonCircle } from "react-icons/io5";
 import AdminNavbar from "../components/AdminNavbar";
 import styles from "../components/SubAdmin.module.scss";
@@ -31,16 +32,15 @@ export default function Users() {
     <div>
       <AdminNavbar />
       <div>
-        <h1 className={styles.title}>
-          <div className={styles.logouser}>
-            <IoPersonCircle />
-          </div>
-          Users
-        </h1>
+        <h1 className={styles.title}>Users</h1>
       </div>
       <div className={styles.container}>
-        <RegisterFormAdmin />
-        <AdminTable />
+        <div className={styles.formcontainer}>
+          <RegisterFormAdmin />
+        </div>
+        <div className={styles.tablecontainer}>
+          <AdminTable />
+        </div>
       </div>
     </div>
   );
@@ -89,31 +89,28 @@ export function RegisterFormAdmin() {
   };
 
   return (
-    <div className={[styles.form, styles.noScroll].join(" ")}>
-      <h1>
-        <BiPlusCircle />
-        Add new user
-      </h1>
-      <form onSubmit={handleSubmit}>
-        <input type="hidden" name="csrf_token" value={csrfToken} />
-        <label>Username:</label>
-        <input type="text" name="username" />
-        <br />
-        <label>Email address:</label>
-        <input type="email" name="email_address" />
-        <br />
-        <label>Password:</label>
-        <input type="password" name="password1" />
-        <br />
-        <label>Confirm password:</label>
-        <input type="password" name="password2" />
-        <br />
+    <div>
+      <h2 className={styles.heading}>Add new user</h2>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <input
-          className={styles.button}
-          id={styles.register}
-          type="submit"
-          value="Register"
+          className={styles.input}
+          type="hidden"
+          name="csrf_token"
+          value={csrfToken}
         />
+        <label className={styles.label}>Username:</label>
+        <input className={styles.input} type="text" name="username" />
+
+        <label className={styles.label}>Email address:</label>
+        <input className={styles.input} type="email" name="email_address" />
+
+        <label className={styles.label}>Password:</label>
+        <input className={styles.input} type="password" name="password1" />
+
+        <label className={styles.label}>Confirm password:</label>
+        <input className={styles.input} type="password" name="password2" />
+
+        <input className={styles.button} type="submit" value="Register" />
       </form>
     </div>
   );
@@ -154,7 +151,7 @@ const AdminTable: React.FC = () => {
 
   return (
     <div className={styles.form}>
-      <h1>User Table</h1>
+      <h2 className={styles.heading}>User Table</h2>
       <table>
         <thead>
           <tr>

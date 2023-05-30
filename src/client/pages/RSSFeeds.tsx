@@ -30,12 +30,7 @@ export default function RSS() {
   return (
     <div>
       <AdminNavbar />
-      <h1 className={styles.title}>
-        <div className={styles.logrss}>
-          <BsRssFill />
-        </div>{" "}
-        RSS Feeds
-      </h1>
+      <h1 className={styles.title}>RSS Feeds</h1>
       <div className={styles.container}>
         <RSSForm />
         <RssTable />
@@ -77,35 +72,32 @@ class RSSForm extends Component {
 
   render() {
     return (
-      <div className={[styles.form, styles.noScroll].join(" ")}>
-        <h1>
-          <BiPlusCircle />
-          Add new RSS Feed
-        </h1>
-        <form onSubmit={this.handleSubmit} method="post">
-          <label>Feed URL:</label>
+      <div className={styles.formcontainer}>
+        <h2 className={styles.heading}>Add new RSS Feed</h2>
+        <form
+          className={styles.form}
+          onSubmit={this.handleSubmit}
+          method="post"
+        >
+          <label className={styles.label}>Feed URL:</label>
           <input
+            className={styles.input}
             title="feedurl"
             type="text"
             id="feed_url"
             name="feed_url"
             required
           />
-          <br />
-          <label>Feed Name:</label>
+          <label className={styles.label}>Feed Name:</label>
           <input
+            className={styles.input}
             title="feedname"
             type="text"
             id="feed_name"
             name="feed_name"
             required
           />
-          <br />
-          <input
-            className={styles.button + " " + styles.add}
-            type="submit"
-            value="Add Feed"
-          />
+          <input className={styles.button} type="submit" value="Add Feed" />
         </form>
       </div>
     );
