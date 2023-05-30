@@ -68,15 +68,15 @@ def get_articles():
 
     final_articles = []
 
-    if searchQuery != "":
+    if searchQuery:
         final_articles = search(searchQuery)
     else:
         if sort == "Popularity":
             final_articles = articles_fetcher.fetch_popular(labels, excluded, skip)
-        elif sort == "Recency":
-            final_articles = articles_fetcher.fetch_recent(labels, excluded, skip)
         elif sort == "Recommended":
             final_articles = articles_fetcher.fetch_recommended(labels, current_user.id, excluded, skip)
+        else: # By recency
+            final_articles = articles_fetcher.fetch_recent(labels, excluded, skip)
 
     return json.dumps(final_articles)
 
