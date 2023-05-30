@@ -102,15 +102,6 @@ export default function Homepage() {
   return (
     <div>
       <div className={styles.filteringContainer}>
-        {/* Exclude Select */}
-        <div>
-          <MultiSelect
-            options={rssOptions}
-            value={selected}
-            labelledBy={"Selected"}
-            onChange={setSelected}
-          />
-        </div>
         {/* Search Bar */}
         <div className={styles.searchBarContainer}>
           <input
@@ -146,6 +137,15 @@ export default function Homepage() {
             <BsFilter className={styles.sortIcon} />
           </div>
         )}
+        {/* Exclude Select */}
+        <div>
+          <MultiSelect
+            options={rssOptions}
+            value={selected}
+            labelledBy={"Selected"}
+            onChange={setSelected}
+          />
+        </div>
       </div>
       {/* Labels */}
       {searched ? null : (

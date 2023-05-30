@@ -89,12 +89,13 @@ export default class DropdownCheckbox extends Component<
   render() {
     return (
       <span
-        className="d-inline-block"
+        className={styles.container}
         data-toggle="popover"
         data-trigger="focus"
-        data-content="Please selecet account(s)"
+        data-content="Please selcet account(s)"
       >
         <ReactSelect
+          className={styles.dropdown}
           options={this.state.optionsList}
           isMulti
           isSearchable={false}
@@ -110,6 +111,3 @@ export default class DropdownCheckbox extends Component<
     );
   }
 }
-
-const rootElement = document.getElementById("root");
-ReactDOM.render(<DropdownCheckbox />, rootElement);
