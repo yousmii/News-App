@@ -29,6 +29,7 @@ articles_fetcher = ArticlesFetcher()
 @app.route("/api/rss", methods=['POST'])
 @login_required
 def post_rss():
+    print("we get here", flush=True)
     feed_data = request.get_json()
 
     success, message = ConnectDB.addRSS(feed_data['feed_name'], feed_data['feed_url'])
