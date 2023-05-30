@@ -54,7 +54,7 @@ class RSSForm extends Component {
 
     const formData = { feed_name: feedName, feed_url: feedUrl };
 
-    fetch("api/rss", {
+    fetch("../api/rss", {
       method: "POST",
       body: JSON.stringify(formData),
       headers: {
@@ -64,7 +64,7 @@ class RSSForm extends Component {
       console.log(response);
       if (response.ok) {
         // RSS feed was successfully added
-        alert("RSS feed was successfully added to the database!");
+        window.location.href = "/admin/rss";
       } else {
         // Display error message to user
         response.text().then((errorMessage) => {
