@@ -4,13 +4,11 @@
   justify-content: space-between;
   width: 90%;
   height: 50px;
-  margin: auto;
 }
 
 .labelsContainer {
   height: 100%;
   overflow: hidden;
-
 }
 
 .labelList {
@@ -24,7 +22,7 @@
 }
 
 .label {
-  background-color: rgb(240,240,240);
+  background-color: rgb(240, 240, 240);
   height: 80%;
   padding: 10px;
   border-radius: 15px;
@@ -65,7 +63,6 @@
   background-color: lightskyblue;
   outline: solid 1px royalblue;
 }
-
 
 #left_button {
   margin-right: 10px;

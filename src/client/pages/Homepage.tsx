@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import styles from "../components/Article.module.scss";
+import styles from "../components/modules/Searchbar.module.scss";
 import moment from "moment";
 import * as Loader from "react-loader-spinner";
 import { BsSearch } from "react-icons/bs";
@@ -103,6 +103,7 @@ export default function Homepage() {
       </div>
       {/* Labels */}
       <Carousel handleFilter={handleFilter} />
+
       {/* Articles */}
       <div>
         <Scroller labels={activeLabels} sort={sort} query={finalQuery} />

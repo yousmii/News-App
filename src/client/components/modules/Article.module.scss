@@ -1,21 +1,28 @@
 @import "../../styles/variables.scss";
 
 .articlescontainer {
+  display: flex;
+  flex-direction: column;
+
   padding-top: 20px;
   padding-left: 10px;
   padding-left: 10px;
 
-  margin-left: auto;
+  margin-left: 30%;
   margin-right: auto;
-
-  width: 80%;
 
   transition: 0.1s ease margin-left, 0.1s ease margin-right;
   @include breakpoint(small) {
     width: 100%;
+    margin-left: 0%;
   }
   @include breakpoint(medium) {
-    width: 50%;
+    width: 70%;
+    margin-left: auto;
+  }
+  @include breakpoint(extra-large) {
+    width: 80%;
+    margin-left: 38%;
   }
 }
 
@@ -23,14 +30,21 @@
   background: $card-bg;
 
   height: 220px;
-  max-width: 98%;
-  width: 700px;
 
   margin-bottom: $spacing-m;
 
   border-radius: 20px;
   border: 3px solid $teal;
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+
+  @include breakpoint(small) {
+    width: 98%;
+    max-width: 98%;
+  }
+  @include breakpoint(medium) {
+    width: 700px;
+    max-width: 100%;
+  }
 
   &__content {
     display: inline-grid;
@@ -43,7 +57,8 @@
   &__sourcedata {
     display: flex;
     justify-content: space-between;
-    font-size: $subtext-size;
+    font-size: 12px;
+    color: $teal;
     padding-bottom: 15px;
   }
 
@@ -69,6 +84,10 @@
     object-fit: cover;
   }
 }
+.article:hover {
+  transform: scale(1.02);
+  transition: all 0.1s ease-in-out;
+}
 
 .description {
   display: inline-block;
@@ -81,11 +100,11 @@
   overflow: hidden;
 
   color: $text;
-  font-size: 75%;
+  font-size: $subtext-size;
 }
 
 .title {
-  font-size: 100%;
+  font-size: $title-size;
   color: $dark-blue;
   text-decoration: none;
 
@@ -93,6 +112,11 @@
   word-wrap: break-word;
   text-overflow: ellipsis;
   overflow: hidden;
+}
+
+.title:hover {
+  color: $teal;
+  transition: all 0.1s ease-in-out;
 }
 
 .sources {
