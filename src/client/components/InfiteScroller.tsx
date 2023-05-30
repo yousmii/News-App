@@ -108,7 +108,7 @@ const Scroller = ({ sort, labels, query, excluded }: { sort: string; labels: str
 
     return (
         <div>
-            <pre>{JSON.stringify(excluded.map((ID : any) => ID.value))}</pre>
+            <pre>{JSON.stringify(excluded)}</pre>
         <InfiniteScroll
             dataLength={shownArticles.length}
             next={updateShownArticles}
