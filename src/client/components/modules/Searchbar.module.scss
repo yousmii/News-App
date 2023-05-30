@@ -8,8 +8,6 @@
   margin-left: 10px;
   margin-right: 10px;
   margin-bottom: 20px;
-
-  max-width: 80%;
 }
 
 .searchBarContainer {
@@ -73,4 +71,10 @@
 .sortOption {
   font-size: $subtext-size;
   padding-left: 10px;
+}
+
+.carouselContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
