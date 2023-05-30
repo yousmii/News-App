@@ -2,7 +2,6 @@ import styles from "../components/Login.module.scss";
 import React, { useEffect, useState } from "react";
 import { IoPersonCircle } from "react-icons/io5";
 import axios from "axios";
-import Scroller from "../components/InfiteScroller";
 import { Link } from "react-router-dom";
 
 export default function Login() {
@@ -41,8 +40,7 @@ export default function Login() {
         if (response.status === 200) {
           console.log(response);
           window.location.href = "/";
-        }
-        else if (response.status === 400) {
+        } else if (response.status === 400) {
           window.location.reload();
         }
       })

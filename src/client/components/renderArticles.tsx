@@ -135,30 +135,26 @@ function RenderArticles({ articles }: { articles: any }) {
                             }
                           />
                           {similarArticles.length > 0 && (
-                            <p>
-                              <div>
-                                {similarArticles.map(
-                                  (similarArticleId: any) => (
-                                    <React.Fragment key={similarArticleId}>
-                                      <a
-                                        href={`${similarArticleId}`}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                      >
-                                        <img
-                                          src={
-                                            "http://www.google.com/s2/favicons?domain=" +
-                                            similarArticleId
-                                          }
-                                          alt="favicon"
-                                          className={styles.favicon}
-                                        />
-                                      </a>
-                                    </React.Fragment>
-                                  )
-                                )}
-                              </div>
-                            </p>
+                            <div>
+                              {similarArticles.map((similarArticleId: any) => (
+                                <React.Fragment key={similarArticleId}>
+                                  <a
+                                    href={`${similarArticleId}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                  >
+                                    <img
+                                      src={
+                                        "http://www.google.com/s2/favicons?domain=" +
+                                        similarArticleId
+                                      }
+                                      alt="favicon"
+                                      className={styles.favicon}
+                                    />
+                                  </a>
+                                </React.Fragment>
+                              ))}
+                            </div>
                           )}
                         </div>
                         <p className={styles.time_ago}>

@@ -113,7 +113,9 @@ export default function Homepage() {
       </div>
 
       {/* Labels */}
-      <Carousel handleFilter={handleFilter} />
+      <div className={styles.carouselContainer}>
+        <Carousel handleFilter={handleFilter} />
+      </div>
 
       {/* Articles */}
       <div>

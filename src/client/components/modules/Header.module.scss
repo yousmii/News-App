@@ -67,7 +67,7 @@
   @include breakpoint(medium) {
     &__loginbutton:nth-child(1),
     &__loginbutton:nth-child(2) {
-      display: initial;
+      display: flex;
     }
     &__loginbutton:nth-child(3) {
       display: none;
