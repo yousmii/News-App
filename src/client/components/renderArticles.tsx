@@ -179,8 +179,8 @@ function RenderArticles({ articles }: { articles: any }) {
                               </div>
                             </div>)
                           }
-
                         </div>
+                        <ShareButton url={link}/>
                         <p className={styles.time_ago}>
                           {moment(pub_date).fromNow()}
                         </p>
