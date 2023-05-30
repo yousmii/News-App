@@ -105,6 +105,7 @@ export default function Homepage() {
         {/* Exclude Select */}
         <div>
           <MultiSelect
+            hasSelectAll={false}
             options={rssOptions}
             value={selected}
             labelledBy={"Selected"}
