@@ -3,6 +3,8 @@ import styles from "./modules/Article.module.scss";
 import moment from "moment";
 import axios from "axios";
 import Cookies from "js-cookie";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCaretDown} from "@fortawesome/free-solid-svg-icons";
 
 function RenderArticles({ articles }: { articles: any }) {
   const [username, setUsername] = useState<string | null>(null);
@@ -88,6 +90,16 @@ function RenderArticles({ articles }: { articles: any }) {
     }
   };
 
+  function dropDown(e: React.MouseEvent<HTMLElement, MouseEvent>) {
+    e.preventDefault();
+    let menu = e.currentTarget.nextSibling as HTMLElement;
+    if (menu?.hasAttribute("enabled")) {
+      menu.removeAttribute("enabled");
+    } else {
+      menu?.setAttribute("enabled", "enabled");
+    }
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.articlescontainer}>
@@ -127,35 +139,46 @@ function RenderArticles({ articles }: { articles: any }) {
                     <div className={styles.article__info}>
                       <div className={styles.article__sourcedata}>
                         <div className={styles.sources}>
-                          <img
-                            className={styles.favicon}
-                            alt={"favicon"}
-                            src={
-                              "http://www.google.com/s2/favicons?domain=" + link
-                            }
-                          />
-                          {similarArticles.length > 0 && (
-                            <div>
-                              {similarArticles.map((similarArticleId: any) => (
-                                <React.Fragment key={similarArticleId}>
-                                  <a
-                                    href={`${similarArticleId}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                  >
-                                    <img
-                                      src={
-                                        "http://www.google.com/s2/favicons?domain=" +
-                                        similarArticleId
-                                      }
-                                      alt="favicon"
-                                      className={styles.favicon}
-                                    />
-                                  </a>
-                                </React.Fragment>
-                              ))}
-                            </div>
-                          )}
+                          <div>
+                            <img
+                              className={styles.favicon}
+                              alt={"favicon"}
+                              src={
+                                "http://www.google.com/s2/favicons?domain=" + link
+                              }
+                            />
+                          </div>
+                          { similarArticles.length > 0 && (
+                            <div id={styles.sourcesMenu}>
+                              <div id={styles.alsoBy} onClick={(e) => dropDown(e)}>
+                                <FontAwesomeIcon icon={faCaretDown} style={{color: "#1b3665",}} />
+                              </div>
+                              <div id={styles.extraSources}>
+                                {similarArticles.length > 0 ?
+                                    <div>
+                                      {similarArticles.map((similarArticleId: any) => (
+                                          <a id={styles.source}
+                                            href={`${similarArticleId}`}
+                                             key={similarArticleId}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                          >
+                                            <img
+                                              src={
+                                                "http://www.google.com/s2/favicons?domain=" +
+                                                similarArticleId
+                                              }
+                                              alt="favicon"
+                                              className={styles.favicon}
+                                            />
+                                          </a>
+                                      ))}
+                                    </div>
+                                : null}
+                              </div>
+                            </div>)
+                          }
+
                         </div>
                         <p className={styles.time_ago}>
                           {moment(pub_date).fromNow()}
