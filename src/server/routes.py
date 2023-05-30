@@ -83,7 +83,7 @@ def get_articles():
 # Return all labels
 @app.route("/api/labels", methods=['GET'])
 def get_labels():
-    labels = Label.query.all()
+    labels = Article_Labels.query.all()
 
     return jsonify([label.label for label in labels])
 
