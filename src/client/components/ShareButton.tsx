@@ -4,7 +4,7 @@ import { faFacebook, faTwitter } from "@fortawesome/free-brands-svg-icons";
 import { faCopy } from "@fortawesome/free-solid-svg-icons";
 import styles from "./modules/ShareButton.module.scss";
 
-export const ShareButton = ({ url }) => {
+export const ShareButton = ({ url } : { url:string } ) => {
   const [isCopied, setIsCopied] = useState(false);
 
   const shareOnFacebook = () => {
