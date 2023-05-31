@@ -34,7 +34,8 @@
     "react-loader-spinner": "^5.3.4",
     "react-multi-select-component": "^4.3.4",
     "react-promise-tracker": "^2.1.1",
-    "react-router-dom": "^6.9.0"
+    "react-router-dom": "^6.9.0",
+    "vite-plugin-svgr": "^3.2.0"
   },
   "devDependencies": {
     "@types/jquery": "^3.5.16",

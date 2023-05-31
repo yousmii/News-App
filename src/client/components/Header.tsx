@@ -3,12 +3,10 @@ import React, { useEffect, useState } from "react";
 import styles from "./modules/Header.module.scss";
 
 import { BiLogOutCircle, BiMenuAltRight } from "react-icons/bi";
-import { AiOutlineCloseSquare } from "react-icons/ai";
-import { BsNewspaper } from "react-icons/bs";
 import { IoPersonCircle } from "react-icons/io5";
 import { MdDashboard } from "react-icons/md";
-import Login from "../assets/login.svg";
-import Register from "../assets/register.svg";
+import { ReactComponent as Login } from "../assets/login.svg";
+import { ReactComponent as Register } from "../assets/register.svg";
 
 import axios from "axios";
 import Logout from "./Logout";
@@ -61,19 +59,19 @@ const Header = () => {
           ) : (
             <div>
               <div className={styles.header__loginbutton}>
-                <a href={"/login"}>
-                  <img src={Login} alt="Login" />
+                <a href={"/login"} title="Login">
+                  <Login />
                 </a>
               </div>
 
               <div className={styles.header__loginbutton}>
-                <a href={"/register"}>
-                  <img src={Register} alt="Register" />
+                <a href={"/register"} title="Register">
+                  <Register />
                 </a>
               </div>
 
               <div className={styles.header__loginbutton}>
-                <a href={"/login"}>
+                <a href={"/login"} title="Login">
                   <IoPersonCircle />
                 </a>
               </div>
