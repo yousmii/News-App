@@ -69,7 +69,9 @@ const Scroller = ({ sort, labels, query, excluded }: { sort: string; labels: str
             } else {
                 setArticles((prevApiArticles: any[]) => prevApiArticles.concat(newData))
             }
-        } else {
+        } else if (response.data.length === 0 && reset) {
+             setArticles((prevApiArticles: any[]) => [])
+        } else{
             hasMore.current = false;
         }
     };
