@@ -67,10 +67,11 @@ def link_articles():
         for i in range(len(res_dict)):
             if res_dict[i] > 0.3:
                 if record[1] != query_result[i][1]:
-                    if not from_same_site(record[1], query_result[i][1]):
-                        duplicate_entry = [record[1], query_result[i][1]]
-                        duplicate_entry.sort()
-                        duplicates_set.add(tuple(duplicate_entry))
+                    # if not from_same_site(record[1], query_result[i][1]):
+                    duplicate_entry = [record[1], query_result[i][1]]
+                    duplicate_entry.sort()
+                    duplicates_set.add(tuple(duplicate_entry))
+
 
     for entry in duplicates_set:
         query = "INSERT INTO tf_idf VALUES (%s, %s) ON CONFLICT DO NOTHING"

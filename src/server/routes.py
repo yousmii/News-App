@@ -17,6 +17,8 @@ from src.server.database import User, RSS, TF_IDF, Article, History, Label, Arti
 from search import search
 from sqlalchemy import asc, or_
 
+from src.server.link_articles import from_same_site
+
 # REST API
 # See https://www.ibm.com/developerworks/library/ws-restful/index.html
 
@@ -99,13 +101,24 @@ def get_similar_articles():
     # Create a set of unique article IDs that are similar to the given article ID
     similar_articles = set()
     for row in rows:
-        if row.article1 == article_link:
+        if row.article1 == article_link and not from_same_site(row.article2, article_link):
             similar_articles.add(row.article2)
-        else:
+        elif not from_same_site(row.article1, article_link):
             similar_articles.add(row.article1)
 
+    similar_articles = list(similar_articles)
+
+    filtered_similar = set()
+    for i, entry in enumerate(similar_articles):
+        add = True
+        for entry_2 in similar_articles[i+1:]:
+            if from_same_site(entry, entry_2):
+                add = False
+        if add:
+            filtered_similar.add(entry)
+
     # Convert the set of similar article IDs to a list and return it as a JSON response
-    return jsonify(list(similar_articles))
+    return jsonify(list(filtered_similar))
 
 # Get all rss feeds
 @app.route("/api/rss", methods=['GET'])
