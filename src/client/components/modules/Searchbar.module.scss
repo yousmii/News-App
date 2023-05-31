@@ -6,8 +6,10 @@
   gap: 5px;
   max-width: 80%;
   flex-wrap: wrap;
+
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: $spacing-s;
 }
 
 .searchBarContainer {
