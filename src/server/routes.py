@@ -83,9 +83,10 @@ def get_articles():
 # Return all labels
 @app.route("/api/labels", methods=['GET'])
 def get_labels():
-    labels = Article_Labels.query.all()
+    label_entries = Article_Labels.query.all()
+    labels = list(set([label.label for label in label_entries]))
 
-    return jsonify([label.label for label in labels])
+    return jsonify(labels)
 
 
 # Return all similar articles
