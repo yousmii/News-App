@@ -103,8 +103,6 @@ class ArticlesFetcher:
         return self.create_articles(skip, stop, results)
 
     def fetch_popular(self, labels, exclude, skip=0):
-
-        print(exclude)
         filtered_articles: list[str] = self.get_article_by_label(labels)
         seven_days_ago = datetime.now() - timedelta(days=7)
         db_articles = Article.query.filter(cast(Article.pub_date, Date) >= seven_days_ago.date(), Article.rss.notin_(exclude)).order_by(desc(Article.views)).all()
@@ -120,9 +118,9 @@ class ArticlesFetcher:
         last_index = len(results) - 1
 
         skip100 = skip + 100
-
+        #
         if skip100 > last_index:
-            return self.fetch_recent(labels, skip)
+            return self.fetch_recent(labels, exclude, skip)
 
         return self.create_articles(skip, skip100, results)
 
@@ -180,7 +178,7 @@ class ArticlesFetcher:
         skip100 = skip + 100
 
         if skip100 > last_index:
-            return self.fetch_recent(labels, exclude)
+            return self.fetch_recent(labels, exclude, skip)
 
         return self.create_articles(skip, skip100, results)
 

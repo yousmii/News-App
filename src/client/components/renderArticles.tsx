@@ -30,7 +30,6 @@ function RenderArticles({ articles }: { articles: any }) {
   }, []);
 
   useEffect(() => {
-    console.log("new articles");
     console.log(articles);
   }, [articles]);
 

@@ -35,8 +35,8 @@ export default class DropdownCheckbox extends Component<
       optionsList: list,
     };
 
-    console.log("this is the options list:");
-    console.log(this.state.optionsList);
+    
+    
   }
 
   handleCheckboxChange = (event: any) => {
