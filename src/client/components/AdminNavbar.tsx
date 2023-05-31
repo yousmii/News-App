@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./AdminNavbar.module.scss";
+import styles from "./modules/AdminNavbar.module.scss";
 
 const AdminNavbar = () => {
   return (
