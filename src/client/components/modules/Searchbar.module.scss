@@ -2,12 +2,12 @@
 
 .filteringContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   gap: 5px;
-
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 20px;
+  max-width: 80%;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .searchBarContainer {

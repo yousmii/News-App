@@ -36,52 +36,94 @@
 
   &__content {
     display: flex;
-    padding-left: 30px;
+    flex-direction: row;
+
+    padding: 5px 20px;
 
     transition: 0.3s ease padding;
     height: 100%;
     align-items: center;
-
-    & {
-      justify-content: space-between;
-    }
+    justify-content: space-between;
   }
 
   &__accountactions {
-    position: relative;
-    padding-right: $spacing-m;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__buttoncombo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
   }
 
   @include breakpoint(small) {
-    &__loginbutton:nth-child(1),
-    &__loginbutton:nth-child(2) {
+    &__buttoncombo {
       display: none;
     }
-    &__loginbutton:nth-child(3) {
+    &__loginbutton {
       display: flex;
-      font-size: $logo-size;
-      padding: 0%;
-      margin-top: 12px;
     }
   }
   @include breakpoint(large) {
-    &__loginbutton:nth-child(1),
-    &__loginbutton:nth-child(2) {
-      display: initial;
+    &__buttoncombo {
+      display: flex;
     }
-    &__loginbutton:nth-child(3) {
+    &__loginbutton {
       display: none;
+    }
+  }
+
+  &__button {
+    font-family: $basic-font;
+    font-size: $title-size;
+    color: $white;
+
+    margin: 0px 5px;
+    justify-content: center;
+
+    &__login,
+    &__register {
+      display: flex;
+      height: 45px;
+      width: 110px;
+
+      align-items: center;
+      justify-content: center;
+
+      padding: 5px 8px;
+      border-radius: 30px;
+    }
+    &__login {
+      background-color: $dark-blue;
+    }
+    &__register {
+      background-color: #647788;
+    }
+    &__login:hover,
+    &__register:hover {
+      background-color: $teal;
+      cursor: pointer;
+
+      transition: all 0.1s ease-in-out;
     }
   }
 
   &__loginbutton {
-    display: inline;
-    padding-right: $spacing-m;
-    font-family: $open-sans;
-    font-size: $title-size;
+    align-items: center;
+    flex-direction: row;
+
+    color: $dark-blue;
+    border-radius: $title_size;
+    font-size: $logo-size;
+
+    margin-top: 15px;
   }
 
-  &__loginbutton:hover {
+  &__button:hover {
     cursor: pointer;
     transform: scale(1.1);
     transition: all 0.1s ease-in-out;
