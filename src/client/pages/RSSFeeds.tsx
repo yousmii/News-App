@@ -23,7 +23,7 @@ export default function RSS() {
         }
       })
       .catch((error) => {
-        console.log(error);
+        
       });
   }, []);
 
@@ -42,7 +42,7 @@ export default function RSS() {
 class RSSForm extends Component {
   handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("submitted");
+    
 
     const feedName = e.target.feed_name.value;
     const feedUrl = e.target.feed_url.value;

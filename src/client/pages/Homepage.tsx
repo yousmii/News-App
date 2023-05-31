@@ -18,7 +18,6 @@ function toggleLabel(labelArray: string[], label: string): string[] {
         // Label not found, add it
         labelArray.push(label);
     }
-    console.log("toggle");
     return labelArray;
 }
 

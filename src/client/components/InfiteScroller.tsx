@@ -28,7 +28,7 @@ const Scroller = ({ sort, labels, query, excluded }: { sort: string; labels: str
     const fetchDataApi = async (reset: boolean = false) => {
         // let offsetValue = articles.length;
         let offsetValue = skip;
-        console.log(offsetValue)
+        
         if (reset) {
             offsetValue = 0;
         }
@@ -63,7 +63,7 @@ const Scroller = ({ sort, labels, query, excluded }: { sort: string; labels: str
             setSkip(prevState => prevState+100);
         }
         if (response.data.length > 0) {
-            console.log(response.data)
+            
             if (reset) {
                 setArticles((prevApiArticles: any[]) => newData)
             } else {
