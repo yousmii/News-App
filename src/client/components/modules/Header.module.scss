@@ -4,6 +4,7 @@
   top: 0px;
   overflow: hidden;
   width: 100%;
+  max-width: 100vw;
   height: $header-height;
 
   position: fixed; // stays on screen, even during scrolling
